@@ -8,21 +8,21 @@ categories: [maven, howto, configuration]
 
 ### Preparing Maven "settings.xml" for Sculptor plugin
 
-Prerequisite: [Maven](http://maven.apache.org) should be installed in you system. Check the command mvn --version. It should display your system and Maven properties.
+Prerequisite: [Maven](http://maven.apache.org) should be installed in you system. Check the command `mvn --version`. It should display your system and Maven properties.
 
 Copy the below [Maven profiles](http://maven.apache.org/guides/introduction/introduction-to-profiles.html) tag into your [Maven "settings.xml"](http://maven.apache.org/settings.html). The file may be found (depending on your OS) in:
 
-* Linux: ```~/.m2```
-* Windows: ```C:\Documents and Settings\$USER$\.m2```
-* Vista/Windows7: ```C:\Users\$USER$\.m2```
+* Linux: `~/.m2`
+* Windows: `C:\Documents and Settings\$USER$\.m2`
+* Vista/Windows7: `C:\Users\$USER$\.m2`
 
-If you prefer not to modify your user Maven settings, you can point to temporal settings by specifying the ```-s``` parameter:
+If you prefer not to modify your user Maven settings, you can point to temporal settings by specifying the `-s` parameter:
 
 {% highlight sh %}
 mvn -s path_to_settings.xml [other options] [<goal(s)>] [<phase(s)>]
 {% endhighlight %}
 
-If the ```settings.xml``` file does not exist, create the file and copy into it the following:
+If the `settings.xml` file does not exist, create the file and copy into it the following:
 
 {% highlight xml %}
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
