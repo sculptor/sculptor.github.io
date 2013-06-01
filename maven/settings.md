@@ -1,8 +1,7 @@
 ---
 layout: page
-title: "Preparing Maven settings.xml"
+title: Maven "settings.xml"
 description: ""
-categories: [maven, howto, configuration]
 ---
 {% include JB/setup %}
 
