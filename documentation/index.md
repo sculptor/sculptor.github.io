@@ -38,7 +38,7 @@ show_comments: false
     <h2>The tools</h2>
   </div>
   <div class="span8" markdown="1">
-### [Maven Setup](maven-settings.html) <small>Preparing Maven "settings.xml".</small>
+### [Maven Setup](maven-setup.html) <small>Preparing Maven "settings.xml".</small>
 
 ### [Maven Plugin](maven-plugin.html) <small>How to use Sculptors Maven Plugin.</small>
 
