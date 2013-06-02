@@ -1,13 +1,12 @@
 ---
 layout: page
-title: Maven "settings.xml"
-description: ""
+title: Maven Setup
+navbar_name: docs
 ---
-{% include JB/setup %}
 
 ### Preparing Maven "settings.xml" for Sculptor plugin
 
-Prerequisite: [Maven](http://maven.apache.org) should be installed in you system. Check the command `mvn --version`. It should display your system and Maven properties.
+Prerequisite: [Maven 3](http://maven.apache.org) should be installed in you system. Check the command `mvn --version`. It should display your system and Maven properties.
 
 Copy the below [Maven profiles](http://maven.apache.org/guides/introduction/introduction-to-profiles.html) tag into your [Maven "settings.xml"](http://maven.apache.org/settings.html). The file may be found (depending on your OS) in:
 
@@ -17,18 +16,17 @@ Copy the below [Maven profiles](http://maven.apache.org/guides/introduction/intr
 
 If you prefer not to modify your user Maven settings, you can point to temporal settings by specifying the `-s` parameter:
 
-{% highlight sh %}
+~~~ sh
 mvn -s path_to_settings.xml [other options] [<goal(s)>] [<phase(s)>]
-{% endhighlight %}
+~~~
 
 If the `settings.xml` file does not exist, create the file and copy into it the following:
 
-{% highlight xml %}
+~~~ xml
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                       http://maven.apache.org/xsd/settings-1.0.0.xsd">
-
   <profiles>
     <profile>
       <id>Sculptor</id>
@@ -77,7 +75,5 @@ If the `settings.xml` file does not exist, create the file and copy into it the 
       </pluginRepositories>
     </profile>
   </profiles>
-
 </settings>
-{% endhighlight %}
-
+~~~
