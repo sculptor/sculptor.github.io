@@ -9,7 +9,7 @@ h1. Sculptor Installation Guide
 This instruction describes what you need to install and configure to be able to use Sculptor as normal developer, e.g. for getting started with the [Hello World Tutorial|2. Hello World Tutorial (CSC)].
 
 Table of Contents:
-{toc}
+@toc@
 h2. JDK
 
 Install [JDK 6|http://java.sun.com/javase/downloads].
@@ -46,11 +46,11 @@ Sculptor can be used with a text editor or any IDE, but if you are an Eclipse us
 * Modeling > Xpand SDK 1.0.1
 * Modeling > Xtext SDK 1.0.1
 
-{note}Use version 1.0.1 from Helios update site, not 1.0.2, or later.
+@note@Use version 1.0.1 from Helios update site, not 1.0.2, or later.
 Be careful when updating Indigo to SR2. Make sure that you deselect the modeling tools,
 otherwise versions that are incompatible with Sculptor will be installed.
 If you need to use Xtext 2.1 you can try the experimental Sculptor plugin, as described below.
-{note}
+@note@
 
 3. Sculptor Plugins
 
@@ -80,8 +80,8 @@ You find this setting in Window \-> Preferences \-> Java \-> Build Path \-> Clas
 The local repository location is by default in .m2/repository in your home directory (Document and Settings in Windows)
 
 Add 'String Substitution Variable' in Eclipse for MAVEN_EXEC=<MAVEN_HOME>/bin/mvn.bat
-{tip}If you are using Mac OS X you should change the default file encoding in Eclipse to ISO-8859-1 via Preferences \-> General \-> Workspace
-{tip}
+@tip@If you are using Mac OS X you should change the default file encoding in Eclipse to ISO-8859-1 via Preferences \-> General \-> Workspace
+@tip@
 h2. Maven Launcher
 
 Maven can be executed from the command prompt, but when developing a better alternative is to run it inside Eclipse as an external tool. You can checkout some preconfigured launchers from Fornax Subversion repository. The menu items for this are available in the external tools menu.
@@ -90,12 +90,12 @@ Checkout [https://fornax.svn.sourceforge.net/svnroot/fornax/trunk/maven-launcher
 
 Use the subversive plugin, open view SVN Repositories. Connect to the Subversion repository root: [https://fornax.svn.sourceforge.net/svnroot/fornax/]
 
-{tip}If you don't see the list of fornax maven commands under the 'External tools' menu in Eclipse, try closing the 'Maven Launcher' project and open it again.
-{tip}
+@tip@If you don't see the list of fornax maven commands under the 'External tools' menu in Eclipse, try closing the 'Maven Launcher' project and open it again.
+@tip@
 
 h2. Eclipse Maven Integration (m2e)
 
-If you like you can use the Eclipse plugin [Maven Integration (m2e)|http://www.eclipse.org/m2e/] instead of the combination of Maven plugin {{eclipse:eclipse}} and Maven Launcher.
+If you like you can use the Eclipse plugin [Maven Integration (m2e)|http://www.eclipse.org/m2e/] instead of the combination of Maven plugin @eclipse:eclipse@ and Maven Launcher.
 
 To add support for Sculptors Maven plugins to m2e you can install the Eclipse plugin "Fornax M2E Extensions" from Sculptors Eclipse update site. This plugin provides the following features:
 
@@ -104,9 +104,9 @@ To add support for Sculptors Maven plugins to m2e you can install the Eclipse pl
 
 The plugin is activated if you import/create a new Maven project or selecting "Maven \-> Update Project Configuration..." from a Maven projects context menu.
 
-{tip}The Fornax M2E Extensions plugin is activated for a Maven project only if the Sculptor Maven plugins (mainly the OAW Workflow plugin) are NOT already deactivated in the POM via the [m2e Maven plugin "org.eclipse.m2e.lifecycle-mapping" ignore goal|http://wiki.eclipse.org/M2E_plugin_execution_not_covered#ignore_plugin_goal].{tip}
+@tip@The Fornax M2E Extensions plugin is activated for a Maven project only if the Sculptor Maven plugins (mainly the OAW Workflow plugin) are NOT already deactivated in the POM via the [m2e Maven plugin "org.eclipse.m2e.lifecycle-mapping" ignore goal|http://wiki.eclipse.org/M2E_plugin_execution_not_covered#ignore_plugin_goal].@tip@
 
 h2. Continue
 
 Now you are ready to continue with the [2. Hello World Tutorial (CSC)|2. Hello World Tutorial (CSC)].
-{rating:Rate this article}
+@rating:Rate this article@
