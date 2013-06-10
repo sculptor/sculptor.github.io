@@ -1424,7 +1424,7 @@ List<ConditionalCriteria> conditions = criteriaFor(Person.class)
     .orderBy(name().last()).orderBy(name().first())
     .build();
 {code}
-{{{}ConditionalCriteria}} supports multiple column selects with column aliases, aggregate functions and grouping.
+{{ConditionalCriteria}} supports multiple column selects with column aliases, aggregate functions and grouping.
 {code}
 List<ConditionalCriteria> conditions = criteriaFor(Person.class)
     .select(PersonProperties.name().last()).alias("lastName")
