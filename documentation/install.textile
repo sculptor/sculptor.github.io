@@ -21,7 +21,6 @@ Maven is used for generating source code and building the system.
 1. Install [Maven 3.0.x|http://maven.apache.org/download.html].
 
 2. Define JAVA_HOME environment variable.
-bq..
 I often put JAVA_HOME and MAVEN_OPTS directly in mvn.bat. I increase the heap size for better performance and avoiding out of memory.
 Windows:
 @
