@@ -8,10 +8,10 @@ hide_header: true
 <div class="row">
   <div class="sidebar span3">
     <ul id="sidenav" class="nav nav-list affix">
-      <li class="active"><a href="#overview">Introduction</a></li>
+      <li class="active"><a href="#introduction">Introduction</a></li>
       <li><a href="#strengths">Strengths</a></li>
       <li><a href="#license">License</a></li>
-      <li><a href="#issues-and-mprovements">Issues and Improvements</a></li>
+      <li><a href="#issues-and-improvements">Issues and Improvements</a></li>
     </ul>
   </div>
   <div class="span9">
@@ -24,7 +24,7 @@ hide_header: true
 
 ## Introduction
 
-Sculptor is an open source productivity tool that applies the concepts from [Domain-Driven Design](http://domaindrivendesign.org/books/) and Domain Specific Languages.
+Sculptor is an open source productivity tool that applies the concepts from [Domain-Driven Design](http://domaindrivendesign.org/books/) and [Domain Specific Languages](http://en.wikipedia.org/wiki/Domain-specific_language).
 
 You express your design intent in a textual specification, from which Sculptor generates high quality Java code and configuration. You can use the concepts from Domain-Driven Design (DDD) in the textual Domain Specific Language (DSL). E.g. Service, Module, Entity, Value Object, Repository.
 
