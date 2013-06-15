@@ -2,6 +2,7 @@ require "rubygems"
 require 'rake'
 require 'yaml'
 require 'time'
+require 'fileutils'
 
 SOURCE = "."
 CONFIG = {
@@ -75,15 +76,15 @@ task :post do
 
   images = ENV["images"] || "n" 
   if images != "n"
-    foldername = File.join(CONFIG['images'], "#{date}-#{slug}")
-    if !Dir.exists?(foldername)
-      puts "Creating image folder for post: #{foldername}"
-      Dir.mkdir(foldername)
+    imagefolder = File.join(CONFIG['images'], "#{date}-#{slug}")
+    if !Dir.exists?(imagefolder)
+      puts "Creating image folder for post: #{imagefolder}"
+      FileUtils.mkdir_p(imagefolder)
     end
   end
 end # task :post
 
-# Usage: rake page name="about.html"
+# Usage: rake page name="about.html" [images=y]
 # You can also specify a sub-directory path.
 # If you don't specify a file extention we create an index.html at the path specified
 desc "Create a new page."
@@ -107,11 +108,20 @@ task :page do
     post.puts "---"
     post.puts "{% include JB/setup %}"
   end
+
+  images = ENV["images"] || "n" 
+  if images != "n"
+    imagefolder = File.join(CONFIG['images'], "#{name}".chomp(File.extname("#{name}")))
+    if !Dir.exists?(imagefolder)
+      puts "Creating image folder for page: #{imagefolder}"
+      FileUtils.mkdir_p(imagefolder)
+    end
+  end
 end # task :page
 
 desc "Launch preview environment"
 task :preview do
-  system "jekyll --auto --server"
+  system "jekyll serve -w"
 end # task :preview
 
 # Public: Alias - Maintains backwards compatability for theme switching.
