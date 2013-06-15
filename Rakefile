@@ -9,6 +9,7 @@ CONFIG = {
   'themes' => File.join(SOURCE, "_includes", "themes"),
   'layouts' => File.join(SOURCE, "_layouts"),
   'posts' => File.join(SOURCE, "_posts"),
+  'images' => File.join(SOURCE, "images"),
   'post_ext' => "md",
   'theme_package_version' => "0.1.0"
 }
@@ -40,7 +41,7 @@ module JB
   end #Path
 end #JB
 
-# Usage: rake post title="A Title" [date="2012-02-09"] [tags=[tag1, tag2]]
+# Usage: rake post title="A Title" [date="2012-02-09"] [tags=[tag1, tag2] [images=y]
 desc "Begin a new post in #{CONFIG['posts']}"
 task :post do
   abort("rake aborted: '#{CONFIG['posts']}' directory not found.") unless FileTest.directory?(CONFIG['posts'])
@@ -66,8 +67,19 @@ task :post do
     post.puts 'description: ""'
     post.puts "category: "
     post.puts "tags: []"
+    post.puts "author: "
+    post.puts 'navbar_name: blog'
     post.puts "---"
     post.puts "{% include JB/setup %}"
+  end
+
+  images = ENV["images"] || "n" 
+  if images != "n"
+    foldername = File.join(CONFIG['images'], "#{date}-#{slug}")
+    if !Dir.exists?(foldername)
+      puts "Creating image folder for post: #{foldername}"
+      Dir.mkdir(foldername)
+    end
   end
 end # task :post
 
@@ -91,6 +103,7 @@ task :page do
     post.puts "layout: page"
     post.puts "title: \"#{title}\""
     post.puts 'description: ""'
+    post.puts 'navbar_name: '
     post.puts "---"
     post.puts "{% include JB/setup %}"
   end

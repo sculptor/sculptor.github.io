@@ -1,14 +1,15 @@
 <div class="page-header">
   <h1>{{ page.title }} {% if page.tagline %}<small>{{ page.tagline }}</small>{% endif %}</h1>
+  <div class="date">
+    <span>{{ page.date | date_to_long_string }} by {{ page.author }}</span>
+  </div>
 </div>
 
 <div class={% if page.wide %}"row post-full"{% else %}"row-fluid post-full"{% endif %}">
   <div class="span12">
-    <div class="date">
-      <span>{{ page.date | date_to_long_string }}</span>
-    </div>
     <div class="content">
       {{ content }}
+      <hr>
     </div>
 
   {% unless page.categories == empty %}
@@ -27,7 +28,6 @@
     </ul>
   {% endunless %}  
 
-    <hr>
     <div class="pagination">
       <ul>
       {% if page.previous %}
@@ -46,10 +46,6 @@
   </div>
 
   <div class="span3">
-    <h4>Published</h4>
-    <div class="date"><span>{{ page.date | date_to_long_string }}</span></div>
-
-    <hr>
     {% include JB/comments %}
   </div>
 </div>
