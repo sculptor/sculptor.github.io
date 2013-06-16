@@ -21,7 +21,13 @@ sculptor_version: "3.0.0-SNAPSHOT"
 
 # Use kramdown for markdown files -> http://kramdown.rubyforge.org/
 markdown: kramdown
+kramdown:
+  use_coderay: true
 
+  coderay:
+    coderay_line_numbers: ''
+    coderay_bold_every: 0
+ 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
 # Most places will/should use BASE_PATH to make the urls
