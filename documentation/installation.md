@@ -91,5 +91,6 @@ Maven can be executed from the command prompt, but when developing a better alte
 If this Eclipse project (with the Maven launchers) is **open** in your Eclipse workspace then the menu items for this launchers are available in the 'External Tools' menu.
 
 ![External Tools Menu](/images/documentation/installation/external-tools-menu.png)
+
   </div>
 </div>
