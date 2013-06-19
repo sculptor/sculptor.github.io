@@ -5,7 +5,7 @@
   </div>
 </div>
 
-<div class={% if page.wide %}"row post-full"{% else %}"row-fluid post-full"{% endif %}">
+<div class={% if page.wide %}"row post-full"{% else %}"row-fluid post-full"{% endif %}>
   <div class="span12">
     <div class="content">
       {{ content }}
@@ -43,9 +43,9 @@
       {% endif %}
       </ul>
     </div>
+    <hr>
+    {% include JB/comments %}
   </div>
 
-  <div class="span3">
-    {% include JB/comments %}
   </div>
 </div>
