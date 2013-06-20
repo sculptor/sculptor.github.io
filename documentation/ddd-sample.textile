@@ -370,5 +370,3 @@ Web Access (read only):
 Anonymous Access (read only):
 [https://fornax.svn.sourceforge.net/svnroot/fornax/trunk/cartridges/sculptor/DDDSample]
 
-{rating:Rate this article}
-

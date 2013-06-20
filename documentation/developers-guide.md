@@ -1071,7 +1071,7 @@ around extensions::properties::getResourceDir(Module module, String name) :
 ~~~
 
 
-{anchor:hint}
+<a id ="hint"></a>
 
 ### hint
 

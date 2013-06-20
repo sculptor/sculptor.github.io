@@ -179,4 +179,4 @@ Web Access (read only):
 
 Anonymous Access (read only):
 [https://fornax.svn.sourceforge.net/svnroot/fornax/trunk/cartridges/sculptor/sculptor-helloworld]
-{rating:Rate this article}
+

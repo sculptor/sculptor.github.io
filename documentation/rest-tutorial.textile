@@ -503,5 +503,3 @@ If you don't need html representation or use another view technology than JSP (e
 {code}
 generate.restWeb.jsp=false
 {code}
-
-{rating:Rate this article}
