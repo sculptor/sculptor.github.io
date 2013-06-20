@@ -1112,13 +1112,14 @@ ValueObject MediaCharacter {
 
 Possible values for fetch:
 
-|-----------+------------------------------|
-| fetch=    | Generated feature            |
-|:----------| :----------------------------|
-| eager     | `javax.persistence.FetchType.EAGER` |
-| join      | `javax.persistence.FetchType.EAGER` |
-| lazy      | `javax.persistence.FetchType.LAZY`  |
-| subselect | `org.hibernate.annotations.FetchMode.SUBSELECT` |
+{:.table .table-striped .table-bordered .table-condensed}
+|-----------+------------------------------
+| fetch=    | Generated feature
+|:----------| :----------------------------
+| eager     | `javax.persistence.FetchType.EAGER`
+| join      | `javax.persistence.FetchType.EAGER`
+| lazy      | `javax.persistence.FetchType.LAZY`
+| subselect | `org.hibernate.annotations.FetchMode.SUBSELECT`
 
 
 ### Cascade
@@ -1135,21 +1136,22 @@ ValueObject MediaCharacter {
 
 Possible values for cascade:
 
-|-------------------+------------------------------|
-| cascade=          | Implementation type          |
-|:------------------| :----------------------------|
-| persist           | `javax.persistence.CascadeType.PERSIST` |
-| merge             | `javax.persistence.CascadeType.MERGE` |
-| remove            | `javax.persistence.CascadeType.REMOVE` |
-| refresh           | `javax.persistence.CascadeType.REFRESH` |
-| all               | `javax.persistence.CascadeType.ALL` |
-| all-delete-orphan | `javax.persistence.CascadeType.ALL`, `org.hibernate.annotations.CascadeType.DELETE_ORPHAN` |
-| delete-orphan     | `org.hibernate.annotations.CascadeType.DELETE_ORPHAN` |
-| delete            | `org.hibernate.annotations.CascadeType.DELETE` |
-| save-update       | `org.hibernate.annotations.CascadeType.SAVE_UPDATE` |
-| evict             | `org.hibernate.annotations.CascadeType.EVICT` |
-| replicate         | `org.hibernate.annotations.CascadeType.REPLICATE` |
-| lock              | `org.hibernate.annotations.CascadeType.LOCK` | 
+{:.table .table-striped .table-bordered .table-condensed}	
+|-------------------+------------------------------
+| cascade=          | Implementation type
+|:------------------| :----------------------------
+| persist           | `javax.persistence.CascadeType.PERSIST`
+| merge             | `javax.persistence.CascadeType.MERGE`
+| remove            | `javax.persistence.CascadeType.REMOVE`
+| refresh           | `javax.persistence.CascadeType.REFRESH`
+| all               | `javax.persistence.CascadeType.ALL`
+| all-delete-orphan | `javax.persistence.CascadeType.ALL`, `org.hibernate.annotations.CascadeType.DELETE_ORPHAN`
+| delete-orphan     | `org.hibernate.annotations.CascadeType.DELETE_ORPHAN`
+| delete            | `org.hibernate.annotations.CascadeType.DELETE`
+| save-update       | `org.hibernate.annotations.CascadeType.SAVE_UPDATE`
+| evict             | `org.hibernate.annotations.CascadeType.EVICT`
+| replicate         | `org.hibernate.annotations.CascadeType.REPLICATE`
+| lock              | `org.hibernate.annotations.CascadeType.LOCK`
 
 Several cascade types can be defined by separating them with comma, e.g. `cascade="persist,merge"`.
 
@@ -1224,7 +1226,7 @@ ValueObject Itinerary {
 }
 ~~~
 
-To include a class in more than one subject area, list each subject area in the hint, separated by a '|'. e.g. `hint="umlgraph.subject=routingsvc|cargoext"`.
+To include a class in more than one subject area, list each subject area in the hint, separated by a `|`. e.g. `hint="umlgraph.subject=routingsvc|cargoext"`.
 
 
 <a id="services"></a>
@@ -2026,16 +2028,15 @@ It is possible to skip the generation of ServiceContext, see [Developer's Guide]
 
 There is an alternative notation for some things in the DSL. It is more verbose but maybe easier to understand. You can mix the verbose and compact syntax as you wish.
 
-|---------+----------|
-| Compact | Verbose  |
-|:------- | :--------|
-| `!`     | `not` |
-| `=>`    | `delegates to` |
-| `>`     | `inject` |
-| `<->`   | `opposite` |
-| `-`     | `reference` |
-|---------+----------|
-
+{:.table .table-striped .table-bordered .table-condensed}	
+|---------+----------
+| Compact | Verbose  
+|:------- | :--------
+| `!`     | `not`
+| `=>`    | `delegates to`
+| `>`     | `inject`
+| `<->`   | `opposite`
+| `-`     | `reference`
 
 The following shows a `model.btdesign` with verbose syntax:
 
