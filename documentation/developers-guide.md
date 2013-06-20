@@ -291,9 +291,8 @@ javaType.ShortString=String
 The type of the automatically generated id attribute is defined as
 
 
-<a id="joda"></a>
-
 ### Joda Date and Time API
+{: #joda}
 
 It is possible to use [Joda Time](http://joda-time.sourceforge.net/) instead of the Java date and time classes.
 
@@ -302,9 +301,8 @@ datetime.library=joda
 ~~~
 
 
-<a id="packageNames"></a>
-
 ### Package Names
+{: #packageNames}
 
 You can define the names of the generated packages.
 
@@ -436,9 +434,8 @@ generate.domainObject.compositeKeyClass=false
 One drawback with not using key class is that `findByKeys` is not supported for composite keys.
 
 
-<a id="serviceContext"></a>
-
 ### Removing the generation of the ServiceContext
+{: #serviceContext}
 
 For some reason it might be required to switch off the generation of the `ServiceContext` - for example if you want to create a client without the created/updated functionality.
 In this case it can be done easily with setting a property value in the `sculptor-generator.properties` file:
@@ -845,9 +842,8 @@ If you are using pure-ejb3 you must add a classifier to the `sculptor-framework-
 The reason for using another jar file is that one of the test beans `JpaTestBean` should not be deployed.
 
 
-<a id="diagram"></a>
-
 ### Settings for Generated Diagrams
+{: #diagram}
 
 By default Sculptor generates a dot file (handled by [Graphviz](http://www.graphviz.org)) for documentation purposes. This might not be needed for all projects. Please set the following property to drive the generation of this feature.
 
@@ -1041,9 +1037,8 @@ Everything starts in `Root.xpt`, which you also can intercept to add more templa
 
 Another alternative is to setup the development environment according to the next section and change the original templates and build a new version of [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core).
 
-<a id="extensionAdvices"></a>
-
 Sometimes you need to override the extension functions used by the templates. This can also be done with the AOP features of Xtend.
+{: #extensionAdvices}
 
 Add `transformationAdvice` in the generator advice in `Workflow.mwe2` in your application project (this is already done if you generated the project with a Sculptor archetype).
 
@@ -1071,9 +1066,8 @@ around extensions::properties::getResourceDir(Module module, String name) :
 ~~~
 
 
-<a id ="hint"></a>
-
 ### hint
+{: #hint}
 
 A very useful extension mechanism is available via the `hint` keyword in the model. It is possible to use a hint on almost any element in the model. It may contain any key/values, which can be used in `SpecialCases` to customize the code generation. For example, if you need to use a special database sequence for the ids of some entities. In the model you can use the hint:
 
