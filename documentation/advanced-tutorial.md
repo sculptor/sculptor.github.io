@@ -55,161 +55,159 @@ Define value for package:  org.library: :
 
 In this part we will write a Sculptor DSL file and generate code from it.
 
-1. Modify the file named `model.btdesign` in the folder
-`src/main/resources/model`
+1. Modify the file named `model.btdesign` in the folder `src/main/resources/model`
 
 2. Open the design file with Scupltor DSL editor, double-click on it.
 Add the following code to the design file. You can see that it defines two Modules, containing one Service each. The operations in the Services delegates directly to the Repositories. It defines the same Domain Objects, including attributes and references, as in Figure 1. The details will be explained further on.
 
    ~~~
-    Application Library {
-        basePackage = org.library
+Application Library {
+    basePackage = org.library
 
-        Module media {
+    Module media {
 
-            Service LibraryService {
-              findLibraryByName => LibraryRepository.findLibraryByName;
-              findMediaByName => MediaRepository.findMediaByName;
-              findMediaByCharacter => MediaRepository.findMediaByCharacter;
-              findPersonByName => PersonService.findPersonByName;
-            }
-
-            Entity Library {
-              scaffold
-              String name key
-              - Set media  library
-
-              Repository LibraryRepository {
-                findByQuery;
-                @Library findLibraryByName(String name) throws LibraryNotFoundException;
-              }
-            }
-
-            Entity PhysicalMedia {
-              scaffold
-              String status length="3"
-              String location
-              - @Library library nullable  media
-              - Set media  physicalMedia
-            }
-
-            Service MediaService {
-              findAll => MediaRepository.findAll;
-            }
-
-            abstract Entity Media {
-              gap
-              String title !changeable
-              - Set physicalMedia inverse  media
-              - Set engagements cascade="all-delete-orphan"  media
-              - Set mediaCharacters  existsInMedia
-
-              Repository MediaRepository {
-                > @MediaCharacterRepository
-                int getNumberOfMovies(Long libraryId) => AccessObject;
-                List findMediaByCharacter(Long libraryId, String characterName);
-                findById;
-                save;
-                findAll;
-                findByQuery;
-                protected findByKeys(Set keys, String keyPropertyName, Class persistentClass);
-                List findMediaByName(Long libraryId, String name);
-                Map findMovieByUrlIMDB(Set keys);
-              }
-            }
-
-            Entity Book extends @Media {
-              !auditable
-              String isbn key length="20"
-            }
-
-            Entity Movie extends @Media {
-              !auditable
-              String urlIMDB key
-              Integer playLength
-              - @Genre category nullable
-            }
-
-            enum Genre {
-                ACTION,
-                COMEDY,
-                DRAMA,
-                SCI_FI
-            }
-
-            ValueObject Engagement {
-              String role
-              - @Person person
-              - @Media media  engagements
-            }
-
-            Service MediaCharacterService {
-              findAll => MediaCharacterRepository.findAll;
-            }
-
-            ValueObject MediaCharacter {
-              String name !changeable
-              - Set playedBy
-              - Set existsInMedia  mediaCharacters
-
-              Repository MediaCharacterRepository {
-                findByQuery;
-                findAll;
-              }
-            }
+        Service LibraryService {
+          findLibraryByName => LibraryRepository.findLibraryByName;
+          findMediaByName => MediaRepository.findMediaByName;
+          findMediaByCharacter => MediaRepository.findMediaByCharacter;
+          findPersonByName => PersonService.findPersonByName;
         }
 
+        Entity Library {
+          scaffold
+          String name key
+          - Set<@PhysicalMedia> media <-> library
 
-        Module person {
-            Service PersonService {
-              findPersonByName => PersonRepository.findPersonByName;
-            }
-
-            Entity Person {
-              gap
-              scaffold
-              Date birthDate past
-              - @Gender sex !changeable
-              - @Ssn ssn key
-              - @PersonName name
-
-              Repository PersonRepository {
-                  List findPersonByName(String name) => AccessObject;
-                  save;
-                  save(Collection entities);
-                  findByQuery;
-                  findByExample;
-                  findByKeys;
-              }
-            }
-
-            BasicType Ssn {
-              String number key length="20"
-              - @Country country key
-            }
-
-            BasicType PersonName {
-              String first
-              String last
-            }
-
-            enum Gender {
-                FEMALE("F"),
-                MALE("M")
-            }
-
-            enum Country {
-                String alpha2 key
-                String alpha3
-                int numeric
-                SWEDEN("SE", "SWE", "752"),
-                NORWAY("NO", "NOR", "578"),
-                DENMARK("DK", "DNK", "208"),
-                US("US", "USA", "840")
-            }
+          Repository LibraryRepository {
+            findByQuery;
+            @Library findLibraryByName(String name) throws LibraryNotFoundException;
+          }
         }
 
+        Entity PhysicalMedia {
+          scaffold
+          String status length="3"
+          String location
+          - @Library library nullable <-> media
+          - Set<@Media> media <-> physicalMedia
+        }
+
+        Service MediaService {
+          findAll => MediaRepository.findAll;
+        }
+
+        abstract Entity Media {
+          gap
+          String title !changeable
+          - Set<@PhysicalMedia> physicalMedia inverse <-> media
+          - Set<@Engagement> engagements cascade="all-delete-orphan" <-> media
+          - Set<@MediaCharacter> mediaCharacters <-> existsInMedia
+
+          Repository MediaRepository {
+            > @MediaCharacterRepository
+            int getNumberOfMovies(Long libraryId) => AccessObject;
+            List<@Media> findMediaByCharacter(Long libraryId, String characterName);
+            findById;
+            save;
+            findAll;
+            findByQuery;
+            protected findByKeys(Set<String> keys, String keyPropertyName, Class persistentClass);
+            List<@Media> findMediaByName(Long libraryId, String name);
+            Map<String, @Movie> findMovieByUrlIMDB(Set<String> keys);
+          }
+        }
+
+        Entity Book extends @Media {
+          !auditable
+          String isbn key length="20"
+        }
+
+        Entity Movie extends @Media {
+          !auditable
+          String urlIMDB key
+          Integer playLength
+          - @Genre category nullable
+        }
+
+        enum Genre {
+            ACTION,
+            COMEDY,
+            DRAMA,
+            SCI_FI
+        }
+
+        ValueObject Engagement {
+          String role
+          - @Person person
+          - @Media media <-> engagements
+        }
+
+        Service MediaCharacterService {
+          findAll => MediaCharacterRepository.findAll;
+        }
+
+        ValueObject MediaCharacter {
+          String name !changeable
+          - Set<@Person> playedBy
+          - Set<@Media> existsInMedia <-> mediaCharacters
+
+          Repository MediaCharacterRepository {
+            findByQuery;
+            findAll;
+          }
+        }
     }
+
+
+    Module person {
+        Service PersonService {
+          findPersonByName => PersonRepository.findPersonByName;
+        }
+
+        Entity Person {
+          gap
+          scaffold
+          Date birthDate past
+          - @Gender sex !changeable
+          - @Ssn ssn key
+          - @PersonName name
+
+          Repository PersonRepository {
+              List<@Person> findPersonByName(String name) => AccessObject;
+              save;
+              save(Collection<@Person> entities);
+              findByQuery;
+              findByExample;
+              findByKeys;
+          }
+        }
+
+        BasicType Ssn {
+          String number key length="20"
+          - @Country country key
+        }
+
+        BasicType PersonName {
+          String first
+          String last
+        }
+
+        enum Gender {
+            FEMALE("F"),
+            MALE("M")
+        }
+
+        enum Country {
+            String alpha2 key
+            String alpha3
+            int numeric
+            SWEDEN("SE", "SWE", "752"),
+            NORWAY("NO", "NOR", "578"),
+            DENMARK("DK", "DNK", "208"),
+            US("US", "USA", "840")
+        }
+    }
+}
    ~~~
 
 3. Run `mvn clean install` to generate code and build. The JUnit test will fail.
@@ -371,8 +369,8 @@ Entity Person {
     def int age;
     - @PersonName name
     def changeName(String first, String last);
-    - Set children
-    def List getChildrenSortedByAge;
+    - Set<@Person> children
+    def List<@Person> getChildrenSortedByAge;
 }
 ~~~
 
@@ -448,18 +446,18 @@ Built in types:
 
 It is easy to add your own DSL types and mapping to database and Java types. See [Developer's Guide](/documentation/developers-guide.html). Sculptor supports [Joda Time](http://joda-time.sourceforge.net/) instead of the Java date and time classes. It is also described in the [Developer's Guide](/documentation/developers-guide.html#joda) how to activate Joda Time.
 
-To distinguish references from simple attributes, declarations of references starts with a `-`. In the same way as in other places you must also use an @ in front of the declaration when referring to a Domain Object. When the relation is one-to-many or many-to-many you define a collection as the type of the reference. Bidirectional associations are defined with the opposite `` syntax.
+To distinguish references from simple attributes, declarations of references starts with a `-`. In the same way as in other places you must also use an @ in front of the declaration when referring to a Domain Object. When the relation is one-to-many or many-to-many you define a collection as the type of the reference. Bidirectional associations are defined with the opposite `<->` syntax.
 
 ~~~
 Entity PhysicalMedia {
     String status
     String location
-    - @Library library  media
-    - Set media  physicalMedia
+    - @Library library <-> media
+    - Set<@Media> media <-> physicalMedia
 }
 ~~~
 
-There is an [alternative notation](#alternative-notation) for references and bidirectional. Instead of `-` you can use `reference` and instead of `` you can use `opposite`.
+There is an [alternative notation](#alternative-notation) for references and bidirectional. Instead of `-` you can use `reference` and instead of `<->` you can use `opposite`.
 
 
 ### Collections
@@ -475,8 +473,8 @@ For Bag collections you can specify `orderby`
 ~~~
 ValueObject MediaCharacter {
     String name !changeable
-    - Bag playedBy orderby="birthDate asc"
-    - Set existsInMedia  characters
+    - Bag<@Person> playedBy orderby="birthDate asc"
+    - Set<@Media> existsInMedia <-> characters
 }
 ~~~
 
@@ -485,7 +483,7 @@ For bi-directional many-to-many associations it is possible to define the JPA/Hi
 ~~~
 abstract Entity Media {
     String title !changeable
-    - Set physicalMedia inverse  media
+    - Set<@PhysicalMedia> physicalMedia inverse <-> media
 ~~~
 
 Associations with cardinality "many" (Set, Bag, List) that are not bidirectional are by default generated as many-to-many, with a separate relation table.
@@ -493,7 +491,7 @@ Associations with cardinality "many" (Set, Bag, List) that are not bidirectional
 ~~~
 Entity Library {
     String name key
-    - Set physicalMedia
+    - Set<@PhysicalMedia> physicalMedia
 }
 ~~~
 
@@ -502,7 +500,7 @@ By defining the reference as `inverse` it will be generated as an ordinary forei
 ~~~
 Entity Library {
     String name key
-    - Set physicalMedia inverse
+    - Set<@PhysicalMedia> physicalMedia inverse
 }
 ~~~
 
@@ -511,7 +509,7 @@ For List collections you can now specify `orderby="properties"`. `properties` is
 
 ~~~
 Entity Library {
-    - List persons orderby="name.last desc, name.first asc"
+    - List<@Person> persons orderby="name.last desc, name.first asc"
 }
 ~~~
 
@@ -519,7 +517,7 @@ To define a persistently ordered List you can specify `orderColumn="columnName"`
 
 ~~~
 Entity Library {
-    - List persons orderColumn="PERSONS_ORDER"
+    - List<@Person> persons orderColumn="PERSONS_ORDER"
 }
 ~~~
 
@@ -536,7 +534,7 @@ Example using a collection of Strings.
 
 ~~~
 Entity Person {
-    Set nicknames
+    Set<String> nicknames
 }
 ~~~
 
@@ -544,7 +542,7 @@ Example using a BasicType.
 
 ~~~
 Entity Spy extends Person {
-    - Set aliases
+    - Set<@PersonName> aliases
 }
 ~~~
 
@@ -553,7 +551,7 @@ If the collection should not be persistent use the `transient` keyword.
 
 ~~~
 Entity Person {
-    Set nicknames transient
+    Set<String> nicknames transient
 }
 ~~~
 
@@ -690,6 +688,10 @@ generate.domainObject.builder=false
 
 By default the builder classes are generated in the domain package. To generate the builder classes in a different package use the `package.builder` property.
 
+~~~
+package.builder=builder
+~~~
+
 
 ### Validation
 
@@ -703,7 +705,7 @@ Entity Person {
     String ssn key length="15"
     String country key length="2" pattern="'[DE|SE|US]'"
     Integer age nullable min="18,'must be an adult'"
-    - Set addresses notEmpty size="min=1,message='at least 1 address is needed'"
+    - Set<@Address> addresses notEmpty size="min=1,message='at least 1 address is needed'"
 }
 ~~~
 
@@ -805,7 +807,7 @@ Read more about the example below in the Domain-Driven Design book, page 134.
 ~~~
 Entity PurchaseOrder {
     - @Money approvedLimit
-    - List items
+    - List<@PurchaseOrderLineItem> items
 }
 
 Entity PurchaseOrderLineItem {
@@ -861,7 +863,7 @@ Entity Phone {
 }
 
 BasicType Contact {
-    - Set phones
+    - Set<@Phone> phones
     - @Address address
 }
 
@@ -882,7 +884,7 @@ It is possible to specify that a ValueObject is not persistent, i.e. not stored 
 
 ~~~
 Service PersonService {
-    Set findPersonsMatching(@PersonCriteria personCriteria);
+    Set<@Person> findPersonsMatching(@PersonCriteria personCriteria);
 }
 
 ValueObject PersonCriteria {
@@ -1045,14 +1047,14 @@ ValueObject Engagement {
   cache
   String role
   - @Person person
-  - @Media media  engagements
+  - @Media media <-> engagements
 }
 
 abstract Entity Media {
   String title !changeable
-  - Set physicalMedia  media
-  - Set engagements cache  media
-  - Set characters  existsInMedia
+  - Set<@PhysicalMedia> physicalMedia <-> media
+  - Set<@Engagement> engagements cache <-> media
+  - Set<@MediaCharacter> characters <-> existsInMedia
 }
 ~~~
 
@@ -1066,21 +1068,21 @@ Entity PhysicalMedia {
     databaseTable="PHMED"
     String status databaseColumn="STAT"
     String location databaseColumn="LOC"
-    - @Library library databaseColumn="LIB"  media
-    - Set media databaseColumn="MED"  physicalMedia
+    - @Library library databaseColumn="LIB" <-> media
+    - Set<@Media> media databaseColumn="MED" <-> physicalMedia
 }
 ~~~
 
 It is possible to define many-to-many join table with `databaseJoinTable` and its columns with `databaseColumn` at both sides of the bidirectional association:
 
 ~~~
-    - Set existsInMedia databaseJoinTable="MED_CHR" databaseColumn="CHR"  mediaCharacters
+- Set<@Media> existsInMedia databaseJoinTable="MED_CHR" databaseColumn="CHR" <-> mediaCharacters
 ~~~
 
 Those keywords are also useful for unidirectional to-many associations. Additionally `databaseJoinColumn` is used, since there is no opposite side to define the column on.
 
 ~~~
-    - Set playedBy databaseJoinTable="CHR_PERS" databaseColumn="PERS" databaseJoinColumn="CHR"
+- Set<@Person> playedBy databaseJoinTable="CHR_PERS" databaseColumn="PERS" databaseJoinColumn="CHR"
 ~~~
 
 For Attributes you can define `nullable`, `index`, `databaseColumn`, `databaseType` and `length`, which all
@@ -1108,12 +1110,12 @@ For References you can define `fetch` which corresponds to JPA/Hibernate feature
 ~~~
 ValueObject MediaCharacter {
     String name !changeable
-    - List playedBy fetch="eager"
-    - Set existsInMedia  characters
+    - List<@Person> playedBy fetch="eager"
+    - Set<@Media> existsInMedia <-> characters
 }
 ~~~
 
-Possible values for fetch:
+Possible values for `fetch`:
 
 {:.table .table-striped .table-bordered .table-condensed}
 |-----------+------------------------------
@@ -1132,12 +1134,12 @@ For References you can define `cascade` which corresponds to JPA/Hibernate featu
 ~~~
 ValueObject MediaCharacter {
     String name !changeable
-    - List playedBy cascade="persist,merge"
-    - Set existsInMedia  characters
+    - List<@Person> playedBy cascade="persist,merge"
+    - Set<@Media> existsInMedia <-> characters
 }
 ~~~
 
-Possible values for cascade:
+Possible values for `cascade`:
 
 {:.table .table-striped .table-bordered .table-condensed}	
 |-------------------+------------------------------
@@ -1167,7 +1169,7 @@ Default values for `cascade` can be defined in `sculptor-generator.properties`, 
 
 Try the different features of the Domain Objects. Add a few more Entities and Value Objects to `model.btdesign`. Add different types of Attributes and References. For example you can add a new Module named customer, with a `Customer` entity, which has a Reference to rented `Media`. Maybe with a rental contract Value Object in between, containing time period and price.
 
-Regenerate with `mvn generate-sources -Dfsculptor.generator.force.execution=true` and look at the generated Java code and JPA annotations.
+Regenerate with `mvn generate-sources -Dfsculptor.generator.force=true` and look at the generated Java code and JPA annotations.
 
 
 ### Documentation of domain model
@@ -1225,7 +1227,7 @@ ValueObject Itinerary {
     not optimisticLocking
     not immutable
     - @Cargo cargo nullable opposite itinerary
-    - List legs inverse orderColumn
+    - List<@Leg> legs inverse orderColumn
 }
 ~~~
 
@@ -1239,7 +1241,7 @@ In the DSL an operation of a Service almost looks like an ordinary Java method w
 
 ~~~
 Service LibraryService {
-    List findBestMovies(Long libraryId);
+    List<@Movie> findBestMovies(Long libraryId);
 }
 ~~~
 
@@ -1249,7 +1251,7 @@ It is also possible to use [Data Transfer Objects](http://www.martinfowler.com/e
 
 ~~~
 Service LibraryFacade {
-  List topTenBooks;
+  List<BookDto> topTenBooks;
 }
 
 DataTransferObject BookDto {
@@ -1285,8 +1287,8 @@ It is also possible to specify a dependency injection of a Repository or any oth
 
 ~~~
 Service LibraryService {
-  > @MediaCharacterRepository
-  addCharacter(@Person person, @Media media, String role);
+    > @MediaCharacterRepository
+    addCharacter(@Person person, @Media media, String role);
 }
 ~~~
 
@@ -1307,7 +1309,7 @@ Separation of generated and manually written code is done by a generated base cl
 
 If you have [configured](/documentation/developers-guide.html) to use EJB there will also be Stateless session EJB and Client side proxy for the EJB.
 
-Try to add one more operation to the PersonService, e.g. `findPersonsByCountry`. Generate with `mvn generate-sources -Dsculptor.generator.force.execution=true`. Note that `PersonServiceImpl` is not overwritten and therefore you will get compilation errors for the new method. You have to add it manually in `PersonServiceImpl`. Tip: use `ctrl+1` in Eclipse.
+Try to add one more operation to the PersonService, e.g. `findPersonsByCountry`. Generate with `mvn generate-sources -Dsculptor.generator.force=true`. Note that `PersonServiceImpl` is not overwritten and therefore you will get compilation errors for the new method. You have to add it manually in `PersonServiceImpl`. Tip: use `ctrl+1` in Eclipse.
 
 
 ## How to Generate Repositories
@@ -1359,7 +1361,7 @@ Note that you can define operations as protected to not expose them in the Repos
 
 ~~~
 Repository PersonRepository {
-    List findPersonByName(String name);
+    List<@Person> findPersonByName(String name);
     protected findByQuery;
 }
 ~~~
@@ -1370,6 +1372,8 @@ Note that setter methods in the [interface](https://github.com/sculptor/sculptor
 
 ~~~
 Repository LibraryRepository {
+    //  deprecated using jpa2
+    //  findAll(String orderBy, boolean orderByAsc, boolean cache);
     findAll(String orderBy, boolean cache);
 }
 ~~~
@@ -1430,18 +1434,18 @@ It is also possible to use, and specialize the generic Access Objects.
 public class FindPersonByNameAccessImpl extends FindPersonByNameAccessImplBase {
     public void performExecute() {
         // use the generic FindByCriteria, but with a special restriction
-        FindByCriteriaAccessImpl finder =
-                new FindByCriteriaAccessImpl(Person.class) {
+        FindByCriteriaAccessImpl<Person> finder =
+                new FindByCriteriaAccessImpl<Person>(Person.class) {
             protected void addRestrictions(Criteria criteria) {
                 List names = Arrays.asList(getName().split(" "));
                 criteria.add(Restrictions.or(
-                        Restrictions.in(NAME %2B "." %2B FIRST, names),
-                        Restrictions.in(NAME %2B "." %2B LAST, names)));
+                        Restrictions.in(NAME + "." + FIRST, names),
+                        Restrictions.in(NAME + "." + LAST, names)));
             }
         };
         finder.setSessionFactory(getSessionFactory());
         finder.setCache(true);
-        finder.setOrderBy(NAME %2B "." %2B LAST);
+        finder.setOrderBy(NAME + "." + LAST);
         finder.execute();
         setResult(finder.getResult());
     }
@@ -1464,9 +1468,9 @@ It is possible to specify a dependency injection of a another Repository, which 
 
 ~~~
 Repository MediaRepository {
-    > @MediaCharacterRepository
-    List findMediaByCharacter(Long libraryId, String characterName);
-    ...
+  > @MediaCharacterRepository
+  List<@Media> findMediaByCharacter(Long libraryId, String characterName);
+  ...
 }
 ~~~
 
@@ -1480,10 +1484,10 @@ As you can see you have to implement it manually, this can be done by something 
 
 ~~~ java
 public Library findLibraryByName(String name) {
-    Map parameters = new HashMap();
+    Map<String, Object> parameters = new HashMap<String, Object>();
     parameters.put(LibraryNames.NAME, name);
 
-    List result = findByQuery("Library.findLibraryByName", parameters);
+    List<Library> result = findByQuery("Library.findLibraryByName", parameters);
 
     if (result.isEmpty()) {
         return null;
@@ -1552,16 +1556,16 @@ int page = 1;
 int pageSize = 25;
 boolean countTotalPages = true;
 PagingParameter pagingParameter = PagingParameter.pageAccess(pageSize, page, countTotalPages);
-PagedResult pagedResult = personRepository.findAll(pagingParameter);
+PagedResult<Person> pagedResult = personRepository.findAll(pagingParameter);
 int totalPages = pagedResult.getTotalPages();
-List values = pagedResult.getValues();
+List<Person> values = pagedResult.getValues();
 
 // later fetch another page, without calculating number of pages
 int page = 2;
 int pageSize = 25;
 PagingParameter pagingParameter = PagingParameter.pageAccess(pageSize, page);
-PagedResult pagedResult = personRepository.findAll(pagingParameter);
-List values = pagedResult.getValues();
+PagedResult<Person> pagedResult = personRepository.findAll(pagingParameter);
+List<Person> values = pagedResult.getValues();
 ~~~
 
 In the initial request you typically ask for number of available pages. To answer this the system must count total number of rows. For `findAll` there is a built in countAll access object. For `findByQuery`, `findByCriteria` custom access objects you must provide a count operation, which can be done in several ways.
@@ -1580,7 +1584,7 @@ myPagedFindOperation(String searchFor, PagingParameter pagingParameter)
 
 findByCriteria(PagingParameter pagingParameter)
     hint="countOperation=findByCriteriaCountOperation";
-protected int findByCriteriaCountOperation(Map restrictions);
+protected int findByCriteriaCountOperation(Map<String, Object> restrictions);
 ~~~
 
 Those hints are available for `findAll` and `findByQuery` also.
@@ -1600,7 +1604,7 @@ findByCondition.paging=true
 It takes a list of `ConditionalCriteria` objects as parameter. Use the fluent api of `ConditionalCriteriaBuilder` to define the criteria.
 
 ~~~ java
-List conditions = ConditionalCriteriaBuilder.criteriaFor(Person.class)
+List<ConditionalCriteria> conditions = ConditionalCriteriaBuilder.criteriaFor(Person.class)
     .withProperty(PersonProperties.primaryAddress().city()).eq("Stockholm")
     .build();
 ~~~
@@ -1610,7 +1614,7 @@ Note that for each Domain Object a corresponding Properties class is generated. 
 You would typically use static imports to make the expression more compact and readable:
 
 ~~~ java
-List conditions = criteriaFor(Person.class)
+List<ConditionalCriteria> conditions = criteriaFor(Person.class)
     .withProperty(primaryAddress().city()).eq("Stockholm")
     .build();
 ~~~
@@ -1618,7 +1622,7 @@ List conditions = criteriaFor(Person.class)
 The builder supports conditions such as `eq`, `like`, `between`, `lessThan`, `greaterThan`, `in`. The order of the result can be specified with `orderBy`. Use code completion (`ctrl+space`) to see all available methods. It also supports logical expressions `and`, `or` and `not`, which can be grouped with `lbrace` and `rbrace`.
 
 ~~~ java
-List conditions = criteriaFor(Person.class)
+List<ConditionalCriteria> conditions = criteriaFor(Person.class)
     .withProperty(ssn().country()).eq(Country.SWEDEN)
     .and().withProperty(birthDate()).between(new LocalDate("1970-01-01")).to(new LocalDate("1979-12-31"))
     .and().lbrace().withProperty(primaryAddress().city().eq("Stockholm")
@@ -1630,7 +1634,7 @@ List conditions = criteriaFor(Person.class)
 `ConditionalCriteria` supports multiple column selects with column aliases, aggregate functions and grouping.
 
 ~~~ java
-List conditions = criteriaFor(Person.class)
+List<ConditionalCriteria> conditions = criteriaFor(Person.class)
     .select(PersonProperties.name().last()).alias("lastName")
     .select(PersonProperties.salary()).alias("sal").min()
     .withProperty(PersonProperties.sex()).eq(Gender.MALE)
@@ -1642,7 +1646,7 @@ List conditions = criteriaFor(Person.class)
 It is also possible to construct the `ConditionalCriteria` without the builder, using the static factory methods in `ConditionalCriteria`.
 
 ~~~ java
-List conditions = new ArrayList();
+List<ConditionalCriteria> conditions = new ArrayList<ConditionalCriteria>();
 ConditionalCriteria conditionalCriteria =
     ConditionalCriteria.equal(PersonProperties.primaryAddress().city().toString(), "Stockholm");
 conditions.add(conditionalCriteria);
@@ -1663,7 +1667,7 @@ After activation all repository operations starting with 'find', except built in
 
 ~~~
 PersonRepository {
-    List findPersonByName(String name) gap;
+    List<@Person> findPersonByName(String name) gap;
 }
 ~~~
 
@@ -1671,6 +1675,7 @@ There two variants of generated finder operations.
 One is based on the the built in repository operation `findByQuery` the other uses `findByCondition`.
 
 Both variants actually do not support pagination.
+
 
 ##### Based on findByQuery
 
@@ -1680,13 +1685,13 @@ Here are typical examples.
 
 ~~~
 PersonRepository {
-    List findByNamedQuery(@Country country) query="Person.findByCountry";
-    List findBy(@Country country) query="select object(p) from Person p where p.ssn.country = :country";
+    List<@Person> findByNamedQuery(@Country country) query="Person.findByCountry";
+    List<@Person> findBy(@Country country) query="select object(p) from Person p where p.ssn.country = :country";
     findBy(@Country country) query="ssn.country = :country";
 }
 ~~~
 
-All these examples will produce the same results.
+All these examples will produce the same results:
 `findByNamedQuery` is using a named query defined in the Person entity class.
 `findBy` will execute the given JPQL statement to get the result list.
 
@@ -1710,11 +1715,11 @@ Next to the aggregate root any appropriate return type is allowed. This can be s
 PersonRepository {
     @Contact findContact(String number, @Country)
                          query="select p.contact from Person p where p.ssn.number = :number and p.ssn.country = :country";
-    List findCountries()
+    List<@Country> findCountries()
                          query="select p.ssn.country from Person p";
-    Set findContacts(@Country country)
+    Set<@Contact> findContacts(@Country country)
                          query="select p.contact from Person p where p.ssn.country = :country";
-    List findLastNameAndMinSalary()
+    List<Object[]> findLastNameAndMinSalary()
                          query="select p.name.last, min(p.salary) from Person p group by p.name.last order by p.name.last";
 }
 ~~~
@@ -1728,7 +1733,7 @@ Here is a typical example.
 
 ~~~
 PersonRepository {
-    List findBy(String first, String last) condition="name.first = :first and name.last = :last";
+    List<@Person> findBy(String first, String last) condition="name.first = :first and name.last = :last";
     findBy(String first, String last);
 }
 ~~~
@@ -1781,9 +1786,9 @@ You can add a complete JPQL statement or only the needed parts.
 
 ~~~
 PersonRepository {
-    Set findAllCountries() condition="select p.ssn.country from Person p"
-    Set findAllCountries() select="ssn.country"
-    Set findAllCountries()
+    Set<@Country> findAllCountries() condition="select p.ssn.country from Person p"
+    Set<@Country> findAllCountries() select="ssn.country"
+    Set<@Country> findAllCountries()
 }
 ~~~
 
@@ -1794,7 +1799,7 @@ In combination with building the restrictions from a operation parameter list th
 ~~~
 PersonRepository {
     @Contact findContactByKeyAttributes(String number, @Country country);
-    Set findAllContactsByCountry(@Country country);
+    Set<@Contact> findAllContactsByCountry(@Country country);
 }
 ~~~
 
@@ -1818,7 +1823,7 @@ In addition to an object array a Tuple (`javax.persistence.Tuple`, JPA2) can be 
 
 ~~~
 PersonRepository {
-    List findByGender(@Gender sex) select="name.last, birthDate" orderBy="name.last";
+    List<Tuple> findByGender(@Gender sex) select="name.last, birthDate" orderBy="name.last";
 }
 ~~~
 
@@ -1838,7 +1843,7 @@ DataTransferObject PersonDto {
 Entity Person {
     ...
     PersonRepository {
-        List findPersonsBy(@Country country) orderBy="birthDate";
+        List<@PersonDto> findPersonsBy(@Country country) orderBy="birthDate";
         @PersonDto findPersonBy(Long id);
     }
 }
@@ -1860,7 +1865,7 @@ DataTransferObject PersonDto {
 Entity Person {
     ...
     PersonRepository {
-        List findPersonsBy(@Country country) select="name.last as lastName, name.first as firstName, birthDate";
+        List<@PersonDto> findPersonsBy(@Country country) select="name.last as lastName, name.first as firstName, birthDate";
         @PersonDto findPersonBy(Long id) select="name.last as lastName, name.first as firstName, birthDate";
     }
 }
@@ -1881,7 +1886,7 @@ Entity Person {
     Long salary nullable;
     ...
     PersonRepository {
-        List findPersonsBy(@Country country) construct select="name.last, name.first, salary" orderBy="name.last";
+        List<@PersonDto> findPersonsBy(@Country country) construct select="name.last, name.first, salary" orderBy="name.last";
         @PersonDto findPersonBy(Long id) construct select="name.last, name.first, salary";
     }
 }
@@ -1899,7 +1904,7 @@ Entity Person {
     Long salary nullable;
     ...
     PersonRepository {
-        List paymentsPerCityIn(@Country country) select="contact.zip, sum(salary) as payments" groupBy="contact.zip" orderBy="contact.zip";
+        List<@PaymentsDto> paymentsPerCityIn(@Country country) select="contact.zip, sum(salary) as payments" groupBy="contact.zip" orderBy="contact.zip";
     }
 }
 ~~~
@@ -1914,7 +1919,7 @@ Spring beans are injected in the test with ordinary `@Autowired` annotations.
 `AbstractDbUnitJpaTests` also provides a method to retrieve the [ServiceContext](#error-handling), which is always passed in as the first parameter of the service methods.
 
 ~~~
-List persons = personService.findPersonByName(getServiceContext(), "Skarsgård");
+List<Person> persons = personService.findPersonByName(getServiceContext(), "Skarsgård");
 ~~~
 
 You can implement the same kind of JUnit tests for the Repositories.
@@ -1931,9 +1936,7 @@ It is possible to use [Mockito](http://mockito.org/) or some other mocking frame
 As example we have a MessageSender, which is implemented using JMS. The MessageSender implementation is normally injected using `@Autowired` annotation. It is this implementation we want to replace with a mock when testing. We can create the mock instance using the FactoryBean that is included in Sculptor so we only need to add the xml definition in `more-test.xml`:
 
 ~~~ xml
-<bean id="messageSenderMockFactory"
-  class="org.sculptor.framework.test.MockitoFactory"
-  primary="true" >
+<bean id="messageSenderMockFactory" class="org.sculptor.framework.test.MockitoFactory" primary="true">
     <property name="type" value="org.foo.MessageSender"/>
 </bean>
 ~~~
@@ -1970,7 +1973,7 @@ public class MyFacadeTest extends AbstractDbUnitJpaTests
         myFacade.doSomething("17");
         int countAfter = countRowsInTable("SOMEDATA");
 
-        assertEquals(countBefore %2B 1, countAfter);
+        assertEquals(countBefore + 1, countAfter);
 
         verify(messageSender).sendMessage(anyString());
     }
@@ -2054,7 +2057,7 @@ Application Library {
         Entity Library {
           not auditable
           String name key
-          reference Set media opposite library
+          reference Set<@PhysicalMedia> media opposite library
 
           Repository LibraryRepository {
             inject @MediaRepository
@@ -2072,7 +2075,7 @@ If you need to define names that clash with the reserved keywords in the Sculpto
 
 ~~~
 Entity ^Entity {
-  String ^url
+    String ^url
 }
 ~~~
 
@@ -2081,9 +2084,11 @@ Entity ^Entity {
 
 It is possible to split model.btdesign and define one or more Modules in each file.
 
-By using one file per module it is also possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (media.btdesign, person.btdesign) or prefixed with `model_` or `model-` (`model-person.btdesign`). This partial generation can shorten the generation time for large projects. `sculptor-generator-plugin` will detect which model files has changed since previous generator run when using `mvn generate-sources`. Full generate will be done when using `-Dsculptopr.generator.force.execution=true` or `mvn clean generate-sources`
+By using one file per module it is also possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (media.btdesign, person.btdesign) or prefixed with `model_` or `model-` (`model-person.btdesign`). This partial generation can shorten the generation time for large projects. `sculptor-generator-plugin` will detect which model files has changed since previous generator run when using `mvn generate-sources`. Full generate will be done when using `-Dsculptor.generator.force=true` or `mvn clean generate-sources`
 
 Referenced files are imported with a URI syntax starting with `classpath:/` followed by classpath path to the `.btdesign` file to be imported.
+
+This is the `model.btdesign` main file:
 
 ~~~
 import "classpath:/model-person.btdesign"
@@ -2093,14 +2098,19 @@ Application Library {
 
     Module media {
 
+        // as usual ...
     }
 }
+~~~
 
+This is the `model-person.btdesign` containing person module in separate file:
 
+~~~
 ApplicationPart PersonPart {
 
     Module person {
 
+        // as usual ...
     }
 }
 ~~~
@@ -2122,6 +2132,8 @@ Application Library {
 In previous section it was described how the model could be separated into several files. It is also possible to define modules in a separate project to be used from other projects.
 
 In that case the imported module must define a `basePackage` and use `ApplicationPart`.
+
+This is `model-sharedtypes.btdesign` in separate file, in another project:
 
 ~~~
 ApplicationPart CommonPart {
