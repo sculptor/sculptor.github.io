@@ -6,21 +6,21 @@ navbar_name: docs
 ---
 {% include JB/setup %}
 
+[MongoDB][1] bridges the gap between key-value stores (which are fast and
+highly scalable) and traditional RDBMS systems (which provide rich queries and
+deep functionality).
+
+I think this makes MongoDB very interesting for applications that need
+high-performance and/or scalability, but also prefer using a rich persistent
+domain model with complex associations. There are of course tradeoffs to be
+aware of, such as relaxed transactional guarantees.
+
+The schema less structure is attractive from a developer productivity perspective, which is one of the two goals with Sculptor (quality is the other).
 
 **Table of Contents:**
 
 * toc
 {:toc}
-
-# 12. MongoDB (CSC) - Fornax-Platform
-
-[MongoDB][1] bridges the gap between key-value stores (which are fast and highly scalable) and traditional RDBMS systems (which provide rich queries and deep functionality).
-
-I think this makes MongoDB very interesting for applications that need high-performance and/or scalability, but also prefer using a rich persistent domain model with complex associations. There are of course tradeoffs to be aware of, such as relaxed transactional guarantees.
-
-The schema less structure is attractive from a developer productivity perspective, which is one of the two goals with Sculptor (quality is the other).
-
-**Table of Contents:**
 
 ## Part 1 - Setup Project for Business Tier
 
