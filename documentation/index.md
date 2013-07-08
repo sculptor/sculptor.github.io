@@ -63,7 +63,7 @@ show_comments: false
 
 ### [Advanced tutorial](advanced-tutorial.html) <small>Tutorial describes the features of Sculptor business tier.</small>
 
-### [Developer''s Guide](developers-guide.html) <small>How to do changes for some typical scenarios.</small>
+### [Developer's Guide](developers-guide.html) <small>How to do changes for some typical scenarios.</small>
 
 ### [Event Driven Tutorial](event-driven-tutorial.html) <small>EDA is an important ingredient for building scalable systems.</small>
 
