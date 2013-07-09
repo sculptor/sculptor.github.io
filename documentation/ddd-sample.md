@@ -21,7 +21,7 @@ Sculptor will help you with the static structure of the application. It can gene
 The definition of the domain model, using Sculptor's textual DSL is separated in one file for each Module, plus one "empty" top file, which imports the other files.
 
 The generated vizualization with [graphviz][3] looks like this:
-![][4]
+![Graphviz visualization][4]
 
 ## JUnit Tests
 
@@ -34,11 +34,11 @@ This sample has an extensive test suite, which illustrates how to write junit te
 ## Metrics
 
 It is interesting to compare the fully hand written original [DDD Sample][1] with this partly generated port. The number of hand written lines of code in the Sculptor port is 783. Compared to 1179 in the original. The business logic is almost identical, but the Sculptor variant has less lines of code since much of the boring boilerplate code is generated. It has bean measured with [JavaNCSS][5].
-![][6]
+![Lines of code][6]
 
-![][7]
+![Lines of code - per package][7]
 
-![][8]
+![Lines of code - summary][8]
 
 JUnit tests are not included, since they are very similar. Web application is not included, since it is not implemented in this Sculptor port.
 
@@ -75,13 +75,13 @@ Unknown macro: {rating}
    [1]: http://dddsample.sourceforge.net/
    [2]: http://www.domaindrivendesign.org/books/index.html#DDD
    [3]: http://www.graphviz.org/
-   [4]: /confluence/download/attachments/2373/dddsample-model.png?version=1&amp;modificationDate=1225543337000&amp;api=v2
+   [4]: /images/documentation/ddd-sample/ddd-sample-model.png
    [5]: http://www.kclee.de/clemens/java/javancss/
-   [6]: /confluence/download/attachments/2373/ddd-sample-loc-bar.png?version=2&amp;modificationDate=1245000198000&amp;api=v2
-   [7]: /confluence/download/attachments/2373/ddd-sample-loc-package.png?version=2&amp;modificationDate=1245000198000&amp;api=v2
-   [8]: /confluence/download/attachments/2373/ddd-sample-loc-summary.png?version=2&amp;modificationDate=1245000198000&amp;api=v2
-   [9]: /confluence/download/attachments/2373/Sculptor-DDDSample-src.zip?version=2&amp;modificationDate=1244972915000&amp;api=v2
-   [10]: /confluence/pages/viewpage.action?pageId=1138 (1. Installation Guide (CSC))
-   [11]: /confluence/pages/viewpage.action?pageId=1139 (2. Hello World Tutorial (CSC))
-   [12]: /confluence/pages/viewpage.action?pageId=1141 (3. Advanced Tutorial (CSC))
+   [6]: /images/documentation/ddd-sample/ddd-sample-loc-bar.png
+   [7]: /images/documentation/ddd-sample/ddd-sample-loc-package.png
+   [8]: /images/documentation/ddd-sample/ddd-sample-loc-summary.png
+   [9]: /images/documentation/ddd-sample/Sculptor-DDDSample-src.zip
+   [10]: installation
+   [11]: hello-world-tutorial
+   [12]: advanced-tutorial
   
