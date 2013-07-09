@@ -8,9 +8,9 @@ navbar_name: docs
 
 This hands-on tutorial will walk you through the steps of how to create a small application and explore it with some JUnit tests. This example is also used and extended in 3 other tutorials:
 
-This is an introduction to Sculptor. A more extensive example is available in the [Advanced Tutorial][1]. If you would like to see something more exciting than running JUnit tests we can recommend the [CRUD GUI Tutorial][2].
+This is an introduction to Sculptor. A more extensive example is available in the [Advanced Tutorial][1]. If you would like to see something more exciting than running JUnit tests we can recommend the [Developer's Guide][2].
 
-Before you start you must follow the instructions in the ****[Installation Guide**][3]**.
+Before you start you must follow the instructions in the ***[Installation Guide][3]***.
 
 **Table of Contents:**
 
@@ -95,14 +95,11 @@ Web Access (read only):
 
 Anonymous Access (read only):
 
-
-Unknown macro: {rating}
-
-   [1]: /confluence/pages/viewpage.action?pageId=1141 (3. Advanced Tutorial (CSC))
-   [2]: /confluence/pages/viewpage.action?pageId=1783 (5. CRUD GUI Tutorial (CSC))
-   [3]: /confluence/pages/viewpage.action?pageId=1138 (1. Installation Guide (CSC))
+   [1]: advanced-tutorial
+   [2]: developers-guide
+   [3]: installation
    [4]: http://domaindrivendesign.org/books/index.html
    [5]: http://hsqldb.org/
-   [6]: http://fornax.itemis.de/confluence/images/icons/emoticons/thumbs_up.png
-   [7]: http://fornax.itemis.de/confluence/images/icons/emoticons/thumbs_down.png
+   [6]: /images/emoticons/thumbs_up.png
+   [7]: /images/emoticons/thumbs_down.png
   

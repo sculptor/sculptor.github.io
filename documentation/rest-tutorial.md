@@ -136,25 +136,12 @@ JAXB annotations are generated in DataTransferObjects. If you expose other types
 
 This tutorial explained how to adjust the business tier project to include the Resources and web app configuration. If you like you can define this in a separate project and reference the services in the business tier services with the ordinary import mechanism in model.btdesign.
 
-It is also possible to combine [JSF web presentation tier][9] project with REST. In that case you need to define the following properties in sculptor-gui-generator.properties.
-
-### Location of webapp directory
-
-By default the web configuration and jsp pages are generated in src/main/webapp. You can change that by defining `outlet.webroot.dir` in src/main/resources/generator/Workflow.mwe2. For Google Appengine projects it should be located in the `war` directory:
-
-### Skip generation of JSP
-
-If you don't need html representation or use another view technology than JSP (e.g. Facelet xhtml) you can omit generation of JSPs by defining the following property in sculptor-generator.properties.
-
-Unknown macro: {rating}
-
    [1]: http://static.springsource.org/spring/docs/3.0.x/reference/mvc.html
-   [2]: /confluence/pages/viewpage.action?pageId=1139 (2. Hello World Tutorial (CSC))
+   [2]: hello-world-tutorial
    [3]: http://curl.haxx.se/
    [4]: http://dozer.sourceforge.net/
    [5]: http://static.springsource.org/spring/docs/3.0.x/reference/mvc.html#mvc-ann-requestmapping-advanced
    [6]: http://restinpractice.com/
    [7]: http://xstream.codehaus.org/annotations-tutorial.html#AutoDetect
    [8]: http://xstream.codehaus.org/
-   [9]: /confluence/pages/viewpage.action?pageId=2508 (5.1 Web CRUD GUI Tutorial (CSC))
   

@@ -175,51 +175,26 @@ When running JUnit test the dbname is suffixed with `-test`.
 
 By default the names in the data store are the same as the names in the Java DomainObjects. In case you need to use other names it is possible to define that in model with `databaseTable` and `databaseColumn`. Discriminator name and value is also possible to define when inheritance is used.
 
-## Part 4 - Show me the GUI
-
-The generated [Web CRUD GUI][14] of Sculptor works fine with mongoDB.
-
-All you need to do to is to run two more maven archetypes:
-
-  * fornax-cartridges-sculptor-archetype-parent
-  * fornax-cartridges-sculptor-archetype-jsf
-
-It is explained in [Archetype Tutorial][15] how to run them. Note that fornax-cartridges-sculptor-archetype for the business tier corresponds to fornax-cartridges-sculptor-archetype-mongodb, which you already have run in Part 1 of this tutorial.
-
-You have now created a multi module maven project and therefore you should change pom.xml in business tier project. Add parent element. Remove properties and repositories elements, since they are located in parent pom.xml.
-
-Thereafter you start Jetty with mvn jetty:run from the blog-web project. Note that no installation is needed. Jetty is launched from maven.
-
-Open  in your browser.
-
-![][16]
-
-Note that the CRUD GUI is intended for administrative sections of an application. Without customization (manual coding) it is not good enough for a public blog.
-
 ## Source
 
 The complete source code for this tutorial is available in Subversion.
 
 Web Access (read only):
 
-
 Anonymous Access (read only):
 
 
    [1]: http://www.mongodb.org/
-   [2]: /confluence/pages/viewpage.action?pageId=1138 (1. Installation Guide (CSC))
-   [3]: /confluence/download/attachments/4489224/blog_umlgraph.png?version=1&amp;modificationDate=1271620102000&amp;api=v2
+   [2]: installation
+   [3]: /images/documentation/mongodb-tutorial/blog_umlgraph.png
    [4]: http://www.mongodb.org/display/DOCS/Downloads
-   [5]: /confluence/pages/viewpage.action?pageId=1141 (3. Advanced Tutorial (CSC))
-   [6]: /confluence/pages/viewpage.action?pageId=1141#id-3.AdvancedTutorial%28CSC%29-aggregate
+   [5]: advanced-tutorial
+   [6]: advanced-tutorial#aggregate-1
    [7]: http://api.mongodb.org/java/1.3/com/mongodb/DBObject.html
    [8]: http://www.mongodb.org/display/DOCS/Java%2BDriver%2BConcurrency
    [9]: http://www.mongodb.org/display/DOCS/Indexes
-   [10]: /confluence/pages/viewpage.action?pageId=1141#id-3.AdvancedTutorial%28CSC%29-find_by_condition
-   [11]: /confluence/pages/viewpage.action?pageId=1141#id-3.AdvancedTutorial%28CSC%29-pagination
-   [12]: /confluence/pages/viewpage.action?pageId=1141#id-3.AdvancedTutorial%28CSC%29-finder_by_condition
+   [10]: advanced-tutorial#findbycondition
+   [11]: advanced-tutorial#pagination
+   [12]: advanced-tutorial#findbycondition
    [13]: http://api.mongodb.org/java/1.3/com/mongodb/MongoOptions.html
-   [14]: /confluence/pages/viewpage.action?pageId=2508 (5.1 Web CRUD GUI Tutorial (CSC))
-   [15]: /confluence/pages/viewpage.action?pageId=1283 (4. Archetype Tutorial (CSC))
-   [16]: /confluence/download/attachments/4489224/blog_screen.png?version=1&amp;modificationDate=1272480599000&amp;api=v2
   
