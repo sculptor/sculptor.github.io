@@ -216,11 +216,11 @@ Anonymous Access (read only):
    [4]: http://akkasource.org/
    [5]: http://code.google.com/p/redis/
    [6]: http://martinfowler.com/eaaDev/EventSourcing.html
-   [7]: /confluence/download/attachments/4915222/shipping_domain.png?version=1&amp;modificationDate=1278231364000&amp;api=v2
-   [8]: /confluence/pages/viewpage.action?pageId=1139
+   [7]: /images/documentation/event-driven-tutorial/shipping_domain.png
+   [8]: hello-world-tutorial
    [9]: http://martinfowler.com/eaaDev/DomainEvent.html
    [10]: http://code.google.com/p/protobuf/
    [11]: http://fornax-sculptor.blogspot.com/2010/10/event-sourcing-with-sculptor.html
    [12]: http://fornax-sculptor.blogspot.com/2010/10/event-sourcing-with-sculptor-snapshots.html
-   [13]: /confluence/pages/viewpage.action?pageId=4489224
+   [13]: mongodb-tutorial
   
