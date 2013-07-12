@@ -8,7 +8,11 @@ navbar_name: docs
 
 This hands-on tutorial will walk you through the steps of how to create a small application and explore it with some JUnit tests. This example is also used and extended in 3 other tutorials:
 
-This is an introduction to Sculptor. A more extensive example is available in the [Advanced Tutorial][1]. If you would like to see something more exciting than running JUnit tests we can recommend the [Developer's Guide][2].
+* [Archetype Tutorial](archetype-tutorial)
+* [CRUD GUI Tutorial](crud-gui-tutorial)
+* [REST Tutorual](rest-tutorial)
+
+This is an introduction to Sculptor. A more extensive example is available in the [Advanced Tutorial][1]. If you would like to see something more exciting than running JUnit tests we can recommend the [Developers Guide][2].
 
 Before you start you must follow the instructions in the ***[Installation Guide][3]***.
 
@@ -17,83 +21,162 @@ Before you start you must follow the instructions in the ***[Installation Guide]
 * toc
 {:toc}
 
+
 ## Part 1 - Setup Project
 
-In this first part we will setup the project structure for maven and eclipse.
+In this first part we will setup the project structure for Maven and eclipse.
 
-1\. Use the following command (one line) to create a maven pom and file structure. You can change the groupId and artifactId if you like.
+1. Use the following command (**one line**) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
 
-Fill in groupId and artifactId:
+   ~~~
+mvn archetype:generate -DarchetypeGroupId=org.sculptor \
+   -DarchetypeArtifactId=sculptor-maven-archetype \
+   -DarchetypeVersion=3.0.0-SNAPSHOT \
+   -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
+   -Dstandalone=true
+   ~~~
 
-There will be warnings like this:
+   Fill in groupId and artifactId:
 
-Ignore these warnings and continue with next step if you see no errors.
+   ~~~
+Define value for groupId: : org.helloworld
+Define value for artifactId: : helloworld
+Define value for version:  1.0-SNAPSHOT: :
+Define value for package:  org.helloworld: :
+   ~~~
 
-2\. In the new directory, run `mvn eclipse:eclipse` to create an Eclipse project with the same dependencies as in the pom.
+2. Open Eclipse and import the newly created project.
 
-3\. Open Eclipse and import the project.
 
 ## Part 2 - Generate Code
 
 In this part we will write a Sculptor DSL file and generate code from it.
 
-1\. Modify the file named `model.btdesign` in the folder
-`src/main/resources/`
+1. Open the file `model.btdesign` in the folder `src/main/resources/` with Sculptor DSL editor.
+Add something like this to the design file:
 
-2\. Open the `model.btdesign` file with Sculptor DSL editor, double-click on it.
-Add something like this to the design file.
+   ~~~
+	Application Universe {
+	    basePackage=org.helloworld
+	 
+	    Module milkyway {
+	        Service PlanetService {
+	            String sayHello(String planetName);
+	            protected findByExample => PlanetRepository.findByExample;
+	        }
+	 
+	        Entity Planet {
+	            String name key;
+	            String message;
+	 
+	            Repository PlanetRepository {
+	                findByExample;
+	            }
+	        }
+	    }
+	}
+   ~~~
 
-Try the code completion, error highlight and outline view.
-It is a Module containing one Entity, with a Repository. The concepts are taken from [Domain-Driven Design][4].
+   Try the code completion, error highlight and outline view.
+It is a [Module](advanced-tutorial#module) containing one [Entity](advanced-tutorial#entity), with a [Repository](advanced-tutorial#repository). The concepts are taken from [Domain-Driven Design][4].
 
-3\. Run `mvn clean install` to generate code and build. The JUnit test will fail.
+2. Run `mvn clean install` to generate code and build. The JUnit test will fail.
 
-If you run maven from the command prompt you have to do a refresh in Eclipse. If you run maven as an external task in Eclipse it can refresh automatically.
+   If you run Maven from the command prompt you have to do a refresh in Eclipse. If you [run Maven as an external task in Eclipse it](installation#maven-launcher) can refresh automatically.
 
-4\. Look at the generated code. In `src/main/java`, `src/main/resources`, `src/test/java` and `src/test/resources` folders the code is only generated once, and you can do manual changes. In `src/main/generated/java`, `src/main/generated/resources`, `src/test/generated/java` and `src/test/generated/resources` it is generated each time, i.e. don't touch.
+3. Look at the generated code. In `src/main/java`, `src/main/resources`, `src/test/java` and `src/test/resources` folders the code is only generated once, and you can do manual changes. In `src/main/generated/java`, `src/main/generated/resources`, `src/test/generated/java` and `src/test/generated/resources` it is generated each time, i.e. don't touch.
+
 
 ## Part 3 - Fix Failing Test
 
 In this step we will fix the failing JUnit test and add some hand written code.
 
-1\. Run `PlanetServiceTest` as JUnit Test. Red bar.
+1. Run `PlanetServiceTest` as JUnit Test. Red bar.
 Adjust the test method `testSayHello` to something like this:
 
-2\. [HSQLDB][5] is used as in memory database when running JUnit. Add test data in `src/test/resources/dbunit/PlanetServiceTest.xml`
+   ~~~
+	public void testSayHello() throws Exception {
+	    String greeting = planetService.sayHello(getServiceContext(), "Earth");
+	    assertEquals("Hello from Earth", greeting);
+	}
+   ~~~
 
-3\. Run, still red, but another failure.
+2. [HSQLDB][5] is used as in memory database when running JUnit. Add test data in `src/test/resources/dbunit/PlanetServiceTest.xml`:
 
-4\. Implement method `sayHello` in `PlanetServiceImpl`.
+   ~~~
+	<?xml version="1.0" encoding="UTF-8"?>
+ 
+	<dataset>
+	  <PLANET id="1" name="Earth" message="Hello from Earth"
+	    LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" />
+	  <PLANET id="2" name="Mars" message="Hello from Mars"
+	    LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" />
+	</dataset>
+   ~~~
 
-5\. Run. Green bar! ![][6]
+3. Run, still red, but another failure.
 
-6\. Add one more test method to test a failure scenario.
+4. Implement method `sayHello` in `PlanetServiceImpl`:
 
-7\. Add `PlanetNotFoundException` in `model.btdesign`.
+   ~~~
+	public String sayHello(ServiceContext ctx, String planetName) {
+	    Planet planetExample = new Planet(planetName);
+	    List<Planet> foundPlanets = findByExample(ctx, planetExample);
+	    Planet planet = foundPlanets.get(0);
+	    return planet.getMessage();
+	}
+   ~~~
 
-8\. Regenerate with
+5. Run. Green bar! ![][6]
 
-9\. Add `throws PlanetNotFoundException` in `PlanetServiceImpl.sayHello`.
+6. Add one more test method to test a failure scenario:
 
-10\. Fix the import of PlanetNotFoundException in the test class and run it, red bar. ![][7]
+   ~~~
+	@Test
+	public void testSayHelloError() throws Exception {
+	    try {
+	        planetService.sayHello(getServiceContext(), "pluto");
+	        fail("Expected PlanetNotFoundException");
+	    } catch (PlanetNotFoundException e) {
+	        // as expected
+	    }
+	}
+   ~~~
 
-11\. Fix the test. You need to adjust `sayHello` method.
+7. Add `throws PlanetNotFoundException` in `model.btdesign`:
 
-12\. Run. Green bar! ![][6]
+   ~~~
+	String sayHello(String planetName) throws PlanetNotFoundException;
+   ~~~
 
-13\. Run `mvn clean install`. Build success.
+8. Regenerate with `mvn -Dsculptor.generator.force.execution=true generate-sources`
 
-You can use `mvn -o -npu install` to speed up the builds, -o == offline, -npu == no plugin upate.
-To regenerate you use `mvn -Dfornax.generator.force.execution=true -o -npu generate-sources`
+9. Add `throws PlanetNotFoundException` in `PlanetServiceImpl.sayHello`.
 
-## Source
+10. Fix the import of `PlanetNotFoundException` in the test class and run it, red bar. ![][7]
 
-The complete source code for this tutorial is available in Subversion.
+11. Fix the test. You need to adjust `sayHello` method:
 
-Web Access (read only):
+    ~~~
+	public String sayHello(ServiceContext ctx, String planetName)
+	        throws PlanetNotFoundException {
+	    Planet planetExample = new Planet(planetName);
+	    List<Planet> foundPlanets = findByExample(ctx, planetExample);
+	    if (foundPlanets.isEmpty()) {
+	        throw new PlanetNotFoundException("Didn't find any planet named " + planetName);
+	    }
+	    Planet planet = foundPlanets.get(0);
+	    return planet.getMessage();
+	}
+    ~~~
 
+12. Run. Green bar! ![][6]
 
-Anonymous Access (read only):
+13. Run `mvn clean install`. Build success.
+
+You can use `mvn -o install` to speed up the builds (-o == offline).
+To regenerate you use `mvn -Dsculptor.generator.force.execution=true -o generate-sources`
+
 
    [1]: advanced-tutorial
    [2]: developers-guide
