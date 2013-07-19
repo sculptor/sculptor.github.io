@@ -11,8 +11,9 @@ navbar_name: docs
     <ul id="sidenav" class="nav nav-list affix">
       <li class="active"><a href="#jdk">JDK</a></li>
       <li><a href="#maven">Maven</a></li>
+      <li><a href="#graphviz">GraphViz</a></li>
       <li><a href="#eclipse">Eclipse</a></li>
-      <li><a href="#sculptor-plugins">Sculptor Plugins</a></li>
+      <li><a href="#sculptor-eclipse-plugins">Sculptor Eclipse Plugins</a></li>
       <li><a href="#eclipse-configuration">Eclipse Configuration</a></li>
       <li><a href="#maven-launcher">Maven Launcher</a></li>
     </ul>
@@ -23,7 +24,12 @@ navbar_name: docs
     </div>
     <div markdown="1">
 
-This instruction describes what you need to install and configure to be able to use Sculptor as normal developer, e.g. for getting started with the [Hello World Tutorial](tutorial/hello-world.html).
+This instruction describes what you need to install and configure to be able to use Sculptor as normal developer, e.g. for getting started with the [Hello World Tutorial](hello-world-tutorial).
+
+**Table of Contents:**
+
+* toc
+{:toc}
 
 
 ## JDK
@@ -41,17 +47,26 @@ Maven is used for generating source code and building the system.
 
 **Windows:**
 
-~~~
-set JAVA_HOME=c:\devtools\jdk1.6.0_03
+~~~ sh
+set JAVA_HOME=c:\devtools\jdk1.6.0_45
 set MAVEN_OPTS=-Xms128m -Xmx1024m
 ~~~
 
 **Mac OS X:**
 
-~~~
+~~~ sh
 JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home
 MAVEN_OPTS="-Xms128m -Xmx1024m"
 ~~~
+
+
+## GraphViz
+
+Sculptor generates several UML diagrams for the domain model. Theses diagrams are defined as textual [GraphViz](http://www.graphviz.org/) `.dot` files.
+The goal `generate-images` of Sculptors Maven plugin generates images (.png) from these `.dot` files. This plugin is included in the `pom.xml` created by the Sculptor Maven archetypes, but you need to install [GraphViz](http://www.graphviz.org/) and have the `dot` executable in path.
+
+If the GraphViz Maven `dot` executable is not available in path then the Maven build aborts with the error message `Executing 'dot' command failed`.
+{: .alert }
 
 
 ## Eclipse
@@ -64,7 +79,7 @@ Sculptor can be used with a text editor or any IDE, but if you are an Eclipse us
   * Modeling > Xtext SDK 2.4.1 (or newer)
 
 
-## Sculptor Plugins
+### Sculptor Eclipse Plugins
 
 Sculptors Eclipse plugins are available from the following update sites:
 
@@ -72,10 +87,9 @@ Sculptors Eclipse plugins are available from the following update sites:
 * Development Snapshots: [https://raw.github.com/sculptor/snapshot-repository/eclipse](https://raw.github.com/sculptor/snapshot-repository/eclipse)
  
 Install "Sculptor DSL Feature".
-If you are going to develop rich clients you should also install "Sculptor Rich Client Feature".
 
 
-## Eclipse Configuration
+### Eclipse Configuration
 
 In Eclipse the following configuration settings are required:
 
@@ -84,7 +98,7 @@ In Eclipse the following configuration settings are required:
 2. If you are using Mac OS X you should change the default file encoding in Eclipse to `ISO-8859-1` via "Preferences > General > Workspace"
 
 
-## Maven Launcher
+### Maven Launcher
 
 Maven can be executed from the command prompt, but when developing a better alternative is to run it inside Eclipse as an external tool. You can checkout an Eclipse project with some pre-configured launchers from Sculptors GitHub repository at [https://github.com/sculptor/sculptor/tree/master/devtools/maven-launcher/](https://github.com/sculptor/sculptor/tree/master/devtools/maven-launcher/). 
 
