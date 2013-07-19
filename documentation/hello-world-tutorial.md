@@ -29,20 +29,20 @@ In this first part we will setup the project structure for Maven and eclipse.
 1. Use the following command (**one line**) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
 
    ~~~
-mvn archetype:generate -DarchetypeGroupId=org.sculptor \
-   -DarchetypeArtifactId=sculptor-maven-archetype \
-   -DarchetypeVersion=3.0.0-SNAPSHOT \
-   -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
-   -Dstandalone=true
+   mvn archetype:generate -DarchetypeGroupId=org.sculptor \
+      -DarchetypeArtifactId=sculptor-maven-archetype \
+      -DarchetypeVersion=3.0.0-SNAPSHOT \
+      -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
+      -Dstandalone=true
    ~~~
 
    Fill in groupId and artifactId:
 
    ~~~
-Define value for groupId: : org.helloworld
-Define value for artifactId: : helloworld
-Define value for version:  1.0-SNAPSHOT: :
-Define value for package:  org.helloworld: :
+   Define value for groupId: : org.helloworld
+   Define value for artifactId: : helloworld
+   Define value for version:  1.0-SNAPSHOT: :
+   Define value for package:  org.helloworld: :
    ~~~
 
 2. Open Eclipse and import the newly created project.
@@ -55,7 +55,7 @@ In this part we will write a Sculptor DSL file and generate code from it.
 1. Open the file `model.btdesign` in the folder `src/main/resources/` with Sculptor DSL editor.
 Add something like this to the design file:
 
-   ~~~
+   ~~~ java
 	Application Universe {
 	    basePackage=org.helloworld
 	 
@@ -82,7 +82,12 @@ It is a [Module](advanced-tutorial#module) containing one [Entity](advanced-tuto
 
 2. Run `mvn clean install` to generate code and build. The JUnit test will fail.
 
+   <span class="badge badge-important">!</span>
+   If the Maven build aborts with the error message `Executing 'dot' command failed` then the GraphViz package is not installed as described in the [installation guide](installation#graphviz).
+   {: .alert .alert-error }
+
    If you run Maven from the command prompt you have to do a refresh in Eclipse. If you [run Maven as an external task in Eclipse it](installation#maven-launcher) can refresh automatically.
+   {: .alert }
 
 3. Look at the generated code. In `src/main/java`, `src/main/resources`, `src/test/java` and `src/test/resources` folders the code is only generated once, and you can do manual changes. In `src/main/generated/java`, `src/main/generated/resources`, `src/test/generated/java` and `src/test/generated/resources` it is generated each time, i.e. don't touch.
 
@@ -94,7 +99,7 @@ In this step we will fix the failing JUnit test and add some hand written code.
 1. Run `PlanetServiceTest` as JUnit Test. Red bar.
 Adjust the test method `testSayHello` to something like this:
 
-   ~~~
+   ~~~ java
 	public void testSayHello() throws Exception {
 	    String greeting = planetService.sayHello(getServiceContext(), "Earth");
 	    assertEquals("Hello from Earth", greeting);
@@ -103,7 +108,7 @@ Adjust the test method `testSayHello` to something like this:
 
 2. [HSQLDB][5] is used as in memory database when running JUnit. Add test data in `src/test/resources/dbunit/PlanetServiceTest.xml`:
 
-   ~~~
+   ~~~ xml
 	<?xml version="1.0" encoding="UTF-8"?>
  
 	<dataset>
@@ -118,7 +123,7 @@ Adjust the test method `testSayHello` to something like this:
 
 4. Implement method `sayHello` in `PlanetServiceImpl`:
 
-   ~~~
+   ~~~ java
 	public String sayHello(ServiceContext ctx, String planetName) {
 	    Planet planetExample = new Planet(planetName);
 	    List<Planet> foundPlanets = findByExample(ctx, planetExample);
@@ -131,7 +136,7 @@ Adjust the test method `testSayHello` to something like this:
 
 6. Add one more test method to test a failure scenario:
 
-   ~~~
+   ~~~ java
 	@Test
 	public void testSayHelloError() throws Exception {
 	    try {
@@ -145,7 +150,7 @@ Adjust the test method `testSayHello` to something like this:
 
 7. Add `throws PlanetNotFoundException` in `model.btdesign`:
 
-   ~~~
+   ~~~ java
 	String sayHello(String planetName) throws PlanetNotFoundException;
    ~~~
 
@@ -157,7 +162,7 @@ Adjust the test method `testSayHello` to something like this:
 
 11. Fix the test. You need to adjust `sayHello` method:
 
-    ~~~
+    ~~~ java
 	public String sayHello(ServiceContext ctx, String planetName)
 	        throws PlanetNotFoundException {
 	    Planet planetExample = new Planet(planetName);
@@ -174,8 +179,10 @@ Adjust the test method `testSayHello` to something like this:
 
 13. Run `mvn clean install`. Build success.
 
+<span class="label label-info">Tip</span>
 You can use `mvn -o install` to speed up the builds (-o == offline).
 To regenerate you use `mvn -Dsculptor.generator.force.execution=true -o generate-sources`
+{: .alert .alert-warning }
 
 
    [1]: advanced-tutorial
