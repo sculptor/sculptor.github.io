@@ -2204,5 +2204,5 @@ If you use `ejb` you will use `<type>ejb-client</type>` instead of classifier.
 The complete source code for this tutorial is available in GitHub [https://github.com/sculptor/sculptor/tree/master/sculptor-example/sculptor-example-library](https://github.com/sculptor/sculptor/tree/master/sculptor-example/sculptor-example-library).
 
 
-   [1]: (developers-guide)
-   [2]: (installation)
+   [1]: developers-guide
+   [2]: installation
