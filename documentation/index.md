@@ -10,9 +10,9 @@ show_comments: false
     <h2>High level</h2>
   </div>
   <div class="span8" markdown="1">
-### [Overview](overview.html) <small>Why you should use Sculptor.</small>
+### [Overview](overview) <small>Why you should use Sculptor.</small>
 
-### [Features](features.html)
+### [Features](features)
 
   </div>
 </div>
@@ -24,9 +24,9 @@ show_comments: false
     <h2>The details</h2>
   </div>
   <div class="span8" markdown="1">
-### [Getting started](getting-started.html) <small>Installation and setup of Sculptor.</small>
+### [Getting started](getting-started) <small>Installation and setup of Sculptor.</small>
 
-### [FAQ and troubleshooting](faq.html)
+### [FAQ and troubleshooting](faq)
 
   </div>
 </div>
@@ -38,13 +38,13 @@ show_comments: false
     <h2>The tools</h2>
   </div>
   <div class="span8" markdown="1">
-### [Eclipse Setup](eclipse-setup.html) <small>Preparing Eclipse.</small>
+### [Eclipse Setup](eclipse-setup) <small>Preparing Eclipse.</small>
 
-### [Eclipse Plugin](eclipse-plugin.html) <small>How to use Sculptors Eclipse Plugin.</small>
+### [Eclipse Plugin](eclipse-plugin) <small>How to use Sculptors Eclipse Plugin.</small>
 
-### [Maven Setup](maven-setup.html) <small>Preparing Maven "settings.xml".</small>
+### [Maven Setup](maven-setup) <small>Preparing Maven "settings.xml".</small>
 
-### [Maven Plugin](maven-plugin.html) <small>How to use Sculptors Maven Plugin.</small>
+### [Maven Plugin](maven-plugin) <small>How to use Sculptors Maven Plugin.</small>
 
   </div>
 </div>
@@ -57,15 +57,15 @@ show_comments: false
   </div>
   <div class="span8" markdown="1">
 
-### [Installation](installation.html) <small>What you need to install and configure to be able to use Sculptor.</small>
+### [Installation](installation) <small>What you need to install and configure to be able to use Sculptor.</small>
 
-### [Hello world tutorial](hello-world-tutorial.html) <small>How to create a small application and explore it with some JUnit tests.</small>
+### [Hello world tutorial](hello-world-tutorial) <small>How to create a small application and explore it with some JUnit tests.</small>
 
-### [Advanced tutorial](advanced-tutorial.html) <small>Tutorial describes the features of Sculptor business tier.</small>
+### [Advanced tutorial](advanced-tutorial) <small>Tutorial describes the features of Sculptor business tier.</small>
 
-### [Developer's Guide](developers-guide.html) <small>How to do changes for some typical scenarios.</small>
+### [Developer's Guide](developers-guide) <small>How to do changes for some typical scenarios.</small>
 
-### [Event Driven Tutorial](event-driven-tutorial.html) <small>EDA is an important ingredient for building scalable systems.</small>
+### [Event Driven Tutorial](event-driven-tutorial) <small>EDA is an important ingredient for building scalable systems.</small>
 
 ### [MongoDB Tutorial](mongodb-tutorial) <small>Applications that need high-performance and/or scalability.</small>
 
@@ -84,11 +84,11 @@ show_comments: false
   </div>
   <div class="span8" markdown="1">
 
-### [What's new](whats-new.html) <small>The changes in each release.</small>
+### [What's new](whats-new) <small>The changes in each release.</small>
 
-### [Contributing](contributing.html) <small>Contributing code or documentation improvements to Sculptor.</small>
+### [Contributing](contributing) <small>Contributing code or documentation improvements to Sculptor.</small>
 
-### [Sculptor: past and present](past-and-present.html) <small>A brief history of the project and its variants.</small>
+### [Sculptor: past and present](past-and-present) <small>A brief history of the project and its variants.</small>
 
   </div>
 </div>
