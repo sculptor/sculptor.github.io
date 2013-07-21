@@ -11,17 +11,20 @@ author: Patrik Nordwall
 
 *Do you still code everything by hand? Isn't it tedious and error prone? It's time to start using Sculptor to jump start Model Driven Software Development. Concepts and patterns from Domain-Driven Design are used in the Domain Specific Language, which is the model for the generated Hibernate and Spring implementation. Have you had frustrating experiences with code generators? Have you become disillusioned with code generators? Was the generated code not entirely satisfactory, and you couldn't control the result? Sculptor is different!*
 
+* toc
+{:toc}
+
+
 ## Overview
 
 Sculptor is a simple and powerful code generation platform, which provides a quick start to [Model Driven Software Development](http://www.voelter.de/mdsd-book/) (MDSD). When using Sculptor you can focus on the business domain, instead of technical details. You can use the concepts from [Domain-Driven Design](http://domaindrivendesign.org/books/)(DDD) in the textual Domain Specific Language (DSL). Sculptor uses [XText](http://www.eclipse.org/Xtext/) and [XPand](http://wiki.eclipse.org/Xpand) to parse the DSL and generate high quality Java code and configuration. The generated code is based on well-known frameworks, such as Spring, Hibernate and Java EE.
 
-![Overview](/images/2010-06-10-improving-developer-productivity-with-sculptor/sculptor_overview5.png)
-
-**Figure 1. Overview of Sculptor**
+![Overview](/images/2010-06-10-improving-developer-productivity-with-sculptor/sculptor_overview5.png) \\
+<small>_Figure 1. Overview of Sculptor_</small>
 
 Figure 1, “Overview” illustrates how the developer specifies the application design in the DSL, generates code and configuration with Maven 2. Generated code and hand written code is well separated. Hand written code, such as JUnit tests and business logic, is added in subclasses or other well defined places.
 
-The DSL and the code generation drives the development and is not a one time shot. It is an iterative process, which can be combined with Test Driven Development (TDD) and evolutionary design, as explained in the appendix [Test Driven Development with Sculptor](#tdd).
+The DSL and the code generation drives the development and is not a one time shot. It is an iterative process, which can be combined with Test Driven Development (TDD) and evolutionary design, as explained in the chapter [Test Driven Development with Sculptor](#tdd).
 
 High level features of Sculptor:
 
@@ -39,19 +42,18 @@ To illustrate how Sculptor can be used in practice we will use an example. It is
 
 The example is a simple system for a library of movies and books. The core of the system is a Domain Model, see Figure 2, “Domain model” A Library consists of PhysicalMedia. Books and Movies are different types of Media, which are stored on a PhysicalMedia, e.g. DVD, VHS, paper books, eBooks on CD. A Media has Characters, e.g. James Bond, which can be played by a Person, e.g. Pierce Brosnan. A person can be involved (Engagement) in different Media, actually a Person can have several Engagements in the same Media. E.g. Quentin Tarantino is both actor and director in the movie 'Reservoir Dogs'.
 
-![UML Graph](/images/2010-06-10-improving-developer-productivity-with-sculptor/umlgraph.png?height=267&width=400)
-
-**Figure 2. Domain model of the Library example.**
+![UML Graph](/images/2010-06-10-improving-developer-productivity-with-sculptor/umlgraph.png?height=267&width=400) \\
+<small>_Figure 2. Domain model of the Library example._</small>
 
 With a few simple Maven commands you will be able to create the Maven and Eclipse projects for your application. Sculptor provides [Maven Archetype](http://maven.apache.org/plugins/maven-archetype-plugin/) artifacts to facilitate this.
 
 A Sculptor application is defined in a textual DSL. Since it is text it has all the benefits of ordinary text source code, such as searching, copy-paste, merging and so on. Sculptor provides an Eclipse editor for the DSL. It supports error highlight, code completion and outline view.
 
-Sculptor doesn't mandate any specific development methodology, but personally I prefer Test Driven Development with evolutionary design and refactoring. Using that approach the DSL model is not a big design up front. This is described in more detail in the appendix [Test Driven Development with Sculptor][7].
+Sculptor doesn't mandate any specific development methodology, but personally I prefer Test Driven Development with evolutionary design and refactoring. Using that approach the DSL model is not a big design up front. This is described in more detail in the chapter [Test Driven Development with Sculptor](#tdd).
 
 An early DSL model for the Library example might look like this:
 
-~~~
+~~~ java
 Application Library {
   basePackage = org.library
 
@@ -88,7 +90,7 @@ Application Library {
 }
 ~~~
 
-The full DSL model for the Library example looks like _[this_][11]. There you can see that the DSL defines two Modules, containing a few Services. It defines the same Domain Objects, including attributes and references, as in Figure 2, “Domain model”.
+The full DSL model for the Library example looks like _[this_](/documentation/advanced-tutorial#library). There you can see that the DSL defines two Modules, containing a few Services. It defines the same Domain Objects, including attributes and references, as in Figure 2, “Domain model”.
 
 The core concepts of the DSL have been taken from [Domain-Driven Design](http://domaindrivendesign.org/books/). If you don't have the book you can download and read more in [DDD Quickly](http://www.infoq.com/news/2006/12/domain-driven-design).
 
@@ -96,22 +98,41 @@ Sculptor code generation is executed as part of the [Maven build cycle](http://m
 
 The artifacts that are intended to be completed with hand written code are generated only once, while other artifacts are regenerated and overwritten each time. Separation is typically implemented with extension as illustrated in Figure 3, "Separation of generated and hand written".
 
-![Sculptor Separation of generated and hand written](/images/2010-06-10-improving-developer-productivity-with-sculptor/sculptor-separation.png)
-
-**Figure 3. Separation of generated and hand written**
+![Sculptor Separation of generated and hand written](/images/2010-06-10-improving-developer-productivity-with-sculptor/sculptor-separation.png) \\
+<small>_Figure 3. Separation of generated and hand written_</small>
 
 The regenerated source should not be added to version control. These two types of artifacts are separated from each other in the file system. The source and resources directories can be seen in Figure 4, “File structure”. It also shows the packages and generated classes in the domain package for the media module. The names of the packages can of course be changed easily.
 
-![Filestructure](/images/2010-06-10-improving-developer-productivity-with-sculptor/filestructure.png)
-
-**Figure 4. File structure and packages**
+![Filestructure](/images/2010-06-10-improving-developer-productivity-with-sculptor/filestructure.png) \\
+<small>_Figure 4. File structure and packages_</small>
 
 One of the strengths of Sculptor, compared to other code generators, is that it spans the complete application, not only fragments, which are hard to fit in to the overall design.
 
-Sculptor typically reduce the amount of hand written code with 50% compared to a manually coded application with a similar design. [Appendix: Sculptor Metrics][15] presents measurements from a real case.
+Sculptor typically reduce the amount of hand written code with 50% compared to a manually coded application with a similar design. The following section presents measurements from a real case.
 
 
-#### Domain Objects
+### Sculptor Metrics
+
+I have converted an existing application to use Sculptor. It is interesting to see that Sculptor removes about half of the code.
+
+It is a rather small application with a straight forward search and display user interface. It also contains an administrative part with typical CRUD operations. The system collects data from a other systems via messages from the ESB. It consists of 2 Services, 6 Consumers, 7 persistent Domain Objects, and several non persistent Value Objects. In these metrics we have not included the presentation tier, since Sculptor doesn't provide anything for the presentation tier yet.
+
+The design of the old and the converted application is very similar, except for the introduction of Repositories and Access Objects instead of ordinary Data Access Objects (DAO).
+
+![Metrics](/images/2010-06-10-improving-developer-productivity-with-sculptor/metrics.png) \\
+<small>_Figure 5. Lines of code for old and converted application_<small>
+
+Figure 5, “Lines of code” shows the lines of codes for the old application compared to the new converted application, which utilize Sculptor.
+The first bar in each category is the old application, the second is the generated code by Sculptor, and the third bar is hand written code in the new application.
+
+The percentage measures are the amount hand written code (skeleton generated once) in the new application related to the amount of code in the
+old application, which was hand written. In total about 50% of the code is generated by Sculptor for this application.
+
+Reduction of lines of code is definitely not the only benefit of Sculptor. Quality aspects such as consistency and maintainability are also
+important, but not as easy to measure.
+
+
+### Domain Objects
 
 In the context of Sculptor, Domain Object is a common term for Entity, ValueObject and BasicType.
 
@@ -123,7 +144,7 @@ It is possible to specify that a ValueObject is not persistent, i.e. not stored 
 
 Below is the definition in the DSL of a few Domain Objects in the Library example.
 
-~~~
+~~~ java
 Entity Person {
   String ssn key length="20"
   String country key length="2"
@@ -164,7 +185,7 @@ Separation of generated and manually written code is done by a generated base cl
 The Sculptor DSL is based on the principle "convention over configuration". An example of this is that Entities are by default auditable, which means that when the objects are saved an interceptor will automatically update information about by whom and when the object was created or changed These attributes are automatically added for auditable Domain Objects. You can turn off auditing for an Entity with `not auditable`. Value Objects are by default not auditable.
 
 
-#### Services
+### Services
 
 The Services act as a [Service Layer](http://martinfowler.com/eaaCatalog/serviceLayer.html) around the domain model. It provides a well defined interface with a set of available operations to the clients.
 
@@ -206,7 +227,7 @@ In the Service implementation hand written code can be added for the behavior of
 Sculptor can also generate message consumers, implemented as EJB Message Driven Beans for the pure EJB3 target implementation.
 
 
-#### Repositories
+### Repositories
 
 The Repositories encapsulate all technical details for retrieving Domain Objects from the database. They are also used to make new objects persistent and to delete objects.
 
@@ -239,6 +260,121 @@ The default implementation of a Repository consists of an implementation class a
 Sculptor runtime framework provides generic Access Objects for operations such as `findByCondition`, `findByQuery`, `findByKeys`, `save` and `delete`. It is important that the API of the Repository communicates supported operations for the Aggregate root and therefore these generic operations are not added automatically to the Repository. They must be specified in the DSL, but that is very simple.
 
 
+## Test Driven Development with Sculptor
+{: #tdd}
+
+Sculptor doesn't mandate any specific development methodology, but personally I prefer Test Driven Development with evolutionary design and refactoring.
+It is important to explain that Sculptor can be combined with an agile mindset and Test Driven Development (TDD) in particular.
+Using this approach the DSL model is not a big design up front.
+
+Unit tests of Sculptor artifacts can be done for Domain Objects, Repositories, Services and Consumers.
+
+Domain Objects can be tested as ordinary POJOs with JUnit, exactly as usual. It is probably the behavior that needs to be tested and methods for that are added manually anyway.
+
+When testing Repositories, Services and Consumers it is convenient to use [DBUnit](http://www.dbunit.org/) to load the in memory HSQLDB database with test data from an XML file.
+The database is recreated for each test method.
+
+Sometimes it is better to test the Services and Consumers by [stubbing](http://www.martinfowler.com/eaaCatalog/serviceStub.html) dependencies to Repositories and other Services.
+
+To explain the TDD approach we will look at an example. It is the same example application as described in this article.
+Assume we need to add a service to lookup a library with a specific name.
+
+1. Add test method. Write asserts and call the non-existing service method.
+
+   ~~~ java
+	public void testFindLibraryByName() {
+	    String name = "famous";
+	    Library library = libraryService.findLibraryByName(
+	            getServiceContext(), name);
+	    assertNotNull(library);
+	    assertEquals(name, library.getName());
+	}
+   ~~~
+
+2. Add test data in the DBUnit XML file.
+
+   ~~~ xml
+	<?xml version='1.0' encoding='UTF-8'?>
+	<dataset>
+		<LIBRARY ID="1" NAME="famous" VERSION="1"/>
+	</dataset>
+   ~~~     
+
+3. Thereafter you have a good feeling of the API of the method. Add it to the DSL model.
+
+   ~~~ java
+	Service LibraryService {
+	    @Library findLibraryByName(String name);
+	    saveLibrary delegates to LibraryRepository.save;
+	    findMediaByName delegates to MediaRepository.findMediaByName;
+	    findMediaByCharacter delegates to
+	      MediaRepository.findMediaByCharacter;
+	    findPersonByName delegates to PersonService.findPersonByName;
+	}
+   ~~~     
+
+4. Generate code with with `mvn generate-sources`. When you add new methods it sometimes results in compilation errors in the hand written classes,
+   which are only generated once. In this case `LibraryServiceImpl`.
+   These types of compilation errors can easily be fixed with Eclipse `ctrl+1 Add unimplemented methods`.
+
+5. Now the compilation error in the test class has disapeared. Run the test to see red bar.
+
+6. Implement the method, by adding hand written code and/or adding more stuff to the DSL model.
+   In this case we add a generic `findByCondition` operation in the Repository. We also add a dependency injection of the Repository in the Service.
+
+   ~~~ java
+	Service LibraryService {
+	    inject LibraryRepository
+	    @Library findLibraryByName(String name);
+	    saveLibrary delegates to LibraryRepository.save;
+	    findMediaByName delegates to MediaRepository.findMediaByName;
+	    findMediaByCharacter delegates to
+	      MediaRepository.findMediaByCharacter;
+	    findPersonByName delegates to PersonService.findPersonByName;
+	}
+	
+	Entity Library {
+	    String name key
+	    reference Set media opposite library
+	
+	    Repository LibraryRepository {
+	      findByCondition;
+	      findById;
+	      save;
+	      findByQuery;
+	    }
+	}
+   ~~~
+
+   Add some hand written code in `LibraryServiceImpl` to call `findByCondition`.
+
+   ~~~ java
+	public Library findLibraryByName(ServiceContext ctx, String name) {
+	    List criteria =
+	        criteriaFor(Library.class).withProperty(name()).eq(name).build();
+	    List libraries = getLibraryRepository().findByCondition(criteria);
+	    return libraries.get(0);
+	}
+   ~~~
+
+7. Run test. Green bar!
+
+8. Continue in the same way by adding another test method, e.g. for the failure scenario when a matching library is not found.
+
+9. Refactor if necessary.
+
+
+### Refactoring
+
+Refactoring can be done like this. Use the ordinary refactoring tools in Eclipse, which will modify the generated code also.
+Run tests to make sure you still have green bar. Thereafter you do the corresponding changes in the DSL model and generate with `mvn generate-sources`. Run tests.
+
+Before generating, all files in the generated directories can be removed to make sure that everything is in sync.
+
+An alternative approach, which is better in some cases, is to start with changing the DSL model and regenerate.
+Thereafter you manually change or move the hand written code.
+
+
 ## CRUD GUI
 
 The rich domain model is the core piece of Sculptor, but Sculptor also provides nice front-end implementations. The purpose of the front-end is to manage the classical Create, Read, Update, and Delete operations of the domain objects. It also has advanced support for associations between objects.
@@ -249,9 +385,11 @@ There are three different implementations you can choose between.
   * Rich Internet Application with GWT Smartclient
   * Rich Client with Eclipse RCP
 
-![Screenshot of Smartclient GUI](/images/2010-06-10-improving-developer-productivity-with-sculptor/screen1.png?height=253&width=400)
+![Screenshot of Smartclient GUI](/images/2010-06-10-improving-developer-productivity-with-sculptor/screen1.png?height=253&width=400) \\
+<small>_Figure 6. Screenshot of Smartclient GUI_</small>
 
-**Figure 5. Screenshot of Smartclient GUI**
+
+## Customization
 
 This section is intended as a teaser of how Sculptor can be customized. More information is available in the [Sculptor Documentation](/documentation/).
 
@@ -272,18 +410,16 @@ The default choices gives a good starting environment with minimal requirements 
 
 For each of these areas there are alternative implementations that are supported by Sculptor out of the box. The features are selected with simple configuration.
 
-![Sculptor Target Implementations](/images/2010-06-10-improving-developer-productivity-with-sculptor/sculptor-target-impl.png)
-
-**Figure 6. Target Implementations**
+![Sculptor Target Implementations](/images/2010-06-10-improving-developer-productivity-with-sculptor/sculptor-target-impl.png) \\
+<small>_Figure 7. Target Implementations_</small>
 
 
 ### Internal Design
 
 Sculptor is implemented with [Xtext](http://www.eclipse.org/Xtext/) and [Xpand](http://wiki.eclipse.org/Xpand). Sculptor is Open Source and available under Apache 2 License.
 
-![Sculptor Internal Design](/images/2010-06-10-improving-developer-productivity-with-sculptor/sculptor-internal-design.png)
-
-**Figure 8. Internal Design of Sculptor**
+![Sculptor Internal Design](/images/2010-06-10-improving-developer-productivity-with-sculptor/sculptor-internal-design.png) \\
+<small>_Figure 8. Internal Design of Sculptor_</small>
 
   1. The developer is using the DSL Editor plugin to edit the application specific `model.btdesign`, i.e. the source for the concrete model that is the input to the code generation process. Constraints of the DSL are validated while editing.
 
@@ -348,6 +484,9 @@ You can change the code generation templates using the Aspect-Oriented Programmi
 
 It is also possible to use AOP to exclude generation. For some special cases the default generation might not be appropriate and it is desirable to handle the special case with manual code instead. For example, assume we have a complex domain object and we need to do the JPA/Hibernate mapping manually.
 
+
+## Full Control
+
 You are not stuck if you need to do more customization than what is possible with properties and AOP. You can checkout the Sculptor source code to do more adjustments. It is well described in the [Sculptor Documentation](/documentation/) how to change different things. A few examples of stuff you can modify:
 
   * Syntax of the DSL.
@@ -358,6 +497,13 @@ You are not stuck if you need to do more customization than what is possible wit
 
   * Constraint checks to enforce certain design decisions.
 
-   [7]: https://sites.google.com/site/fornaxsculptor/improving-developer-productivity/tdd
-   [11]: http://fornax.itemis.de/confluence/x/dQQ
-   [15]: https://sites.google.com/site/fornaxsculptor/improving-developer-productivity/metrics
+
+## Conclusions
+
+Sculptor is an Open Source tool with the purpose to improve developer productivity and quality.
+It raises the level of abstraction and automates a lot of otherwise repetitive manual coding.
+
+You can focus on the business domain, instead of technical details. Sculptor distills best practice into easy to use notation.
+The design of the generated application is heavily inspired by the patterns and concepts from [Domain-Driven Design](http://domaindrivendesign.org/books/).
+
+You are in control and can easily adopt the tool to fit the requirements and frameworks you are working with.
