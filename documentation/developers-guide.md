@@ -6,7 +6,10 @@ navbar_name: docs
 ---
 {% include JB/setup %}
 
-Sculptor is not an one-size-fits-all product. Even though it is a good start for many systems, sooner or later customization is always needed. This guide will give you an understanding of the internal design of Sculptor and explains how to do changes for some typical scenarios. Some things can easily be changed with properties or AOP, while other things requires more effort, since you need to setup the development environment. Some changes are staightforward and some requires more in depth understanding of Eclipse [Xtext](http://www.eclipse.org/xtext/) and [Xtend](http://www.eclipse.org/xtend/).
+Sculptor is not an one-size-fits-all product. Even though it is a good start for many systems, sooner or later customization is always needed.
+This guide will give you an understanding of the internal design of Sculptor and explains how to do changes for some typical scenarios.
+Some things can easily be changed with properties or AOP, while other things requires more effort, since you need to setup the [development environment](development-environment).
+Some changes are staightforward and some requires more in depth understanding of Eclipse [Xtext](http://www.eclipse.org/xtext/) and [Xtend](http://www.eclipse.org/xtend/).
 
 **Table of Contents:**
 
@@ -16,9 +19,8 @@ Sculptor is not an one-size-fits-all product. Even though it is a good start for
 
 ## Sculptor Internal Design
 
-![Sculptors internal design](/images/documentation/developers-guide/sculptor-internal-design.png)
-
-**_Figure 1. Internal Design of Sculptor_**
+![Sculptors internal design](/images/documentation/developers-guide/sculptor-internal-design.png) \\
+<small>_Figure 1. Internal Design of Sculptor_</small>
 
 1. The developer is using the DSL Editor plugin to edit the application specific `model.btdesign`, i.e. the source for the concrete model that is the input to the code generation process. Constraints of the DSL is validated while editing.
 
@@ -1203,13 +1205,13 @@ Input to the code generation is the model, which is structured according to the 
 
 ### Business Tier Model (domain model)
 
-![Sculptormetamodel](/images/documentation/developers-guide/sculptormetamodel.png)
-
-**_Figure 2. Meta Model for the code generation model_**
+![Sculptormetamodel](/images/documentation/developers-guide/sculptormetamodel.png) \\
+<small>_Figure 2. Meta Model for the code generation model_</small>
 
 If you have installed Eclipse Graphical Modeling Framework SDK (Ganymede update site) you will be able to edit the ecore file with a graphical editor, see Figure 2. Open the `sculptormetamodel.ecore_diagram` with the editor.
 
-**To prevent OutOfMemoryError when you use the graphical ecore editor you can add `-XX:MaxPermSize=128m` in `eclipse.ini`, which is located in the Eclipse installation directory.**
+To prevent OutOfMemoryError when you use the graphical ecore editor you can add `-XX:MaxPermSize=128m` in `eclipse.ini`, which is located in the Eclipse installation directory.
+{: .alert }
 
 When you add a totally new concept you have to add it to this meta model.
 When you change the meta model it is not enough to build with maven. First you must generate EMF model code.
@@ -1224,9 +1226,8 @@ Now you can package the meta model with `mvn install`.
 
 Sculptor doesn't aim at implementing a general purpose GUI model that can be used for any type of GUI. We are focusing on the kind of CRUD GUI illustrated in the [CRUD GUI Tutorial](/documentation/crud-gui-tutorial.html).
 
-![Sculptorguimetamodel](/images/documentation/developers-guide/sculptorguimetamodel.png)
-
-**_Figure 2. GUI Meta Model for the GUI parts of the code generation model_**
+![Sculptorguimetamodel](/images/documentation/developers-guide/sculptorguimetamodel.png) \\
+<small>_Figure 3. GUI Meta Model for the GUI parts of the code generation model_</small>
 
 
 **User Task**
@@ -1713,7 +1714,8 @@ We need to be able to define an additional feature for the attributes of the Dom
 1. Open the `sculptormetamodel.ecore_diagram` with the graphical editor.
    Add a new EAttribute to the `Attribute` "class". Set the name to `required` in the Properties view. Select `EBoolean` in the `EAttribute Type`.
 
-   ![Required Attribute](/images/documentation/developers-guide/required_attribute.png)
+   ![Required Attribute](/images/documentation/developers-guide/required_attribute.png) \\
+   <small>_Figure 4. Screenshot of metamodel for required attribute_</small>
 
 2. Open the `sculptormetamodel.genmodel` and right click on the top node. Select Generate Model.
 
@@ -1746,7 +1748,8 @@ This section describes all steps of how to add a completely new concept, Consume
    * Add association from `Consumer` to `Service`, `serviceDependencies`, used for dependency injection of Services into the Consumer.
    * Add association from `Consumer` to `Repository`, `repositoryDependencies`, used for dependency injection of Repositories into the Consumer.
 
-   ![Consumer Meta Model](/images/documentation/developers-guide/consumer_meta_model.png)
+   ![Consumer Meta Model](/images/documentation/developers-guide/consumer_meta_model.png)\\
+   <small>_Figure 5. Screenshot of metamodel for consumer_</small>
 
 2. DSL grammar, located in `sculptordsl.xtext`
 
