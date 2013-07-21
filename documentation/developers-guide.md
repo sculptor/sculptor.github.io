@@ -45,7 +45,7 @@ Some changes are staightforward and some requires more in depth understanding of
 
 ## Performance Tuning of Generator
 
-By using one model file per module it is possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (e.g. `media.btdesign`, `person.btdesign`) or prefixed with `model_` or `model-` (model-person.btdesign). This partial generation can shorten the generation time for large projects. [`sculptor-maven-plugin`](/documentation/maven-plugin.html) will detect which model files has changed since previous generator run when using `mvn -o generate-sources`. Full generate will be done when using `-Dsculptor.generator.force.execution=true` or `mvn clean generate-sources`
+By using one model file per module it is possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (e.g. `media.btdesign`, `person.btdesign`) or prefixed with `model_` or `model-` (model-person.btdesign). This partial generation can shorten the generation time for large projects. [`sculptor-maven-plugin`](maven-plugin) will detect which model files has changed since previous generator run when using `mvn -o generate-sources`. Full generate will be done when using `-Dsculptor.generator.force.execution=true` or `mvn clean generate-sources`
 
 Note that the Maven `-o` (offline) option can reduce Maven execution time a lot, if you know that you have everything locally.
 
@@ -55,7 +55,7 @@ A major disadvantage of using `mvn clean` is that Eclipse will often not underst
 
 Note that Refresh in Eclipse is often time consuming. In the Maven launcher you should specify Refresh "The project containing the selected resource" or "Specific resources". Don't use "The entire workspace".
 
-[`sculptor-maven-plugin`](/documentation/maven-plugin.html) runs the generator within the Maven process and therefore it can be necessary to define JVM parameters for large projects via the environment variable `MAVEN_OPTS`:
+[`sculptor-maven-plugin`](maven-plugin) runs the generator within the Maven process and therefore it can be necessary to define JVM parameters for large projects via the environment variable `MAVEN_OPTS`:
 
 * Windows: `set MAVEN_OPTS="-Xms256m -Xmx1g -XX:MaxPermSize=256m"`
 * Unix: `export MAVEN_OPTS=-Xms256m -Xmx1g -XX:MaxPermSize=256m`
@@ -916,7 +916,7 @@ Sculptor supports deployment as EAR or WAR. WAR is default when creating new pro
 * Transaction management is done with JTA by the application server when deployed as EAR, by Spring when deployed as WAR.
 * Consumers are not supported when deployed as WAR.
 
-The [Archetype Tutorial](/documentation/archetype-tutorial.html) describes the steps how to convert WAR to EAR deployment. It also describes how to deploy in JBoss.
+The [Archetype Tutorial](archetype-tutorial) describes the steps how to convert WAR to EAR deployment. It also describes how to deploy in JBoss.
 
 
 ### JAXB
@@ -1112,7 +1112,7 @@ Use Eclipses Git support [EGit](http://www.eclipse.org/egit/) or any other [Git 
 
 ### Maven Launcher
 
-Import the project `devtools/maven-launcher` into Eclipses workspace as described in the [Installation Guide](/documentation/installation.html#maven-launcher) (if you haven't already done that).
+Import the project `devtools/maven-launcher` into Eclipses workspace as described in the [Installation Guide](installation#maven-launcher) (if you haven't already done that).
 
 When the Sculptor Maven Launcher project is open in the workspace you can run Maven inside Eclipse. The menu items for this are available in the external tools menu.
 
@@ -1166,7 +1166,7 @@ It would also be possible to replace the XText DSL meta model with some other, e
 
 A transformation converts the DSL model to the code generation model. This transformation is implemented in `DslTransformation.ext` in `sculptor-generator-core`.
 
-You can do a lot of powerful things in this transformation, without having to change code generation templates or its meta model. For example, the [scaffold feature](/documentation/advanced-tutorial.html#scaffold) is implemented in the transformation. There is a property `scaffold` for `DslEntity`. It is like an ordinary `Entity` with attributes and references, but the `DslTransformation` automatically add `Repository` and `Service` with generic CRUD operations.
+You can do a lot of powerful things in this transformation, without having to change code generation templates or its meta model. For example, the [scaffold feature](advanced-tutorial#scaffold) is implemented in the transformation. There is a property `scaffold` for `DslEntity`. It is like an ordinary `Entity` with attributes and references, but the `DslTransformation` automatically add `Repository` and `Service` with generic CRUD operations.
 
 When you change the DSL, except for simple syntactic sugar, you often have to change the `DslTransformation` also.
 
@@ -1224,7 +1224,7 @@ Now you can package the meta model with `mvn install`.
 
 ### GUI Model
 
-Sculptor doesn't aim at implementing a general purpose GUI model that can be used for any type of GUI. We are focusing on the kind of CRUD GUI illustrated in the [CRUD GUI Tutorial](/documentation/crud-gui-tutorial.html).
+Sculptor doesn't aim at implementing a general purpose GUI model that can be used for any type of GUI. We are focusing on the kind of CRUD GUI illustrated in the [CRUD GUI Tutorial](crud-gui-tutorial).
 
 ![Sculptorguimetamodel](/images/documentation/developers-guide/sculptorguimetamodel.png) \\
 <small>_Figure 3. GUI Meta Model for the GUI parts of the code generation model_</small>
@@ -1614,7 +1614,7 @@ You must place the `genericAccessObjectStrategy` class (EvictAccessObjectStrateg
 
 ### How to add a transformation feature
 
-[Scaffold](/documentation/advanced-tutorial.html#scaffold) is a feature to be able to mark a Domain Object as scaffold and then automatically add some predefined operations (typically CRUD) to the corresponding Repository and Service. This is implemented in the transformation.
+[Scaffold](advanced-tutorial#scaffold) is a feature to be able to mark a Domain Object as scaffold and then automatically add some predefined operations (typically CRUD) to the corresponding Repository and Service. This is implemented in the transformation.
 
 We add a boolean `scaffold` property to the DSL grammar for DslEntity. This is straightforward.
 

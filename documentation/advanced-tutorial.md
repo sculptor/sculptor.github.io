@@ -6,9 +6,9 @@ navbar_name: docs
 ---
 {% include JB/setup %}
 
-This tutorial describes the features of Sculptor business tier. It presents how Sculptor works out-of-the-box, customization is often needed and that is the topic of the [Developer's Guide](/documentation/developers-guide.html).
+This tutorial describes the features of Sculptor business tier. It presents how Sculptor works out-of-the-box, customization is often needed and that is the topic of the [Developer's Guide][1].
 
-Before you start you must follow the instructions in the [Installation Guide](/documentation/installation.html). It is also recommended that you try the [Hello World Tutorial](/hello-world-tutorial.html) to get a feeling of the environment.
+Before you start you must follow the instructions in the [Installation Guide][2]. It is also recommended that you try the [Hello World Tutorial](hello-world-tutorial) to get a feeling of the environment.
 
 **Table of Contents:**
 
@@ -451,7 +451,7 @@ Built in types:
   * Clob
   * Blob
 
-It is easy to add your own DSL types and mapping to database and Java types. See [Developer's Guide](/documentation/developers-guide.html). Sculptor supports [Joda Time](http://joda-time.sourceforge.net/) instead of the Java date and time classes. It is also described in the [Developer's Guide](/documentation/developers-guide.html#joda) how to activate Joda Time.
+It is easy to add your own DSL types and mapping to database and Java types. See [Developer's Guide][1]. Sculptor supports [Joda Time](http://joda-time.sourceforge.net/) instead of the Java date and time classes. It is also described in the [Developer's Guide](developers-guide#joda) how to activate Joda Time.
 
 To distinguish references from simple attributes, declarations of references starts with a `-`. In the same way as in other places you must also use an @ in front of the declaration when referring to a Domain Object. When the relation is one-to-many or many-to-many you define a collection as the type of the reference. Bidirectional associations are defined with the opposite `<->` syntax.
 
@@ -1048,7 +1048,7 @@ ValueObject PersonCriteria {
 
 ### Cache
 
-Domain Objects and collection references can be defined to be cached by JPA/Hibernate second level cache. EhCache is the default cache provider. It is described in the [Developer's Guide](/documentation/developers-guide.html) how to change to another cache provider.
+Domain Objects and collection references can be defined to be cached by JPA/Hibernate second level cache. EhCache is the default cache provider. It is described in the [Developer's Guide][1] how to change to another cache provider.
 
 ~~~
 ValueObject Engagement {
@@ -1175,7 +1175,7 @@ The default value for `cascade` takes the aggregate and module into account. Whe
   * `all-delete-orphan` is used if both Entities are in the same Aggregate.
   * `all` is used if both Entities are in the same Module.
 
-Default values for `cascade` can be defined in `sculptor-generator.properties`, see [Developer's Guide](/documentation/developers-guide.html).
+Default values for `cascade` can be defined in `sculptor-generator.properties`, see [Developer's Guide][1].
 
 Try the different features of the Domain Objects. Add a few more Entities and Value Objects to `model.btdesign`. Add different types of Attributes and References. For example you can add a new Module named customer, with a `Customer` entity, which has a Reference to rented `Media`. Maybe with a rental contract Value Object in between, containing time period and price.
 
@@ -1223,7 +1223,7 @@ Entity Movie extends @Media {
 }
 ~~~
 
-The colors are customizable as described in [Developer's Guide](/documentation/developers-guide.html#diagram).
+The colors are customizable as described in [Developer's Guide](developers-guide#diagram).
 
 
 #### Subject area class diagrams
@@ -1317,7 +1317,7 @@ The generated code consists of:
 
 Separation of generated and manually written code is done by a generated base class and manually written subclass. The subclass is also generated, but only once, it will never be overwritten by the generator. You can of course remove it to regenerate it. There will not be any subclass, gap class, when the service only consists of operations that delegate to repositories and other other services.
 
-If you have [configured](/documentation/developers-guide.html) to use EJB there will also be Stateless session EJB and Client side proxy for the EJB.
+If you have [configured][1] to use EJB there will also be Stateless session EJB and Client side proxy for the EJB.
 
 Try to add one more operation to the PersonService, e.g. `findPersonsByCountry`. Generate with `mvn generate-sources -Dsculptor.generator.force=true`. Note that `PersonServiceImpl` is not overwritten and therefore you will get compilation errors for the new method. You have to add it manually in `PersonServiceImpl`. Tip: use `ctrl+1` in Eclipse.
 
@@ -1335,7 +1335,7 @@ Guidelines:
 
 A Repository generated by Sculptor uses [Access Objects](http://books.google.de/books?id=w5xFzY3sJLsC&lpg=PP1&pg=PA188#v=onepage&q&f=false), which implement the specialization needed for persistence. Access Objects are implemented as Commands and have separated interface and implementation. The JPA/Hibernate specific code is encapsulated in the implementation classes. A Factory is used to create instances of the Access Objects.
 
-It is possible to use another design approach and implement everything directly in the Repository. This is described in the section _Hibernate Repository_ in the [Developer's Guide](/documentation/developers-guide.html).
+It is possible to use another design approach and implement everything directly in the Repository. This is described in the section _Hibernate Repository_ in the [Developer's Guide][1].
 
 
 ### Generic Access Objects
@@ -1546,7 +1546,7 @@ Entity Person {
 
 The Repository and Service is also added automatically if they are not defined.
 
-Which scaffolding operations to use can be defined in `sculptor-generator.properties`, see [Developer's Guide](/documentation/developers-guide.html).
+Which scaffolding operations to use can be defined in `sculptor-generator.properties`, see [Developer's Guide][1].
 
 
 ### Pagination
@@ -2036,7 +2036,7 @@ The ServiceContext class is needed to support logging and audit trail functional
 
 The first parameter of each method in the Services is a ServiceContext parameter. This is generated automatically. In front of the Services there is an advice, which stores this ServiceContext object in a thread local variable, ServiceContextStore, to make sure that it is available everywhere within that request in the tier. When calling remote methods it must be passed as a method parameter.
 
-It is possible to skip the generation of ServiceContext, see [Developer's Guide](/documentation/devlopers-guide.html#serviceContext).
+It is possible to skip the generation of ServiceContext, see [Developer's Guide](devlopers-guide#serviceContext).
 
 
 ## Alternative Notation
@@ -2203,3 +2203,6 @@ If you use `ejb` you will use `<type>ejb-client</type>` instead of classifier.
 
 The complete source code for this tutorial is available in GitHub [https://github.com/sculptor/sculptor/tree/master/sculptor-example/sculptor-example-library](https://github.com/sculptor/sculptor/tree/master/sculptor-example/sculptor-example-library).
 
+
+   [1]: (developers-guide)
+   [2]: (installation)
