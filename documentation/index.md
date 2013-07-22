@@ -88,6 +88,8 @@ show_comments: false
 
 ### [Contributing](contributing) <small>Contributing code or documentation improvements to Sculptor.</small>
 
+### [Develoment](development-environment) <small>What you need to install and configure for Sculptor development.</small>
+
 ### [Sculptor: past and present](past-and-present) <small>A brief history of the project and its variants.</small>
 
   </div>

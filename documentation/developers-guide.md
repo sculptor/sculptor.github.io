@@ -8,7 +8,7 @@ navbar_name: docs
 
 Sculptor is not an one-size-fits-all product. Even though it is a good start for many systems, sooner or later customization is always needed.
 This guide will give you an understanding of the internal design of Sculptor and explains how to do changes for some typical scenarios.
-Some things can easily be changed with properties or AOP, while other things requires more effort, since you need to setup the [development environment](development-environment).
+Some things can easily be changed with properties or AOP, while other things requires more effort, since you need to setup the [development environment][1].
 Some changes are staightforward and some requires more in depth understanding of Eclipse [Xtext](http://www.eclipse.org/xtext/) and [Xtend](http://www.eclipse.org/xtend/).
 
 **Table of Contents:**
@@ -186,6 +186,9 @@ For parent child (one-to-many) relations the database can do cascaded delete of 
 ~~~
 db.mysql.onDeleteCascade=false
 ~~~
+
+
+#### DDL script
 
 There are two ways to generate database creation sql script (ddl). Select between:
 
@@ -1037,7 +1040,7 @@ Define your advice in `src/main/resources/generator/SpecialCases.xpt`. For examp
 You find the default templates in [https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core/src/main/java/org/sculptor/generator/template](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core/src/main/java/org/sculptor/generator/template).
 Everything starts in `Root.xpt`, which you also can intercept to add more templates or exclude some of the existing templates.
 
-Another alternative is to setup the development environment according to the next section and change the original templates and build a new version of [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core).
+Another alternative is to setup the [development environment][1] and change the original templates and build a new version of [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core).
 
 Sometimes you need to override the extension functions used by the templates. This can also be done with the AOP features of Xtend.
 {: #extensionAdvices}
@@ -1100,28 +1103,6 @@ String someAttribute hint="aaa=A,bbb,ccc"
 ~~~
 
 
-## Setup Development Environment
-
-To be able to do more adjustments you need to setup Eclipse for development of Sculptor. Please set default encoding in Eclipse to `ISO-8859-1` via "Preferences > General > Workspace > Text file encoding > ISO-8859-1".
-
-
-### Checkout from GitHub
-
-Use Eclipses Git support [EGit](http://www.eclipse.org/egit/) or any other [Git client](http://git-scm.com/downloads) to checkout Sculptors GitHub repository [https://github.com/sculptor/sculptor](https://github.com/sculptor/sculptor).
-
-
-### Maven Launcher
-
-Import the project `devtools/maven-launcher` into Eclipses workspace as described in the [Installation Guide](installation#maven-launcher) (if you haven't already done that).
-
-When the Sculptor Maven Launcher project is open in the workspace you can run Maven inside Eclipse. The menu items for this are available in the external tools menu.
-
-
-### Run Maven
-
-Verify that your environment is correct by starting the Maven build from the command line from within the project [`releng/sculptor-parent`](https://github.com/sculptor/sculptor/tree/master/releng/sculptor-parent) via `mvn install`. Refresh all projects in Eclipse. Thereafter you should not have any red crosses (problems) in Eclipse. Sometimes, validation errors in code generation files (.xtend) must be cleaned. This an be done with clean of the Eclipse project.
-
-
 ## Reference Application
 
 When you customize Sculptor it is important that you have a representative reference application. It is used to verify the changes to the code generator. It must be big enough to span most of the design concepts you use, but still small enough to be supple.
@@ -1133,7 +1114,7 @@ The source code is available in Sculptor GitHub repository: [https://github.com/
 
 Run the JUnit tests to verify that it works before you start changing.
 
-It is convenient to use Eclipse project dependencies from the reference application to [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core). Then you can do changes in the templates and try them directly, without having to build with maven. You can run the code generation directly inside Eclipse. In your reference application project, right click on `Workflow.mwe2` and select 'Run as MWE workflow'.
+It is convenient to use Eclipse project dependencies from the reference application to [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core). Then you can do changes in the templates and try them directly, without having to build with Maven. You can run the code generation directly inside Eclipse. In your reference application project, right click on `Workflow.mwe2` and select 'Run as MWE workflow'.
 
 
 ## Constraint Validation
@@ -1792,3 +1773,6 @@ DslConsumer :
    * Add properties for package and framework classes. This is done in `default-sculptor-generator.properties`, `properties.ext` and `helper.ext`.
    * Add `EXPAND Consumer` in `Root.xpt`, you need `allConsumers()` in `helper.ext`, which can be implemented in the same way as `allServices`.
    * Add Spring stuff for the Consumers in `Spring.xpt`.
+
+
+[1]: development-environment
