@@ -36,6 +36,8 @@ E.g. Quentin Tarantino is both actor and director in the movie 'Reservoir Dogs'.
 
 In this part we will setup the project structure for maven and eclipse.
 
+![Tryit](../images/tryit.gif)
+
 1. Use the following command (one line) to create a maven pom and file structure.
 
    ~~~
@@ -59,6 +61,8 @@ Define value for package:  org.library: :
 ## Generate Code
 
 In this part we will write a Sculptor DSL file and generate code from it.
+
+![Tryit](../images/tryit.gif)
 
 1. Modify the file named `model.btdesign` in the folder `src/main/resources/model`
 
@@ -834,7 +838,9 @@ Entity Part {
 
 A `BasicType` corresponds to JPA @Embeddable / [Hibernate Component](http://www.hibernate.org/hib_docs/reference/en/html/components.html), i.e. the properties are stored in the same table as the parent. It makes it easy to create object [types](http://www.martinfowler.com/ieeeSoftware/whenType.pdf).
 
+![Tryit](../images/tryit.gif)
 In the Library example `PersonName` is an example of a BasicType. Look at annotations of the PersonName class.
+{: .alert}
 
 A classical example is [Money](http://www.martinfowler.com/eaaCatalog/money.html).
 
@@ -984,7 +990,7 @@ enum Genre {
 ~~~
 
 JPA has a built in support for enums. It is recommend to use this default handling to avoid provider specific generation of code and configuration files. Therefore try not to use enums that have an identifier (key) attribute.
-{: .alert }
+{: .alert .alert-info}
 
 
 ### Inheritance
@@ -1177,9 +1183,11 @@ The default value for `cascade` takes the aggregate and module into account. Whe
 
 Default values for `cascade` can be defined in `sculptor-generator.properties`, see [Developer's Guide][1].
 
-Try the different features of the Domain Objects. Add a few more Entities and Value Objects to `model.btdesign`. Add different types of Attributes and References. For example you can add a new Module named customer, with a `Customer` entity, which has a Reference to rented `Media`. Maybe with a rental contract Value Object in between, containing time period and price.
-
+![Tryit](../images/tryit.gif)
+Try the different features of the Domain Objects. Add a few more Entities and Value Objects to `model.btdesign`. Add different types of Attributes and References. For example you can add a new Module named customer, with a `Customer` entity, which has a Reference to rented `Media`. Maybe with a rental contract Value Object in between, containing time period and price.\\
+\\
 Regenerate with `mvn generate-sources -Dsculptor.generator.force=true` and look at the generated Java code and JPA annotations.
+{: .alert}
 
 
 ### Documentation of domain model
@@ -1317,9 +1325,12 @@ The generated code consists of:
 
 Separation of generated and manually written code is done by a generated base class and manually written subclass. The subclass is also generated, but only once, it will never be overwritten by the generator. You can of course remove it to regenerate it. There will not be any subclass, gap class, when the service only consists of operations that delegate to repositories and other other services.
 
-If you have [configured][1] to use EJB there will also be Stateless session EJB and Client side proxy for the EJB.
+If you have [configured][1] to use EJB (via `deployment.type=ear` or `deployment.applicationServer=JBoss`) there will also be Stateless session EJB and Client side proxy for the EJB.
 
-Try to add one more operation to the PersonService, e.g. `findPersonsByCountry`. Generate with `mvn generate-sources -Dsculptor.generator.force=true`. Note that `PersonServiceImpl` is not overwritten and therefore you will get compilation errors for the new method. You have to add it manually in `PersonServiceImpl`. Tip: use `ctrl+1` in Eclipse.
+![Tryit](../images/tryit.gif)
+Try to add one more operation to the PersonService, e.g. `findPersonsByCountry`. Generate with `mvn generate-sources -Dsculptor.generator.force=true`. Note that `PersonServiceImpl` is not overwritten and therefore you will get compilation errors for the new method. You have to add it manually in `PersonServiceImpl`.
+Tip: use `ctrl+1` in Eclipse.
+{: .alert}
 
 
 ## How to Generate Repositories
@@ -1490,6 +1501,8 @@ When you inject other beans you have to implement the setter method yourself in 
 
 There is an [alternative notation](#alternative-notation) for dependency injection. Instead of `>` you can use `inject`.
 
+![Tryit](../images/tryit.gif)
+
 Take a look at the Java code for `findLibraryByName` in `LibraryRepositoryImpl`.
 As you can see you have to implement it manually, this can be done by something like this:
 
@@ -1584,7 +1597,9 @@ In the initial request you typically ask for number of available pages. To answe
 For `findByQuery` the default is to use a naming convention of the named query for the counting query. `find` is replaced with `count`.
 `findByQuery` on named query `"Person.findByCountry"` will use `"Person.countByCountry"`.
 
-For findByCriteria and custom access objects you must define the count operation or named query to use. That is done with hint `countOperation` or `countQuery`. Operation parameters are passed to the count operation or count query. Try the following and look at the generated code. 
+For findByCriteria and custom access objects you must define the count operation or named query to use. That is done with hint `countOperation` or `countQuery`. Operation parameters are passed to the count operation or count query.
+
+![Tryit](../images/tryit.gif) Try the following and look at the generated code. 
 
 ~~~
 findByQuery(PagingParameter pagingParameter);
@@ -1991,7 +2006,7 @@ public class MyFacadeTest extends AbstractDbUnitJpaTests
 }
 ~~~
 
-In the previous section about [How to Generate Services](#services) you added the operation `findPersonsByCountry` in PersonService. Think about how to implement that method using one of the three different types of Repository operations. It is possible to do it with any of the three variants. Select the alternative you find most attractive and give it a try. Implement a test method also.
+![Tryit](../images/tryit.gif) In the previous section about [How to Generate Services](#services) you added the operation `findPersonsByCountry` in PersonService. Think about how to implement that method using one of the three different types of Repository operations. It is possible to do it with any of the three variants. Select the alternative you find most attractive and give it a try. Implement a test method also.
 
 You might find the following DBUnit test data useful:
 
@@ -2196,7 +2211,7 @@ The dependency to the classes must be added in `pom.xml`:
 
 Note that if you use classifier `client` it will be dependency to the `-client` jar file, which was created by `maven-jar-plugin` with corresponding `client` classifier.
 
-If you use `ejb` you will use `<type>ejb-client</type>` instead of classifier.
+If the referenced project is an EJB project (built by the Maven EJB plugin via POM packaging type `ejb`) then you will use `<type>ejb-client</type>` instead of `<classifier/>`.
 
 
 ## Source
