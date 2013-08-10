@@ -495,18 +495,21 @@ cache.provider=EhCache
 #cache.provider=JbossTreeCache
 #cache.provider=DeployedTreeCache
 #cache.provider=TreeCache
+#cache.provider=Infinispan
 ~~~
 
 There are some built in cache providers.
 
-  1. EhCache - settings are defined in `ehcache.xml` file, skeleton is generated
+  1. EhCache - (default) settings are defined in `ehcache.xml` file, skeleton is generated
   2. JbossTreeCache - settings are defined as a JBoss mbean `EJB3EntityTreeCache`
-  3. DeployedTreeCache - settings are defined as a JBoss mbean.
+  3. DeployedTreeCache - settings are defined as a JBoss mbean
   4. TreeCache - settings are defined in `treecache.xml` file
+  5. Infinispan - (default cache provider for JBoss) no settings required because it's pre-configured in JBoss AS 7
 
 The choice also affects the cache `usage` attribute in the Hibernate mapping.
 
-EhCache is the default cache provider, since it doesn't require any additional configuration. JBoss `JbossTreeCache` is recommended for (clustered) applications that require a transactional cache. Refer to JBoss documentation for information about how to configure the TreeCache.
+EhCache is the default cache provider, since it doesn't require any additional configuration. JBoss `Infinispan` is recommended for (clustered) applications that require a transactional cache. Refer to JBoss documentation for information about how to configure [Infinispan](https://www.jboss.org/infinispan).
+{: .alert .alert-success}
 
 
 ### Validation
@@ -832,7 +835,7 @@ Remove persistence related dependencies in `pom.xml`:
 * hibernate-core
 * persistence-api
 
-If you are using pure-ejb3 you must add a classifier to the `sculptor-framework-test` dependency:
+If you are using the 'jpa.provider=none` then you must add the classifier `without-jpa` to the `sculptor-framework-test` dependency:
 
 ~~~ xml
 <dependency>
@@ -919,7 +922,7 @@ Sculptor supports deployment as EAR or WAR. WAR is default when creating new pro
 * Transaction management is done with JTA by the application server when deployed as EAR, by Spring when deployed as WAR.
 * Consumers are not supported when deployed as WAR.
 
-The [Archetype Tutorial](archetype-tutorial) describes the steps how to convert WAR to EAR deployment. It also describes how to deploy in JBoss.
+The [Archetype Tutorial](archetype-tutorial) describes the steps how to convert WAR to EAR deployment (e.g. by setting `deployment.type=ear`). It also describes how to deploy in JBoss (e.g. by setting `deployment.applicationServer=JBoss`).
 
 
 ### JAXB
@@ -1147,7 +1150,7 @@ It would also be possible to replace the XText DSL meta model with some other, e
 
 A transformation converts the DSL model to the code generation model. This transformation is implemented in `DslTransformation.ext` in `sculptor-generator-core`.
 
-You can do a lot of powerful things in this transformation, without having to change code generation templates or its meta model. For example, the [scaffold feature](advanced-tutorial#scaffold) is implemented in the transformation. There is a property `scaffold` for `DslEntity`. It is like an ordinary `Entity` with attributes and references, but the `DslTransformation` automatically add `Repository` and `Service` with generic CRUD operations.
+You can do a lot of powerful things in this transformation, without having to change code generation templates or its meta model. For example, the [scaffold feature][2] is implemented in the transformation. There is a property `scaffold` for `DslEntity`. It is like an ordinary `Entity` with attributes and references, but the `DslTransformation` automatically add `Repository` and `Service` with generic CRUD operations.
 
 When you change the DSL, except for simple syntactic sugar, you often have to change the `DslTransformation` also.
 
@@ -1591,11 +1594,12 @@ public void evict(Class persistentClass) {
 For some rare special cases you might need to adjust the code generation template for the Repository, `genericBaseRepositoryMethod` in `Repository.xpt`.
 
 You must place the `genericAccessObjectStrategy` class (EvictAccessObjectStrategy) in another library than your application project. It is used (only) by the code generator, and that is run before ordinary compilation, i.e. the class is not available in generate-sources phase if a clean has been done before.
+{: .alert}
 
 
 ### How to add a transformation feature
 
-[Scaffold](advanced-tutorial#scaffold) is a feature to be able to mark a Domain Object as scaffold and then automatically add some predefined operations (typically CRUD) to the corresponding Repository and Service. This is implemented in the transformation.
+[Scaffold][2] is a feature to be able to mark a Domain Object as scaffold and then automatically add some predefined operations (typically CRUD) to the corresponding Repository and Service. This is implemented in the transformation.
 
 We add a boolean `scaffold` property to the DSL grammar for DslEntity. This is straightforward.
 
@@ -1776,3 +1780,4 @@ DslConsumer :
 
 
 [1]: development-environment
+[2]: advanced-tutorial#scaffold
