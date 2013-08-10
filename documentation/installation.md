@@ -49,6 +49,7 @@ set JAVA_HOME=c:\devtools\jdk1.7.0_25
 
 ~~~ sh
 JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home
+export JAVA_HOME
 ~~~
 
 Check from the command line that Java is configured properly, e.g.
@@ -66,6 +67,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 23.25-b01, mixed mode)
 Maven is used for generating source code and building the system.
 
 1. Install [Maven](http://maven.apache.org/download.html) (Version 3.0.5 or newer)
+2. Define environment variable `M2_HOME` with path to Maven installation folder
 2. Define environment variable `MAVEN_OPTS` with JVM arguments, e.g. for increase the heap size for better performance and avoiding out of memory
 
    To prevent OutOfMemoryError when using Sculptors code generator it's neccesary to increase the [Oracle JVMs permanent generation](https://blogs.oracle.com/jonthecollector/entry/presenting_the_permanent_generation) via `-XX:MaxPermSize=128m`.
@@ -74,13 +76,16 @@ Maven is used for generating source code and building the system.
 **Windows:**
 
 ~~~ sh
+set M2_HOME=C:\devtools\apache-maven-3.0.5\
 set MAVEN_OPTS=-Xms128m -Xmx1024m -XX:MaxPermSize=128m
 ~~~
 
-**Mac OS X:**
+**Unix:**
 
 ~~~ sh
+M2_HOME=C:\devtools\apache-maven-3.0.5\
 MAVEN_OPTS="-Xms128m -Xmx1024m -XX:MaxPermSize=128m"
+export M2_HOME MAVEN_OPTS
 ~~~
 
 Check from the command line that Maven is configured properly, e.g.
@@ -146,6 +151,11 @@ Maven can be executed from the command prompt, but when developing a better alte
 If this Eclipse project (with the Maven launchers) is **open** in your Eclipse workspace then the menu items for this launchers are available in the 'External Tools' menu.
 
 ![External Tools Menu](/images/documentation/installation/external-tools-menu.png)
+
+
+### Eclipse projects and Maven build started from command line
+
+After executing a Maven build from the command line the corresponding projects in Eclipse have to be refreshed manually! Thereafter you should not have any red crosses (problems) in Eclipse. Sometimes, validation errors in code generation files (.xtend) must be cleaned manually as well. This an be done with a "clean build" (using "Project > Clean...") of the corresponding Eclipse project.
 
   </div>
 </div>
