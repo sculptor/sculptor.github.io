@@ -338,7 +338,7 @@ Before we can deploy our EAR we have to prepare some resources within JBoss firs
 
 ### Deploy EAR
 
-Well done. Now we can deploy our EAR to the configured JBoss. For this we're using the [JBoss AS Maven plugin](http://docs.jboss.org/jbossas/7/plugins/maven/latest/). From within the **EAR** project `helloworld-ear` execute 'mvn jboss-as:deploy'.
+Well done. Now we can deploy our EAR to the configured JBoss. For this we're using the [JBoss AS Maven plugin](http://docs.jboss.org/jbossas/7/plugins/maven/latest/). From within the **EAR** project `helloworld-ear` execute `mvn jboss-as:deploy`.
 
 If the deployment is successful then the JBoss console logs shows something like this:
 
