@@ -9,7 +9,7 @@ navbar_name: docs
 This hands-on tutorial will walk you through the steps of how to create a small application and explore it with some JUnit tests. This example is also used and extended in 3 other tutorials:
 
 * [Archetype Tutorial](archetype-tutorial)
-* [CRUD GUI Tutorial](crud-gui-tutorial)
+* [Pure EJB3 Tutorial](pure-ejb3-tutorial)
 * [REST Tutorual](rest-tutorial)
 
 This is an introduction to Sculptor. A more extensive example is available in the [Advanced Tutorial][1]. If you would like to see something more exciting than running JUnit tests we can recommend the [Developers Guide][2].

@@ -61,6 +61,8 @@ show_comments: false
 
 ### [Hello world tutorial](hello-world-tutorial) <small>How to create a small application and explore it with some JUnit tests.</small>
 
+### [Pure EJB3 tutorial](pure-ejb3-tutorial) <small>How to create a pure EJB3 application and run it in JBoss AS 7.</small>
+
 ### [Advanced tutorial](advanced-tutorial) <small>Tutorial describes the features of Sculptor business tier.</small>
 
 ### [Developer's Guide](developers-guide) <small>How to do changes for some typical scenarios.</small>
