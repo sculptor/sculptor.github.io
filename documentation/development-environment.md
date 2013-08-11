@@ -176,7 +176,7 @@ The following is a brief overview of the main Maven modules of Sculptors source 
 
 ### Eclipse projects
 
-Import all Maven projects in Eclipse (via [Eclipse M2E](http://wiki.eclipse.org/M2E))) with "File > Import... > Existing Maven Projects". For improved development experience organize the projects in appropriate [Eclipse working sets](http://help.eclipse.org/kepler/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Fconcepts%2Fcworkset.htm).
+Import all Maven projects in Eclipse (via [Eclipse M2E](http://wiki.eclipse.org/M2E)) with "File > Import... > Existing Maven Projects". For improved development experience organize the projects in appropriate [Eclipse working sets](http://help.eclipse.org/kepler/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Fconcepts%2Fcworkset.htm).
 
 After executing a Maven build from the commandline the corresponding projects in Eclipse have to be refreshed manually! Thereafter you should not have any red crosses (problems) in Eclipse. Sometimes, validation errors in code generation files (.xtend) must be cleaned manually as well. This an be done with a "clean build" (using "Project > Clean...") of the corresponding Eclipse project.
 {: .alert .alert-success}
