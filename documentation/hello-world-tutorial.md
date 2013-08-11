@@ -26,7 +26,7 @@ Before you start you must follow the instructions in the ***[Installation Guide]
 
 In this first part we will setup the project structure for Maven and eclipse.
 
-1. Use the following command (**one line**) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
+1. Use the following command (**one line** - indicated by the trailing `\`) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
 
    ~~~
    mvn archetype:generate -DarchetypeGroupId=org.sculptor \
@@ -35,6 +35,9 @@ In this first part we will setup the project structure for Maven and eclipse.
       -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
       -Dstandalone=true
    ~~~
+
+   The property `-Dstandalone=true` indicates that the project is **not** part of a [Maven multi-module project](http://maven.apache.org/guides/mini/guide-multiple-modules.html) and is **not** refering to a common parent project `helloworld-parent`.
+   {: .alert} 
 
    Fill in groupId and artifactId:
 
@@ -55,7 +58,7 @@ In this part we will write a Sculptor DSL file and generate code from it.
 1. Open the file `model.btdesign` in the folder `src/main/resources/` with Sculptor DSL editor.
 Add something like this to the design file:
 
-   ~~~ java
+   ~~~
 	Application Universe {
 	    basePackage=org.helloworld
 	 
@@ -84,7 +87,7 @@ It is a [Module](advanced-tutorial#module) containing one [Entity](advanced-tuto
 
    <span class="badge badge-important">!</span>
    If the Maven build aborts with the error message `Executing 'dot' command failed` then the GraphViz package is not installed as described in the [installation guide](installation#graphviz).
-   {: .alert .alert-error }
+   {: .alert .alert-success }
 
    If you run Maven from the command prompt you have to do a refresh in Eclipse. If you [run Maven as an external task in Eclipse it](installation#maven-launcher) can refresh automatically.
    {: .alert }
@@ -182,7 +185,7 @@ Adjust the test method `testSayHello` to something like this:
 <span class="label label-info">Tip</span>
 You can use `mvn -o install` to speed up the builds (-o == offline).
 To regenerate you use `mvn -Dsculptor.generator.force.execution=true -o generate-sources`
-{: .alert .alert-warning }
+{: .alert}
 
 
    [1]: advanced-tutorial
