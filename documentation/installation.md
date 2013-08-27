@@ -113,16 +113,17 @@ If the GraphViz Maven `dot` executable is not available in path then the Maven b
 
 ## Eclipse
 
-Sculptor can be used with any text editor or IDE, but if you are an [Eclipse](http://eclipse.org/) user it is recommended that you
+Sculptor can be used with any text editor or IDE. But if you are an [Eclipse](http://eclipse.org/) user it is recommended that you
 [install Eclipse](http://eclipse.org/downloads/) with the following plugins to be able to use Sculptors DSL editor with error highlight, code completion, and outline.
 
 1. Install [Eclipse](http://www.eclipse.org/downloads/) (Juno or newer), Eclipse IDE for Java EE Developers
-2. Directly in Eclipse (Help -> Install New Software) install from the Eclipse releases (e.g. Kepler) update site the following plugins:
-   * Modeling > MWE 2 runtime SDK 2.4.0 (or newer)
-   * Modeling > Xtext SDK 2.4.2 (or newer)
 
-To prevent OutOfMemoryError when using the Sculptor editor you can add `-XX:MaxPermSize=128m` in `eclipse.ini`, which is located in the Eclipse installation directory.
-{: .alert }
+   To prevent OutOfMemoryError when using the Sculptor editor you can add `-XX:MaxPermSize=128m` in `eclipse.ini`, which is located in the Eclipse installation directory.
+   {: .alert }
+
+2. Directly in Eclipse (Help -> Install New Software) install from the Eclipse releases (e.g. Kepler) update site the following plugins:
+   * General Purpose Tools > m2e - Maven Integration for Eclipse 1.4.0 (or newer)
+   * Modeling > Xtext SDK 2.4.2 (or newer)
 
 
 ### Sculptor Eclipse Plugins
