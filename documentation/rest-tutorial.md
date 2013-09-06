@@ -380,6 +380,9 @@ The annotations that are generated for the controller methods are by default bas
 The complete set of properties for this:
 
 ~~~
+# context root (with leading slash) used in REST webapp, e.g. "/myapp" (default: unset -> meaning "/")
+rest.contextRoot=
+
 # In the 'path' and 'return' you can use the following placeholders, which are replaced in generation time
 # ${resourceName}
 # ${operationName}
@@ -497,11 +500,20 @@ generate.xml.bind.annotation.commandEvent=true
 
 This tutorial explained how to adjust the business tier project to include the Resources and web app configuration. If you like you can define this in a separate project and reference the services in the business tier services with the ordinary import mechanism in `model.btdesign` described in the [Advanced Tutorial][10].
 
-It is also possible to combine JSF web presentation tier project with REST. In that case you need to define the following properties in `sculptor-gui-generator.properties`:
+It is also possible to combine the web presentation tier project (project nature `presentation-tier`) with REST. In that case you need to define the following properties in `sculptor-generator.properties`:
 
 ~~~
 generate.resource=true
 generate.restWeb=true
+~~~
+
+
+### Web app context root
+
+By default the context root of the REST web app is expected to be `/`. To change this (e.g. if the web app is part of an EAR) you need to define the following property in `sculptor-generator.properties`:
+
+~~~
+rest.contextRoot=/myapp
 ~~~
 
 
