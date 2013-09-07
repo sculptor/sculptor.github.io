@@ -46,6 +46,8 @@ show_comments: false
 
 ### [Maven Plugin](maven-plugin) <small>How to use Sculptors Maven Plugin.</small>
 
+### [Maven Archetypes](maven-archetypes) <small>How to use Sculptors Maven Archetypes.</small>
+
   </div>
 </div>
 
