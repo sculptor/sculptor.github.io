@@ -941,7 +941,7 @@ generate.xml.bind.annotation.commandEvent=false
 
 ### XStream
 
-You should add the following property to your `sculptor-generator.properties` to avoid fully qualified class names the xml REST representations. `@XStreamAlias` will be generated.
+You should add the following property to your `sculptor-generator.properties` to avoid fully qualified class names in the XML of the REST representations. `@XStreamAlias` will be generated.
 
 ~~~
 generate.xstream.annotation=true
@@ -950,7 +950,7 @@ generate.xstream.annotation=true
 
 ### Scaffold
 
-Scaffold operations are defined as a comma separated list.
+[Scaffold][2] operations are defined as a comma separated list.
 
 ~~~
 scaffold.operations=findById,findAll,save,delete
