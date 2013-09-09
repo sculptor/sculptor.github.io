@@ -69,8 +69,8 @@ Add something like this to the design file:
 	        }
 	 
 	        Entity Planet {
-	            String name key;
-	            String message;
+	            String name key
+	            String message
 	 
 	            Repository PlanetRepository {
 	                findByExample;
