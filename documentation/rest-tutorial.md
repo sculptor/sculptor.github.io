@@ -380,9 +380,6 @@ The annotations that are generated for the controller methods are by default bas
 The complete set of properties for this:
 
 ~~~
-# context root (with leading slash) used in REST webapp, e.g. "/myapp" (default: unset -> meaning "/")
-rest.contextRoot=
-
 # In the 'path' and 'return' you can use the following placeholders, which are replaced in generation time
 # ${resourceName}
 # ${operationName}
@@ -505,15 +502,6 @@ It is also possible to combine the web presentation tier project (project nature
 ~~~
 generate.resource=true
 generate.restWeb=true
-~~~
-
-
-### Web app context root
-
-By default the context root of the REST web app is expected to be `/`. To change this (e.g. if the web app is part of an EAR) you need to define the following property in `sculptor-generator.properties`:
-
-~~~
-rest.contextRoot=/myapp
 ~~~
 
 
