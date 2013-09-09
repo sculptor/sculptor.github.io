@@ -79,10 +79,10 @@ Let us start with an Entity with CRUD operations.
 1. Modify the file named `model.btdesign` in folder `src/main/resources/`. Use the following:
 
    ~~~
-   Application Helloworld {
+   Application Universe {
        basePackage=org.helloworld
    
-       Module milkyway {
+       Module planet {
     
            Entity Planet {
                scaffold
@@ -270,12 +270,15 @@ Before we can deploy our EAR we have to prepare some resources within JBoss firs
    {"outcome" => "success"}
    ~~~
 
-2. Next we need the datasource `HelloworldDS` which is using HSQLDB. A deployable datasource configuration can be found in `src/generated/resources/dbschema/hellowrld-ds.xml`. But we're using JBoss CLI for this as well:
+   In the above `module add` command you have to update the `resources` parameter with the full path to your local Maven repository!
+   {: .alert .alert-info}
+
+2. Next we need the datasource `UniverseDS` which is using HSQLDB. A deployable datasource configuration can be found in `src/generated/resources/dbschema/universe-ds.xml`. But we're using JBoss CLI for this as well:
 
    ~~~
-   [standalone@localhost:9999 /] /subsystem=datasources/data-source=HelloworldDS/:add(driver-name="hsqldb", connection-url="jdbc:hsqldb:mem:helloworld", jndi-name="java:/jdbc/HelloworldDS", use-java-context=true, user-name="sa", password="sa")
+   [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS/:add(driver-name="hsqldb", connection-url="jdbc:hsqldb:mem:universe", jndi-name="java:/jdbc/UniverseDS", use-java-context=true, user-name="sa", password="sa")
    {"outcome" => "success"}
-   [standalone@localhost:9999 /] /subsystem=datasources/data-source=HelloworldDS/:enable(persistent=true)
+   [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS/:enable(persistent=true)
    {"outcome" => "success"}
    ~~~
 
@@ -300,7 +303,7 @@ Before we can deploy our EAR we have to prepare some resources within JBoss firs
    ~~~
    10:26:21,647 INFO  [org.jboss.as] (Controller Boot Thread) JBAS015874: JBoss AS 7.2.0.Final "Janus" started in 2799ms - Started 151 of 210 services (58 services are passive or on-demand)
    10:27:15,862 INFO  [org.jboss.as.connector.subsystems.datasources] (management-handler-thread - 4) JBAS010403: Deploying JDBC-compliant driver class org.hsqldb.jdbc.JDBCDriver (version 2.2)
-   10:35:48,490 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-11) JBAS010400: Bound data source [java:/jdbc/HelloworldDS]
+   10:35:48,490 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-11) JBAS010400: Bound data source [java:/jdbc/UniverseDS]
    10:40:46,624 INFO  [org.hornetq.core.server] (ServerService Thread Pool -- 60) HQ221005: trying to deploy queue jms.queue.addPlanetQueue
    10:40:46,675 INFO  [org.jboss.as.messaging] (ServerService Thread Pool -- 60) JBAS011601: Bound messaging object to jndi name java:jboss/exported/queue/addPlanet
    10:40:46,676 INFO  [org.jboss.as.messaging] (ServerService Thread Pool -- 60) JBAS011601: Bound messaging object to jndi name java:/queue/addPlanet

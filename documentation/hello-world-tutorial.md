@@ -10,7 +10,7 @@ This hands-on tutorial will walk you through the steps of how to create a small 
 
 * [Archetype Tutorial](archetype-tutorial)
 * [Pure EJB3 Tutorial](pure-ejb3-tutorial)
-* [REST Tutorual](rest-tutorial)
+* [REST Tutorial](rest-tutorial)
 
 This is an introduction to Sculptor. A more extensive example is available in the [Advanced Tutorial][1]. If you would like to see something more exciting than running JUnit tests we can recommend the [Developers Guide][2].
 
@@ -62,7 +62,7 @@ Add something like this to the design file:
 	Application Universe {
 	    basePackage=org.helloworld
 	 
-	    Module milkyway {
+	    Module planet {
 	        Service PlanetService {
 	            String sayHello(String planetName);
 	            protected findByExample => PlanetRepository.findByExample;
