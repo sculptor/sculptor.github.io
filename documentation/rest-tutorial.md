@@ -85,7 +85,7 @@ ${result}
 </p>
 ~~~
 
-Try it by starting Jetty with `mvn jetty:run` and browse to [http://localhost:8888/rest/helloWorld?msg=Hi]()
+Try it by starting Jetty with `mvn jetty:run` and browse to [http://localhost:8888/rest/helloWorld?msg=Hi](http://localhost:8888/rest/helloWorld?msg=Hi)
 
 Servlet and Spring configuration is generated in `web.xml` and `rest-servlet.xml`. By default, 3 content type representations are supported; HTML, XML and JSON. When testing XML and JSON it is convenient to use [cURL][3]. Try this from console:
 
@@ -130,7 +130,7 @@ Entity Planet {
 
 Generate code. No hand written code is needed.
 
-Start Jetty. Open browser at [http://localhost:8888/rest/planet]() and try the simple CRUD functionality. 
+Start Jetty. Open browser at [http://localhost:8888/rest/planet](http://localhost:8888/rest/planet) and try the simple CRUD functionality. 
 
 The generated JSPs are working for this simple example, but they are only intended to be a starting point for writing your own user interface.
 {: .alert}
