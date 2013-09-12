@@ -157,7 +157,7 @@ Adjust the test method `testSayHello` to something like this:
    String sayHello(String planetName) throws PlanetNotFoundException;
    ~~~
 
-8. Regenerate with `mvn -Dsculptor.generator.force.execution=true generate-sources`
+8. Regenerate with `mvn generate-sources -Dsculptor.generator.force=true`
 
 9. Add `throws PlanetNotFoundException` in `PlanetServiceImpl.sayHello`.
 
@@ -184,7 +184,7 @@ Adjust the test method `testSayHello` to something like this:
 
 <span class="label label-info">Tip</span>
 You can use `mvn -o install` to speed up the builds (-o == offline).
-To regenerate you use `mvn -Dsculptor.generator.force.execution=true -o generate-sources`
+To regenerate you use `mvn generate-sources -Dsculptor.generator.force=true`
 {: .alert}
 
 

@@ -45,7 +45,7 @@ Some changes are staightforward and some requires more in depth understanding of
 
 ## Performance Tuning of Generator
 
-By using one model file per module it is possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (e.g. `media.btdesign`, `person.btdesign`) or prefixed with `model_` or `model-` (model-person.btdesign). This partial generation can shorten the generation time for large projects. [`sculptor-maven-plugin`](maven-plugin) will detect which model files has changed since previous generator run when using `mvn -o generate-sources`. Full generate will be done when using `-Dsculptor.generator.force.execution=true` or `mvn clean generate-sources`
+By using one model file per module it is possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (e.g. `media.btdesign`, `person.btdesign`) or prefixed with `model_` or `model-` (model-person.btdesign). This partial generation can shorten the generation time for large projects. [`sculptor-maven-plugin`](maven-plugin) will detect which model files has changed since previous generator run when using `mvn -o generate-sources`. Full generate will be done when using `-Dsculptor.generator.force=true` or `mvn clean generate-sources`
 
 Note that the Maven `-o` (offline) option can reduce Maven execution time a lot, if you know that you have everything locally.
 
