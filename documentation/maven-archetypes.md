@@ -64,10 +64,11 @@ The following properties are supported by the archetype:
 |-----------------------------+------------+------------------
 | Property                    | Default    | Purpose
 |:----------------------------|:-----------|:-----------------
+| `-Drest=[true|false]`       | `false`    | If set to `true` then the project is a WAR module which provides REST resources for its business services. Refer to the [REST Tutorial][6] for details.
 | `-Dstandalone=[true|false]` | `false`    | If set to `true` then the project is **not** an part of a Maven multi-module project. So the generated POM has no reference to a parent POM. Therefore this projects POM contains all the settings from the parent POM as well.
 | `-Dejb=[true|false]`        | `false`    | If set to `true` then the project is uses EJB3 instead of Spring. Therefore the project nature `pure-ejb3` is set in the generator configuration.
 | `-Dear=[true|false]`        | `false`    | If set to `true` then the project is part of an EAR. Therefore the deployment mode `ear` is set in the generator configuration.
-| `-Drest=[true|false]`       | `false`    | If set to `true` then the project is a WAR module which provides REST resources for its business services. Refer to the [REST Tutorial][6] for details.
+| `-Djboss=[true|false]`      | `false`    | If set to `true` then the project is a JAR or WAR module which is deployed to the JBoss application server.
 
 **Example:**
 
@@ -79,7 +80,7 @@ mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptor \
    -DarchetypeVersion=3.0.0-SNAPSHOT \
    -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
    -DgroupId=org.helloworld -DartifactId=helloworld -Dpackage=org.helloworld \
-   -Dversion=1.0-SNAPSHOT -Dstandalone=true -Drest=true
+   -Dversion=1.0-SNAPSHOT -Drest=true -Dstandalone=true
 ~~~
 
 
@@ -96,6 +97,7 @@ The following properties are supported by the archetype:
 | `-Dejb=[true|false]`        | `false`    | If set to `true` then the project is refering to a business tier module which uses EJB3 (Maven packaging type `EJB`) instead of Spring (Maven packaging type `JAR`).
 | `-Dear=[true|false]`        | `false`    | If set to `true` then the project is part of an EAR. Therefore the deployment mode `ear` is set in the generator configuration.
 | `-Drest=[true|false]`       | `false`    | If set to `true` then the project is a WAR module which provides REST resources for business services. Refer to the [REST Tutorial][6] for details.
+| `-Djboss=[true|false]`      | `false`    | If set to `true` then the project is a WAR module which is deployed to the JBoss application server.
 
 **Example:**
 
