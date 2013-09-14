@@ -2216,7 +2216,7 @@ If the referenced project is an EJB project (built by the Maven EJB plugin via P
 
 ## Source
 
-The complete source code for this tutorial is available in GitHub [https://github.com/sculptor/sculptor/tree/master/sculptor-example/library-example](https://github.com/sculptor/sculptor/tree/master/sculptor-example/library-example).
+The complete source code for this tutorial is available in GitHub [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/library-example](https://github.com/sculptor/sculptor/tree/master/sculptor-examples/library-example).
 
 
    [1]: developers-guide

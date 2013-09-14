@@ -60,7 +60,7 @@ Another choice is to try the real thing:
 
     ~~~
     $ git clone git://github.com/sculptor/sculptor.git
-    $ cd sculptor/sculptor-example/DDDSample
+    $ cd sculptor/sculptor-examples/DDDSample
     ~~~
 
  3. Build with `mvn clean install`. This will also run all JUnit tests located in `src/test/java`. Take a look at some of them and run them from Eclipse also.
@@ -72,7 +72,7 @@ Learn more about the capabilities of Sculptor by reading the [Hello World][11] a
 
 ## Source Code
 
-The complete source code for this sample is available in GitHub [https://github.com/sculptor/sculptor/tree/master/sculptor-example/DDDSample](https://github.com/sculptor/sculptor/tree/master/sculptor-example/DDDSample).
+The complete source code for this sample is available in GitHub [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/DDDSample](https://github.com/sculptor/sculptor/tree/master/sculptor-examples/DDDSample).
 
 
    [1]: http://dddsample.sourceforge.net/

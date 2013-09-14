@@ -1113,7 +1113,7 @@ When you customize Sculptor it is important that you have a representative refer
 When you do refactoring of the code generator it is recommended that you first do manual refactoring of the reference application. Keep that code base as a baseline. When you have changed the code generation the generated code should correspond to the manual baseline. Use a diff tool to compare the results.
 
 The library example can act as a reference application if you haven't developed one of your own.
-The source code is available in Sculptor GitHub repository: [https://github.com/sculptor/sculptor/tree/master/sculptor-example/sculptor-example-library](https://github.com/sculptor/sculptor/tree/master/sculptor-example/sculptor-example-library)
+The source code is available in Sculptor GitHub repository: [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/library-example](https://github.com/sculptor/sculptor/tree/master/sculptor-examples/library-example)
 
 Run the JUnit tests to verify that it works before you start changing.
 
