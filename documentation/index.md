@@ -63,6 +63,8 @@ show_comments: false
 
 ### [Hello world tutorial](hello-world-tutorial) <small>How to create a small application and explore it with some JUnit tests.</small>
 
+### [Archetype tutorial](archetype-tutorial) <small>How to use Sculptors Maven archteytpes to create a simple Java EE application and run it in Jetty.</small>
+
 ### [Pure EJB3 tutorial](pure-ejb3-tutorial) <small>How to create a pure EJB3 application and run it in JBoss AS 7.</small>
 
 ### [Advanced tutorial](advanced-tutorial) <small>Tutorial describes the features of Sculptor business tier.</small>
