@@ -318,7 +318,7 @@ Deploy the WAR file to JBoss via `mvn jboss-as:deploy` in the project `helloworl
 Open [http://localhost:8080/helloworld](http://localhost:8080/helloworld) in your browser.
 
 
-## Use MySQL Database
+## Part 4 - Use MySQL Database
 
 To use JBoss with [MySQL](http://www.mysql.com/) instead of HSQLDB the following adjustments are neccessary:
 
