@@ -63,7 +63,7 @@ show_comments: false
 
 ### [Hello world tutorial](hello-world-tutorial) <small>How to create a small application and explore it with some JUnit tests.</small>
 
-### [Archetype tutorial](archetype-tutorial) <small>How to use the Maven archteytpes to create a simple web application and run it in Jetty.</small>
+### [Archetype tutorial](archetype-tutorial) <small>How to use Maven archetypes to create a web application and run it in Jetty.</small>
 
 ### [Pure EJB3 tutorial](pure-ejb3-tutorial) <small>How to create a pure EJB3 application and run it in JBoss AS 7.</small>
 
