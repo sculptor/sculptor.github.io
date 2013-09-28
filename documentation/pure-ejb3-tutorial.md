@@ -28,7 +28,7 @@ These projects are created with Sculptors Maven archetypes as follows:
 1. Create `helloworld-parent` project with the following command (**one line** - indicated by the trailing `\`):
 
    ~~~
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptor \
+   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
       -DarchetypeArtifactId=sculptor-maven-archetype-parent -DarchetypeVersion=3.0.0-SNAPSHOT \
       -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
       -DgroupId=org.helloworld -DartifactId=helloworld-parent -Dpackage=org.helloworld \
@@ -41,7 +41,7 @@ These projects are created with Sculptors Maven archetypes as follows:
 2. Create `helloworld` project with the following command:
 
    ~~~
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptor \
+   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
       -DarchetypeArtifactId=sculptor-maven-archetype -DarchetypeVersion=3.0.0-SNAPSHOT \
       -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
       -DgroupId=org.helloworld -DartifactId=helloworld -Dpackage=org.helloworld \
@@ -55,7 +55,7 @@ These projects are created with Sculptors Maven archetypes as follows:
 3. Create `helloworld-ear` project with the following command:
 
    ~~~
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptor \
+   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
       -DarchetypeArtifactId=sculptor-maven-archetype-ear -DarchetypeVersion=3.0.0-SNAPSHOT \
       -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
       -DgroupId=org.helloworld -DartifactId=helloworld-ear -Dpackage=org.helloworld \

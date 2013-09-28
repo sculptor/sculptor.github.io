@@ -29,7 +29,7 @@ In this first part we will setup the project structure for Maven and Eclipse.
 1. Use the following command (**one line** - indicated by the trailing `\`) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
 
    ~~~
-   mvn archetype:generate -DarchetypeGroupId=org.sculptor \
+   mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator \
       -DarchetypeArtifactId=sculptor-maven-archetype \
       -DarchetypeVersion=3.0.0-SNAPSHOT \
       -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \

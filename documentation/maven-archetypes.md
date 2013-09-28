@@ -45,7 +45,7 @@ The following properties are supported by the archetype:
 The following command (**one line** - indicated by the trailing `\`) creates the `helloworld-parent` project which references the EAR project `helloworld-ear` in its module list:
 
 ~~~
-mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptor \
+mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
    -DarchetypeArtifactId=sculptor-maven-archetype-parent \
    -DarchetypeVersion=3.0.0-SNAPSHOT \
    -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
@@ -75,7 +75,7 @@ The following properties are supported by the archetype:
 The following command (**one line** - indicated by the trailing `\`) creates the `helloworld` project for a stand-alone WAR with a business tier which supports RESTful services:
 
 ~~~
-mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptor \
+mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
    -DarchetypeArtifactId=sculptor-maven-archetype \
    -DarchetypeVersion=3.0.0-SNAPSHOT \
    -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
@@ -104,7 +104,7 @@ The following properties are supported by the archetype:
 The following command (**one line** - indicated by the trailing `\`) creates the `helloworld-web` project for a WAR with a business tier (which uses EJB3 and supports RESTful services) and deployment as an EAR:
 
 ~~~
-mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptor \
+mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
    -DarchetypeArtifactId=sculptor-maven-archetype-web \
    -DarchetypeVersion=3.0.0-SNAPSHOT \
    -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
@@ -131,7 +131,7 @@ The following properties are supported by the archetype:
 The following command (**one line** - indicated by the trailing `\`) creates the `helloworld-ear` project which packages an EJB3-based business tier and a web presentation tier:
 
 ~~~
-mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptor \
+mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
    -DarchetypeArtifactId=sculptor-maven-archetype-ear \
    -DarchetypeVersion=3.0.0-SNAPSHOT \
    -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
