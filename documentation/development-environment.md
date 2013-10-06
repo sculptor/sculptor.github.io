@@ -165,13 +165,15 @@ The following is a brief overview of the main Maven modules of Sculptors source 
 
 * `devtools` Folder with projects used for local development, e.g. `eclipse-mirror` with the local Eclipse p2 repository mirror.
 
-* `releng` Folder with projects used by release engineering, e.g. `sculptor-parent` with the parent POM used by the other modules or `sculptor-distribution` with profiles used for building the Sculptor distribution.
-
 * `sculptor-eclipse` The aggregator project holding the Eclipse projects with the Eclipse p2 mirror, the meta model, the DSL model with its UI and unit tests, the feature and the p2 mirror.
 
 * `sculptor-generator` The aggregator project holding the implementation of the code generator.
 
+* `sculptor-framework` The aggregator project holding the implementation of the Sculptor runtime library.
+
 * `sculptor-maven` The aggregator project holding the Maven plugin, the Maven archetypes and the Maven repository.
+
+* `sculptor-examples` The aggregato project holding a few examples which are using Scupltor, eg. the ones used in the tutorials.
 
 
 ### Eclipse projects
@@ -197,28 +199,29 @@ The following chapters are describing the different aspects of Sculptors Maven-b
 ### Creation of local Eclipse p2 repository mirror
 {: #p2-mirror}
 
-To improve the development experience the needed external Eclipse p2 repositories are "mirrored" via Eclipse Tycho. This mirror is located in the folder "devtools/eclipse-mirror/.p2-mirror/". The mirroring process is activated by using the Maven profile `mirror`:
+To improve the development experience the needed external Eclipse p2 repositories are "mirrored" via Eclipse Tycho. The mirroring process is activated by using the Maven profile `mirror`:
 
 ~~~
-cd devtools/sculptor-distribution
 mvn initialize -Pmirror
 ~~~
 
-The *initial* mirroring process takes hours!!!
-{: .alert .alert-error}
+The *initial* mirroring process takes hours!!! After the build is finished then the mirror can be found in the folder "devtools/eclipse-mirror/.p2-mirror/". 
+{: .alert}
 
 Make sure that the [Maven profile used for the local Eclipse p2 repository mirror](#p2-mirror-profile) is added to the Maven "settings.xml".
-{: .alert}
+{: .alert .alert-error}
 
 
 ### Installation of custom Eclipse IDE
 
-By using Eclipse Tycho it's possible to create a customized Eclipse installation. This Eclipse installation is located in the folder "devtools/eclipse-ide/target/products/org.sculptor.ide/<platform>". The installation process is activated by using the Maven profile `ide`:
+By using Eclipse Tycho it's possible to create a customized Eclipse installation. The installation process is activated by using the Maven profile `ide`:
 
 ~~~
-cd releng/sculptor-distribution
 mvn verify -Pide
 ~~~
+
+After the build is finished then the Eclipse installation can be found in the folder "devtools/eclipse-ide/target/products/org.sculptor.ide/<platform>".
+{: .alert}
 
 
 ### Build the whole project
@@ -226,7 +229,6 @@ mvn verify -Pide
 Without specifying any Maven profile the whole project is built:
 
 ~~~
-cd releng/sculptor-distribution
 mvn clean install
 ~~~
 
@@ -243,7 +245,6 @@ By specifying one or more from the following Maven profiles certain parts of the
 E.g. to built the Maven stuff and the examples only then the following commands are used:
 
 ~~~
-cd releng/sculptor-distribution
 mvn clean install -Pmaven,example
 ~~~
 
@@ -253,7 +254,6 @@ mvn clean install -Pmaven,example
 To deploy the Maven repository (with Sculptors Maven plugin and the coresponding archtypes) and the Eclipse p2 repository (with the Sculptor Eclipse plugin) to GitHub the Maven deploy plugin is used. To activate the transfer to the GitHub repository the Maven profile `deploy` has to be specified:
 
 ~~~
-cd releng/sculptor-distribution
 mvn deploy -Pdeploy
 ~~~
 
@@ -269,9 +269,8 @@ Make sure that your Maven "settings.xml" contains the correct [GitHub user crede
 To build the stand-alone Generator JAR the Maven profile `shade` is used:
 
 ~~~
-cd releng/sculptor-distribution
 mvn install -Pshade
-cd ../../sculptor-generator/sculptor-core
+cd sculptor-generator/sculptor-core
 java -jar target/sculptor-core-3.0.0-SNAPSHOT.jar -model src/test/resources/model-test.btdesign
 ~~~
 
