@@ -337,7 +337,7 @@ To use JBoss with [MySQL](http://www.mysql.com/) instead of HSQLDB the following
    mysql -u root
    mysql> create database universe;
    mysql> connect universe;
-   mysql> source helloworld/src/generated/resources/dbschema/Myapp_ddl.sql
+   mysql> source helloworld/src/generated/resources/dbschema/Universe_ddl.sql
    ~~~
 
 4. JBoss AS 7 doesn't come with the MySQL JDBC driver. So we have to download the MySQL JDBC driver from [http://dev.mysql.com/downloads/connector/j/](http://dev.mysql.com/downloads/connector/j/) and install it first. For this we're using the [JBoss Command Line Client (CLI)](https://docs.jboss.org/author/display/AS72/Management+Clients) as described [here](http://www.mastertheboss.com/jboss-script/installing-a-jboss-as-7-module-using-the-cli):
