@@ -9,7 +9,7 @@ author: Patrik Nordwall
 ---
 {% include JB/setup %}
 
-I think one of the best features in [Scala](http://www.scala-lang.org) is [traits](http://www.scala-lang.org/node/126). Using traits it is possible to compose small pieces of behavior and state in an elegant way. I miss traits when I use Java. To mitigate that problem I have implemented support for traits in Sculptor. This article illustrates how this tool can be used for designing good, rich, domain models with traits.
+I think one of the best features in [Scala][1] is [traits][2]. Using traits it is possible to compose small pieces of behavior and state in an elegant way. I miss traits when I use Java. To mitigate that problem I have implemented support for traits in Sculptor. This article illustrates how this tool can be used for designing good, rich, domain models with traits.
 
 Traits provide a mixin composition mechanism that is missing in Java. Similar to interfaces in Java, traits are used to define object types by specifying the signature of the supported methods. Unlike interfaces, traits can be partially implemented; i.e. it is possible to define implementations for some methods. Similar to abstract classes, but you don't have to wast your single inheritance opportunity.
 
@@ -94,4 +94,8 @@ Entity Product with Ordered with PriceTag {
 That's it. We have designed products with a rich price and compare interface.
 Note that compareTo is no longer implemented in Product, only in PriceTag.
 
-Try this new feature in Sculptor 2.0.0.
+Try this new feature in [Sculptor 2.0.0][3].
+
+   [1]: http://www.scala-lang.org
+   [2]: http://www.scala-lang.org/node/126
+   [3]: /2011/03/13/sculptor-20-is-out
