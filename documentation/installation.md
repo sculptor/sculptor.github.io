@@ -128,10 +128,7 @@ Sculptor can be used with any text editor or IDE. But if you are an [Eclipse](ht
 
 ### Sculptor Eclipse Plugins
 
-Sculptors Eclipse plugins are available from the following update sites:
-
-* Releases: [https://raw.github.com/sculptor/repository/eclipse](https://raw.github.com/sculptor/repository/eclipse)
-* Development Snapshots: [https://raw.github.com/sculptor/snapshot-repository/eclipse](https://raw.github.com/sculptor/snapshot-repository/eclipse)
+Sculptors Eclipse plugins are available from the update site [http://sculptorgenerator.org/updates/](http://sculptorgenerator.org/updates/).
  
 Install "Sculptor DSL Feature".
 
