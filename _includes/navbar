@@ -1,10 +1,10 @@
 <div class="masthead">
 	<ul class="nav nav-pills pull-right">
 		<li {% if page.navbar_name == 'home' %}class="active"{% endif %}><a href="{{ BASE_PATH }}/">Home</a></li>
-		<li {% if page.navbar_name == 'blog' %}class="active"{% endif %}><a href="http://fornax-sculptor.blogspot.com" onclick="recordOutboundLink(this, 'Outbound links', 'Blog', '{{ page.nav_bar_name }}');return false;">Blog</a></li>
+		<li {% if page.navbar_name == 'blog' %}class="active"{% endif %}><a href="{{ BASE_PATH }}/archive" onclick="recordOutboundLink(this, 'Outbound links', 'Blog', '{{ page.nav_bar_name }}');return false;">Blog</a></li>
 		<li {% if page.navbar_name == 'docs' %}class="active"{% endif %}><a href="{{ BASE_PATH }}/documentation/">Documentation</a></li>
 		<li><a href="https://groups.google.com/group/fornax-platform" onclick="recordOutboundLink(this, 'Outbound links', 'Forum', '{{ page.nav_bar_name }}');return false;">Forum</a></li>
-		<li {% if page.navbar_name == 'contact' %}class="active"{% endif %}><a href="{{ BASE_PATH }}/contact.html">Contact</a></li>
+		<li {% if page.navbar_name == 'contact' %}class="active"{% endif %}><a href="{{ BASE_PATH }}/contact">Contact</a></li>
 	</ul>
 	<h3 class="muted">Sculptor</h3>
 </div>
