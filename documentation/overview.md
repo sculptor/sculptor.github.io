@@ -47,14 +47,14 @@ Sculptor is not an one-size-fits-all product. Even though it is a good start for
 * Quick development round trip, short feedback loop, it is not a one time shot
 * Support for [TDD](http://fornax-sculptor.blogspot.com/2009/08/testing-is-simple.html) and [refactoring](http://fornax-sculptor.blogspot.com/2009/08/refactoring.html)
 * Existing IDE tools, such as refactoring, code assist and debugger will continue to be of service to you
-* [High quality](http://fornax-sculptor.blogspot.com/2009/11/promote-quality-with-sculptor.html) of generated code
-* [Pick 'n' Choose Target Implementation](http://fornax-sculptor.blogspot.com/2010/01/pick-n-choose-target-implementation.html), based on well known frameworks, best practices, and a lot of experience
+* [High quality](/2010/03/02/promote-quality-with-sculptor) of generated code
+* [Pick 'n' Choose Target Implementation](/2010/01/16/pick-n-choose-target-implementation), based on well known frameworks, best practices, and a lot of experience
 * Generation of complete application from a single model, not only fragments that are hard to fit in to the overall design
 * Great extensibility and customization
 * Used with de facto standard build tool - Maven
 * Based on [Xtext](http://www.eclipse.org/Xtext/) code generation framework
 * Can be used with text editor or any IDE, but DSL editor with error highlight, code completion, and outline is provided for Eclipse users
-* Easy to [remove the tool](http://fornax-sculptor.blogspot.com/2010/01/how-to-remove-sculptor.html), no runtime magic
+* Easy to [remove the tool](/2010/01/26/how-to-remove-sculptor), no runtime magic
 
 
 ## License

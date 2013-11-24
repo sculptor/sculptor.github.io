@@ -13,7 +13,6 @@ This article gives an overview of the options you have regarding the generated t
 
 The default target implementation is using:
 
-
   * JPA with Hibernate as provider
   * Spring with annotations, no EJBs
   * Web CRUD GUI client with JSF, Facelets, and Spring Web Flow

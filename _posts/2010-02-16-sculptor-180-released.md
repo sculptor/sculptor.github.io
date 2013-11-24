@@ -13,7 +13,7 @@ Only two weeks after the [big 1.7.0][1] we are happy to deliver another major re
 
 We have migrated from openArchitectureWare 4.3.1 to Xtext/Xpand/MWE 0.7.2 at Eclipse.org. Many thanks to Todd Ferrell for doing most of this migration.
 
-Now, content assist (ctrl%2Bspace) works as you would expect.
+Now, content assist (ctrl + space) works as you would expect.
 
 Another useful feature is formatting (pretty printing) of model files (ctrl%2Bshift%2BF).
 
