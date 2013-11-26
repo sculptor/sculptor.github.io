@@ -17,4 +17,7 @@ Now, content assist (ctrl + space) works as you would expect.
 
 Another useful feature is formatting (pretty printing) of model files (ctrl%2Bshift%2BF).
 
+[Read more about the release][2].
+
    [1]: /2010/01/29/sculptor-170---gae-smartclient-eclipselink-datanucleus-jee
+   [2]: /documentation/whats-new#version-180

@@ -52,4 +52,4 @@ Book book = book()
 
 [Read more about the release][1].
 
-   [1]: http://fornax.itemis.de/confluence/display/fornax/0.%2BWhat%27s%2BNew%2B%28CSC%29#0.What%27sNew%28CSC%29-Version2.1.x
+   [1]: /documentation/whats-new#version-210

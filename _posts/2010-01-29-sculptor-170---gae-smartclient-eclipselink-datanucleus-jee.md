@@ -23,4 +23,7 @@ Sculptor also has good possibilities for extensibility if you prefer a design or
 
 The Pure EJB3 implementation, one of the new features in 1.7.0, has already been successfully used in several projects, i.e. it is well tested and production ready. This means that not only Spring users can gain the productivity and quality benefits of Sculptor, but also those who develop on the standard JEE stack.
 
+[Read more about the release][2].
+
    [1]: /2010/01/16/pick-n-choose-target-implementation
+   [2]: /documentation/whats-new#version-170

@@ -25,6 +25,7 @@ We have upgraded support for latest versions of most of the underlaying tools an
 
 The logging API has been changed from Commons Logging with Log4j to [SLF4J][6] with [Logback][7]. SLF4J allow many backends and also have special bridges for many (legacy) logging frameworks. SLF4J with Logback is considered to be best logging framework available.
 
+[Read more about the release][8].
 
    [1]: /documentation/rest-tutorial
    [2]: http://static.springsource.org/spring/docs/3.0.x/reference/mvc.html
@@ -33,3 +34,4 @@ The logging API has been changed from Commons Logging with Log4j to [SLF4J][6] w
    [5]: http://fornax.itemis.de/confluence/x/zQk
    [6]: http://www.slf4j.org/
    [7]: http://logback.qos.ch/
+   [8]: /documentation/whats-new#version-200
