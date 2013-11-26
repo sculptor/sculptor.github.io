@@ -42,8 +42,6 @@ show_comments: false
 
 ### [Eclipse Plugin](eclipse-plugin) <small>How to use Sculptors Eclipse Plugin.</small>
 
-### [Maven Setup](maven-setup) <small>Preparing Maven "settings.xml".</small>
-
 ### [Maven Plugin](maven-plugin) <small>How to use Sculptors Maven Plugin.</small>
 
 ### [Maven Archetypes](maven-archetypes) <small>How to use Sculptors Maven Archetypes.</small>
