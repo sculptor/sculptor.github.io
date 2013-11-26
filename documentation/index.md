@@ -38,8 +38,6 @@ show_comments: false
     <h2>The tools</h2>
   </div>
   <div class="span8" markdown="1">
-### [Eclipse Setup](eclipse-setup) <small>Preparing Eclipse.</small>
-
 ### [Eclipse Plugin](eclipse-plugin) <small>How to use Sculptors Eclipse Plugin.</small>
 
 ### [Maven Plugin](maven-plugin) <small>How to use Sculptors Maven Plugin.</small>
