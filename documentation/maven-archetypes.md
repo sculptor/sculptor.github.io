@@ -47,8 +47,7 @@ The following command (**one line** - indicated by the trailing `\`) creates the
 ~~~
 mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
    -DarchetypeArtifactId=sculptor-maven-archetype-parent \
-   -DarchetypeVersion=3.0.0-SNAPSHOT \
-   -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
+   -DarchetypeVersion=3.0.0 \
    -DgroupId=org.helloworld -DartifactId=helloworld-parent -Dpackage=org.helloworld \
    -Dversion=1.0-SNAPSHOT -Dear=true
 ~~~
@@ -77,8 +76,7 @@ The following command (**one line** - indicated by the trailing `\`) creates the
 ~~~
 mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
    -DarchetypeArtifactId=sculptor-maven-archetype \
-   -DarchetypeVersion=3.0.0-SNAPSHOT \
-   -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
+   -DarchetypeVersion=3.0.0 \
    -DgroupId=org.helloworld -DartifactId=helloworld -Dpackage=org.helloworld \
    -Dversion=1.0-SNAPSHOT -Drest=true -Dstandalone=true
 ~~~
@@ -106,8 +104,7 @@ The following command (**one line** - indicated by the trailing `\`) creates the
 ~~~
 mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
    -DarchetypeArtifactId=sculptor-maven-archetype-web \
-   -DarchetypeVersion=3.0.0-SNAPSHOT \
-   -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
+   -DarchetypeVersion=3.0.0 \
    -DgroupId=org.helloworld -DartifactId=helloworld-web -Dpackage=org.helloworld \
    -Dversion=1.0-SNAPSHOT -Dejb=true -Dear=true -Drest=true
 ~~~
@@ -133,8 +130,7 @@ The following command (**one line** - indicated by the trailing `\`) creates the
 ~~~
 mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
    -DarchetypeArtifactId=sculptor-maven-archetype-ear \
-   -DarchetypeVersion=3.0.0-SNAPSHOT \
-   -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
+   -DarchetypeVersion=3.0.0 \
    -DgroupId=org.helloworld -DartifactId=helloworld-ear -Dpackage=org.helloworld \
    -Dversion=1.0-SNAPSHOT -Dejb=true -Dweb=true
 ~~~

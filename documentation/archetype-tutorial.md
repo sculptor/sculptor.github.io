@@ -45,14 +45,13 @@ Copy one of the following scripts into the root of your Eclipse workspace.
    set PACKAGE=%1
    set SYS_NAME=%2
 
-   set REPOSITORY=https://raw.github.com/sculptor/snapshot-repository/maven/
-   set VERSION=3.0.0-SNAPSHOT
+   set VERSION=3.0.0
    
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-parent -DarchetypeVersion=%VERSION% -DarchetypeRepository=%REPOSITORY% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME%-parent -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Dweb=true
+   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-parent -DarchetypeVersion=%VERSION% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME%-parent -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Dweb=true
    
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype -DarchetypeVersion=%VERSION% -DarchetypeRepository=%REPOSITORY% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME% -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Djboss=false
+   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype -DarchetypeVersion=%VERSION% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME% -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Djboss=false
    
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-web -DarchetypeVersion=%VERSION% -DarchetypeRepository=%REPOSITORY% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME%-web -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Drest=true -Djboss=false
+   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-web -DarchetypeVersion=%VERSION% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME%-web -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Drest=true -Djboss=false
    
    pause
    
@@ -81,19 +80,18 @@ Copy one of the following scripts into the root of your Eclipse workspace.
    PACKAGE=$1
    SYS_NAME=$2
    
-   REPOSITORY=https://raw.github.com/sculptor/snapshot-repository/maven/
-   VERSION=3.0.0-SNAPSHOT
+   VERSION=3.0.0
 
    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-parent \
-      -DarchetypeVersion=$VERSION -DarchetypeRepository=$REPOSITORY -DgroupId=$PACKAGE -DartifactId=$SYS_NAME-parent \
+      -DarchetypeVersion=$VERSION -DgroupId=$PACKAGE -DartifactId=$SYS_NAME-parent \
       -Dpackage=$PACKAGE -Dversion=1.0-SNAPSHOT -Dweb=true
 
    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype \
-      -DarchetypeVersion=$VERSION -DarchetypeRepository=$REPOSITORY -DgroupId=$PACKAGE -DartifactId=$SYS_NAME \
+      -DarchetypeVersion=$VERSION -DgroupId=$PACKAGE -DartifactId=$SYS_NAME \
       -Dpackage=$PACKAGE -Dversion=1.0-SNAPSHOT -Djboss=false
 
    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-web \
-      -DarchetypeVersion=$VERSION -DarchetypeRepository=$REPOSITORY -DgroupId=$PACKAGE -DartifactId=$SYS_NAME-web \
+      -DarchetypeVersion=$VERSION -DgroupId=$PACKAGE -DartifactId=$SYS_NAME-web \
       -Dpackage=$PACKAGE -Dversion=1.0-SNAPSHOT -Drest=true -Djboss=false
    
    sleep 1

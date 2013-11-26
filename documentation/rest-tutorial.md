@@ -26,8 +26,7 @@ At first we will setup the project structure for Maven and Eclipse.
    ~~~
    mvn archetype:generate -DarchetypeGroupId=org.sculptor \
       -DarchetypeArtifactId=sculptor-maven-archetype \
-      -DarchetypeVersion=3.0.0-SNAPSHOT \
-      -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
+      -DarchetypeVersion=3.0.0 \
       -Dstandalone=true -Drest=true
    ~~~
 

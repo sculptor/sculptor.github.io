@@ -29,8 +29,7 @@ These projects are created with Sculptors Maven archetypes as follows:
 
    ~~~
    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
-      -DarchetypeArtifactId=sculptor-maven-archetype-parent -DarchetypeVersion=3.0.0-SNAPSHOT \
-      -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
+      -DarchetypeArtifactId=sculptor-maven-archetype-parent -DarchetypeVersion=3.0.0 \
       -DgroupId=org.helloworld -DartifactId=helloworld-parent -Dpackage=org.helloworld \
       -Dversion=1.0-SNAPSHOT -Dear=true
    ~~~
@@ -42,8 +41,7 @@ These projects are created with Sculptors Maven archetypes as follows:
 
    ~~~
    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
-      -DarchetypeArtifactId=sculptor-maven-archetype -DarchetypeVersion=3.0.0-SNAPSHOT \
-      -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
+      -DarchetypeArtifactId=sculptor-maven-archetype -DarchetypeVersion=3.0.0 \
       -DgroupId=org.helloworld -DartifactId=helloworld -Dpackage=org.helloworld \
       -Dversion=1.0-SNAPSHOT -Dejb=true
    ~~~
@@ -56,8 +54,7 @@ These projects are created with Sculptors Maven archetypes as follows:
 
    ~~~
    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
-      -DarchetypeArtifactId=sculptor-maven-archetype-ear -DarchetypeVersion=3.0.0-SNAPSHOT \
-      -DarchetypeRepository=https://raw.github.com/sculptor/snapshot-repository/maven/ \
+      -DarchetypeArtifactId=sculptor-maven-archetype-ear -DarchetypeVersion=3.0.0 \
       -DgroupId=org.helloworld -DartifactId=helloworld-ear -Dpackage=org.helloworld \
       -Dversion=1.0-SNAPSHOT
    ~~~
