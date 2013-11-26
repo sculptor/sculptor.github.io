@@ -5,7 +5,7 @@ description: ""
 navbar_name: docs
 ---
 
-This document describes the development environment for the Sculptor project:
+This document describes the development environment and the development / release process for the Sculptor project:
 
 * toc
 {:toc}
@@ -15,6 +15,8 @@ This document describes the development environment for the Sculptor project:
 
 To develop Sculptor you need local installations of the following tools:
 
+* [git](http://git-scm.com/downloads) (1.8 or newer)
+  * git workflow extension [git-flow](https://github.com/nvie/gitflow)
 * [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/) (1.6 or newer)
 * [Maven](http://maven.apache.org/download.html) (3.0.5 or newer)
 * [Eclipse](http://eclipse.org/downloads/) (4.2 or newer) with [Xtext](http://www.eclipse.org/Xtext/download.html) (2.4.2 or newer)
@@ -129,6 +131,9 @@ To use the [local Eclipse p2 repository mirror](#p2-mirror) (created by the Scul
 </activeProfiles>
 ~~~
 
+The repository IDs listed in the <mirrorOf> tag have to match the repository IDs used in the Maven POM of the Maven (aggregator) project  `sculptor-eclipse`.
+{: .alert .alert-error }
+
 Usage of the local p2 repository mirror can be (temporarily) turned-off by disabling the coresponding Maven profile via the commandline option `-P!p2-mirror`.
 {: .alert .alert-info }
 
@@ -136,16 +141,64 @@ Usage of the local p2 repository mirror can be (temporarily) turned-off by disab
 #### Deployment to GitHub
 {: #github-credentials}
 
-For deploying to GitHub the GitHub user credentials have to be defined in the `<servers/>` section, e.g.
+For deploying the Eclipse plugin to GitHub the GitHub user credentials have to be defined in the `<servers/>` section, e.g.
 
 ~~~ xml
 <servers>
   <server>
     <id>github</id>
-    <username>johndoo</username>
-    <password>xyz</password>
+    <username>your-username</username>
+    <password>your-password</password>
   </server>
 </servers>
+~~~
+
+The server ID is referenced by the [GitHub site-maven-plugin](https://github.com/github/maven-plugins) used in the `eclipse-repository` project.
+{: .alert .alert-info }
+
+
+#### Deployment to Sonatype OSS Repository Hosting Service
+{: #sonatype-credentials}
+
+For deploying the Maven plugin to Sonatypes OSS Repository Hosting (OSSRH) service the Sonatype user credentials have to be defined in the `<servers/>` section, e.g.
+
+~~~ xml
+<servers>
+  <server>
+    <id>sonatype-nexus-snapshots</id>
+    <username>your-username</username>
+    <password>your-password</password>
+  </server>
+  <server>
+    <id>sonatype-nexus-staging</id>
+    <username>your-username</username>
+    <password>your-password</password>
+  </server>
+</servers>
+~~~
+
+The server IDs are referenced by the distribution repositories defined the Sonatype `oss-parent` POM referenced in the `sculptor-parent` project.
+{: .alert .alert-info }
+
+
+#### Passphrase for code signing via GPG Maven plugin
+{: #gpg-passphrase}
+
+For signing the Maven artifacts via the [maven-gpg-plugin](http://maven.apache.org/plugins/maven-gpg-plugin/) during the release build a Maven profile with the GPG passphrase has to be defined in the `<profiles/>` section, e.g.
+
+~~~ xml
+<profile>
+  <id>release-gpg-passphrase</id>
+    <activation>
+      <property>
+        <name>performRelease</name>
+        <value>true</value>
+      </property>
+    </activation>
+  <properties>
+    <gpg.passphrase>your-passphrase</gpg.passphrase>
+  </properties>
+</profile>
 ~~~
 
 
@@ -182,13 +235,6 @@ Import all Maven projects in Eclipse (via [Eclipse M2E](http://wiki.eclipse.org/
 
 After executing a Maven build from the commandline the corresponding projects in Eclipse have to be refreshed manually! Thereafter you should not have any red crosses (problems) in Eclipse. Sometimes, validation errors in code generation files (.xtend) must be cleaned manually as well. This an be done with a "clean build" (using "Project > Clean...") of the corresponding Eclipse project.
 {: .alert .alert-success}
-
-
-### Eclipse Maven Launcher
-
-Import the Maven project `devtools/maven-launcher` into Eclipses workspace as described in the [Installation Guide](installation#maven-launcher) (if you haven't already done that).
-
-When this Eclipse project is open in the workspace you can run the Maven build from inside Eclipse. The corresponding menu items for this are available in Eclipses external tools menu.
 
 
 ## Build
@@ -249,24 +295,9 @@ mvn clean install -Pmaven,example
 ~~~
 
 
-### Deployment to GitHub
-
-To deploy the Maven repository (with Sculptors Maven plugin and the coresponding archtypes) and the Eclipse p2 repository (with the Sculptor Eclipse plugin) to GitHub the Maven deploy plugin is used. To activate the transfer to the GitHub repository the Maven profile `deploy` has to be specified:
-
-~~~
-mvn deploy -Pdeploy
-~~~
-
-The corresponding approach is described [here](http://stackoverflow.com/questions/14013644/hosting-a-maven-repository-on-github/).
-{: .alert}
-
-Make sure that your Maven "settings.xml" contains the correct [GitHub user credentials](#github-credentials).
-{: .alert .alert-error}
-
-
 ### Stand-alone Code Generator
 
-To build the stand-alone Generator JAR the Maven profile `shade` is used:
+To build the stand-alone generator JAR the Maven profile `shade` is used:
 
 ~~~
 mvn install -Pshade
@@ -275,3 +306,51 @@ java -jar target/sculptor-core-3.0.0-SNAPSHOT.jar -model src/test/resources/mode
 ~~~
 
 The generator isn't useful right now - it reads the model, validates it and prints "org.eclipse.emf.mwe2.runtime.workflow.Workflow - Done.".
+
+
+## Development process
+
+The project uses the [gitflow workflow](https://www.atlassian.com/git/workflows#!workflow-gitflow). So development of small features is done in the **branch "develop"**. Larger features are implemented within a feature branch (created via `git flow feature start some-new-feature`).
+
+After finishing the new feature the feature branch is merged with "develop" via `git flow feature finish some-new-feature`.
+
+Non-committers are not merging the feature branch with "develop" (within their forked repository) but pushing the feature branch to their GitHub repository and [opening a pull request](https://help.github.com/articles/creating-a-pull-request). After the pull request gets accepted the feature is merged in the "develop" branch of the Sculptor repository. From here the merged "develop" branch (with the feature) can be pulled in the forked repository.
+{: .alert .alert-info }
+
+The **branch "master"** is used for released code and the corresponding release tags only!
+{: .alert .alert-error }
+
+
+## Release process
+
+To release Sculptors Eclipse plugin and the Maven plugins (including the archetypes) we don't use the (official) [Maven release plugin](http://maven.apache.org/maven-release/maven-release-plugin) but Atlassians [Maven JGitFlow Plugin](https://bitbucket.org/atlassian/maven-jgitflow-plugin) is used. It is based on and is a replacement for the maven-release-plugin enabling support for git-flow style releases via Maven.
+
+Due to JGitFlows missing support for the Eclipse config files `MANIFEST.MF` and `feature.xml` (it only updates the version numbers in Maven POMs) we're using the [Tycho versions plugin](http://eclipse.org/tycho/sitedocs/tycho-release/tycho-versions-plugin/plugin-info.html) for this.
+
+So Sculptors release process is as follows:
+
+* create a release branch and updates pom(s) with the release version via `mvn jgitflow:release-start -P!all -DreleaseVersion=<RELEASE_VERSION>`
+* update the Eclipse config files with the release version via `mvn tycho-versions:set-version -P!all -DnewVersion=<RELEASE_VERSION>` and commit the modified files
+* runs a Maven build (deploy or install), merges the release branch, updates pom(s) with the development version via `mvn jgitflow:release-finish -DdevelopmentVersion=<DEVLOPMENT_VERSION>`
+* update the Eclipse config files with the development version via `mvn tycho-versions:set-version -P!all -DnewVersion=<DEVLOPMENT_VERSION>` and commit the modified files
+
+To automate this process the script file [`release.sh`](https://github.com/sculptor/sculptor/blob/develop/release.sh) is available. This script requires as arguments the release version and the next development version (without the suffix "-SNAPSHOT"), e.g. `./release 3.0.0 3.0.1`.
+
+The following chapters are describing the deployment of the Eclipse plugin and the Maven plugin during the release build (executed via `mvn jgitflow:release-finish`).
+
+
+### Deployment of Eclipse p2 repository to GitHub
+
+To deploy the Eclipse p2 repository (with the Sculptor Eclipse plugin) to GitHub the [GitHub site-maven-plugin](https://github.com/github/maven-plugins) is used in the `eclipse-repository` project. The corresponding approach is described [here](http://stackoverflow.com/questions/14013644/hosting-a-maven-repository-on-github/).
+
+Make sure that your Maven "settings.xml" contains the correct [GitHub user credentials](#github-credentials).
+{: .alert .alert-error}
+
+
+### Deployment of Maven artifacts to Sonatypes OSS
+
+To deploy the Maven artifacts to Sonatypes OSS Repository Hosting the [maven-deploy-plugin](http://maven.apache.org/plugins/maven-deploy-plugin/) is used.
+
+Make sure that your Maven "settings.xml" contains the correct [Sonatype user credentials](#sonatype-credentials).
+{: .alert .alert-error}
+
