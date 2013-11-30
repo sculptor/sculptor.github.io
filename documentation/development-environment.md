@@ -323,6 +323,11 @@ The **branch "master"** is used for released code and the corresponding release 
 
 ## Release process
 
+Sculptors release artifacts are hosted at different locations:
+
+* Sculptors Eclipse plugins p2 repository is hosted on GitHub in the folder "updates" of [Sculptors website repository](https://github.com/sculptor/sculptor.github.io).
+* Sculptors Maven plugin and archeytpes are hosten on Maven Central.
+
 To release Sculptors Eclipse plugin and the Maven plugins (including the archetypes) we don't use the (official) [Maven release plugin](http://maven.apache.org/maven-release/maven-release-plugin) but Atlassians [Maven JGitFlow Plugin](https://bitbucket.org/atlassian/maven-jgitflow-plugin) is used. It is based on and is a replacement for the maven-release-plugin enabling support for git-flow style releases via Maven.
 
 Due to JGitFlows missing support for the Eclipse config files `MANIFEST.MF` and `feature.xml` (it only updates the version numbers in Maven POMs) we're using the [Tycho versions plugin](http://eclipse.org/tycho/sitedocs/tycho-release/tycho-versions-plugin/plugin-info.html) for this.
@@ -349,7 +354,7 @@ Make sure that your Maven "settings.xml" contains the correct [GitHub user crede
 
 ### Deployment of Maven artifacts to Sonatypes OSS
 
-To deploy the Maven artifacts to Sonatypes OSS Repository Hosting the [maven-deploy-plugin](http://maven.apache.org/plugins/maven-deploy-plugin/) is used.
+To deploy the Maven artifacts to Maven Central (via Sonatypes OSS Repository Hosting as described in [OSSRH-5507](https://issues.sonatype.org/browse/OSSRH-5507)) the [maven-deploy-plugin](http://maven.apache.org/plugins/maven-deploy-plugin/) is used.
 
 Make sure that your Maven "settings.xml" contains the correct [Sonatype user credentials](#sonatype-credentials).
 {: .alert .alert-error}
