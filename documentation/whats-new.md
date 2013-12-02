@@ -22,7 +22,7 @@ This release has most of the functionality as previous 2.1.0, but internally it 
 On the other hand this version of Sculptor greatly benefits from the upgraded technology used internally, e.g.
 
 * better performance because all templates are now pure Java (compiled from Xtend code)
-* better Maven support because Sculptor comes with its own Maven3 plugin
+* better Maven support because Sculptor comes with its own [Maven plugin][2]
 
 
 ## Version 2.1.x
@@ -72,7 +72,7 @@ This release contains:
 
 * Support for MongoDB
 * Support for Event-Driven Arcitecture (Publish/Subscribe, CQRS, Event Sourcing)
-* New Home Page: [http://sculptor.fornax-platform.org][2]
+* New Home Page: [http://sculptor.fornax-platform.org](http://sculptor.fornax-platform.org)
 * Generated Documentation
 * More generated visualizations
 * DSL language syntax
@@ -226,4 +226,4 @@ This release is a minor bug fix release.
 
 
 [1]: advanced-tutorial
-[2]: http://sculptor.fornax-platform.org
+[2]: maven-plugin

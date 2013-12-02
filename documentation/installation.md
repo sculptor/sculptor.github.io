@@ -104,7 +104,7 @@ OS name: "mac os x", version: "10.8.3", arch: "x86_64", family: "mac"
 ## GraphViz
 
 Sculptor generates several UML diagrams for the domain model. Theses diagrams are defined as textual [GraphViz](http://www.graphviz.org/) `.dot` files.
-The goal `generate-images` of Sculptors Maven plugin generates images (.png) from these `.dot` files. This plugin is included in the `pom.xml`
+The goal `generate-images` of [Sculptors Maven plugin](maven-plugin) generates images (.png) from these `.dot` files. This plugin is included in the `pom.xml`
 created by the Sculptor Maven archetypes, but you need to install [GraphViz](http://www.graphviz.org/) and have the `dot` executable in path.
 
 If the GraphViz Maven `dot` executable is not available in path then the Maven build aborts with the error message `Executing 'dot' command failed`.

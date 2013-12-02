@@ -1213,7 +1213,7 @@ Sculptor generates several UML diagrams for the domain model. The [above diagram
 We are using [Graphviz](http://www.graphviz.org/).
 Sculptor generates textual Graphviz `.dot` files, which is then used to generate images.
 
-Sculptors Maven plugin `sculptor-maven-plugin` (goal `generate-images`) generates images (.png) from the .dot files. This plugin is included in the `pom.xml` created by the maven archetypes, but you need to install Graphviz and have executable `dot` in path.
+[Sculptors Maven plugin `sculptor-maven-plugin`][3] (goal `generate-images`) generates images (.png) from the .dot files. This plugin is included in the `pom.xml` created by the maven archetypes, but you need to install Graphviz and have executable `dot` in path.
 
 It is possible to mark some domain objects with `hint="umlgraph=core"` to generate a special diagram with those domain objects in focus.
 
@@ -2110,7 +2110,7 @@ Entity ^Entity {
 
 It is possible to split model.btdesign and define one or more Modules in each file.
 
-By using one file per module it is also possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (media.btdesign, person.btdesign) or prefixed with `model_` or `model-` (`model-person.btdesign`). This partial generation can shorten the generation time for large projects. `sculptor-generator-plugin` will detect which model files has changed since previous generator run when using `mvn generate-sources`. Full generate will be done when using `-Dsculptor.generator.force=true` or `mvn clean generate-sources`
+By using one file per module it is also possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (media.btdesign, person.btdesign) or prefixed with `model_` or `model-` (`model-person.btdesign`). This partial generation can shorten the generation time for large projects. [`sculptor-generator-plugin`][3] will detect which model files has changed since previous generator run when using `mvn generate-sources`. Full generate will be done when using `-Dsculptor.generator.force=true` or `mvn clean generate-sources`
 
 Referenced files are imported with a URI syntax starting with `classpath:/` followed by classpath path to the `.btdesign` file to be imported.
 
@@ -2221,3 +2221,4 @@ The complete source code for this tutorial is available in GitHub [https://githu
 
    [1]: developers-guide
    [2]: installation
+   [3]: maven-plugin

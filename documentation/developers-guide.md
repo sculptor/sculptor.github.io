@@ -45,7 +45,7 @@ Some changes are staightforward and some requires more in depth understanding of
 
 ## Performance Tuning of Generator
 
-By using one model file per module it is possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (e.g. `media.btdesign`, `person.btdesign`) or prefixed with `model_` or `model-` (model-person.btdesign). This partial generation can shorten the generation time for large projects. [`sculptor-maven-plugin`](maven-plugin) will detect which model files has changed since previous generator run when using `mvn -o generate-sources`. Full generate will be done when using `-Dsculptor.generator.force=true` or `mvn clean generate-sources`
+By using one model file per module it is possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (e.g. `media.btdesign`, `person.btdesign`) or prefixed with `model_` or `model-` (model-person.btdesign). This partial generation can shorten the generation time for large projects. [`sculptor-maven-plugin`][3] will detect which model files has changed since previous generator run when using `mvn -o generate-sources`. Full generate will be done when using `-Dsculptor.generator.force=true` or `mvn clean generate-sources`
 
 Note that the Maven `-o` (offline) option can reduce Maven execution time a lot, if you know that you have everything locally.
 
@@ -55,7 +55,7 @@ A major disadvantage of using `mvn clean` is that Eclipse will often not underst
 
 Note that Refresh in Eclipse is often time consuming. In the Maven launcher you should specify Refresh "The project containing the selected resource" or "Specific resources". Don't use "The entire workspace".
 
-[`sculptor-maven-plugin`](maven-plugin) runs the generator within the Maven process and therefore it can be necessary to define JVM parameters for large projects via the environment variable `MAVEN_OPTS`:
+[`sculptor-maven-plugin`][3] runs the generator within the Maven process and therefore it can be necessary to define JVM parameters for large projects via the environment variable `MAVEN_OPTS`:
 
 * Windows: `set MAVEN_OPTS="-Xms256m -Xmx1g -XX:MaxPermSize=256m"`
 * Unix: `export MAVEN_OPTS=-Xms256m -Xmx1g -XX:MaxPermSize=256m`
@@ -1781,3 +1781,4 @@ DslConsumer :
 
 [1]: development-environment
 [2]: advanced-tutorial#scaffold
+[3]: maven-plugin

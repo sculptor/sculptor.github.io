@@ -506,7 +506,7 @@ generate.restWeb=true
 
 ### Location of webapp directory
 
-By default the web configuration and JSP pages are generated in `src/main/webapp`. You can change that in the projects Maven POM by defining the attribute `outletWebrootDir` in the Sculptor Maven plugin configuration. For Google Appengine projects it should be located in the war directory:
+By default the web configuration and JSP pages are generated in `src/main/webapp`. You can change that in the projects Maven POM by defining the attribute `outletWebrootDir` in the [Sculptor Maven plugin configuration][11]. For Google Appengine projects it should be located in the war directory:
 
 ~~~
 <build>
@@ -538,3 +538,4 @@ generate.restWeb.jsp=false
    [8]: http://xstream.codehaus.org/
    [9]: https://jaxb.java.net/
    [10]: advanced-tutorial#cross-project-references
+   [11]: maven-plugin#configuration
