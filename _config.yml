@@ -17,7 +17,7 @@ author :
   twitter : sculptorgen
   feedburner : 
 
-sculptor_version: "3.0.0-SNAPSHOT"
+sculptor_version: "3.0.0"
 
 # Use kramdown for markdown files -> http://kramdown.rubyforge.org/
 markdown: kramdown
