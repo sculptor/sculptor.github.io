@@ -15,7 +15,7 @@ Released versions of Sculptor:
 
 ### Version 3.0.0
 
-Version 3.0.0 was released ???.
+Version 3.0.0 was released November 29, 2013
 
 This release has most of the functionality as previous 2.1.0, but internally it has been migrated to latest version of Maven3, Eclipse4, Xtext2 and Xtend2. During this migration some of Sculptors features have been dropped (or haven't been migrated) - mainly the gui-related features.
 
@@ -23,6 +23,14 @@ On the other hand this version of Sculptor greatly benefits from the upgraded te
 
 * better performance because all templates are now pure Java (compiled from Xtend code)
 * better Maven support because Sculptor comes with its own [Maven plugin][2]
+
+Some other highlights of the release:
+
+* New Home Page: [http://sculptorgenerator.org](http://sculptorgenerator.org)
+* New Forum: [https://groups.google.com/forum/#!forum/sculptorgenerator](https://groups.google.com/forum/#!forum/sculptorgenerator)
+* Version control changed from Subversion to Git
+* Project hosting changed from [Sourceforge](http://sourceforge.net/projects/fornax/) to GitHub
+* Website implemented via [Jekyll Bootstrap](http://jekyllbootstrap.com)
 
 
 ## Version 2.1.x
