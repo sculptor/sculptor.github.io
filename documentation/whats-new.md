@@ -17,20 +17,20 @@ Released versions of Sculptor:
 
 Version 3.0.0 was released November 29, 2013
 
-This release has most of the functionality as previous 2.1.0, but internally it has been migrated to latest version of Maven3, Eclipse4, Xtext2 and Xtend2. During this migration some of Sculptors features have been dropped (or haven't been migrated) - mainly the gui-related features.
+Some highlights of the release:
 
-On the other hand this version of Sculptor greatly benefits from the upgraded technology used internally, e.g.
-
-* better performance because all templates are now pure Java (compiled from Xtend code)
-* better Maven support because Sculptor comes with its own [Maven plugin][2]
-
-Some other highlights of the release:
-
+* Upgrade to Xtext/Xtend 2.4.3 and Eclipse Kepler
+* Java package changed from `org.fornax.cartridges.sculptor` to `org.sculptor`
 * New Home Page: [http://sculptorgenerator.org](http://sculptorgenerator.org)
-* New Forum: [https://groups.google.com/forum/#!forum/sculptorgenerator](https://groups.google.com/forum/#!forum/sculptorgenerator)
+* New Forum: [https://groups.google.com/group/sculptorgenerator](https://groups.google.com/group/sculptorgenerator)
 * Version control changed from Subversion to Git
-* Project hosting changed from [Sourceforge](http://sourceforge.net/projects/fornax/) to GitHub
+* Project hosting changed from [Sourceforge](http://sourceforge.net/projects/fornax/) to [GitHub](https://github.com/sculptor)
 * Website implemented via [Jekyll Bootstrap](http://jekyllbootstrap.com)
+* Maven plugin available from [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.sculptorgenerator%22)
+* Eclipse plugin available from [http://sculptorgenerator.org/updates](http://sculptorgenerator.org/updates)
+* Eclipse plugin build with Maven via [Eclipse Tycho](http://eclipse.org/tycho/)
+* Release process based on [Gitflow Maven plugin](https://bitbucket.org/atlassian/maven-jgitflow-plugin)
+* CI service via [Travis CI](https://travis-ci.org)
 
 
 ## Version 2.1.x
@@ -96,8 +96,7 @@ This release contains:
 
 [Version 1.8.0 was released February 16, 2010](/2010/02/16/sculptor-180-released).
 
-This release has the same functionality as previous 1.7.0, but internally it has been migrated to latest openArchitectureWare, which is now part of 
-Eclipse. This means that the usability of the DSL editor is much better, e.g
+This release has the same functionality as previous 1.7.0, but internally it has been migrated to latest openArchitectureWare, which is now part of Eclipse. This means that the usability of the DSL editor is much better, e.g
 
 * Better content assist (ctrl+space)
 * Formatting (Pretty Printing) of model files (ctrl+shift+F)
