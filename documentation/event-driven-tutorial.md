@@ -220,7 +220,7 @@ Anonymous Access (read only):
    [8]: hello-world-tutorial
    [9]: http://martinfowler.com/eaaDev/DomainEvent.html
    [10]: http://code.google.com/p/protobuf/
-   [11]: http://fornax-sculptor.blogspot.com/2010/10/event-sourcing-with-sculptor.html
-   [12]: http://fornax-sculptor.blogspot.com/2010/10/event-sourcing-with-sculptor-snapshots.html
+   [11]: /2010/10/28/event-sourcing-with-sculptor
+   [12]: /2010/10/29/event-sourcing-with-sculptor---snapshots
    [13]: mongodb-tutorial
   
