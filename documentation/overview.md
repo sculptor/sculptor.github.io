@@ -64,9 +64,9 @@ Sculptor is licensed under the [Apache 2.0 License](http://www.apache.org/licens
 
 ## Issues and Improvements
 
-Use the [Forum](http://groups.google.com/group/fornax-platform) for questions and discussion.
+Use the [Forum](https://groups.google.com/group/sculptorgenerator) for questions and discussion.
 
-You can report bugs and feature request in the [forum](http://groups.google.com/group/fornax-platform) also. We will add them to issue tracking system: [https://github.com/sculptor/sculptor/issues](https://github.com/sculptor/sculptor/issues).
+You can report bugs and feature request in the [forum](https://groups.google.com/group/sculptorgenerator) also. We will add them to issue tracking system: [https://github.com/sculptor/sculptor/issues](https://github.com/sculptor/sculptor/issues).
 
   </div>
 </div>
