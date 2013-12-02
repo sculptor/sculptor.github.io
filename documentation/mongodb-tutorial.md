@@ -57,8 +57,7 @@ You need to [download and install mongoDB][4]. Start mongoDB with bin/mongod com
 
 When running the tests it will connect to a mongoDB instance running at localhost (default port 27017). The database will be created automatically and dropped after each test method (done by the @After dropDatabase method in the test case).
 
-You can use `mvn -Dfornax.generator.force.execution=true -o -npu generate-sources` to speed up the builds,
--o == offline, -npu == no plugin upate.
+You can use `mvn generate-sources -Dsculptor.generator.force=true -o` to speed up the builds (-o == offline).
 Maven can be executed from inside Eclipse with External Tool Configuration (Fornax Maven Launcher as explained in **[Installation Guide**][2]) or with m2eclipse.
 JUnit tests are typically run from inside Eclipse as usual.
 

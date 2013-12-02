@@ -15,7 +15,7 @@ We have migrated from openArchitectureWare 4.3.1 to Xtext/Xpand/MWE 0.7.2 at Ecl
 
 Now, content assist (ctrl + space) works as you would expect.
 
-Another useful feature is formatting (pretty printing) of model files (ctrl%2Bshift%2BF).
+Another useful feature is formatting (pretty printing) of model files (ctrl + shift + F).
 
 [Read more about the release][2].
 

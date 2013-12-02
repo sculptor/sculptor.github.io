@@ -11,7 +11,7 @@ navbar_name: blog
 
 Sculptor 1.7.0 has been released. In this version the list of supported technologies has grown with several popular alternatives.
 
-Sculptor has many built in customization options to[ pick and choose from][1]. The major new target implementation options in this release:
+Sculptor has many built in customization options to [pick and choose from][1]. The major new target implementation options in this release:
 
   * Google App Engine
   * EclipseLink and DataNucleus JPA Provider

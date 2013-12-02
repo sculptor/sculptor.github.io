@@ -21,7 +21,7 @@ Three new and noteworthy features:
 
 In addition to these and several other new features we have also improved the technical quality.
 
-We have upgraded support for latest versions of most of the underlaying tools and frameworks. Most important is Xtext 1.0, Eclipse Helios, Maven 3, Spring 3.0.
+We have upgraded support for latest versions of most of the underlying tools and frameworks. Most important is Xtext 1.0, Eclipse Helios, Maven 3, Spring 3.0.
 
 The logging API has been changed from Commons Logging with Log4j to [SLF4J][6] with [Logback][7]. SLF4J allow many backends and also have special bridges for many (legacy) logging frameworks. SLF4J with Logback is considered to be best logging framework available.
 
