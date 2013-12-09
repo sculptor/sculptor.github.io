@@ -47,7 +47,12 @@ In this first part we will setup the project structure for Maven and Eclipse.
    Define value for package:  org.helloworld: :
    ~~~
 
-2. Open Eclipse and import the project via (via [Eclipse M2E](http://wiki.eclipse.org/M2E)) with "File > Import... > Existing Maven Projects".
+2. Open Eclipse and import the project via (via [m2e Eclipse plugin](http://www.eclipse.org/m2e/)) with "File > Import... > Existing Maven Projects".
+
+3. Create an Eclipse m2e launch configuration for executing Maven (e.g. with the goal `generate-sources`) from within Eclipse (right-clicking the project or Maven POM and selecting "Run as > Maven build..." from the context menu).
+
+   To refresh the Eclipse workspace after Sculptors code generator created new code enable the option "Refresh > Refresh resources upon completion > The project containing the selected resource" in the launch configuration.
+   {: .alert}
 
 
 ## Part 2 - Generate Code
@@ -88,7 +93,7 @@ It is a [Module](advanced-tutorial#module) containing one [Entity](advanced-tuto
    If the Maven build aborts with the error message `Executing 'dot' command failed` then the GraphViz package is not installed as described in the [installation guide](installation#graphviz).
    {: .alert .alert-success }
 
-   If you run Maven from the command prompt you have to refresh the Eclipse workspace. If you [run Maven as an external task in Eclipse](installation#maven-launcher) it can refresh automatically.
+   If you run Maven from the command prompt you have to refresh the Eclipse workspace. If you from within Eclipse with the aforementioned m2e launch configuration then the workspace is refreshed automatically.
    {: .alert }
 
 3. Look at the generated code. In `src/main/java`, `src/main/resources`, `src/test/java` and `src/test/resources` folders the code is only generated once, and you can do manual changes. In `src/main/generated/java`, `src/main/generated/resources`, `src/test/generated/java` and `src/test/generated/resources` it is generated each time, i.e. don't touch.

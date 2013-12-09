@@ -13,9 +13,9 @@ navbar_name: docs
       <li><a href="#maven">Maven</a></li>
       <li><a href="#graphviz">GraphViz</a></li>
       <li><a href="#eclipse">Eclipse</a></li>
-      <li><a href="#sculptor-eclipse-plugins">Sculptor Eclipse Plugins</a></li>
-      <li><a href="#eclipse-configuration">Eclipse Configuration</a></li>
-      <li><a href="#maven-launcher">Maven Launcher</a></li>
+      <li><a href="#sculptor-eclipse-plugins">&nbsp;&nbsp;&nbsp;Sculptor Eclipse Plugins</a></li>
+      <li><a href="#eclipse-configuration">&nbsp;&nbsp;&nbsp;Eclipse Configuration</a></li>
+      <li><a href="#eclipse-projects-and-maven-build-started-from-command-line">&nbsp;&nbsp;&nbsp;Eclipse and Maven build</a></li>
     </ul>
   </div>
   <div class="span9">
@@ -122,7 +122,7 @@ Sculptor can be used with any text editor or IDE. But if you are an [Eclipse](ht
    {: .alert }
 
 2. Directly in Eclipse (Help -> Install New Software) install from the Eclipse releases (e.g. Kepler) update site the following plugins:
-   * General Purpose Tools > m2e - Maven Integration for Eclipse 1.4.0 (or newer)
+   * General Purpose Tools > [m2e - Maven Integration for Eclipse](http://www.eclipse.org/m2e/) 1.4.0 (or newer)
    * Modeling > Xtext SDK 2.4.2 (or newer)
 
 
@@ -130,25 +130,15 @@ Sculptor can be used with any text editor or IDE. But if you are an [Eclipse](ht
 
 Sculptors Eclipse plugins are available from the update site [http://sculptorgenerator.org/updates/](http://sculptorgenerator.org/updates/).
  
-Install "Sculptor DSL Feature".
+Install "Sculptor DSL Editor".
 
 
 ### Eclipse Configuration
 
 In Eclipse the following configuration settings are required:
 
-1. For the [Maven Launcher](#maven-launcher) add the 'String Substitution' variable `MAVEN_EXEC` with the full-qualified path to Mavens start script (Windows: `mvn.bat`, Unix: `mvn.sh`)  
-![Maven Exec Variable](/images/documentation/installation/maven-exec-variable.png)
-2. If you are using Mac OS X you should change the default file encoding in Eclipse to `ISO-8859-1` via "Preferences > General > Workspace"
-
-
-### Maven Launcher
-
-Maven can be executed from the command prompt, but when developing a better alternative is to run it inside Eclipse as an external tool. You can checkout an Eclipse project with some pre-configured launchers from Sculptors GitHub repository at [https://github.com/sculptor/sculptor/tree/master/devtools/maven-launcher/](https://github.com/sculptor/sculptor/tree/master/devtools/maven-launcher/). 
-
-If this Eclipse project (with the Maven launchers) is **open** in your Eclipse workspace then the menu items for this launchers are available in the 'External Tools' menu.
-
-![External Tools Menu](/images/documentation/installation/external-tools-menu.png)
+1. To support [Xtend template expressions](http://www.eclipse.org/xtend/documentation.html#templates) (which are using the "guillemets" characters `«` and `»` for tag brackets) the default file encoding in Eclipse should be set to `UTF-8` or `ISO-8859-1` via "Preferences > General > Workspace"
+2. Refresh in Eclipse is often time consuming. In the [m2e Eclipse plugin](http://www.eclipse.org/m2e/) Maven launch configurations (created via context menu "Run As > Maven build..." on the corresponding Maven project or Maven POM) you should enable the option "Refresh > Refresh resources upon completion > The project containing the selected resource". Don't use "The entire workspace".
 
 
 ### Eclipse projects and Maven build started from command line
