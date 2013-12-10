@@ -2108,9 +2108,14 @@ Entity ^Entity {
 
 ## Divide model into several files
 
-It is possible to split model.btdesign and define one or more Modules in each file.
+It is possible to split model.btdesign and define one or more modules in each file.
 
-By using one file per module it is also possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (media.btdesign, person.btdesign) or prefixed with `model_` or `model-` (`model-person.btdesign`). This partial generation can shorten the generation time for large projects. [`sculptor-generator-plugin`][3] will detect which model files has changed since previous generator run when using `mvn generate-sources`. Full generate will be done when using `-Dsculptor.generator.force=true` or `mvn clean generate-sources`
+By using one file per module it is also possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. This partial generation can shorten the generation time for large projects.
+
+The module file must be named the same as the module (e.g. `media.btdesign` or `person.btdesign`) or prefixed with `model_` or `model-` (e.g. `model-person.btdesign`).
+{: .alert}
+
+[Sculptors Maven plugin][3] will detect which model files has changed since previous generator run when using `mvn generate-sources`. Full generate will be done when using `-Dsculptor.generator.force=true` or `mvn clean generate-sources`
 
 Referenced files are imported with a URI syntax starting with `classpath:/` followed by classpath path to the `.btdesign` file to be imported.
 
