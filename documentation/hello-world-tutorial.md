@@ -63,25 +63,25 @@ In this part we will write a Sculptor DSL file and generate code from it.
 Add something like this to the design file:
 
    ~~~
-	Application Universe {
-	    basePackage=org.helloworld
-	 
-	    Module planet {
-	        Service PlanetService {
-	            String sayHello(String planetName);
-	            protected findByExample => PlanetRepository.findByExample;
-	        }
-	 
-	        Entity Planet {
-	            String name key
-	            String message
-	 
-	            Repository PlanetRepository {
-	                findByExample;
-	            }
-	        }
-	    }
-	}
+   Application Universe {
+       basePackage=org.helloworld
+    
+       Module planet {
+           Service PlanetService {
+               String sayHello(String planetName);
+               protected findByExample => PlanetRepository.findByExample;
+           }
+    
+           Entity Planet {
+               String name key
+               String message
+    
+               Repository PlanetRepository {
+                   findByExample;
+               }
+           }
+       }
+   }
    ~~~
 
    Try the code completion, error highlight and outline view.
