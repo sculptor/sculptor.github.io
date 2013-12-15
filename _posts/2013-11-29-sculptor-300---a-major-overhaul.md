@@ -26,3 +26,4 @@ Sculptors Eclipse plugin is available from [http://sculptorgenerator.org/updates
 [Read more about the release][1].
 
    [1]: /documentation/whats-new#version-300
+   [2]: /documentation/maven-plugin
