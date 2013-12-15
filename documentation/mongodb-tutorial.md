@@ -168,8 +168,13 @@ nosql.provider=mongoDb
 cartridges=builder,mongodb
 ~~~
 
-The property `cartridges` is used to enable a comma-separated list of extensions of Sculptors template override mechanismus. The extension 'builder' is the default set of Sculptopr template. The extension `mongoDB` modifies the default templates in order to add the mongoDB support.
-{.alert}
+<div markdown="1">
+The property `cartridges` is used to enable a (comma-separated) list of extensions used by Sculptors internal template override mechanismus.
+
+* The extension 'builder' is the default set of Sculptor templates.
+* The extension `mongoDB` modifies the default templates in order to add the mongoDB support.
+</div>
+{: .alert}
 
 
 ### Associations
