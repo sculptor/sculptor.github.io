@@ -158,6 +158,20 @@ In this part we will write a Sculptor DSL file and generate code from it.
 Most things that can be done with JPA target implementation can also be done with mongoDB. Therefore most of the descriptions in [Advanced Tutorial][5] are valid and I will not repeat everything, but I will elaborate on some topics.
 
 
+### Activation
+
+To activate Sculptors mongoDB support the following properties are needed in the `sculptor-generator.properties` file (already set by the Sculptor Maven archetype).
+
+~~~
+nosql.provider=mongoDb
+
+cartridges=builder,mongodb
+~~~
+
+The property `cartridges` is used to enable a comma-separated list of extensions of Sculptors template override mechanismus. The extension 'builder' is the default set of Sculptopr template. The extension `mongoDB` modifies the default templates in order to add the mongoDB support.
+{.alert}
+
+
 ### Associations
 
 An associated object can be stored as an embedded document, i.e. it belongs to parent object and cannot be shared between several objects. References to BasicType are always embedded. [Aggregates][6] are also embedded in the DBCollection of the parent object. Aggregates are defined with `belongsTo` or `not aggregateRoot` in the owned DomainObjects.
@@ -431,22 +445,27 @@ By default the names in the data store are the same as the names in the Java Dom
 
 ~~~
 abstract Entity Media {
-  databaseTable="Products"
-  discriminatorColumn="type"
-  String title !changeable
+   databaseTable="Products"
+   discriminatorColumn="type"
+   String title !changeable
 }
  
 Entity Book extends @Media {
-  discriminatorValue="B"
-  String isbn key length="20" databaseColumn="KEY"
+   discriminatorValue="B"
+   String isbn key length="20" databaseColumn="KEY"
 }
  
 Entity Movie extends @Media {
-  discriminatorValue="M"
-  String urlIMDB key databaseColumn="KEY"
-  Integer playLength
+   discriminatorValue="M"
+   String urlIMDB key databaseColumn="KEY"
+   Integer playLength
 }
 ~~~
+
+
+## Blog Posts
+
+In the Sculptor Blog there's a [series of posts][15] related to mongoDB.
 
 
 ## Source
@@ -468,3 +487,4 @@ The complete source code for this tutorial is available in GitHub [https://githu
    [12]: advanced-tutorial#findbycondition
    [13]: http://api.mongodb.org/java/1.3/com/mongodb/MongoOptions.html
    [14]: advanced-tutorial#custom-access-objects  
+   [15]: /2010/04/27/mongodb-with-sculptor---introduction
