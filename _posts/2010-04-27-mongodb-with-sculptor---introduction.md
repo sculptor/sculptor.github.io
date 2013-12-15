@@ -56,6 +56,6 @@ Read the other posts that describes the features in more detail:
    [4]: http://api.mongodb.org/java/2.11.3/com/mongodb/DBObject.html
    [5]: /images/2010-04-27-mongodb-with-sculptor---introduction/blog_model.png
    [6]: /images/2010-04-27-mongodb-with-sculptor---introduction/blog_umlgraph.png
-   [7]: /2010/04/28/mongodb-with-sculptor-data-mapper
-   [8]: /2010/04/28/mongodb-with-sculptor-associations
-   [9]: /2010/04/28/mongodb-with-sculptor-repository
+   [7]: /2010/04/28/mongodb-with-sculptor---data-mapper
+   [8]: /2010/04/28/mongodb-with-sculptor---associations
+   [9]: /2010/04/28/mongodb-with-sculptor---repository
