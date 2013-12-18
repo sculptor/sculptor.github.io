@@ -484,12 +484,12 @@ The complete source code for this tutorial is available in GitHub [https://githu
    [4]: http://www.mongodb.org/display/DOCS/Downloads
    [5]: advanced-tutorial
    [6]: advanced-tutorial#aggregate-1
-   [7]: http://api.mongodb.org/java/1.3/com/mongodb/DBObject.html
+   [7]: http://api.mongodb.org/java/2.11.3/com/mongodb/DBObject.html
    [8]: http://www.mongodb.org/display/DOCS/Java%2BDriver%2BConcurrency
    [9]: http://www.mongodb.org/display/DOCS/Indexes
    [10]: advanced-tutorial#findbycondition
    [11]: advanced-tutorial#pagination
    [12]: advanced-tutorial#findbycondition
-   [13]: http://api.mongodb.org/java/1.3/com/mongodb/MongoOptions.html
+   [13]: http://api.mongodb.org/java/2.11.3/com/mongodb/MongoOptions.html
    [14]: advanced-tutorial#custom-access-objects  
    [15]: /2010/04/27/mongodb-with-sculptor---introduction
