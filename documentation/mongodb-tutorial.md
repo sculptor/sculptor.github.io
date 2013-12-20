@@ -17,6 +17,10 @@ aware of, such as relaxed transactional guarantees.
 
 The schema-less structure is attractive from a developer productivity perspective, which is one of the two goals with Sculptor (quality is the other).
 
+Before you start you need to run a mongoDB server locally. Therefore [download and install mongoDB][4]. Start mongoDB with `bin/mongod` command.
+{: .alert .alert-errror}
+
+
 **Table of Contents:**
 
 * toc
@@ -148,7 +152,8 @@ In this part we will write a Sculptor DSL file and generate code from it.
    }
    ~~~
 
-   You need to [download and install mongoDB][4]. Start mongoDB with `bin/mongod` command.
+   You need to run a mongoDB server locally. Therefore [download and install mongoDB][4]. Start mongoDB with `bin/mongod` command.
+   {: .alert .alert-error}
 
    When running the tests it will connect to a mongoDB instance running at localhost (default port 27017). The database will be created automatically and dropped after each test method (done by the `@After dropDatabase` method in the test case).
 
