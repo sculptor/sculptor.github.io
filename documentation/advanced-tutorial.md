@@ -9,6 +9,8 @@ navbar_name: docs
 This tutorial describes the features of Sculptor business tier. It presents how Sculptor works out-of-the-box, customization is often needed and that is the topic of the [Developer's Guide][1].
 
 Before you start you must follow the instructions in the [Installation Guide][2]. It is also recommended that you try the [Hello World Tutorial](hello-world-tutorial) to get a feeling of the environment.
+{: .alert}
+
 
 **Table of Contents:**
 

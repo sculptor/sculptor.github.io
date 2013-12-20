@@ -9,6 +9,8 @@ navbar_name: docs
 In this tutorial we will create a simple Java EE application from scratch using [Sculptors Maven archetypes][1]. We will start with a simple war, deployed in Jetty and using HSQLDB in-memory database. Later on it is illustrated how it can be converted to use MySQL and be deployed in JBoss.
 
 Before you start you must follow the instructions in the **[Installation Guide][3]**.
+{: .alert}
+
 
 **Table of Contents:**
 
