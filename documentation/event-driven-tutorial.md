@@ -167,7 +167,7 @@ DomainEvent ShipHasDepartured {
 
 DomainEvents may contain attributes and references in the same way as ValueObjects and Entities. DomainEvents are always immutable and not persistent.
 
-Events are about something happening at a point in time, so it's natural for events to contain time information. Sculptor automatically adds two timestamps, occurred and recorded. The time the event occurred in the world and the time the event was noticed.
+Events are about something happening at a point in time, so it's natural for events to contain time information. Sculptor automatically adds two timestamps, `occurred` and `recorded`. The time the event occurred in the world and the time the event was noticed.
 
 
 ## Publish
@@ -177,7 +177,7 @@ The easiest way to publish a DomainEvent is to mark a service or repository oper
 ~~~
 Service TrackingService {
     @ShipHasArrived recordArrival(DateTime occurred, @Ship ship, @Port port)
-        publish to shippingChannel;
+                publish to shippingChannel;
 }
 ~~~
 
@@ -314,14 +314,14 @@ Add the following dependency in `pom.xml`
 <dependency>
     <groupId>org.springframework.integration</groupId>
     <artifactId>spring-integration-core</artifactId>
-    <version>${spring-integration.version}</version>
+    <version>${spring-integration-version}</version>
 </dependency>
 ~~~
 
 Add in properties section of `pom.xml`
 
 ~~~ xml
-<spring-integration.version>2.0.0.RELEASE</spring-integration.version>
+<spring-integration-version>2.2.6.RELEASE</spring-integration-version>
 ~~~
 
 Re-generate!
@@ -365,17 +365,17 @@ Add the following dependencies in `pom.xml`
 <dependency>
     <groupId>org.apache.camel</groupId>
     <artifactId>camel-core</artifactId>
-    <version>${camel.version}</version>
+    <version>${camel-version}</version>
 </dependency>
 <dependency>
     <groupId>org.apache.camel</groupId>
     <artifactId>camel-jms</artifactId>
-    <version>${camel.version}</version>
+    <version>${camel-version}</version>
 </dependency>
 <dependency>
     <groupId>org.apache.camel</groupId>
     <artifactId>camel-spring</artifactId>
-    <version>${camel.version}</version>
+    <version>${camel-version}</version>
 </dependency>
 <dependency>
     <groupId>org.apache.activemq</groupId>
@@ -398,7 +398,7 @@ Add the following dependencies in `pom.xml`
 Add in properties section of `pom.xml`
 
 ~~~ xml
-<camel.version>2.6.0</camel.version>
+<camel-version>2.12.2</camel-version>
 ~~~
 
 Re-generate!
@@ -563,9 +563,9 @@ The complete source code for this tutorial is available in GitHub [https://githu
 
    [1]: http://en.wikipedia.org/wiki/Event-driven_architecture
    [2]: http://camel.apache.org/
-   [3]: http://www.springsource.org/spring-integration
-   [4]: http://akkasource.org/
-   [5]: http://code.google.com/p/redis/
+   [3]: http://springsource.org/spring-integration
+   [4]: http://akka.io/
+   [5]: http://redis.io/
    [6]: http://martinfowler.com/eaaDev/EventSourcing.html
    [7]: /images/documentation/event-driven-tutorial/shipping_domain.png
    [8]: hello-world-tutorial
