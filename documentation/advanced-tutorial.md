@@ -1944,7 +1944,7 @@ For each Service there is a generated JUnit test class that you have to implemen
 
 Spring beans are injected in the test with ordinary `@Autowired` annotations.
 
-`AbstractDbUnitJpaTests` also provides a method to retrieve the [ServiceContext](#error-handling), which is always passed in as the first parameter of the service methods.
+`AbstractDbUnitJpaTests` also provides a method to retrieve the [ServiceContext](#servicecontext), which is always passed in as the first parameter of the service methods.
 
 ~~~
 List<Person> persons = personService.findPersonByName(getServiceContext(), "Skarsgård");
@@ -2028,17 +2028,17 @@ You might find the following DBUnit test data useful:
 ## Error Handling
 {: #error-handling}
 
-Two types of exceptions are used, a checked exception called ApplicationException and a runtime exception called SystemException.
+Two types of exceptions are used, a checked exception called `ApplicationException` and a runtime exception called `SystemException`.
 
-ApplicationException is used for faults that the system is designed to take care of, i.e. recoverable errors at the level of the application, e.g. validation failures.
+`ApplicationException` is used for faults that the system is designed to take care of, i.e. recoverable errors at the level of the application, e.g. validation failures.
 
-System exceptions are used to indicate unrecoverable, unexpected errors that are outside the control of the application, e.g. database failures. The current processing can't continue and the transaction is rolled back when they occur.
+`SystemException` is used to indicate unrecoverable, unexpected errors that are outside the control of the application, e.g. database failures. The current processing can't continue and the transaction is rolled back when they occur.
 
 [Effective Java Exceptions](http://www.oracle.com/technetwork/articles/entarch/effective-exceptions-092345.html) is a good article describing similar error handling strategy.
 
-Both ApplicationException and SystemException contain an error code, which is used by the client to translate to appropriate error message. Subclasses to these exceptions defines specific error situations and it is in these subclasses the error codes are defined, i.e. an exception class can define several error codes to indicate different flavours of the fault.
+Both `ApplicationException` and `SystemException` contain an error code, which is used by the client to translate to appropriate error message. Subclasses to these exceptions defines specific error situations and it is in these subclasses the error codes are defined, i.e. an exception class can define several error codes to indicate different flavours of the fault.
 
-In the throws clause of operations for Services or Repositories you can define a comma separated list of exceptions. It can be fully qualified or unqualified class names. When it is unqualified name an ApplicationException subclass with that name will be generated.
+In the throws clause of operations for Services or Repositories you can define a comma separated list of exceptions. It can be fully qualified or unqualified class names. When it is unqualified name an `ApplicationException` subclass with that name will be generated.
 
 ~~~
 Repository LibraryRepository {
@@ -2047,13 +2047,16 @@ Repository LibraryRepository {
 }
 ~~~
 
-A Spring advice will catch all exceptions that are thrown from the Services. This advice will log all SystemExceptions to the error log. ApplicationExceptions are logged at debug level. Log4j is used for the logging.
+A Spring advice will catch all exceptions that are thrown from the Services. This advice will log all SystemExceptions to the error log. ApplicationExceptions are logged at debug level. [slf4j][4] is used for the logging.
 
-The ServiceContext class is needed to support logging and audit trail functionality through the tiers of an application. A ServiceContext object will typically be sent through all tiers, and represents the context in which a business service is called. It contains information about the user and ids for the session and request.
 
-The first parameter of each method in the Services is a ServiceContext parameter. This is generated automatically. In front of the Services there is an advice, which stores this ServiceContext object in a thread local variable, ServiceContextStore, to make sure that it is available everywhere within that request in the tier. When calling remote methods it must be passed as a method parameter.
+### ServiceContext
 
-It is possible to skip the generation of ServiceContext, see [Developer's Guide](devlopers-guide#serviceContext).
+The `ServiceContext` class is needed to support logging and audit trail functionality through the tiers of an application. A `ServiceContext` object will typically be sent through all tiers, and represents the context in which a business service is called. It contains information about the user and ids for the session and request.
+
+The first parameter of each method in the Services is a `ServiceContext` parameter. This is generated automatically. In front of the Services there is an advice, which stores this `ServiceContext` object in a thread local variable, `ServiceContextStore`, to make sure that it is available everywhere within that request in the tier. When calling remote methods it must be passed as a method parameter.
+
+It is possible to skip the generation of `ServiceContext`, see [Developer's Guide](devlopers-guide#serviceContext).
 
 
 ## Alternative Notation
@@ -2229,3 +2232,5 @@ The complete source code for this tutorial is available in GitHub [https://githu
    [1]: developers-guide
    [2]: installation
    [3]: maven-plugin
+   [4]: http://www.slf4j.org
+
