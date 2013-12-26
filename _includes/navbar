@@ -5,6 +5,12 @@
 		<li {% if page.navbar_name == 'docs' %}class="active"{% endif %}><a href="{{ BASE_PATH }}/documentation/">Documentation</a></li>
 		<li><a href="https://groups.google.com/group/sculptorgenerator" onclick="recordOutboundLink(this, 'Outbound links', 'Forum', '{{ page.nav_bar_name }}');return false;">Forum</a></li>
 		<li {% if page.navbar_name == 'contact' %}class="active"{% endif %}><a href="{{ BASE_PATH }}/contact">Contact</a></li>
+		<li>
+        	<form class="navbar-search" id="google-search" action="https://google.com/search" target="_blank">
+               	<input type="hidden" name="sitesearch" value="{{ site.production_url }}" />
+ 				<input class="search-query span2" id="q" type="search" name="q" title="Enter search query" placeholder="Enter search query" />
+        	</form>
+		</li>
 	</ul>
 	<h3 class="muted">Sculptor</h3>
 </div>
