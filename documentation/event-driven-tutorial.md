@@ -98,7 +98,7 @@ Application Shipping {
         }
 
         Entity Port {
-            - UnLocode unlocode key;
+            - UnLocode unlocode key
             String city
             - Country country
             
@@ -165,14 +165,17 @@ DomainEvent ShipHasDepartured {
 }
 ~~~
 
-DomainEvents may contain attributes and references in the same way as ValueObjects and Entities. DomainEvents are always immutable and not persistent.
+DomainEvents may contain attributes and references in the same way as ValueObjects and Entities.
+
+DomainEvents are always immutable and not persistent.
+{: .alert .alert-info}
 
 Events are about something happening at a point in time, so it's natural for events to contain time information. Sculptor automatically adds two timestamps, `occurred` and `recorded`. The time the event occurred in the world and the time the event was noticed.
 
 
 ## Publish
 
-The easiest way to publish a DomainEvent is to mark a service or repository operation in `model.btdesign` like this:
+The easiest way to publish a `DomainEvent` is to mark a service or repository operation in `model.btdesign` like this:
 
 ~~~
 Service TrackingService {
@@ -181,9 +184,9 @@ Service TrackingService {
 }
 ~~~
 
-The operation must return a DomainEvent or take a DomainEvent as parameter. That event is published to the defined topic of the event bus when the operation has been invoked.
+The operation must return a `DomainEvent` or take a `DomainEvent` as parameter. That event is published to the defined topic of the event bus when the operation has been invoked.
 
-As an alternative the `DomainEvent` instance can be created from the return value or parameters. The DomainEvent must have a matching constructor. In the below sample code the save operation of `CargoRepository` returns a Cargo. The save method is defined with a publish side effect that will create an instance of `CargoSavedEvent` holding the saved `Cargo` entity.
+As an alternative the `DomainEvent` instance can be created from the return value or parameters. The `DomainEvent` must have a matching constructor. In the below sample code the save operation of `CargoRepository` returns a Cargo. The save method is defined with a publish side effect that will create an instance of `CargoSavedEvent` holding the saved `Cargo` entity.
 
 ~~~
 Entity Cargo {
@@ -427,7 +430,7 @@ public class Routes extends RouteBuilder {
 
 ### How to use your own event bus
 
-The interface of the event bus is simply three methods, `subscribe`, `unsubscribe`, and `publish`. You can easily write your own implementation. You can get inspiration by looking at the source code of `SimpleEventBusImpl`, `SpringIntegrationEventBusImpl`, or `CamelEventBusImpl`.
+The interface of the event bus is simply three methods, `subscribe`, `unsubscribe`, and `publish`. You can easily write your own implementation. You can get inspiration by looking at the source code of `SimpleEventBusImpl`, `SpringIntegrationEventBusImpl` or `CamelEventBusImpl`.
 
 Thereafter you need to define that your bus is to be used. Define that in `src/main/resources/more.xml` like this:
 
@@ -457,6 +460,9 @@ Command-Query Responsibility Segregation (CQRS) comes to the rescue. Simplified 
 
 There are a lot of interesting material to study related to CQRS. For example:
 
+* [Clarified CQRS](http://www.udidahan.com/2009/12/09/clarified-cqrs/)
+* [Unshackle Your Domain](http://www.infoq.com/presentations/greg-young-unshackle-qcon08)
+
 Let us look at a sample of a query subsystem that is responsible for answering "Where is my cargo now?" (and similar queries).
 
 It should be defined in a separate subsystem with its own database. It might be defined like this in `model.btdesign`:
@@ -468,11 +474,11 @@ Module tracking {
     }
  
     Entity CargoInfo {
-        String cargoId key;
-        - UnLocode location;
-        DateTime locationTime;
-        - ShipId loadedOnShip;
-        boolean atSea;
+        String cargoId key
+        - UnLocode location
+        DateTime locationTime
+        - ShipId loadedOnShip
+        boolean atSea
  
         Repository CargoInfoRepository {
             subscribe to shippingChannel
@@ -484,23 +490,26 @@ Module tracking {
 }
 ~~~
 
-Note that it subscribes to the shippingChannel. When the master shipping subsystem has processed the commands it publishes DomainEvents to this topic. It can be JMS messages, maybe serialized with [Protobuf][10], but that is technical details handled in the integration product and hidden from the business domain.
+Note that it subscribes to the `shippingChannel`. When the master shipping subsystem has processed the commands it publishes DomainEvents to this topic. It can be JMS messages, maybe serialized with [Protobuf][10], but that is technical details handled in the integration product and hidden from the business domain.
 
-  1. recordLoad publishes CargoLoaded, received by tracking subsystem, which updates loadedOnShip for corresponding CargoInfo
-  2. recordDeparture publishes ShipHasDepartured, received by tracking subsystem, which updates atSea for all CargoInfo loaded on that ship
-  3. recordArrival publishes ShipHasArrived, received by tracking subsystem, which updates atSea, location, locationTime for all CargoInfo loaded on that ship
-  4. recordUnload publishes CargoUnloaded, received by tracking subsystem, which updates loadedOnShip for corresponding CargoInfo
+ 1. `recordLoad` publishes `CargoLoaded`, received by tracking subsystem, which updates `loadedOnShip` for corresponding `CargoInfo`
+ 1. `recordDeparture` publishes `ShipHasDepartured`, received by tracking subsystem, which updates `atSea` for all `CargoInfo` loaded on that ship
+ 1. `recordArrival` publishes `ShipHasArrived`, received by tracking subsystem, which updates `atSea`, `location`, `locationTime` for all `CargoInfo` loaded on that ship
+ 1. `recordUnload` publishes `CargoUnloaded`, received by tracking subsystem, which updates `loadedOnShip` for corresponding `CargoInfo`
 
-The actual public query, locateCargo in the CargoTracker Service, is a plain findByKey without any joins, i.e. super fast.
+The actual public query, `locateCargo` in the CargoTracker Service, is a plain `findByKey` without any joins, i.e. super fast.
 
-Does it strike you that a relational database might not be necessary, nor optimal, for all types of query stores? I think you should select the best tool for the job. Key-value store, document-oriented database, and RDBMS with SQL all have their strengths and weaknesses for different scenarios.
+Does it strike you that a relational database might not be necessary, nor optimal, for all types of query stores? I think you should select the best tool for the job. Key-value store, document-oriented database and RDBMS with SQL all have their strengths and weaknesses for different scenarios.
+
+Sculptor has support for [MongoDB][15].
+{: .alert .alert-success}
 
 As you can see the same publish/subscribe mechanisms as described before can be used for an architecture based on CQRS.
 
 
 ## CommandEvent
 
-Sculptor also supports CQRS by having possibility to define CommandEvent, which is something that the system is asked to perform, as opposed to DomainEvent, which is something that has happened. This means that you can make the commands explicit in the model, e.g.
+Sculptor also supports CQRS by having possibility to define `CommandEvent`, which is something that the system is asked to perform, as opposed to `DomainEvent`, which is something that has happened. This means that you can make the commands explicit in the model, e.g.
 
 ~~~
 CommandEvent RecordArrival {
@@ -513,6 +522,9 @@ CommandEvent RecordLoad {
     String cargoId
 }
 ~~~
+
+CommandEvents are always immutable and not persistent.
+{: .alert .alert-info}
 
 There is a separate command event bus instance for processing CommandEvents. When subscribing to the command bus it must be specified:
 
@@ -528,9 +540,17 @@ A domain model typically holds current state of the world. Event Sourcing makes 
 
 Good descriptions of Event Sourcing can be found here:
 
-Note that CQRS and EventSourcing are two different patterns. One can be used without the other, but they also play very well together.
+* Martin Fowler's description of [Event Sourcing](http://martinfowler.com/eaaDev/EventSourcing.html), see also [Parallel Model](http://martinfowler.com/eaaDev/ParallelModel.html)
+* [CQRS and Event Sourcing](http://codebetter.com/blogs/gregyoung/archive/2010/02/13/cqrs-and-event-sourcing.aspx)
+* [Why use Event Sourcing?](http://codebetter.com/blogs/gregyoung/archive/2010/02/20/why-use-event-sourcing.aspx)
 
-DomainEvents are by default not persistent, but it is easy to make them persistent so that they can be stored and loaded in the same way as Entities and ValueObjects, i.e. with Repository
+CQRS and Event Sourcing are two different patterns. One can be used without the other, but they also play very well together.
+{: .alert .alert-success}
+
+
+## Persistence
+
+DomainEvents and CommandEvents are by default not persistent, but it is easy to make them persistent so that they can be stored and loaded in the same way as Entities and ValueObjects, i.e. with Repository:
 
 ~~~
 abstract DomainEvent ShipEvent {
@@ -551,9 +571,18 @@ DomainEvent ShipHasArrived extends @ShipEvent {
 }
 ~~~
 
-Using the ordinary building blocks of Sculptor it is rather straightforward to implement EventSourcing. It is described in this [blog post][11] how to do it. You might need to add [snapshot mechanism][12] also.
+Persistent DomainEvents and CommandEvents can be marked with [scaffold][16] to automatically generate some predefined CRUD operations in the `Repository` and corresponding `Service`
+{: .alert .alert-success}
 
-MongoDB is a good data store for events, as explained in the blog. The [MongoDB Tutorial][13] explains how to setup a project with MongoDB persistence. If you don't use MongoDB then you can use any other supported database (JPA), since it is using the ordinary persistence mechanisms of Sculptor. Note that you can have one subsystem responsible for the EventSourcing only and use MongoDB for that, and have another subsystem storing current state of the domain model using RDBMS, and another for queries.
+
+## Summary
+
+Using the ordinary building blocks of Sculptor it is rather straightforward to implement Event Sourcing. It is described in this [blog post][11] how to do it. You might need to add [snapshot mechanism][12] also.
+
+[MongoDB][15] is a good data store for events, as explained in the blog. The [MongoDB Tutorial][13] explains how to setup a project with MongoDB persistence. If you don't use MongoDB then you can use any other supported database (JPA), since it is using the ordinary persistence mechanisms of Sculptor.
+
+You can have one subsystem responsible for the Event Sourcing only and use MongoDB for that, and have another subsystem storing current state of the domain model using RDBMS, and another for queries.
+{: .alert .alert-success}
 
 
 ## Source
@@ -575,5 +604,5 @@ The complete source code for this tutorial is available in GitHub [https://githu
    [12]: /2010/10/29/event-sourcing-with-sculptor---snapshots
    [13]: mongodb-tutorial
    [14]: http://www.domainlanguage.com/newsletter/2010-03/#domainEvents
-
-  
+   [15]: http://mongodb.org/
+   [16]: advanced-tutorial#scaffold
