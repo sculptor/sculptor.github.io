@@ -259,7 +259,8 @@ aspects of a domain, and which does not have identity, is named
 Value Object."
 <small>Quote from [DDD Quickly](http://www.infoq.com/news/2006/12/domain-driven-design)</small>
 
-Note that Value Object is not the same as [Data Transfer Object](http://www.martinfowler.com/eaaCatalog/dataTransferObject.html). Core J2EE patterns caused a lot of confusion when they used the term Value Object. They have renamed it to [Transfer Object](http://www.oracle.com/technetwork/java/transferobject-139757.html).
+Value Object is not the same as [Data Transfer Object](http://www.martinfowler.com/eaaCatalog/dataTransferObject.html). Core J2EE patterns caused a lot of confusion when they used the term Value Object. They have renamed it to [Transfer Object](http://www.oracle.com/technetwork/java/transferobject-139757.html).
+{: .alert}
 
 
 #### BasicType
@@ -1526,7 +1527,7 @@ public Library findLibraryByName(String name) {
 
 ### Scaffold
 
-It is possible to mark a Domain Object with `scaffold` to automatically generate some predefined CRUD operations in the Repository and corresponding Service.
+It is possible to mark a Domain Object with `scaffold` to automatically generate some predefined CRUD operations in the `Repository` and corresponding `Service`.
 
 ~~~
 Entity Person {
@@ -1559,15 +1560,16 @@ Entity Person {
 }
 ~~~
 
-The Repository and Service is also added automatically if they are not defined.
+The `Repository` and `Service` is also added automatically if they are not defined.
+{: .alert .alert-success}
 
-Which scaffolding operations to use can be defined in `sculptor-generator.properties`, see [Developer's Guide][1].
+Which scaffolding operations to use can be defined in `sculptor-generator.properties`, see [Developer's Guide](developers-guide#scaffold).
 
 
 ### Pagination
 
-Paging of large result sets is supported for findAll, findByQuery, findByCriteria and custom access objects.
-Usage of paging is defined by adding a PagingParameter as parameter to a repository operation.
+Paging of large result sets is supported for `findAll`, `findByQuery`, `findByCriteria` and custom access objects.
+Usage of paging is defined by adding a `PagingParameter` as parameter to a repository operation.
 
 ~~~
 findAll; // without paging
