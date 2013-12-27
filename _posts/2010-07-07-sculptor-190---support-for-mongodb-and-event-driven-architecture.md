@@ -3,7 +3,7 @@ layout: post
 title: "Sculptor 1.9.0 - Support for MongoDB and Event Driven Architecture"
 description: ""
 category: 
-tags: [Sculptor, Release]
+tags: [Sculptor, Release, MongoDB, EDA]
 author: Sculptor Team
 navbar_name: blog
 ---
@@ -11,9 +11,15 @@ navbar_name: blog
 
 The Sculptor development team has a track record delivering around 3 releases per year. We have delivered 10 releases in total. That means that the core pieces are rock solid. I have personally used it successfully together with 15 other developers on daily basis for about a year now. It simply works very well.
 
-We care about bugfixing and making small improvements. At the same time we are excited about learning new technology and using emergent design. This release contains two new features in the area of scalability. Persistence backed with MongoDB and support for Event-Driven Architecture.
+We care about bugfixing and making small improvements. At the same time we are excited about learning new technology and using emergent design. This release contains two new features in the area of scalability:
 
-**MongoDB** bridges the gap between key-value stores (which are fast and highly scalable) and traditional RDBMS systems (which provide rich queries and deep functionality). I think this makes MongoDB very interesting for applications that need high-performance and/or scalability, but also prefer using a rich persistent domain model with complex associations. The schema less structure is attractive from a developer productivity perspective, which is one of the two goals with Sculptor (quality is the other).
+* Persistence backed with MongoDB
+* Support for Event-Driven Architecture
+
+
+### MongoDB
+
+MongoDB bridges the gap between key-value stores (which are fast and highly scalable) and traditional RDBMS systems (which provide rich queries and deep functionality). I think this makes MongoDB very interesting for applications that need high-performance and/or scalability, but also prefer using a rich persistent domain model with complex associations. The schema less structure is attractive from a developer productivity perspective, which is one of the two goals with Sculptor (quality is the other).
 
 Sculptor generates data mapper classes that converts domain objects to/from MongoDB data structures, DBObjects. This makes it easy to use a domain model à la DDD with automatic mapping to MongoDB data structures.
 
@@ -26,7 +32,9 @@ Rich support for associations. Aggregates are stored as a embedded documents. Ot
 Read more about how to use MongoDB with Sculptor [here][1].
 
 
-**Event-Driven Architecture (EDA)** is a good complement to Domain-Driven Design. We think EDA is an important ingredient for building scalable systems. It is also an enabler for designing loosely coupled modules and bounded contexts.
+### Event-Driven Architecture (EDA)
+
+Event-Driven Architecture (EDA) is a good complement to Domain-Driven Design. We think EDA is an important ingredient for building scalable systems. It is also an enabler for designing loosely coupled modules and bounded contexts.
 
 For this Sculptor makes it possible to define Domain Events in the model in similar way as Entities and Value Objects. Sculptor also provide a mechanism to publish and subscribe through a simple event bus. This is done either in a declarative way in the model, or programatically with a simple API.
 
