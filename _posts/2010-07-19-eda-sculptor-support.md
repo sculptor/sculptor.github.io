@@ -29,17 +29,17 @@ To support the above, there are three central parts in our implementation:
 
 **"The bus"**
 
-The event bus is an extremely simple API, with three different implementations (in 1.9.0), "Simple", [Spring Integration][6] and [Apache Camel][7].
+The event bus is an extremely simple API, with three different implementations ([in 1.9.0][8]), "Simple", [Spring Integration][6] and [Apache Camel][7].
 
 The idea is that the central parts, i.e. pub/sub, should be easy to use. The only thing you have to work with is an event bus where you publish and subscribes to and from events. And if you need some non functional behavior (asynchronism, over the wire, etc) for your events, you plug in an event bus that can handle this requirements.
-And as stated above, the easiest way to accomplish that with the 1.9.0 release is to use Spring Integration or Apache Camel. But you can also choose to implement your own event bus.
+And as stated above, the easiest way to accomplish that with the [1.9.0 release][8] is to use Spring Integration or Apache Camel. But you can also choose to implement your own event bus.
 
 You can publish and subscribe to and from the bus either declarative through the DSL, or programatically through the event bus API.
 
 
 **DomainEvent vs CommandEvent**
 
-`CommandEvent` is an instruction for something to happen. The system processes a CommandEvent and takes appropriate actions.
+`CommandEvent` is an instruction for something to happen. The system processes a `CommandEvent` and takes appropriate actions.
 
 `DomainEvent` states fact - that something has happen. This fact is published to the rest of the world and the publisher just lets it go with no further interest in what happens to the event, i.e. who receives it and what they do.
 
@@ -61,7 +61,7 @@ DomainEvent ShipHasDepartured {
 }
 ~~~
 
-As you can see, you define a domain event in the same way as for entities or value objects.
+As you can see, you define a `DomainEvent` in the same way as for entities or value objects.
 
 And to declare pub/sub:
 

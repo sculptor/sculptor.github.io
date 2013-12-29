@@ -9,9 +9,9 @@ navbar_name: blog
 ---
 {% include JB/setup %}
 
-We have come to our seventh entry about [Event Driven Architecture][1]. We are in the topic of how Sculptor supports EDA. In previous posts we have covered how to publish and subscribe, both through the dsl in the model, and through plain java code.
+We have come to our seventh entry about [Event Driven Architecture][1]. We are in the topic of [how Sculptor supports EDA][5]. In previous posts we have covered how to publish and subscribe, both through the dsl in the model, and through plain java code.
 
-Today we will talk a bit more on the thin layer we call 'the event bus'.
+Today we will talk a bit more on the [thin layer we call 'the event bus'][5].
 
 As stated before, there are a lot of different approaches to EDA. You can use/implement it locally or apply it too the entire enterprise. But also, in its simplest form its about the [observer pattern][4], regardless if we talk about big or small implementations. This leads us to the main motivations of our event bus abstraction.
 
@@ -32,3 +32,4 @@ And that brings us to the next topic of this series. Some examples of how to bri
    [2]: http://www.springsource.org/spring-integration
    [3]: http://camel.apache.org/
    [4]: http://en.wikipedia.org/wiki/Observer_pattern
+   [5]: http://sculptorgenerator.org/2010/07/19/eda-sculptor-support/

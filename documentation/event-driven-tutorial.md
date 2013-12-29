@@ -19,15 +19,15 @@ Design. We think EDA is an important ingredient for building scalable systems.
 It is also an enabler for designing loosely coupled modules and bounded
 contexts (business components).
 
-In the simplest form you might need Observer pattern to decouple modules, swap
+In the simplest form you might need [Observer pattern][17] to decouple modules, swap
 direction of dependencies. When something happens in the core domain a
 notification should occur in supporting module (e.g. statistics). It is desired
 that core is independent of support modules. For this Sculptor provides
-DomainEvent and a mechanism to publish and subscribe through a simple event
-bus.
+`DomainEvent` and a mechanism to publish and subscribe through a simple [event
+bus][18].
 
 You will often benefit from communicating between bounded contexts (business
-components) in a loosely coupled way. E.g. send and receive messages with JMS.
+components) in a loosely coupled way, e.g. send and receive messages with JMS.
 For this Sculptor provides implementations of the event bus that integrates
 with [Apache Camel][2] and [Spring Integration][3]. Same API as the simple
 event bus. It is also possible to mix Sculptor event bus with usage of ordinary
@@ -186,7 +186,7 @@ Service TrackingService {
 
 The operation must return a `DomainEvent` or take a `DomainEvent` as parameter. That event is published to the defined topic of the event bus when the operation has been invoked.
 
-As an alternative the `DomainEvent` instance can be created from the return value or parameters. The `DomainEvent` must have a matching constructor. In the below sample code the save operation of `CargoRepository` returns a Cargo. The save method is defined with a publish side effect that will create an instance of `CargoSavedEvent` holding the saved `Cargo` entity.
+As an alternative the `DomainEvent` instance can be created from the return value or parameters. The `DomainEvent` must have a matching constructor. In the below sample code the `save` operation of `CargoRepository` returns a `Cargo`. The `save` method is defined with a `publish` side effect that will create an instance of `CargoSavedEvent` holding the saved `Cargo` entity.
 
 ~~~
 Entity Cargo {
@@ -225,7 +225,7 @@ public void recordArrival(DateTime occurred, Ship ship, Port port) {
 
 ## Subscribe
 
-Subscribers can be defined in `model.btdesign`. Any ordinary Service or Repository can become a subscriber of a topic like this:
+Subscribers can be defined in `model.btdesign`. Any ordinary `Service` or `Repository` can become a subscriber of a topic like this:
 
 ~~~
 Service Statistics {
@@ -235,7 +235,7 @@ Service Statistics {
 }
 ~~~
 
-The result is that the Statistics service will implement the `EventSubscriber` interface and be marked with `@Subscribe` annotation. That means that the Statistics service will automatically be added as subscriber to `chippingChannel` of the event bus. It will be notified, `receive` method called, when events are published to that topic.
+The result is that the Statistics service will implement the `EventSubscriber` interface and be marked with `@Subscribe` annotation. That means that the Statistics service will automatically be added as subscriber to `shippingChannel` of the event bus. It will be notified () `receive` method called) when events are published to that topic.
 
 You need to manually implement the `receive` method of the `EventSubscriber` interface.
 
@@ -270,7 +270,7 @@ public void consume(Object any) {
 }
 ~~~
 
-Not only Service and Repository can be subscribers. It is also possible to define a dedicated Consumer, which can only receive events. You can inject Services and Repositories to the Consumer, as usual.
+Not only `Service` and `Repository` can be subscribers. It is also possible to define a dedicated `Consumer`, which can only receive events. You can inject Services and Repositories to the `Consumer`, as usual.
 
 ~~~
 Consumer EventCounter {
@@ -280,7 +280,7 @@ Consumer EventCounter {
 }
 ~~~
 
-It is of course also possible to subscribe with hand written code:
+It is of course also possible to subscribe with-hand written code:
 
 ~~~ java
 @Autowired
@@ -383,18 +383,18 @@ Add the following dependencies in `pom.xml`
 <dependency>
     <groupId>org.apache.activemq</groupId>
     <artifactId>activemq-camel</artifactId>
-    <version>5.3.2</version>
+    <version>5.9.0</version>
 </dependency>
 <!-- xbean is required for ActiveMQ broker configuration in the spring xml file -->
 <dependency>
     <groupId>org.apache.xbean</groupId>
     <artifactId>xbean-spring</artifactId>
-    <version>3.7</version>
+    <version>3.16</version>
 </dependency>
 <dependency>
     <groupId>javax.xml.bind</groupId>
     <artifactId>jaxb-api</artifactId>
-    <version>2.1</version>
+    <version>2.2.11</version>
 </dependency>
 ~~~
 
@@ -410,7 +410,7 @@ Then you will have a new `camel.xml` file in `src/main/resources`. This file is 
 
 There is also a `camel-test.xml` in `src/test/resources` to make it possible to use different configuration when running JUnit tests.
 
-Camel makes it possible to define endpoints and routes in either xml or Java DSL. It is a matter of taste.
+Camel makes it possible to define endpoints and routes in either XML or Java DSL. It is a matter of taste.
 Here is a little sample of how to add a few endpoints and routes with the Java DSL:
 
 ~~~ java
@@ -439,7 +439,8 @@ Thereafter you need to define that your bus is to be used. Define that in `src/m
 <alias name="myEventBusImpl" alias="eventBus"/>
 ~~~
 
-That will override the default event bus named "eventBus".
+That will override the default event bus named "eventBus" (also defined as a Spring bean with the same alias name in `src/generated/resources/pub-sub.xml`).
+{: .alert}
 
 
 ## Command-Query Responsibility Segregation (CQRS)
@@ -490,21 +491,21 @@ Module tracking {
 }
 ~~~
 
-Note that it subscribes to the `shippingChannel`. When the master shipping subsystem has processed the commands it publishes DomainEvents to this topic. It can be JMS messages, maybe serialized with [Protobuf][10], but that is technical details handled in the integration product and hidden from the business domain.
+Note that the `CargoInfoRepository` subscribes to the `shippingChannel`. When the master shipping subsystem has processed the commands it publishes DomainEvents to this topic. It can be JMS messages (maybe serialized with [Protobuf][10]), but that is technical details handled in the integration product and hidden from the business domain.
 
  1. `recordLoad` publishes `CargoLoaded`, received by tracking subsystem, which updates `loadedOnShip` for corresponding `CargoInfo`
  1. `recordDeparture` publishes `ShipHasDepartured`, received by tracking subsystem, which updates `atSea` for all `CargoInfo` loaded on that ship
  1. `recordArrival` publishes `ShipHasArrived`, received by tracking subsystem, which updates `atSea`, `location`, `locationTime` for all `CargoInfo` loaded on that ship
  1. `recordUnload` publishes `CargoUnloaded`, received by tracking subsystem, which updates `loadedOnShip` for corresponding `CargoInfo`
 
-The actual public query, `locateCargo` in the CargoTracker Service, is a plain `findByKey` without any joins, i.e. super fast.
+The actual public query, `locateCargo` in the `CargoTracker` service, is a plain `findByKey` without any joins, i.e. super fast.
 
 Does it strike you that a relational database might not be necessary, nor optimal, for all types of query stores? I think you should select the best tool for the job. Key-value store, document-oriented database and RDBMS with SQL all have their strengths and weaknesses for different scenarios.
 
-Sculptor has support for [MongoDB][15].
+Sculptor has support for [mongoDB][15].
 {: .alert .alert-success}
 
-As you can see the same publish/subscribe mechanisms as described before can be used for an architecture based on CQRS.
+As you can see the same publish/subscribe mechanisms as described before can be used for an architecture based on CQRS. A sample application (betting system) using Sculptor for implementing CQRS is described in [a blog post][19].
 
 
 ## CommandEvent
@@ -533,6 +534,9 @@ Service ShippingCommandHandler {
     subscribe to handleShippingCommand eventBus=commandBus
 ~~~
 
+Like the event bus is the command bus defined as a Spring bean with the alias name `commandBus` in `src/generated/resources/pub-sub.xml`).
+{: .alert}
+
 
 ## Event Sourcing
 
@@ -545,12 +549,12 @@ Good descriptions of Event Sourcing can be found here:
 * [Why use Event Sourcing?](http://codebetter.com/blogs/gregyoung/archive/2010/02/20/why-use-event-sourcing.aspx)
 
 CQRS and Event Sourcing are two different patterns. One can be used without the other, but they also play very well together.
-{: .alert .alert-success}
+{: .alert .alert-info}
 
 
 ## Persistence
 
-DomainEvents and CommandEvents are by default not persistent, but it is easy to make them persistent so that they can be stored and loaded in the same way as Entities and ValueObjects, i.e. with Repository:
+DomainEvents and CommandEvents are by default not persistent, but it is easy to make them persistent so that they can be stored and loaded in the same way as Entities and ValueObjects, i.e. with `Repository`:
 
 ~~~
 abstract DomainEvent ShipEvent {
@@ -606,3 +610,7 @@ The complete source code for this tutorial is available in GitHub [https://githu
    [14]: http://www.domainlanguage.com/newsletter/2010-03/#domainEvents
    [15]: http://mongodb.org/
    [16]: advanced-tutorial#scaffold
+   [17]: http://en.wikipedia.org/wiki/Observer_pattern
+   [18]: /2010/08/01/eda-why-the-event-bus-in-sculptor/
+   [19]: /2010/09/09/eda-cqrs-betting-sample/
+
