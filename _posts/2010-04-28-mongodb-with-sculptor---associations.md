@@ -25,7 +25,7 @@ Let us repeat what DDD says about aggregates:
 
 Sculptor will validate the reference constraints described in the quote above. Repositories are only available for aggregate roots. Aggregates are defined with belongsTo or not aggregateRoot in the owned DomainObjects.
 
-A typical aggregate in the blog sample is that Comment belongs to BlogPost
+A typical aggregate in the [blog sample][4] is that `Comment` belongs to `BlogPost`
 
 ~~~
 Entity BlogPost {
@@ -73,7 +73,7 @@ ValueObject Leg {
 }
 ~~~
 
-In above sample the TrackingId, Itinary and Leg are all stored toghether with the Cargo. [BasicTypes][2] are also stored as embedded documents.
+In above sample the `TrackingId`, `Itinary` and `Leg` are all stored toghether with the `Cargo`. [BasicTypes][2] are also stored as embedded documents.
 
 
 ### Reference by Id
@@ -128,3 +128,4 @@ Entity Movie extends @Media {
    [1]: /2010/04/27/mongodb-with-sculptor---introduction
    [2]: /2009/08/20/introducing-type
    [3]: http://www.infoq.com/minibooks/domain-driven-design-quickly
+   [4]: https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/blog-mongodb
