@@ -103,7 +103,7 @@ Quite long post, but we got pretty much done. Next time we will look how to do t
 
    [1]: /2010/08/01/eda-why-the-event-bus-in-sculptor
    [2]: http://docs.spring.io/spring-integration/reference/html/jms.html#jms-outbound-channel-adapter
-   [3]: http://static.springsource.org/spring/docs/2.5.x/reference/jms.html
+   [3]: http://static.springsource.org/spring/docs/3.0.x/reference/jms.html
    [4]: http://activemq.apache.org/
    [5]: http://www.springsource.org/spring-integration
    [6]: http://camel.apache.org/

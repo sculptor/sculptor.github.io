@@ -196,9 +196,9 @@ public void apply(Object other) {
 
 In this example we have used a naive approach when loading the `InventoryItem` by replaying all historical events. For Entities with a long life cycle it can be too many events. Then we can use a snapshot technique, which I will describe in a [separate blog post][3].
 
-The complete source code for this example can be found here: [https://github.com/patriknw/sculptor-simplecqrs/tree/event_sourcing_without_snapshots][4]
+The complete source code for this example can be found here: [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-simplecqrs][4]
 
    [1]: http://github.com/gregoryyoung/m-r
    [2]: http://cqrs.wordpress.com/documents/
    [3]: /2010/10/29/event-sourcing-with-sculptor---snapshots
-   [4]: https://github.com/patriknw/sculptor-simplecqrs/tree/event_sourcing_without_snapshots
+   [4]: https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-simplecqrs

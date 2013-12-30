@@ -101,8 +101,14 @@ In the query side we use domain objects that are optimized for the views and rep
 
 Since we are using publish/subscribe via a message bus, it might take a while until the query side is updated with the latest data, but that is not a problem. Most systems can be eventually consistent on the query side.
 
-The full source code for the example is available here: [http://github.com/patriknw/sculptor-betting][4]
+## Source Code
+
+The full source code for the example is available here: [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-betting][4]
+
 The slides of the presentation are available here: [http://www.slideshare.net/patriknw/sculptor][5]
+
+
+## Summary
 
 In the example we have chosen MongoDB as persistence store, Camel together with ActiveMQ as event bus. It is a matter of simple configuration to use something else, such as Oracle with JPA/Hibernate and Spring Integration for the event bus.
 
@@ -111,5 +117,5 @@ I was pretty impressed myself when I counted the number of lines of code that wa
    [1]: http://jwsdsl09sep.eventbrite.com/
    [2]: http://cqrs.wordpress.com/
    [3]: /images/2010-09-09-eda-cqrs-betting-sample/betting_demo.png
-   [4]: http://github.com/patriknw/sculptor-betting
+   [4]: https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-betting
    [5]: http://www.slideshare.net/patriknw/sculptor

@@ -93,25 +93,21 @@ To do the same as we did with spring-integration, i.e. put a domain event on a J
 And that's it. Now we are publishing our domain event to an ActiveMQ topic. Yes, a bit strange that it works, but it gets clearer if we look in `camel.xml` and see whats was already there:
 
 ~~~ xml
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:camel="http://camel.apache.org/schema/spring" xmlns:broker="http://activemq.apache.org/schema/core" xsi:schemaLocation="         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd         http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+<bean id="camelEventBusImpl" class="org.sculptor.framework.event.CamelEventBusImpl"/>
+<alias name="camelEventBusImpl" alias="eventBus"/>
+ 
+<camel:camelContext id="camel">
+    <camel:package>org.sculptor.shipping</camel:package>
+    <camel:template id="producerTemplate"/>
+</camel:camelContext>
 
-    <bean id="camelEventBusImpl" class="org.sculptor.framework.event.CamelEventBusImpl"/>
-    <alias name="camelEventBusImpl" alias="eventBus"/>
-     
-    <camel:camelContext id="camel">
-        <camel:package>org.sculptor.shipping</camel:package>
-        <camel:template id="producerTemplate"/>
-    </camel:camelContext>
-
-    <!-- Camel ActiveMQ to use the ActiveMQ broker -->
-    <bean id="jms" class="org.apache.activemq.camel.component.ActiveMQComponent">
-        <property name="brokerURL" value="tcp://localhost:61616"/>
-    </bean>
-
-</beans>
+<!-- Camel ActiveMQ to use the ActiveMQ broker -->
+<bean id="jms" class="org.apache.activemq.camel.component.ActiveMQComponent">
+    <property name="brokerURL" value="tcp://localhost:61616"/>
+</bean>
 ~~~
 
-We have a bean that wires the jms api's to the actual ActiveMQ instance together. So you have to have an ActiveMQ instance up and running listening on port 61616.
+We have a bean that wires the JMS api to the actual ActiveMQ instance together. So you have to have an ActiveMQ instance up and running listening on port 61616.
 
 All for today, next time...we'll see what the subject is...
 

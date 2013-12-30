@@ -215,7 +215,7 @@ We are also prototyping how to add other event mechanisms, such as publish/subsc
 
    [1]: http://martinfowler.com/eaaDev/DomainEvent.html
    [2]: http://martinfowler.com/eaaDev/EventSourcing.html
-   [3]: https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping
+   [3]: https://github.com/sculptor/sculptor/tree/master/sculptor-examples/mongodb-samples/sculptor-shipping
    [4]: /images/2010-05-31-prototyping-event-sourcing/EventSourcingDesign.png
    [5]: http://martinfowler.com/eaaDev/ParallelModel.html
    [6]: http://www.springsource.org/spring-integration

@@ -591,7 +591,12 @@ You can have one subsystem responsible for the Event Sourcing only and use Mongo
 
 ## Source
 
-The complete source code for this tutorial is available in GitHub [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/mongodb-samples/sculptor-shipping](https://github.com/sculptor/sculptor/tree/master/sculptor-examples/mongodb-samples/sculptor-shipping).
+The complete source code for this tutorial is available in GitHub:
+[https://github.com/sculptor/sculptor/tree/master/sculptor-examples/mongodb-samples/sculptor-shipping](https://github.com/sculptor/sculptor/tree/master/sculptor-examples/mongodb-samples/sculptor-shipping)
+
+The source code of the examples described in the [EDA-related blog posts][20] are available in GitHub as well:
+[https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/](https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/)
+
 
 
    [1]: http://en.wikipedia.org/wiki/Event-driven_architecture
@@ -613,4 +618,5 @@ The complete source code for this tutorial is available in GitHub [https://githu
    [17]: http://en.wikipedia.org/wiki/Observer_pattern
    [18]: /2010/08/01/eda-why-the-event-bus-in-sculptor/
    [19]: /2010/09/09/eda-cqrs-betting-sample/
+   [20]: /tags#EDA-ref
 

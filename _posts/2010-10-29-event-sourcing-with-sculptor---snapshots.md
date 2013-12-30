@@ -100,8 +100,8 @@ By using snapshots we can dramatically improve performance for loading Entities 
 
 Also, note that snapshots and event are immutable and therefore we have great opportunities for using caching for improving performance.
 
-The complete source code for this example is available here: [https://github.com/patriknw/sculptor-simplecqrs/][3]
+The complete source code for this example is available here: [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-simplecqrs-snapshots][3]
 
    [1]: /2010/10/28/event-sourcing-with-sculptor
    [2]: http://github.com/gregoryyoung/m-r
-   [3]: https://github.com/patriknw/sculptor-simplecqrs/
+   [3]: https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-simplecqrs-snapshots
