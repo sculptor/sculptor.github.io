@@ -572,7 +572,7 @@ Entity Person {
 
 ### Key
 
-`equals` and `hashCode` requires some thought when used with JPA/Hibernate, see the [discussion](http://www.hibernate.org/109.html) at the Hibernate site. Sculptor takes care of the details. You only have to mark the attributes that is the natural key of the Domain Object, or if there is no natural key Sculptor will generate a UUID automatically.
+`equals` and `hashCode` requires some thought when used with JPA/Hibernate, see the [discussion](http://www.hibernate.org/109.html) at the Hibernate site. Sculptor takes care of the details. You only have to mark the attributes that is the natural key of the Domain Object.
 
 If the key is a composite key, consisting of several attributes, a separate internal key class will be generated.
 
@@ -591,8 +591,13 @@ BasicType Ssn {
 }
 ~~~
 
-All persistent Entities and Value Objects will also have a surrogate `id` attribute, which is the primary key in the database.
+If there is no natural key Sculptor will generate a UUID (via `java.utill.UUID.randomUUID()`) automatically (attribute name `uuid`) and use this instead.
 {: .alert .alert-info}
+
+
+### Id
+
+All Entities and persistent Value Objects will also have a surrogate `id` attribute, which is the primary key in the database.
 
 
 ### Changeable
@@ -952,7 +957,7 @@ enum Gender {
 }
 ~~~
 
-It is possible to define an implicit value without defining an attribute. This attribute is automatically named `'value'` and can be of String or int type. This attribute will be stored in database as identifier for the enum.
+It is possible to define an implicit value without defining an attribute. This attribute is automatically named `value` and can be of String or int type. This attribute will be stored in database as identifier for the enum.
 
 ~~~
 enum Gender {
@@ -1015,7 +1020,7 @@ Entity LargeProject extends @Project {
 }
 ~~~
 
-You can also use SINGLE_TABLE strategy, i.e. a single table per class hierarchy.
+You can also use `SINGLE_TABLE` strategy, i.e. a single table per class hierarchy.
 
 ~~~
 abstract Entity Project {
@@ -1028,7 +1033,7 @@ Entity LargeProject extends @Project {
 }
 ~~~
 
-When using SINGLE_TABLE you can also define several things to customize the mapping, similar to JPA.
+When using `SINGLE_TABLE` you can also define several things to customize the mapping, similar to JPA.
 
 ~~~
 abstract Entity Project {
