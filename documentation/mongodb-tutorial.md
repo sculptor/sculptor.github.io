@@ -176,7 +176,7 @@ cartridges=builder,mongodb
 <div markdown="1">
 The property `cartridges` is used to enable a (comma-separated) list of extensions used by Sculptors internal template override mechanismus.
 
-* The extension 'builder' is the default set of Sculptor templates.
+* The extension 'builder' generates a [builder class](advanced-tutorial#domain-object-builders) for each domain object.
 * The extension `mongoDB` modifies the default templates in order to add the mongoDB support.
 </div>
 {: .alert}

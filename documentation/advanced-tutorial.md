@@ -592,6 +592,7 @@ BasicType Ssn {
 ~~~
 
 All persistent Entities and Value Objects will also have a surrogate `id` attribute, which is the primary key in the database.
+{: .alert .alert-info}
 
 
 ### Changeable
@@ -660,21 +661,21 @@ new Address("Drottninggatan")
 
 ### Domain Object Builders
 
-Sculptor generates a builder class for each domain object. The builder class provides a fluent interface to build domain objects in a manner that can be easier to work with and read. The following example additionally uses static imports to make the builder code a bit more succinct.
+Sculptor **optionally** generates a builder class for each domain object. The builder class provides a fluent interface to build domain objects in a manner that can be easier to work with and read. The following example additionally uses static imports to make the builder code a bit more succinct.
 
 ~~~ java
 import static org.sculptor.examples.library.media.domain.BookBuilder.book;
 import static org.sculptor.examples.library.media.domain.MediaCharacterBuilder.mediaCharacter;
-...
-    Book book = book()
-        .createdBy("me")
-        .createdDate(now)
-        .title("Ender's Game")
-        .isbn("Some-ISBN")
-        .addMediaCharacter(mediaCharacter()
-            .name("Ender")
-            .build())
-        .build();
+
+Book book = book()
+    .createdBy("me")
+    .createdDate(now)
+    .title("Ender's Game")
+    .isbn("Some-ISBN")
+    .addMediaCharacter(mediaCharacter()
+        .name("Ender")
+        .build())
+    .build();
 ~~~
 
 The builder can also be useful to get around restrictions on access to no-argument constructors and changing immutable attributes.
@@ -694,10 +695,10 @@ if( isSpecialCase(bookBuilder) ) {
 Book book = bookBuilder.build();
 ~~~
 
-Generation of domain object builder classes is an optional feature that is enabled by default, but can be disabled via the `generate.domainObject.builder` property.
+Generation of domain object builder classes is an optional feature (disabled by default) which is implmented as a template extension cartridge named `builder`. To activate this cartridge add it to the list of cartridges in `sculptor-generator.properties`, e.g.
 
 ~~~ java
-generate.domainObject.builder=false
+cartridges=mongodb,builder
 ~~~
 
 By default the builder classes are generated in the domain package. To generate the builder classes in a different package use the `package.builder` property.
@@ -788,7 +789,9 @@ public void validatePlayLength() {
 
 ### Auditable
 
-Entities are by default auditable, which means that when the objects are saved an interceptor will automatically update properties 'lastUpdated', 'lastUpdatedBy', 'createdDate' and 'createdBy'. These attributes are automatically added for auditable Domain Objects. You can turn off auditing for an Entity with `!auditable`.
+Entities are by default auditable, which means that when the objects are saved an interceptor will automatically update properties `lastUpdated`, `lastUpdatedBy`, `createdDate` and `createdBy`. These attributes are automatically added for auditable Domain Objects.
+
+You can turn off auditing for an Entity with `!auditable`.
 
 ~~~
 Entity Book extends Media {
@@ -801,6 +804,7 @@ Entity Book extends Media {
 ### Optimistic Locking
 
 By default a `version` attribute is automatically added to each Entity and mutable persistent ValueObject. This is used for [optimistic locking](http://www.hibernate.org/hib_docs/reference/en/html/transactions.html#transactions-optimistic) checks by Hibernate.
+
 You can skip this feature by specifying `!optimisticLocking` for the Domain Object.
 
 ~~~
@@ -815,8 +819,6 @@ Entity Book extends Media {
 ### Aggregate
 
 By default all Entities are considered to be aggregate roots, but you can use `!aggregateRoot` to specify that the Entity is part of an aggregate and not the root of it. The default values for `cascade` and `fetch` features take the aggregate into account.
-
-Read more about the example below in the Domain-Driven Design book, page 134.
 
 ~~~
 Entity PurchaseOrder {
@@ -835,6 +837,9 @@ Entity Part {
     - @Money price
 }
 ~~~
+
+Read more about the example above in the Domain-Driven Design book, page 134.
+{: .alert}
 
 
 ### Basic Type
@@ -1356,20 +1361,20 @@ It is possible to use another design approach and implement everything directly 
 
 Sculptor runtime framework provides generic access objects for the following operations:
 
-  * findById
-  * findAll
-  * findByExample
-  * findByQuery
-  * findByCondition
-  * findByCriteria (use findByCondition instead)
-  * findByKey
-  * findByKeys
-  * save
-  * delete
-  * countAll
-  * populateAssociations
+  * `findById`
+  * `findAll`
+  * `findByExample`
+  * `findByQuery`
+  * `findByCondition`
+  * `findByCriteria` (use `findByCondition` instead)
+  * `findByKey`
+  * `findByKeys`
+  * `save`
+  * `delete`
+  * `countAll`
+  * `populateAssociations`
 
-**JPA2:** All generic access objects, including findByExample, findByCondition and findByCriteria, are implemented for all supported JPA2 providers.
+**JPA2:** All generic access objects, including `findByExample`, `findByCondition` and `findByCriteria`, are implemented for all supported JPA2 providers.
 {: .alert }
 
 To use a generic Access Object you simply have to specify the name of it in the Repository in the DSL.
@@ -1382,7 +1387,7 @@ Repository LibraryRepository {
 }
 ~~~
 
-Note that you can define operations as protected to not expose them in the Repository interface and only use them from other methods with a more domain centric interface.
+Note that you can define operations as protected to not expose them in the Repository interface and only use them from other methods with a more domain centric interface, e.g.
 
 ~~~
 Repository PersonRepository {
@@ -1429,6 +1434,7 @@ Repository MediaRepository {
 There is an [alternative notation](#alternative-notation) for delegation. Instead of `=>` you can use `delegates to`.
 
 Note that you define return type and parameters in the same way as for Service operations. When referring to a Domain Object (Entity or ValueObject) you use a `@` in front of the declaration.
+{: .alert}
 
 By default the Access Object has a similar name as the repository operation, but you can define another name.
 
@@ -1493,9 +1499,9 @@ It is possible to specify a dependency injection of a another Repository, which 
 
 ~~~
 Repository MediaRepository {
-  > @MediaCharacterRepository
-  List<@Media> findMediaByCharacter(Long libraryId, String characterName);
-  ...
+    > @MediaCharacterRepository
+    List<@Media> findMediaByCharacter(Long libraryId, String characterName);
+    ...
 }
 ~~~
 
