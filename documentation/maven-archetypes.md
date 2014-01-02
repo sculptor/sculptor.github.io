@@ -65,9 +65,10 @@ The following properties are supported by the archetype:
 |:----------------------------|:-----------|:-----------------
 | `-Drest=[true|false]`       | `false`    | If set to `true` then the project is a WAR module which provides REST resources for its business services. Refer to the [REST Tutorial][6] for details.
 | `-Dstandalone=[true|false]` | `false`    | If set to `true` then the project is **not** an part of a Maven multi-module project. So the generated POM has no reference to a parent POM. Therefore this projects POM contains all the settings from the parent POM as well.
-| `-Dejb=[true|false]`        | `false`    | If set to `true` then the project is uses EJB3 instead of Spring. Therefore the project nature `pure-ejb3` is set in the generator configuration.
+| `-Dejb=[true|false]`        | `false`    | If set to `true` then the project uses EJB3 instead of Spring. Therefore the project nature `pure-ejb3` is set in the generator configuration.
 | `-Dear=[true|false]`        | `false`    | If set to `true` then the project is part of an EAR. Therefore the deployment mode `ear` is set in the generator configuration.
 | `-Djboss=[true|false]`      | `false`    | If set to `true` then the project is a JAR or WAR module which is deployed to the JBoss application server.
+| `-Dmongodb=[true|false]`    | `false`    | If set to `true` then the project uses [MongoDB][7] instead of JPA.
 
 **Example:**
 
@@ -142,6 +143,7 @@ mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorge
    [4]: http://maven.apache.org/pom.html#Aggregation
    [5]: http://maven.apache.org/guides/mini/guide-multiple-modules.html
    [6]: rest-tutorial
+   [7]: http://www.mongodb.org/
 
   </div>
 </div>
