@@ -165,7 +165,7 @@ Most things that can be done with JPA target implementation can also be done wit
 
 ### Activation
 
-To activate Sculptors mongoDB support the following properties are needed in the `sculptor-generator.properties` file (already set by the Sculptor Maven archetype).
+To activate Sculptors mongoDB support the following properties are needed in the `sculptor-generator.properties` file (already set by the [Sculptor Maven archetype][16]).
 
 ~~~
 nosql.provider=mongoDb
@@ -184,7 +184,7 @@ The property `cartridges` is used to enable a (comma-separated) list of extensio
 
 ### Associations
 
-An associated object can be stored as an embedded document, i.e. it belongs to parent object and cannot be shared between several objects. References to BasicType are always embedded. [Aggregates][6] are also embedded in the DBCollection of the parent object. Aggregates are defined with `belongsTo` or `not aggregateRoot` in the owned DomainObjects.
+An associated object can be stored as an embedded document, i.e. it belongs to parent object and cannot be shared between several objects. References to `BasicType` are always embedded. [Aggregates][6] are also embedded in the `DBCollection` of the parent object. Aggregates are defined with `belongsTo` or `not aggregateRoot` in the owned DomainObjects.
 
 ~~~
 Entity Cargo {
@@ -214,11 +214,11 @@ ValueObject Leg {
 }
 ~~~
 
-In above sample the TrackingId, Itinary and Leg are all stored toghether with the Cargo.
+In above sample the `TrackingId`, `Itinary` and `Leg` are all stored toghether with the `Cargo`.
 
-The other alternative is to store ids of the referred objects. Associations that are not owned are treated in this way. In the above sample the refereces to Location and HandlingEvent are unowned. In the domain objects there are generated getters that lazily fetch associated objects from the ids. This means that you don't have to work with the ids yourself, you can follow associations as usual, but be aware that an invocation of such a getter might need to query the database.
+The other alternative is to store ids of the referred objects. Associations that are not owned are treated in this way. In the above sample the references to `Location` and `HandlingEvent` are unowned. In the domain objects there are generated getters that lazily fetch associated objects from the ids. This means that you don't have to work with the ids yourself, you can follow associations as usual, but be aware that an invocation of such a getter might need to query the database.
 
-Referential integrity is not enforced. It must be handled by your program. Lazy getters of associations will not fail if referred to object is missing, they will return null for single value references and ignore missing objects for collection references. This means that you can cleanup dangling references by fetching objects, populate associations by invoking the getters and then save the object. There is also a populateAssociations repository operation to fetch all referred objects.
+Referential integrity is not enforced. It must be handled by your program. Lazy getters of associations will not fail if referred to object is missing, they will return null for single value references and ignore missing objects for collection references. This means that you can cleanup dangling references by fetching objects, populate associations by invoking the getters and then save the object. There is also a `populateAssociations` repository operation to fetch all referred objects.
 
 <span class="label label-info">Avoid bidirectional associations</span>
 Within an aggregate it is not possible to use bidirectional associations or associations that creates cycles. Bidirectional associations cross aggregates are possible but complicated, because one end must be saved first, and the assignment of the id is done after the object is saved.
@@ -227,7 +227,7 @@ Within an aggregate it is not possible to use bidirectional associations or asso
 
 ### Data Mapper
 
-When working with mongoDB Java API the [DBObject][7] plays a central role. It is like a key value Map. Values can be of most types and also collections and other DBObjects for nested documents.
+When working with mongoDB Java API the [DBObject][7] plays a central role. It is like a key-value Map. Values can be of most types and also collections and other DBObjects for nested documents.
 
 Sculptor generates data mapper classes that converts domain objects to DBObjects. It is useful to not have to write those mappers by hand. Since it is generated code it also runs at full speed, compared to alternative solutions using reflection or intermediate String JSON format.
 
@@ -272,17 +272,20 @@ It can also be good to know that fields marked with `transient` are are not stor
 
 ### requestStart / requestDone
 
-To ensure that you read your own writes MongoDB java driver [recommends][8] using requestStart/requestDone. This is done by the `DbManagerAdvice`, which is automatically added in front of services. This is also necessary for optimistic locking.
+To ensure that you read your own writes MongoDB java driver [recommends][8] using `requestStart()` / `requestDone()`. This is done by the `DbManagerAdvice`, which is automatically added in front of services. This is also necessary for optimistic locking.
 
 
 ### Optimistic Locking
 
-By default a version attribute is automatically added to each Entity and mutable persistent ValueObject. This is used for optimistic locking checks. You can skip this feature by specifying !optimisticLocking for the Domain Object.
+By default a `version` attribute is automatically added to each `Entity` and mutable persistent `ValueObject`. This is used for [optimistic locking](advanced-tutorial#optimistic-locking) checks. You can skip this feature by specifying `!optimisticLocking` for the Domain Object.
 
 
 ### Index
 
-[Indexes][9] are defined and created automatically for the natural key fields, i.e. attributes and references marked with `key`. It is possible to define additional indices for attributes by marking them with `index`. The id (`_id`) field is always indexed.
+[Indexes][9] are defined and created automatically for the natural [key fields](advanced-tutorial#key), i.e. attributes and references marked with `key`. It is possible to define additional indices for attributes by marking them with `index`.
+
+The [id field](advanced-tutorial#id) (database primary key) is always indexed.
+{: .alert}
 
 In the following sample there will be one composite index for `ssn.number`, `ssn.country` and another index for `birthDate`.
 
@@ -310,25 +313,25 @@ Indexes are defined in the generated method `indexes` in the mapper. It is possi
 
 Sculptor provides the following generic repository operations for use with mongoDB:
 
-  * findById
-  * findAll
-  * findByCondition
-  * findByKey
-  * findByKeys
-  * save
-  * delete
-  * countAll
-  * populateAssociations
+  * `findById`
+  * `findAll`
+  * `findByCondition`
+  * `findByKey`
+  * `findByKeys`
+  * `save`
+  * `delete`
+  * `countAll`
+  * `populateAssociations`
 
 #### findByCondition
 
-mongoDB has good support for dynamic queries on any attribute. The easiest way to create a query is to use [findByCondition][10] , which is one of the built in repository operations.
+mongoDB has good support for dynamic queries on any attribute. The easiest way to create a query is to use [findByCondition][10], which is one of the built in repository operations.
 
-In `model.btdesign`
+In `model.btdesign`:
 
 ~~~
-Repository PostRepository { 
-    List<@Post> findPostsWithGreatComments;
+Repository BlogPostRepository { 
+    List<@BlogPost> findPostsWithGreatComments;
     protected findByCondition;
 }
 ~~~
@@ -336,8 +339,11 @@ Repository PostRepository {
 The hand written Java implementation:
 
 ~~~
-public List<Post> findPostsWithGreatComments() {
-    List<ConditionalCriteria> condition = criteriaFor(Post.class)
+import static org.blog.core.domain.BlogPostProperties.*;
+import static org.sculptor.framework.accessapi.ConditionalCriteriaBuilder.*;
+
+public List<BlogPost> findPostsWithGreatComments() {
+    List<ConditionalCriteria> condition = criteriaFor(BlogPost.class)
         .withProperty(comments().title()).ignoreCaseLike(".*great.*")
         .and().withProperty(published()).isNotNull()
         .orderBy(published()).build();
@@ -345,9 +351,9 @@ public List<Post> findPostsWithGreatComments() {
 }
 ~~~
 
-The `ConditionalCriteriaBuilder` builder supports conditions such as eq, like, between, lessThan, greaterThan, in. The order of the result can be specified with orderBy. Regular expression condition can be defined with like and ignoreCaseLike (ignore case).
+The `ConditionalCriteriaBuilder` builder supports conditions such as `eq`, `like`, `between`, `lessThan`, `greaterThan` and `in`. The order of the result can be specified with `orderBy`. Regular expression condition can be defined with `like` and `ignoreCaseLike` (ignore case).
 
-Limitations of findByCondition when used with mongoDB:
+Limitations of `findByCondition` when used with mongoDB:
 
   * It is not possible to specifiy criteria on attibutes of unowned associations.
   * OR-condition is not supported.
@@ -360,14 +366,14 @@ Pagination is supported as described in [Advanced Tutorial][11]
 
 #### Generation of Finder Operations
 
-Generated finder methods, based on findByCondition, is supported as described in [Advanced Tutorial][12]. It has the same limitations as findByCondition when used with mongoDB, described above.
+Generated finder methods, based on `findByCondition`, is supported as described in [Advanced Tutorial][12]. It has the same limitations as `findByCondition` when used with mongoDB, described above.
 
 Example of generated finders in the `BlogPostRepository`:
 
 ~~~
 Repository BlogPostRepository { 
     findByTitle(String title) condition="title i= :title";
-    findPostsInBlog(@Blog inBlog) orderBy="title";
+    findPostsInBlog(@Blog blog) orderBy="title";
 }
 ~~~
 
@@ -388,12 +394,12 @@ PersonRepository {
 
 #### Own AccessObject
 
-You can also easily create your own Access Object (as described in the [Advanced Tutorial][14]) with full access to the underlaying DBCollection.
-For example, a query that finds a blog Posts with comments. In `model.btdesign`:
+You can also easily create your own Access Object (as described in the [Advanced Tutorial][14]) with full access to the underlaying `DBCollection`.
+For example, a query that finds blog posts with comments. In `model.btdesign`:
 
 ~~~
-Repository PostRepository { 
-    List<@Post> findPostsWithComments => AccessObject;
+Repository BlogPostRepository { 
+    List<@BlogPost> findPostsWithComments => AccessObject;
 }
 ~~~
 
@@ -401,15 +407,16 @@ You write the implementation yourself and it may look something like this:
 
 ~~~ java
 public class FindPostsWithCommentsAccessImpl extends FindPostsWithCommentsAccessImplBase {
+
     @Override
     public void performExecute() {
         DBObject query = new BasicDBObject();
         query.put("comments", new BasicDBObject("$not", new BasicDBObject("$size", 0)));
-        DBCursor cur = getDBCollection().find(query);
+        DBCursor cursor = getDBCollection().find(query);
  
-        List<Post> mappedResult = new ArrayList<Post>();
-        for (DBObject each : cur.hasNext()) {
-            Post eachResult = (Post) getDataMapper().toDomain(each);
+        List<BlogPost> mappedResult = new ArrayList<BlogPost>();
+        for (DBObject each : cursor) {
+            BlogPost eachResult = (BlogPost) getDataMapper().toDomain(each);
             mappedResult.add(eachResult);
         }
  
@@ -421,9 +428,9 @@ public class FindPostsWithCommentsAccessImpl extends FindPostsWithCommentsAccess
 
 #### MongoDB specific code directly in Repository
 
-The default implementation of a Repository consists of an implementation class and Access Objects. The intention is a separation of concerns between the domain and the data layer. Repository is close to the business domain and Access Objects are close to the data layer. The MongoDB specific code is located in the Access Object, and not in the Repository.
+The default [implementation of a `Repository`](advanced-tutorial#how-to-generate-repositories) consists of an implementation class and Access Objects. The intention is a separation of concerns between the domain and the data layer. `Repository` is close to the business domain and Access Objects are close to the data layer. The MongoDB specific code is located in the Access Object, and not in the Repository.
 
-For some systems this separation might be overkill and you might prefer to implement the data access directly in the Repository. Sculptor supports this design out-of-the-box. You only have to specify a property in `sculptor-generator.properties` to have MongoDB support directly in the Repository implementation. The starting point is the method `getDbManager`.
+For some systems this separation might be overkill and you might prefer to implement the data access directly in the Repository. Sculptor supports this design out-of-the-box. You only have to specify a property in `sculptor-generator.properties` to have MongoDB support directly in the `Repository` implementation. The starting point is the method `getDbManager`.
 
 ~~~
 generate.repository.dbManagerSupport=true
@@ -451,7 +458,7 @@ When running JUnit test the dbname is suffixed with `-test`.
 
 ### Custom Datastore Names
 
-By default the names in the data store are the same as the names in the Java DomainObjects. In case you need to use other names it is possible to define that in model with `databaseTable` and `databaseColumn`. Discriminator name and value is also possible to define when inheritance is used.
+By default the names in the data store are the same as the names in the Java DomainObjects. In case you need to use other names it is possible to define that in model with `databaseTable` and `databaseColumn`. Discriminator name and value is also possible to define when [inheritance](advanced-tutorial#inheritance) is used.
 
 ~~~
 abstract Entity Media {
@@ -480,7 +487,7 @@ In the Sculptor Blog there's a [series of posts][15] related to mongoDB.
 
 ## Source
 
-The complete source code for this tutorial is available in GitHub [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/mongodb-samples](https://github.com/sculptor/sculptor/tree/master/sculptor-examples/mongodb-samples).
+The complete source code for this tutorial is available in GitHub [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/mongodb-samples/blog-mongodb](https://github.com/sculptor/sculptor/tree/master/sculptor-examples/mongodb-samples/blog-mongodb).
 
 
    [1]: http://www.mongodb.org/
@@ -498,3 +505,4 @@ The complete source code for this tutorial is available in GitHub [https://githu
    [13]: http://api.mongodb.org/java/2.11.3/com/mongodb/MongoOptions.html
    [14]: advanced-tutorial#custom-access-objects  
    [15]: /2010/04/27/mongodb-with-sculptor---introduction
+   [16]: maven-archetypes#sculptor-maven-archetype
