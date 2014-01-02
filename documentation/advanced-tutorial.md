@@ -808,7 +808,7 @@ Entity Book extends Media {
 
 ### Optimistic Locking
 
-By default a `version` attribute is automatically added to each Entity and mutable persistent ValueObject. This is used for [optimistic locking](http://www.hibernate.org/hib_docs/reference/en/html/transactions.html#transactions-optimistic) checks by Hibernate.
+By default a `version` attribute is automatically added to each `Entity` and mutable persistent `ValueObject`. This is used for [optimistic locking](http://www.hibernate.org/hib_docs/reference/en/html/transactions.html#transactions-optimistic) checks by Hibernate.
 
 You can skip this feature by specifying `!optimisticLocking` for the Domain Object.
 
@@ -1008,7 +1008,7 @@ JPA has a built in support for enums. It is recommend to use this default handli
 
 ### Inheritance
 
-An Entity may extend another Entity. A ValueObject may extend another ValueObject. Inheritance is not supported for BasicType. By default JOINED inheritance strategy is used, i.e. fields that are specific to a subclass are mapped to a separate table than the fields that are common to the parent class.
+An Entity may extend another Entity. A ValueObject may extend another ValueObject. Inheritance is not supported for `BasicType`. By default `JOINED` inheritance strategy is used, i.e. fields that are specific to a subclass are mapped to a separate table than the fields that are common to the parent class.
 
 ~~~
 abstract Entity Project {
