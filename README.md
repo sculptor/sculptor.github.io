@@ -16,6 +16,7 @@ Grab the sources from GitHub:
 You need Ruby 1.9.x (check with ```ruby -v```). Install dependencies:
 
     $ gem install jekyll
+    $ gem install kramdown
 
 Run the jekyll server:
 
