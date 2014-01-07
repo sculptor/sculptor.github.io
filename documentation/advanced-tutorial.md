@@ -2236,6 +2236,100 @@ Note that if you use classifier `client` it will be dependency to the `-client` 
 
 If the referenced project is an EJB project (built by the Maven EJB plugin via POM packaging type `ejb`) then you will use `<type>ejb-client</type>` instead of `<classifier/>`.
 
+## Overriding templates or transformations for a project
+
+Sculptor includes a mechanism for overriding individual Sculptor template or transformation functions.  This can be used to specialize the code that is generated for a project.
+
+You override a Sculptor template or transformation class by defining an override class that extends the Sculptor class to be overridden.
+
+To override a template or transformation:
+
+* **Locate the specific Sculptor template or transformation class in the sculptor-generator-core project you need to override**
+
+* **Ensure the class is marked with the @ChainOverrideable annotation**
+
+  This is an XTend active annotation which marks classes that support overriding.
+
+  - If it isn't, you can raise a github issue to request it be added
+
+* **Create a seperate generator project for your application**
+
+  If one doesn't already exist, create a separate generator project to contain the override classes and any other Sculptor generator-specific classes your project may need.
+
+  See the [Creating separate generator project](#creating-separate-generator-project) section below for details on how to do this.
+
+* **Create an override class in the separate generator project**.  The override class must:
+
+  - Be placed in the 'generator' package in order to be recognized by Sculptor.
+    
+    You can use a different package by setting the 'sculptor.defaultOverridesPackage' system property.
+
+  - Follow the *\<template or transformation to be overridden\>*Override naming convention
+
+  - Extend the template or transformation to be overridden
+
+  - Be marked with the @ChainOverride annotation
+
+
+For an example of the override mechanism in use, see the [sculptor-shipping-generator](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator) project, which goes along with the [scupltor-shipping](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping) project.
+
+
+## Creating separate generator project
+
+
+Any classes that have to do with Sculptor generation, such as override classes, must be packaged in a separate Maven project from the one that'll be utilizing them because the compiled override classes must be used as part of the Sculptor code generation process.  If the override classes are packaged in the application project itself, the compiled override classes won't be available during the Sculptor code generation step, which comes earlier in the build process than compiling XTend code.
+
+Sculptor example projects follow the convention of naming this separate project \<project name\>-generator, although that's not a requirement.
+
+The generator project must be added as a dependency within the sculptor-maven-plugin plugin within the main project.  Following is an example taken from the sculptor-shipping project.
+
+~~~
+<plugin>
+        <groupId>org.sculptorgenerator</groupId>
+        <artifactId>sculptor-maven-plugin</artifactId>
+        <version>${project.version}</version>
+        <configuration>
+                <verbose>false</verbose>
+        </configuration>
+        <executions>
+                <execution>
+                        <id>cleanup</id>
+                        <goals>
+                                <goal>clean</goal>
+                        </goals>
+                </execution>
+                <execution>
+                        <id>code-generation</id>
+                        <goals>
+                                <goal>generate</goal>
+                        </goals>
+                </execution>
+        </executions>
+         <dependencies>
+                <dependency>
+                        <groupId>org.sculptorgenerator.examples.mongodb-samples</groupId>
+                        <artifactId>sculptor-shipping-generator</artifactId>
+                        <version>${project.version}</version>
+                </dependency>
+         </dependencies>
+</plugin>
+~~~
+
+Additionally, the generator project must be added as a dependency to the main project itself:
+
+~~~
+<dependency>
+        <groupId>org.sculptorgenerator.examples.mongodb-samples</groupId>
+        <artifactId>sculptor-shipping-generator</artifactId>
+        <version>${project.version}</version>
+        <scope>provided</scope>
+</dependency>
+~~~
+
+
+For a complete example, see the [sculptor-shipping-generator](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator) project, which goes along with the [scupltor-shipping](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping) project.
+
+
 
 ## Source
 
