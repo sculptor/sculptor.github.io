@@ -1012,69 +1012,14 @@ This approach is not recommended, since it might be confusing to have multiple b
 
 ## Change Generation Templates
 
-You can change the code generation templates using the Aspect-Oriented Programming features in Xpand. It is described in [Aspect-Oriented Programming in Xtend](http://www.openarchitectureware.org/pub/documentation/4.3.1/html/contents/core_reference.html).
+You can customize the code generation templates using the [Sculptor extension mechanism](advanced-tutorial.html#overrides-and-extension-mechanism).
 
-To use AOP you add a `templateAdvice` in `Workflow.mwe2` in your application project (this is already done if you generated the project with a Sculptor archetype).
-
-~~~
-templateAdvice = "generator::SpecialCases"
-~~~
-
-Define your advice in `src/main/resources/generator/SpecialCases.xpt`. For example if you need to replace the UUID generation in `SpecialCases.xpt`:
-
-~~~
-«IMPORT sculptormetamodel»
-«EXTENSION extensions::helper»
-«EXTENSION extensions::properties»
-
-«AROUND templates::domain::DomainObjectAttribute::uuidAccessor FOR DomainObject»
-    public String getUuid() {
-        // lazy init of UUID
-        if (uuid == null) {
-            uuid = org.myorg.MyUUIDGenerator.generate().toString();
-        }
-        return uuid;
-    }
-
-    private void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-«ENDAROUND»
-~~~
+See [Sculptor extension mechanism](advanced-tutorial.html#overrides-and-extension-mechanism) for details and steps on how to override Templates (or transformations) in your project, or to extend Sculptor via cartridges.
 
 You find the default templates in [https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core/src/main/java/org/sculptor/generator/template](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core/src/main/java/org/sculptor/generator/template).
-Everything starts in `Root.xpt`, which you also can intercept to add more templates or exclude some of the existing templates.
+Everything starts in [RootTmpl](https://github.com/sculptor/sculptor/blob/master/sculptor-generator/sculptor-generator-core/src/main/java/org/sculptor/generator/template/RootTmpl.xtend), which you also can intercept to add more templates or exclude some of the existing templates.
 
 Another alternative is to setup the [development environment][1] and change the original templates and build a new version of [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core).
-
-Sometimes you need to override the extension functions used by the templates. This can also be done with the AOP features of Xtend.
-{: #extensionAdvices}
-
-Add `transformationAdvice` in the generator advice in `Workflow.mwe2` in your application project (this is already done if you generated the project with a Sculptor archetype).
-
-~~~
-// Advice for transformation, Xtend 'src/main/resources/generator/SpecialCases.ext'
-transformationAdvice = "generator::SpecialCases"
-~~~
-
-Define your advice in `src/main/resources/extensions/SpecialCases.ext`. For example if would like to change the location of spring resource files in `SpecialCases.ext`:
-
-~~~
-import sculptormetamodel;
-
-extension extensions::helper;
-
-around extensions::properties::getResourceDir(Application application, String name) :
-  name == "spring" ?
-    "spring/" :
-    ctx.proceed();
-
-around extensions::properties::getResourceDir(Module module, String name) :
-  name == "spring" ?
-    "spring-" + module.name + "/" :
-    ctx.proceed();
-~~~
-
 
 ### hint
 {: #hint}
@@ -1171,16 +1116,27 @@ A separate model is used for generation of the CRUD GUI. A transformation takes 
 
 ### Customize the Transformations
 
-Extension advices can be used to customize the transformations.
-Define your advice in `src/main/resources/extensions/SpecialCases.ext`.
+The [Sculptor extension mechanism](advanced-tutorial.html#overrides-and-extension-mechanism) can be used to customize the transformations.  Follow either the steps in the [overriding templates or transformations for a project](advanced-tutorial.html#overriding-templates-or-transformations-for-a-project) or [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges-reusable-extensions-to-sculptor), depending on how you want to package the extension.
 
-For example, to skip automatic addition of uuid property:
+For example, to skip automatic addition of uuid property in your project:
+
+* Locate the class to be overridden or extended, in this case it's the org.sculptor.generator.transform.Transformation class
+* Create a TransformationOverride.xtend class in the generator package in a separate generator project for your main project
+* Override the modifyUuid method:
 
 ~~~
-import sculptormetamodel;
+package generator
 
-around transformation::Transformation::modifyUuid(DomainObject domainObject) :
-    null;
+import org.sculptor.generator.transform.Transformation
+import org.sculptor.generator.chain.ChainOverride
+
+@ChainOverride
+class TransformationOverride extends Transformation {
+
+  ...
+
+  override void modifyUuid(DomainObject domainObject) {
+  }
 ~~~
 
 
@@ -1779,6 +1735,19 @@ DslConsumer :
    * Add properties for package and framework classes. This is done in `default-sculptor-generator.properties`, `properties.ext` and `helper.ext`.
    * Add `EXPAND Consumer` in `Root.xpt`, you need `allConsumers()` in `helper.ext`, which can be implemented in the same way as `allServices`.
    * Add Spring stuff for the Consumers in `Spring.xpt`.
+
+### How to define a Sculptor cartridge
+
+Cartridges in Sculptor provide a means to package extensions to Sculptor that projects may enable or disable via the 'cartridges' property.  Some features within Sculptor itself are packaged as cartridges, for example the builders feature and MongoDB support.
+
+To define a cartridge:
+
+* Review [overriding templates or transformations for a project](advanced-tutorial.html#overriding-templates-or-transformations-for-a-project) and [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges-reusable-extensions-to-sculptor)
+* Follow the steps in [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges-reusable-extensions-to-sculptor) to define a cartridge.
+* The cartridge may either be packaged in the sculptor-generator-core project itself, or in a separate project.
+
+  If a separate project, it can be set up in the same manner as [Creating separate generator project](advanced-tutorial.html#creating-separate-generator-project)
+
 
 
 [1]: development-environment

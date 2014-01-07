@@ -2275,6 +2275,41 @@ To override a template or transformation:
 
 For an example of the override mechanism in use, see the [sculptor-shipping-generator](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator) project, which goes along with the [scupltor-shipping](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping) project.
 
+#### Delegating to base implementation of function
+
+When overriding a transformation or template function, it's often desirable to delegate to the base implementation of the function being overridden.
+
+Because of how the extension mechanism works, calling *super.someMethod()* doesn't work.  Instead, to delegate to the base implementation being overridden, use a 'next' object reference that is implicitly added to every override class.  For instance:
+
+~~~
+override String unidirectionalReferenceAdd(Reference it) {
+  '''
+  «IF !it.isSetterPrivate()»
+    /**
+     * Adds an object to the unidirectional to-many
+     * association.
+     * It is added the collection {@link #get«name.toFirstUpper()»}.
+     */
+    «it.getVisibilityLitteralSetter()»void addTo«name.toFirstUpper().singular()»(«it.getTypeName()» «name.singular()»Element) {
+      get«name.toFirstUpper()»().add(«name.singular()»Element);
+    };
+  «ENDIF»
+  «next.unidirectionalReferenceAdd(it)»
+
+  '''
+}
+~~~
+
+In the above example, the unidirectionalReferenceAdd() template method is overridden, and some additional content is conditionally generated, before delegating to the base unidirectionalReferenceAdd() method at the end.
+
+Part of what the 'next' reference does is to delegate to the next implementation in a chain.  If there are multiple cartridges that have overridden the same method, calling 'next' will delegate to the next overidden implementation, which may in turn delegate to its next implementation in the chain.
+
+The override implementations are chained in the following order:
+
+1. Override classes in the generator package
+2. Extensions packaged within cartridges, based on the order specified in the 'cartridges' property
+3. The implementation in Sculptor core
+
 ### Cartridges: Reusable extensions to Sculptor
 
 In addition to being able to override templates and transformations for a single project, it's possible to extend Sculptor itself, adding additional capabilities that may be packaged in a library and used by multiple projects.  These reusable collection of extensions are referred to as cartridges.
