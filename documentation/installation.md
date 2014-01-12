@@ -123,7 +123,10 @@ Sculptor can be used with any text editor or IDE. But if you are an [Eclipse](ht
 
 2. Directly in Eclipse (Help -> Install New Software) install from the Eclipse releases (e.g. Kepler) update site the following plugins:
    * General Purpose Tools > [m2e - Maven Integration for Eclipse](http://www.eclipse.org/m2e/) 1.4.0 (or newer)
-   * Modeling > Xtext SDK 2.4.2 (or newer)
+   * Modeling > Xtext SDK 2.5.0 (or newer)
+
+     Xtext **version 2.5.0** (or newer) is required because Sculptors DSL text editor leverages public API introduced with this version!
+     {: .alert .alert-error}
 
 
 ### Sculptor Eclipse Plugins
