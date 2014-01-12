@@ -15,6 +15,7 @@ This hands-on tutorial will walk you through the steps of how to create a small 
 This is an introduction to Sculptor. A more extensive example is available in the [Advanced Tutorial][1]. If you would like to see something more exciting than running JUnit tests we can recommend the [Developers Guide][2].
 
 Before you start you must follow the instructions in the **[Installation Guide][3]**.
+{: .alert}
 
 **Table of Contents:**
 
