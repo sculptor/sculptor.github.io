@@ -192,16 +192,24 @@ db.mysql.onDeleteCascade=false
 
 #### DDL script
 
-There are two ways to generate database creation sql script (ddl). Select between:
+There are two ways to generate database creation SQL script (DDL). Select between:
 
 1. Enable the `hibernate3-maven-plugin hbm2ddl` in `pom.xml`. The archetype generates settings for it, but it is commented out.
 The default settings is to generate the ddl script every time in the build phase `process-classes`. You can change that by
-removing the `<phase>process-classes</phase>` in the `execution` section of the plugin definition in `pom.xml´. In that case
+removing the `<phase>process-classes</phase>` in the `execution` section of the plugin definition in `pom.xml`. In that case
 you need to run the generation when needed with `mvn hibernate3::hbm2ddl`.
 
-2. Sculptor will generate ddl script if you add the following property in `sculptor-generator.properties`.
+2. Sculptor will generate DDL script if you add the following property in `sculptor-generator.properties`:
 
-The generated DDL SQL script contains drop statements. In case you don't wan't to generate those you can define:
+   ~~~
+   generate.ddl=true
+   ~~~
+
+The generated DDL script contains drop statements. In case you don't wan't to generate those you can define:
+
+~~~
+generate.ddl.drop=false
+~~~
 
 Individual classes may be omitted from the generated DDL. This can be useful to keep parts of the model that are works in progress from the DDL. To omit a class from the generated DDL, mark it with a 'skipddl' hint:
 
@@ -214,7 +222,7 @@ Entity Roles {
 }
 ~~~
 
-By default, some of the system-generated attributes, such as version, createdBy, createdDate, are ordered at the end of each generated table in the DDL. This can be controlled via the 'systemAttributesToPutLast' property:
+By default, some of the system-generated attributes, such as `version`, `createdBy`, `createdDate`, are ordered at the end of each generated table in the DDL. This can be controlled via the 'systemAttributesToPutLast' property:
 
 ~~~
 # Attributes defined by system that should appear last in attribute listings, such as in DDL
@@ -224,7 +232,7 @@ systemAttributesToPutLast=version,createdBy,createdDate,updatedBy,updatedDate,la
 
 ### Cascade
 
-Default cascade values can be defined for different types of associations. References between different modules have no default cascade value. 'all' is default for references within the same module. You might want to change that to 'persist,merge' if you don't want delete to be propagated.
+Default cascade values can be defined for different types of associations. References between different modules have no default cascade value. `all` is default for references within the same module. You might want to change that to `persist,merge` if you don't want delete to be propagated.
 
 ~~~
 # default cascade values for aggregate references
@@ -257,7 +265,8 @@ javaType.Set=java.util.Set
 javaType.Collection=java.util.Collection
 ~~~
 
-Note that the `java.lang` types, such as `String` and `Integer` are not defined, since they have the same name in the DSL and the Java code.
+`java.lang` types, such as `String` and `Integer` are not defined, since they have the same name in the DSL and the Java code.
+{: .alert}
 
 You can add your own types also, e.g.
 
@@ -296,6 +305,10 @@ javaType.ShortString=String
 ~~~
 
 The type of the automatically generated id attribute is defined as
+
+~~~
+id.type=Long
+~~~
 
 
 ### Joda Date and Time API
@@ -361,7 +374,7 @@ domainEvent.extends=org.foo.SuperEvent
 commandEvent.extends=org.foo.SuperCommand
 ~~~
 
-Note that extends can also be defined per domain object `in model.btdesign`:
+Note that extends can also be defined per domain object in `model.btdesign`:
 
 ~~~
 Entity Movie extends @Media {
@@ -376,7 +389,7 @@ DataTransferObject SearchResponse extends org.foo.ResponseBase {
 
 There are a few configuration options for different naming strategies of database elements.
 
-Convert camel case to underscore in database names:
+Convert camel-case to underscore in database names:
 
 ~~~
 db.useUnderscoreNaming=true
@@ -419,7 +432,7 @@ toStringStyle=SHORT_PREFIX_STYLE
 
 JavaDoc of [ToStringStyle](http://commons.apache.org/proper/commons-lang/javadocs/api-2.6/org/apache/commons/lang/builder/ToStringStyle.html) describes the different formats.
 
-You can also override this for individual DomainObject with hint
+You can also override this for individual DomainObject with `hint`:
 
 ~~~
 ValueObject Foo {
@@ -439,6 +452,7 @@ generate.domainObject.compositeKeyClass=false
 ~~~
 
 One drawback with not using key class is that `findByKeys` is not supported for composite keys.
+{: .alert}
 
 
 ### Removing the generation of the ServiceContext
@@ -452,7 +466,7 @@ In this case it can be done easily with setting a property value in the `sculpto
 generate.serviceContext=false
 ~~~
 
-This turns off the generation of the `ServiceContext`. Please note that in this case the auditable feature does not work or must be implemented manually.
+This turns off the generation of the `ServiceContext`. Please note that in this case the [auditable feature][4] does not work or must be implemented manually.
 
 You can skip generation of auditable with:
 
@@ -1753,3 +1767,4 @@ To define a cartridge:
 [1]: development-environment
 [2]: advanced-tutorial#scaffold
 [3]: maven-plugin
+[4]: advanced-tutorial#auditable
