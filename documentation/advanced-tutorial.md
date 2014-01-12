@@ -6,7 +6,7 @@ navbar_name: docs
 ---
 {% include JB/setup %}
 
-This tutorial describes the features of Sculptor business tier. It presents how Sculptor works out-of-the-box, customization is often needed and that is the topic of the [Developer's Guide][1].
+This tutorial describes the features of Sculptor business tier. It presents how Sculptor works out-of-the-box, customization is often needed and that is the topic of the [Developers Guide][1].
 
 Before you start you must follow the instructions in the [Installation Guide][2]. It is also recommended that you try the [Hello World Tutorial](hello-world-tutorial) to get a feeling of the environment.
 {: .alert}
@@ -68,7 +68,7 @@ In this part we will write a Sculptor DSL file and generate code from it.
 
 1. Modify the file named `model.btdesign` in the folder `src/main/resources/model`
 
-2. Open the design file with Scupltor DSL editor, double-click on it.
+2. Open the design file with Sculptor DSL editor, double-click on it.
 Add the following code to the design file. You can see that it defines two Modules, containing one Service each.
 The operations in the Services delegates directly to the Repositories. It defines the same Domain Objects, including attributes and references,
 as in Figure 1. The details will be explained further on.
@@ -2236,6 +2236,7 @@ Note that if you use classifier `client` it will be dependency to the `-client` 
 
 If the referenced project is an EJB project (built by the Maven EJB plugin via POM packaging type `ejb`) then you will use `<type>ejb-client</type>` instead of `<classifier/>`.
 
+
 ## Overrides and extension mechanism
 
 ### Overriding templates or transformations for a project
@@ -2273,7 +2274,8 @@ To override a template or transformation:
   - Be marked with the @ChainOverride annotation
 
 
-For an example of the override mechanism in use, see the [sculptor-shipping-generator](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator) project, which goes along with the [scupltor-shipping](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping) project.
+For an example of the override mechanism in use, see the [sculptor-shipping-generator](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator) project, which goes along with the [sculptor-shipping](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping) project.
+
 
 #### Delegating to base implementation of function
 
@@ -2403,7 +2405,7 @@ Additionally, the generator project must be added as a dependency to the main pr
 ~~~
 
 
-For a complete example, see the [sculptor-shipping-generator](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator) project, which goes along with the [scupltor-shipping](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping) project.
+For a complete example, see the [sculptor-shipping-generator](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator) project, which goes along with the [sculptor-shipping](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping) project.
 
 
 
@@ -2416,4 +2418,3 @@ The complete source code for this tutorial is available in GitHub [https://githu
    [2]: installation
    [3]: maven-plugin
    [4]: http://www.slf4j.org
-
