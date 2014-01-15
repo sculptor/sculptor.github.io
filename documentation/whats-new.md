@@ -33,15 +33,15 @@ This release contains:
 
 Some highlights of the release:
 
-* Upgrade to Xtext/Xtend 2.4.3 and Eclipse Kepler
+* Upgrade to [Xtext/Xtend 2.4.3](http://www.eclipse.org/Xtext/releasenotes.html) and Eclipse Kepler
 * Java package changed from `org.fornax.cartridges.sculptor` to `org.sculptor`
 * New Home Page: [http://sculptorgenerator.org](http://sculptorgenerator.org)
 * New Forum: [https://groups.google.com/group/sculptorgenerator](https://groups.google.com/group/sculptorgenerator)
 * Version control changed from Subversion to Git
 * Project hosting changed from [Sourceforge](http://sourceforge.net/projects/fornax/) to [GitHub](https://github.com/sculptor)
 * Website implemented via [Jekyll Bootstrap](http://jekyllbootstrap.com)
-* Maven plugin available from [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.sculptorgenerator%22)
-* Eclipse plugin available from [http://sculptorgenerator.org/updates](http://sculptorgenerator.org/updates)
+* [Maven plugin](maven-plugin) available from [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.sculptorgenerator%22)
+* [Eclipse plugin](eclipse-plugin) available from [http://sculptorgenerator.org/updates](http://sculptorgenerator.org/updates)
 * Eclipse plugin build with Maven via [Eclipse Tycho](http://eclipse.org/tycho/)
 * Release process based on [Gitflow Maven plugin](https://bitbucket.org/atlassian/maven-jgitflow-plugin)
 * CI service via [Travis CI](https://travis-ci.org)
