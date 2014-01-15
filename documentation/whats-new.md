@@ -13,6 +13,20 @@ Released versions of Sculptor:
 
 ## Version 3.0.x
 
+### Version 3.0.1
+
+Version 3.0.1 was released January XX, 2014.
+
+This release contains:
+
+* Upgrade to [Xtext/Xtend 2.5.0](http://www.eclipse.org/Xtext/releasenotes.html)
+* Support for [mongoDB](http://mongodb.org) in [Maven archetypes](maven-archetypes#sculptor-maven-archetype)
+* Support for [Maven 3.1 logging](http://maven.apache.org/maven-logging.html) in [Maven plugin](maven-plugin)
+* Support for Eclipse projects with [Maven Integration (m2e)](http://www.eclipse.org/m2e/) nature ([resource folders in Java project have `excluded="*"` set in classpath properties](http://wiki.eclipse.org/M2E_FAQ#Why_resource_folders_in_Java_project_have_excluded.3D.22.2A.22))
+* Additional [EDA examples](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/eda-samples) and missing [mongoDB examples](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples)
+* Icon for [Eclipse text editor](eclipse-plugin) and feature branding
+
+
 ### Version 3.0.0
 
 [Version 3.0.0 was released November 29, 2013](/2013/11/29/sculptor-300---a-major-overhaul).
