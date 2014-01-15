@@ -20,7 +20,7 @@ On the other hand this version of Sculptor greatly benefits from the upgraded te
 * better Maven support because Sculptor comes with its own [Maven plugin][2]
 
 Now Sculptor is hosted on [GitHub](https://github.com/sculptor) and has its own [Website](http://sculptorgenerator.org).
-[Sculptors Eclipse plugin][3] is available from [http://sculptorgenerator.org/updates](http://sculptorgenerator.org/updates) and the [Maven plugin][2] is available from [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.sculptorgenerator%22)
+Sculptors [Eclipse plugin][3] is available from [http://sculptorgenerator.org/updates](http://sculptorgenerator.org/updates) and the [Maven plugin][2] is available from [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.sculptorgenerator%22)
 
 
 [Read more about the release][1].
