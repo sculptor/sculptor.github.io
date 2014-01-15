@@ -2069,7 +2069,7 @@ The `ServiceContext` class is needed to support logging and audit trail function
 
 The first parameter of each method in the Services is a `ServiceContext` parameter. This is generated automatically. In front of the Services there is an advice, which stores this `ServiceContext` object in a thread local variable, `ServiceContextStore`, to make sure that it is available everywhere within that request in the tier. When calling remote methods it must be passed as a method parameter.
 
-It is possible to skip the generation of `ServiceContext`, see [Developer's Guide](devlopers-guide#serviceContext).
+It is possible to skip the generation of `ServiceContext`, see [Developer's Guide](developers-guide#serviceContext).
 
 
 ## Alternative Notation
