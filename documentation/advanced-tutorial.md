@@ -665,6 +665,7 @@ new Address("Drottninggatan")
 
 
 ### Domain Object Builders
+{: #builder}
 
 Sculptor **optionally** generates a builder class for each domain object. The builder class provides a fluent interface to build domain objects in a manner that can be easier to work with and read. The following example additionally uses static imports to make the builder code a bit more succinct.
 
@@ -700,9 +701,9 @@ if( isSpecialCase(bookBuilder) ) {
 Book book = bookBuilder.build();
 ~~~
 
-Generation of domain object builder classes is an optional feature (disabled by default) which is implmented as a template extension cartridge named `builder`. To activate this cartridge add it to the list of cartridges in `sculptor-generator.properties`, e.g.
+Generation of domain object builder classes is an optional feature (disabled by default) which is implemented as a [template extension cartridge](#cartridges) named "builder". To [activate this cartridge](#cartridge-activation) add it to the list of cartridges in `sculptor-generator.properties`, e.g.
 
-~~~ java
+~~~
 cartridges=mongodb,builder
 ~~~
 
@@ -2240,6 +2241,7 @@ If the referenced project is an EJB project (built by the Maven EJB plugin via P
 ## Overrides and extension mechanism
 
 ### Overriding templates or transformations for a project
+{: #overriding}
 
 Sculptor includes a mechanism for overriding individual Sculptor template or transformation functions.  This can be used to specialize the code that is generated for a project.
 
@@ -2265,13 +2267,13 @@ To override a template or transformation:
 
   - Be placed in the 'generator' package in order to be recognized by Sculptor.
     
-    You can use a different package by setting the 'sculptor.defaultOverridesPackage' system property.
+    You can use a different package by setting the `sculptor.defaultOverridesPackage` system property.
 
   - Follow the *\<template or transformation to be overridden\>*Override naming convention
 
   - Extend the template or transformation to be overridden
 
-  - Be marked with the @ChainOverride annotation
+  - Be marked with the `@ChainOverride` annotation
 
 
 For an example of the override mechanism in use, see the [sculptor-shipping-generator](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator) project, which goes along with the [sculptor-shipping](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping) project.
@@ -2309,14 +2311,16 @@ Part of what the 'next' reference does is to delegate to the next implementation
 The override implementations are chained in the following order:
 
 1. Override classes in the generator package
-2. Extensions packaged within cartridges, based on the order specified in the 'cartridges' property
+2. Extensions packaged within cartridges, based on the order specified in the `cartridges` property
 3. The implementation in Sculptor core
 
+
 ### Cartridges: Reusable extensions to Sculptor
+{: #cartridges}
 
 In addition to being able to override templates and transformations for a single project, it's possible to extend Sculptor itself, adding additional capabilities that may be packaged in a library and used by multiple projects.  These reusable collection of extensions are referred to as cartridges.
 
-The steps for defining a cartridge are very similar to the steps for [overriding templates or transformations for a project](#overriding-templates-or-transformations-for-a-project):
+The steps for defining a cartridge are very similar to the steps for [overriding templates or transformations for a project](#overriding):
 
 * **Locate the specific Sculptor template or transformation class in the sculptor-generator-core project you need to extend**
 
@@ -2324,9 +2328,10 @@ The steps for defining a cartridge are very similar to the steps for [overriding
 
 * **Create a seperate generator project for your application**
 
-  See the [Creating separate generator project](#creating-separate-generator-project) section below for details on how to do this.
+  See the [Creating separate generator project](#separate-generator-project) section below for details on how to do this.
 
-  One exception to this is if the cartridge is part of Sculptor itself, in which case the extension classes are defined within the sculptor-generator-core project itself, and a a separate project doesn't need to be created.
+  One exception to this is if the cartridge is part of Sculptor itself, in which case the extension classes are defined within the sculptor-generator-core project itself, and a separate project doesn't need to be created.
+  {: .alert}
 
 * **Create an extension class in the separate generator project**.  The override class must:
 
@@ -2336,15 +2341,20 @@ The steps for defining a cartridge are very similar to the steps for [overriding
 
   - Extend the template or transformation to be overridden
 
-  - Be marked with the @ChainOverride annotation
+  - Be marked with the `@ChainOverride` annotation
 
 For an example of a cartridge, see the [org.sculptor.generator.cartridge.mongodb](https://github.com/sculptor/sculptor/tree/develop/sculptor-generator/sculptor-generator-core/src/main/java/org/sculptor/generator/cartridge/mongodb) cartridge within the [sculptor-generator-core](https://github.com/sculptor/sculptor/tree/develop/sculptor-generator/sculptor-generator-core) project.
 
+
 ### Enabling a cartridge in a project
+{: #enabling-cartridges}
 
-To enable the cartridge in a project, include the catridge in the cartridges property in your project sculptor-generator.properties file.  For example, the following enables the builder and mongodb cartridges:
+To enable the cartridge in a project, include the catridge in the cartridges property in your project `sculptor-generator.properties` file. For example, the following enables the [builder](#builder) and mongoDB cartridges:
 
-    cartridges=builder,mongodb
+~~~
+cartridges=builder,mongodb
+~~~
+
 
 ### Limitations of override/extension mechanism
 
@@ -2352,8 +2362,9 @@ There are currently some limitations in the override/extension mechanism:
 
 * [XTend dispatch methods may not be overridden](https://github.com/sculptor/sculptor/issues/45)
 
-## Creating separate generator project
 
+## Creating separate generator project
+{: #separate-generator-project}
 
 Any classes that have to do with Sculptor generation, such as override classes, must be packaged in a separate Maven project from the one that'll be utilizing them because the compiled override classes must be used as part of the Sculptor code generation process.  If the override classes are packaged in the application project itself, the compiled override classes won't be available during the Sculptor code generation step, which comes earlier in the build process than compiling XTend code.
 
@@ -2361,7 +2372,7 @@ Sculptor example projects follow the convention of naming this separate project 
 
 The generator project must be added as a dependency within the sculptor-maven-plugin plugin within the main project.  Following is an example taken from the sculptor-shipping project.
 
-~~~
+~~~ xml
 <plugin>
         <groupId>org.sculptorgenerator</groupId>
         <artifactId>sculptor-maven-plugin</artifactId>
@@ -2395,7 +2406,7 @@ The generator project must be added as a dependency within the sculptor-maven-pl
 
 Additionally, the generator project must be added as a dependency to the main project itself:
 
-~~~
+~~~ xml
 <dependency>
         <groupId>org.sculptorgenerator.examples.mongodb-samples</groupId>
         <artifactId>sculptor-shipping-generator</artifactId>
