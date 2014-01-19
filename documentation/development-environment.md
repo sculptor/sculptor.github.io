@@ -295,19 +295,6 @@ mvn clean install -Pmaven,example
 ~~~
 
 
-### Stand-alone Code Generator
-
-To build the stand-alone generator JAR the Maven profile `shade` is used:
-
-~~~
-mvn install -Pshade
-cd sculptor-generator/sculptor-core
-java -jar target/sculptor-core-3.0.0-SNAPSHOT.jar -model src/test/resources/model-test.btdesign
-~~~
-
-The generator isn't useful right now - it reads the model, validates it and prints "org.eclipse.emf.mwe2.runtime.workflow.Workflow - Done.".
-
-
 ## Development process
 
 The project uses the [gitflow workflow](https://www.atlassian.com/git/workflows#!workflow-gitflow). So development of small features is done in the **branch "develop"**. Larger features are implemented within a feature branch (created via `git flow feature start some-new-feature`).
@@ -340,6 +327,7 @@ So Sculptors release process is as follows:
 * update the Eclipse config files with the development version via `mvn tycho-versions:set-version -P!all -DnewVersion=<DEVLOPMENT_VERSION>` and commit the modified files
 
 To automate this process the script file [`release.sh`](https://github.com/sculptor/sculptor/blob/develop/release.sh) is available. This script requires as arguments the release version and the next development version (without the suffix "-SNAPSHOT"), e.g. `./release 3.0.0 3.0.1`.
+{: .alert .alert-success}
 
 The following chapters are describing the deployment of the Eclipse plugin and the Maven plugin during the release build (executed via `mvn jgitflow:release-finish`).
 
