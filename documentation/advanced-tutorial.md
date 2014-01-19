@@ -2253,7 +2253,7 @@ To override a template or transformation:
 
 * **Ensure the class is marked with the @ChainOverrideable annotation**
 
-  This is an XTend active annotation which marks classes that support overriding.
+  This is an [Xtend active annotation](http://www.eclipse.org/xtend/documentation.html#activeAnnotations) which marks classes that support overriding.
 
   - If it isn't, you can raise a github issue to request it be added
 
@@ -2265,9 +2265,16 @@ To override a template or transformation:
 
 * **Create an override class in the separate generator project**.  The override class must:
 
-  - Be placed in the 'generator' package in order to be recognized by Sculptor.
+  - Be placed in the package `generator` in order to be recognized by Sculptor.
     
-    You can use a different package by setting the `sculptor.defaultOverridesPackage` system property.
+    <div markdown="1">
+    You can use a different package name by setting the `sculptor.defaultOverridesPackage` system property, e.g.
+
+    ~~~
+    -Dsculptor.defaultOverridesPackage=org.sculptor.generator.override
+    ~~~
+    </div>
+    {: .alert}
 
   - Follow the *\<template or transformation to be overridden\>*Override naming convention
 
@@ -2308,11 +2315,14 @@ In the above example, the unidirectionalReferenceAdd() template method is overri
 
 Part of what the 'next' reference does is to delegate to the next implementation in a chain.  If there are multiple cartridges that have overridden the same method, calling 'next' will delegate to the next overidden implementation, which may in turn delegate to its next implementation in the chain.
 
+<div markdown="1">
 The override implementations are chained in the following order:
 
 1. Override classes in the generator package
 2. Extensions packaged within cartridges, based on the order specified in the `cartridges` property
 3. The implementation in Sculptor core
+</div>
+{: .alert}
 
 
 ### Cartridges: Reusable extensions to Sculptor
@@ -2349,7 +2359,7 @@ For an example of a cartridge, see the [org.sculptor.generator.cartridge.mongodb
 ### Enabling a cartridge in a project
 {: #enabling-cartridges}
 
-To enable the cartridge in a project, include the catridge in the cartridges property in your project `sculptor-generator.properties` file. For example, the following enables the [builder](#builder) and mongoDB cartridges:
+To enable the cartridge in a project, include the cartidge in the `cartridges` property in your project `sculptor-generator.properties` file. For example, the following enables the [builder](#builder) and mongoDB cartridges:
 
 ~~~
 cartridges=builder,mongodb
@@ -2360,7 +2370,8 @@ cartridges=builder,mongodb
 
 There are currently some limitations in the override/extension mechanism:
 
-* [XTend dispatch methods may not be overridden](https://github.com/sculptor/sculptor/issues/45)
+* [Xtend dispatch methods may not be overridden](https://github.com/sculptor/sculptor/issues/45)
+* [Xtend create methods may not be overridden](https://github.com/sculptor/sculptor/issues/64)
 
 
 ## Creating separate generator project
@@ -2368,9 +2379,10 @@ There are currently some limitations in the override/extension mechanism:
 
 Any classes that have to do with Sculptor generation, such as override classes, must be packaged in a separate Maven project from the one that'll be utilizing them because the compiled override classes must be used as part of the Sculptor code generation process.  If the override classes are packaged in the application project itself, the compiled override classes won't be available during the Sculptor code generation step, which comes earlier in the build process than compiling XTend code.
 
-Sculptor example projects follow the convention of naming this separate project \<project name\>-generator, although that's not a requirement.
+Sculptor example projects follow the convention of naming this separate project `<project name>-generator`, although that's not a requirement.
+{: .alert}
 
-The generator project must be added as a dependency within the sculptor-maven-plugin plugin within the main project.  Following is an example taken from the sculptor-shipping project.
+The generator project must be added as a dependency of the sculptor-maven-plugin plugin within the main project.  Following is an example taken from the sculptor-shipping project.
 
 ~~~ xml
 <plugin>
@@ -2414,7 +2426,7 @@ Additionally, the generator project must be added as a dependency to the main pr
         <scope>provided</scope>
 </dependency>
 ~~~
-
+	
 
 For a complete example, see the [sculptor-shipping-generator](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator) project, which goes along with the [sculptor-shipping](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping) project.
 
