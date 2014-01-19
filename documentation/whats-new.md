@@ -15,7 +15,7 @@ Released versions of Sculptor:
 
 ### Version 3.0.1
 
-Version 3.0.1 was released January XX, 2014.
+[Version 3.0.1 was released January 18, 2014](/2014/01/18/sculptor-301-released).
 
 This release contains:
 
@@ -23,8 +23,10 @@ This release contains:
 * Support for [mongoDB](http://mongodb.org) in [Maven archetypes](maven-archetypes#sculptor-maven-archetype)
 * Support for [Maven 3.1 logging](http://maven.apache.org/maven-logging.html) in [Maven plugin](maven-plugin)
 * Support for Eclipse projects with [Maven Integration (m2e)](http://www.eclipse.org/m2e/) nature ([resource folders in Java project have `excluded="*"` set in classpath properties](http://wiki.eclipse.org/M2E_FAQ#Why_resource_folders_in_Java_project_have_excluded.3D.22.2A.22))
-* Additional [EDA examples](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/eda-samples) and missing [mongoDB examples](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples)
-* Icon for [Eclipse text editor](eclipse-plugin) and feature branding
+* Additional validations and quickfixes, e.g. for repositories in non-persistent events or reserved keywords used as ID
+* Support for hyperlink navigation to imported model files
+* Custom icon for [Eclipse text editor](eclipse-plugin) and feature branding
+* Additional [EDA examples](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/eda-samples) and missing [MongoDB examples](https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples)
 
 
 ### Version 3.0.0
