@@ -47,7 +47,7 @@ Copy one of the following scripts into the root of your Eclipse workspace.
    set PACKAGE=%1
    set SYS_NAME=%2
 
-   set VERSION=3.0.0
+   set VERSION={{site.sculptor_version}}
    
    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-parent -DarchetypeVersion=%VERSION% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME%-parent -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Dweb=true
    
@@ -82,7 +82,7 @@ Copy one of the following scripts into the root of your Eclipse workspace.
    PACKAGE=$1
    SYS_NAME=$2
    
-   VERSION=3.0.0
+   VERSION={{site.sculptor_version}}
 
    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-parent \
       -DarchetypeVersion=$VERSION -DgroupId=$PACKAGE -DartifactId=$SYS_NAME-parent \

@@ -27,12 +27,12 @@ Before you start you must follow the instructions in the **[Installation Guide][
 
 In this first part we will setup the project structure for Maven and Eclipse.
 
-1. Use the following command (**one line** - indicated by the trailing `\`) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
+1. Use [Sculptors Maven archetype][8] with the following command (**one line** - indicated by the trailing `\`) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
 
    ~~~
    mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator \
       -DarchetypeArtifactId=sculptor-maven-archetype \
-      -DarchetypeVersion=3.0.0 \
+      -DarchetypeVersion={{site.sculptor_version}} \
       -Dstandalone=true
    ~~~
 
@@ -200,4 +200,4 @@ To regenerate you use `mvn generate-sources -Dsculptor.generator.force=true`
    [5]: http://hsqldb.org/
    [6]: /images/emoticons/thumbs_up.png
    [7]: /images/emoticons/thumbs_down.png
-  
+   [8]: maven-archetypes#sculptor-maven-archetype

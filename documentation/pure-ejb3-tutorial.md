@@ -23,13 +23,13 @@ It consists of the following Maven projects:
 * `helloworld` - Business tier. EJB project containing the services and domain objects.
 * `helloworld-ear` - EAR package of the deployable application.
 
-These projects are created with Sculptors Maven archetypes as follows:
+These projects are created with [Sculptors Maven archetypes][1] as follows:
 
 1. Create `helloworld-parent` project with the following command (**one line** - indicated by the trailing `\`):
 
    ~~~
    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
-      -DarchetypeArtifactId=sculptor-maven-archetype-parent -DarchetypeVersion=3.0.0 \
+      -DarchetypeArtifactId=sculptor-maven-archetype-parent -DarchetypeVersion={{site.sculptor_version}} \
       -DgroupId=org.helloworld -DartifactId=helloworld-parent -Dpackage=org.helloworld \
       -Dversion=1.0-SNAPSHOT -Dear=true
    ~~~
@@ -41,7 +41,7 @@ These projects are created with Sculptors Maven archetypes as follows:
 
    ~~~
    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
-      -DarchetypeArtifactId=sculptor-maven-archetype -DarchetypeVersion=3.0.0 \
+      -DarchetypeArtifactId=sculptor-maven-archetype -DarchetypeVersion={{site.sculptor_version}} \
       -DgroupId=org.helloworld -DartifactId=helloworld -Dpackage=org.helloworld \
       -Dversion=1.0-SNAPSHOT -Dejb=true
    ~~~
@@ -54,7 +54,7 @@ These projects are created with Sculptors Maven archetypes as follows:
 
    ~~~
    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
-      -DarchetypeArtifactId=sculptor-maven-archetype-ear -DarchetypeVersion=3.0.0 \
+      -DarchetypeArtifactId=sculptor-maven-archetype-ear -DarchetypeVersion={{site.sculptor_version}} \
       -DgroupId=org.helloworld -DartifactId=helloworld-ear -Dpackage=org.helloworld \
       -Dversion=1.0-SNAPSHOT
    ~~~
@@ -447,3 +447,6 @@ Run `SimpleSend`. You'll find in JBoss console log something like this:
 Open SoapUI again an execute the `getAllPlanets` request. Voilà! The planet is retrieved.
 
 ![Soapui Screenshot](/images/documentation/pure-ejb3-tutorial/soapui-screenshot.png)
+
+
+  [1]: maven-archetypes

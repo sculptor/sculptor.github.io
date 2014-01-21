@@ -40,10 +40,10 @@ In this part we will setup the project structure for maven and eclipse.
 
 ![Tryit](../images/tryit.gif)
 
-1. Use the following command (one line) to create a maven pom and file structure.
+1. Use [Sculptors Maven archetype][5] with the following command (one line) to create a Maven POM and file structure.
 
    ~~~
-mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-archetype-standalone -DarchetypeVersion=3.0.0 -DarchetypeRepository=ttps://raw.github.com/sculptor/repository/maven/
+mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-archetype-standalone -DarchetypeVersion={{site.sculptor_version}}
    ~~~
 
    Fill in groupId and archetypeId:
@@ -1227,7 +1227,7 @@ Sculptor generates several UML diagrams for the domain model. The [above diagram
 We are using [Graphviz](http://www.graphviz.org/).
 Sculptor generates textual Graphviz `.dot` files, which is then used to generate images.
 
-[Sculptors Maven plugin `sculptor-maven-plugin`][3] (goal `generate-images`) generates images (.png) from the .dot files. This plugin is included in the `pom.xml` created by the maven archetypes, but you need to install Graphviz and have executable `dot` in path.
+[Sculptors Maven plugin `sculptor-maven-plugin`][3] (goal `generate-images`) generates images (.png) from the .dot files. This plugin is included in the `pom.xml` created by the [Maven archetypes][5], but you need to install Graphviz and have executable `dot` in path.
 
 It is possible to mark some domain objects with `hint="umlgraph=core"` to generate a special diagram with those domain objects in focus.
 
@@ -2441,3 +2441,4 @@ The complete source code for this tutorial is available in GitHub [https://githu
    [2]: installation
    [3]: maven-plugin
    [4]: http://www.slf4j.org
+   [5]: maven-archetypes#sculptor-maven-archetype
