@@ -28,13 +28,13 @@ Sculptor is an open source productivity tool that applies the concepts from [Dom
 
 You express your design intent in a textual specification, from which Sculptor generates high quality Java code and configuration. You can use the concepts from Domain-Driven Design (DDD) in the textual Domain Specific Language (DSL). E.g. Service, Module, Entity, Value Object, Repository.
 
-The generated code is based on well-known frameworks, such as [JPA](http://java.sun.com/javaee/technologies/persistence.jsp), [Hibernate](http://www.hibernate.org/), [Spring Framework](http://www.springframework.org/), [Spring Web Flow](http://www.springframework.org/webflow), [JSF](http://java.sun.com/javaee/javaserverfaces/) and [Java EE](http://java.sun.com/javaee/). Sculptor takes care of the technical details, the tedious repetitive work, and let you focus on delivering more business value - and have more fun.
+The generated code is based on well-known frameworks, such as [JPA](http://java.sun.com/javaee/technologies/persistence.jsp), [Hibernate](http://www.hibernate.org/), [Spring Framework](http://www.springframework.org/) and [Java EE](http://java.sun.com/javaee/). Sculptor takes care of the technical details, the tedious repetitive work, and let you focus on delivering more business value - and have more fun.
 
 The DSL and the code generation drives the development and is not a one time shot. The application can be developed incrementally with an efficient round trip loop.
 
-Sculptor is useful when developing typical enterprise or web applications that benefit from a rich and persistent domain model. Sculptor also provides a sophisticated CRUD GUI for administrative sections of the application or to serve as a scaffolding for your manually created pages.
+Sculptor is useful when developing typical enterprise or web applications that benefit from a rich and persistent domain model.
 
-Within 15 minutes you can go from scratch to a running application, including build scripts, Eclipse projects, domain model, JPA persistence, services, Web Flow application and much more. Thereafter you can continue by evolving the design, add manual code and regenerate.
+Within 15 minutes you can go from scratch to a running application, including build scripts, Eclipse projects, domain model, JPA persistence, services and much more. Thereafter you can continue by evolving the design, add manual code and regenerate.
 
 Sculptor is not an one-size-fits-all product. Even though it is a good start for many systems, sooner or later customization is always needed. Sculptor is designed and documented with this in mind. The generated result can easily be modified to meet your needs.
 
@@ -43,9 +43,9 @@ Sculptor is not an one-size-fits-all product. Even though it is a good start for
 
 * Easy to learn, intuitive syntax of the textual DSL, based on the concepts from DDD
 * Textual DSL has a lot of productivity benefits over graphical tools
-* [Quick start](http://fornax-sculptor.blogspot.com/2009/06/jump-start.html), simple installation
+* Quick start, simple installation
 * Quick development round trip, short feedback loop, it is not a one time shot
-* Support for [TDD](http://fornax-sculptor.blogspot.com/2009/08/testing-is-simple.html) and [refactoring](http://fornax-sculptor.blogspot.com/2009/08/refactoring.html)
+* Support for TDD and refactoring
 * Existing IDE tools, such as refactoring, code assist and debugger will continue to be of service to you
 * [High quality](/2010/03/02/promote-quality-with-sculptor) of generated code
 * [Pick 'n' Choose Target Implementation](/2010/01/16/pick-n-choose-target-implementation), based on well known frameworks, best practices, and a lot of experience
@@ -53,7 +53,7 @@ Sculptor is not an one-size-fits-all product. Even though it is a good start for
 * Great extensibility and customization
 * Used with de facto standard build tool - Maven
 * Based on [Xtext](http://www.eclipse.org/Xtext/) code generation framework
-* Can be used with text editor or any IDE, but DSL editor with error highlight, code completion, and outline is provided for Eclipse users
+* Can be used with text editor or any IDE, but DSL editor with error highlight, code completion and outline is provided for Eclipse users
 * Easy to [remove the tool](/2010/01/26/how-to-remove-sculptor), no runtime magic
 
 
