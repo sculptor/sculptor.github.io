@@ -570,6 +570,20 @@ Entity Person {
 ~~~
 
 
+### Singular Plural Conversion
+
+For one-to-many and many-to-many relations the corresponding attributes and database tables are automatically converted to singular or plural. Here conversion rules for english words are used. By default words become plural by appending "s". Some algorithmic rules are implemented, such as words ending with "y" become "ies" plural.
+
+To be able to handle special cases it is possible to define the mapping in `sculptor-generator.properties` via properties with the prefix `singular2plural.`, e.g.
+
+~~~
+singular2plural.criterion=criteria
+singular2plural.matrix=matrices
+singular2plural.status=status
+singular2plural.species=species
+~~~
+
+
 ### Key
 
 `equals` and `hashCode` requires some thought when used with JPA/Hibernate, see the [discussion](http://www.hibernate.org/109.html) at the Hibernate site. Sculptor takes care of the details. You only have to mark the attributes that is the natural key of the Domain Object.
