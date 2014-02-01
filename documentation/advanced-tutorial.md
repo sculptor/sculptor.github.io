@@ -265,8 +265,8 @@ Value Object is not the same as [Data Transfer Object](http://www.martinfowler.c
 
 #### BasicType
 
-BasicType is typically used for fundamental [types](http://www.martinfowler.com/ieeeSoftware/whenType.pdf), for example different [quantities](http://martinfowler.com/ap2/quantity.html) such as [Money](http://martinfowler.com/eaaCatalog/money.html),
-or [range of values](http://martinfowler.com/ap2/range.html).
+BasicType is typically used for fundamental [types](http://www.martinfowler.com/ieeeSoftware/whenType.pdf), for example different [quantities](http://martinfowler.com/eaaDev/quantity.html) such as [Money](http://martinfowler.com/eaaCatalog/money.html),
+or [range of values](http://martinfowler.com/eaaDev/Range.html).
 
 BasicType is a ValueObject which is stored in the same table as the Domain Object referencing it. It corresponds to JPA `@Embeddable`.
 
@@ -458,7 +458,7 @@ Built in types:
   * Clob
   * Blob
 
-It is easy to add your own DSL types and mapping to database and Java types. See [Developer's Guide][1]. Sculptor supports [Joda Time](http://joda-time.sourceforge.net/) instead of the Java date and time classes. It is also described in the [Developer's Guide](developers-guide#joda) how to activate Joda Time.
+It is easy to add your own DSL types and mapping to database and Java types. See [Developer's Guide](developers-guide#types). Sculptor supports [Joda Time](http://joda-time.sourceforge.net/) instead of the Java date and time classes. It is also described in the [Developer's Guide](developers-guide#joda) how to activate Joda Time.
 
 To distinguish references from simple attributes, declarations of references starts with a `-`. In the same way as in other places you must also use an @ in front of the declaration when referring to a Domain Object. When the relation is one-to-many or many-to-many you define a collection as the type of the reference. Bidirectional associations are defined with the opposite `<->` syntax.
 
@@ -605,13 +605,15 @@ BasicType Ssn {
 }
 ~~~
 
-If there is no natural key Sculptor will generate a UUID (via `java.utill.UUID.randomUUID()`) automatically (attribute name `uuid`) and use this instead.
+If there is no natural key Sculptor will generate a UUID (via `java.util.UUID.randomUUID()`) automatically (attribute name `uuid`) and use this instead.
 {: .alert .alert-info}
 
 
 ### Id
 
 All Entities and persistent Value Objects will also have a surrogate `id` attribute, which is the primary key in the database.
+
+The Java type of the automatically generated id attribute is `Long`. This can be change as described in the [Developer's Guide](developers-guide#types).
 
 
 ### Changeable
@@ -2254,10 +2256,10 @@ If the referenced project is an EJB project (built by the Maven EJB plugin via P
 
 ## Overrides and extension mechanism
 
+Sculptor includes a mechanism for overriding individual Sculptor template or transformation functions.  This can be used to specialize the code that is generated for a project.
+
 ### Overriding templates or transformations for a project
 {: #overriding}
-
-Sculptor includes a mechanism for overriding individual Sculptor template or transformation functions.  This can be used to specialize the code that is generated for a project.
 
 You override a Sculptor template or transformation class by defining an override class that extends the Sculptor class to be overridden.
 
@@ -2304,7 +2306,7 @@ For an example of the override mechanism in use, see the [sculptor-shipping-gene
 
 When overriding a transformation or template function, it's often desirable to delegate to the base implementation of the function being overridden.
 
-Because of how the extension mechanism works, calling *super.someMethod()* doesn't work.  Instead, to delegate to the base implementation being overridden, use a 'next' object reference that is implicitly added to every override class.  For instance:
+Because of how the extension mechanism works, calling `super.someMethod()` doesn't work.  Instead, to delegate to the base implementation being overridden, use a 'next' object reference that is implicitly added to every override class.  For instance:
 
 ~~~
 override String unidirectionalReferenceAdd(Reference it) {
@@ -2325,7 +2327,7 @@ override String unidirectionalReferenceAdd(Reference it) {
 }
 ~~~
 
-In the above example, the unidirectionalReferenceAdd() template method is overridden, and some additional content is conditionally generated, before delegating to the base unidirectionalReferenceAdd() method at the end.
+In the above example, the `unidirectionalReferenceAdd()` template method is overridden, and some additional content is conditionally generated, before delegating to the base `unidirectionalReferenceAdd()` method at the end.
 
 Part of what the 'next' reference does is to delegate to the next implementation in a chain.  If there are multiple cartridges that have overridden the same method, calling 'next' will delegate to the next overidden implementation, which may in turn delegate to its next implementation in the chain.
 
