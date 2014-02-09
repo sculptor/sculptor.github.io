@@ -42,8 +42,8 @@ Sculptor is not an one-size-fits-all product. Even though it is a good start for
 ## Strengths
 
 * Easy to learn, intuitive syntax of the textual DSL, based on the concepts from DDD
-* Textual DSL has a lot of productivity benefits over graphical tools
-* Quick start, simple installation
+* Textual DSL has a lot of [productivity benefits](/2010/06/10/improving-developer-productivity-with-sculptor) over graphical tools
+* Quick start, [simple installation](/documentation/installation)
 * Quick development round trip, short feedback loop, it is not a one time shot
 * Support for TDD and refactoring
 * Existing IDE tools, such as refactoring, code assist and debugger will continue to be of service to you
@@ -51,9 +51,9 @@ Sculptor is not an one-size-fits-all product. Even though it is a good start for
 * [Pick 'n' Choose Target Implementation](/2010/01/16/pick-n-choose-target-implementation), based on well known frameworks, best practices, and a lot of experience
 * Generation of complete application from a single model, not only fragments that are hard to fit in to the overall design
 * Great extensibility and customization
-* Used with de facto standard build tool - Maven
+* Used with de facto standard build tool - [Maven](http://maven.apache.org/)
 * Based on [Xtext](http://www.eclipse.org/Xtext/) code generation framework
-* Can be used with text editor or any IDE, but DSL editor with error highlight, code completion and outline is provided for Eclipse users
+* Can be used with text editor or any IDE, but [DSL editor with error highlight, code completion and outline](/documentation/eclipse-plugin) is provided for Eclipse users
 * Easy to [remove the tool](/2010/01/26/how-to-remove-sculptor), no runtime magic
 
 
