@@ -17,7 +17,7 @@ author: Patrik Nordwall
 
 ## Overview
 
-Sculptor is a simple and powerful code generation platform, which provides a quick start to [Model Driven Software Development](http://www.voelter.de/mdsd-book/) (MDSD). When using Sculptor you can focus on the business domain, instead of technical details. You can use the concepts from [Domain-Driven Design](http://domaindrivendesign.org/books/)(DDD) in the textual Domain Specific Language (DSL). Sculptor uses [XText](http://www.eclipse.org/Xtext/) and [XPand](http://wiki.eclipse.org/Xpand) to parse the DSL and generate high quality Java code and configuration. The generated code is based on well-known frameworks, such as Spring, Hibernate and Java EE.
+Sculptor is a simple and powerful code generation platform, which provides a quick start to [Model Driven Software Development](http://www.voelter.de/mdsd-book/) (MDSD). When using Sculptor you can focus on the business domain, instead of technical details. You can use the concepts from [Domain-Driven Design](http://domaindrivendesign.org/books/) (DDD) in the textual Domain Specific Language (DSL). Sculptor uses [Xtext](http://www.eclipse.org/Xtext/) to parse the DSL and generate high quality Java code and configuration. The generated code is based on well-known frameworks, such as Spring, Hibernate and Java EE.
 
 ![Overview](/images/2010-06-10-improving-developer-productivity-with-sculptor/sculptor_overview5.png) \\
 <small>_Figure 1. Overview of Sculptor_</small>
@@ -38,14 +38,14 @@ High level features of Sculptor:
 
   * Sculptor is not a one-size-fits-all product. Even though it is a good start for many systems, sooner or later customization is always needed. Sculptor is designed and documented with this in mind. The generated result can easily be modified to meet your needs.
 
-To illustrate how Sculptor can be used in practice we will use an example. It is an introduction and not a complete User's Guide, more information can be found in the [Sculptor Documentation](/documentation/).
+To illustrate how Sculptor can be used in practice we will use an example. It is an introduction and not a complete User's Guide, more information can be found in the [Sculptor Documentation][1].
 
 The example is a simple system for a library of movies and books. The core of the system is a Domain Model, see Figure 2, “Domain model” A Library consists of PhysicalMedia. Books and Movies are different types of Media, which are stored on a PhysicalMedia, e.g. DVD, VHS, paper books, eBooks on CD. A Media has Characters, e.g. James Bond, which can be played by a Person, e.g. Pierce Brosnan. A person can be involved (Engagement) in different Media, actually a Person can have several Engagements in the same Media. E.g. Quentin Tarantino is both actor and director in the movie 'Reservoir Dogs'.
 
-![UML Graph](/images/2010-06-10-improving-developer-productivity-with-sculptor/umlgraph.png?height=267&width=400) \\
+![UML Graph](/images/2010-06-10-improving-developer-productivity-with-sculptor/umlgraph.png) \\
 <small>_Figure 2. Domain model of the Library example._</small>
 
-With a few simple Maven commands you will be able to create the Maven and Eclipse projects for your application. Sculptor provides [Maven Archetype](http://maven.apache.org/plugins/maven-archetype-plugin/) artifacts to facilitate this.
+With a few simple Maven commands you will be able to create the Maven and Eclipse projects for your application. Sculptor provides [Maven Archetypes][2] to facilitate this.
 
 A Sculptor application is defined in a textual DSL. Since it is text it has all the benefits of ordinary text source code, such as searching, copy-paste, merging and so on. Sculptor provides an Eclipse editor for the DSL. It supports error highlight, code completion and outline view.
 
@@ -90,7 +90,7 @@ Application Library {
 }
 ~~~
 
-The full DSL model for the Library example looks like _[this_](/documentation/advanced-tutorial#library). There you can see that the DSL defines two Modules, containing a few Services. It defines the same Domain Objects, including attributes and references, as in Figure 2, “Domain model”.
+The full DSL model for the Library example looks like [this][3]. There you can see that the DSL defines two Modules, containing a few Services. It defines the same Domain Objects, including attributes and references, as in Figure 2, “Domain model”.
 
 The core concepts of the DSL have been taken from [Domain-Driven Design](http://domaindrivendesign.org/books/). If you don't have the book you can download and read more in [DDD Quickly](http://www.infoq.com/news/2006/12/domain-driven-design).
 
@@ -391,7 +391,7 @@ There are three different implementations you can choose between.
 
 ## Customization
 
-This section is intended as a teaser of how Sculptor can be customized. More information is available in the [Sculptor Documentation](/documentation/).
+This section is intended as a teaser of how Sculptor can be customized. More information is available in the [Sculptor Documentation][1].
 
 Sculptor is not a one-size-fits-all product. Even though it is a good start for many systems, sooner or later customization is always needed. Some things can easily be changed with properties or AOP, while other things require more effort. However, Sculptor doesn't pretend that it can solve all problems out-of-the-box, but is designed and documented so that you as a developer can take full control of the tool without too much effort.
 
@@ -487,7 +487,7 @@ It is also possible to use AOP to exclude generation. For some special cases the
 
 ## Full Control
 
-You are not stuck if you need to do more customization than what is possible with properties and AOP. You can checkout the Sculptor source code to do more adjustments. It is well described in the [Sculptor Documentation](/documentation/) how to change different things. A few examples of stuff you can modify:
+You are not stuck if you need to do more customization than what is possible with properties and AOP. You can checkout the Sculptor source code to do more adjustments. It is well described in the [Sculptor Documentation][1] how to change different things. A few examples of stuff you can modify:
 
   * Syntax of the DSL.
 
@@ -507,3 +507,8 @@ You can focus on the business domain, instead of technical details. Sculptor dis
 The design of the generated application is heavily inspired by the patterns and concepts from [Domain-Driven Design](http://domaindrivendesign.org/books/).
 
 You are in control and can easily adopt the tool to fit the requirements and frameworks you are working with.
+
+
+   [1]: /documentation/
+   [2]: /documentation/maven-archetypes
+   [3]: /documentation/advanced-tutorial#library
