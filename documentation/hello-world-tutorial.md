@@ -94,7 +94,7 @@ It is a [Module](advanced-tutorial#module) containing one [Entity](advanced-tuto
    If the Maven build aborts with the error message `Executing 'dot' command failed` then the GraphViz package is not installed as described in the [installation guide](installation#graphviz).
    {: .alert .alert-success }
 
-   If you run Maven from the command prompt you have to refresh the Eclipse workspace. If you from within Eclipse with the aforementioned m2e launch configuration then the workspace is refreshed automatically.
+   If you run Maven from the command prompt you have to refresh the Eclipse workspace. If you start the Maven build from within Eclipse with the aforementioned m2e launch configuration then the workspace is refreshed automatically.
    {: .alert }
 
 3. Look at the generated code. In `src/main/java`, `src/main/resources`, `src/test/java` and `src/test/resources` folders the code is only generated once, and you can do manual changes. In `src/main/generated/java`, `src/main/generated/resources`, `src/test/generated/java` and `src/test/generated/resources` it is generated each time, i.e. don't touch.
@@ -189,7 +189,7 @@ Adjust the test method `testSayHello` to something like this:
 
 <span class="label label-info">Tip</span>
 You can use `mvn -o install` to speed up the builds (-o == offline).
-To regenerate you use `mvn generate-sources -Dsculptor.generator.force=true`
+To enforce regeneration you use `mvn generate-sources -Dsculptor.generator.force=true`
 {: .alert}
 
 
