@@ -13,6 +13,17 @@ Released versions of Sculptor:
 
 ## Version 3.0.x
 
+### Version 3.0.2
+
+[Version 3.0.2 was released February xx, 2014](/2014/02/xx/sculptor-302-released).
+
+This release contains:
+
+* Upgrade to [Xtext/Xtend 2.5.2](http://www.eclipse.org/Xtext/releasenotes.html)
+* Refactoring of Sculptor generator test code into separate Maven module
+* Removal of Fornax OAW Maven plugin from build (Exec Maven plugin is used now)
+
+
 ### Version 3.0.1
 
 [Version 3.0.1 was released January 18, 2014](/2014/01/18/sculptor-301-released).
