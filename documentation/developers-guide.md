@@ -851,7 +851,7 @@ Remove persistence related dependencies in `pom.xml`:
 * hibernate-core
 * persistence-api
 
-If you are using the 'jpa.provider=none` then you must add the classifier `without-jpa` to the `sculptor-framework-test` dependency:
+If you are using the `jpa.provider=none` then you must add the classifier `without-jpa` to the `sculptor-framework-test` dependency:
 
 ~~~ xml
 <dependency>
@@ -864,6 +864,7 @@ If you are using the 'jpa.provider=none` then you must add the classifier `witho
 ~~~
 
 The reason for using another jar file is that one of the test beans `JpaTestBean` should not be deployed.
+{: .alert}
 
 
 ### Settings for Generated Diagrams
@@ -1371,7 +1372,7 @@ Contribution of support for Apache Derby has been posted in the
 
 ### How to remove the circular dependency check
 
-Define the following in ((sculptor-generator.properties))
+Define the following in `sculptor-generator.properties`:
 
 ~~~
 check.cyclicDependencies=false
