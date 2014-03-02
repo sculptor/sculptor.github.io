@@ -342,8 +342,31 @@ Make sure that your Maven "settings.xml" contains the correct [GitHub user crede
 
 ### Deployment of Maven artifacts to Sonatypes OSS
 
-To deploy the Maven artifacts to Maven Central (via Sonatypes OSS Repository Hosting as described in [OSSRH-5507](https://issues.sonatype.org/browse/OSSRH-5507)) the [maven-deploy-plugin](http://maven.apache.org/plugins/maven-deploy-plugin/) is used.
+To deploy artifacts to Maven Central the artifacts have to be staged on Sonatypes OSS Repository first. This is described in [Sonatype OSS Maven Repository Usage Guide](https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-7a.DeploySnapshotsandStageReleaseswithMaven). The details of Sculptors access to this repository are outlined in the [ticket OSSRH-5507](https://issues.sonatype.org/browse/OSSRH-5507)).
 
 Make sure that your Maven "settings.xml" contains the correct [Sonatype user credentials](#sonatype-credentials).
 {: .alert .alert-error}
 
+
+### Troubleshooting release finish
+
+If the release script aborts with an error during execution of the Maven plugin `maven-jgitflow-plugin:release-finish` (as described in the corresponding [ticket MJF-129](https://ecosystem.atlassian.net/browse/MJF-129)) then the release process has to be finished manually:
+
+1. Use Git Flow to finish the release via `git flow release finish <release name>`.
+1. Push the release tag created by Git Flow to the GitHub repository via `git push --tags`.
+1. Change the version number in the `develop` branch to the next development version via
+
+   ~~~
+   mvn tycho-versions:set-version -P!all -DnewVersion=<release version>
+   mvn tycho-versions:set-version -P!all -DnewVersion=<next development version>-SNAPSHOT
+   git commit -a -m "updates POMs and MANIFST.MFs for development of version <next development version>-SNAPSHOT"
+   ~~~
+
+
+### Publishing the staged release on Maven Central
+
+After successfully finishing the release process Sculptors release artifacts are staged on Sonatypes OSS Maven Repository [https://oss.sonatype.org/](https://oss.sonatype.org/). To publish the artifacts on Maven Central the following has to be done:
+
+1. Login to Sonatype OSS Maven Repository Manager with the credentials mentioned in the [ticket OSSRH-5507](https://issues.sonatype.org/browse/OSSRH-5507).
+1. Close the staged repository as described [here](https://docs.sonatype.org/display/Repository/Closing+a+Staging+Repository).
+1. Release the closed repository as described [here](https://docs.sonatype.org/display/Repository/Releasing+a+Staging+Repository).
