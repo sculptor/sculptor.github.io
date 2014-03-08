@@ -43,26 +43,6 @@ Some changes are staightforward and some requires more in depth understanding of
 10. Properties of technical nature, which don't belong in the DSL or meta model, are used by the templates and the helpers.
 
 
-## Performance Tuning of Generator
-
-By using one model file per module it is possible for Sculptor to do a partial generate of the changed modules and the ones depending on the changed modules. The file must be named the same as the module (e.g. `media.btdesign`, `person.btdesign`) or prefixed with `model_` or `model-` (model-person.btdesign). This partial generation can shorten the generation time for large projects. [`sculptor-maven-plugin`][3] will detect which model files has changed since previous generator run when using `mvn -o generate-sources`. Full generate will be done when using `-Dsculptor.generator.force=true` or `mvn clean generate-sources`
-
-The Maven `-o` (offline) option can reduce Maven execution time a lot, if you know that you have everything locally.
-{: .alert}
-
-I normally use `mvn -o generate-sources` when doing small changes, which is most of the time, and then `mvn clean generate-sources` or `mvn clean install`when I have done major changes, or want to ensure that everything is working.
-
-A major disadvantage of using `mvn clean` is that Eclipse will often not understand the changes and a separate (and annoying) Eclipse refresh and project clean is needed.
-
-Refresh in Eclipse is often time consuming. In the m2e launch configuration used for executing Maven you should enable the option "Refresh > Refresh resources upon completion > The project containing the selected resource". Don't use "The entire workspace".
-{: .alert}
-
-[`sculptor-maven-plugin`][3] runs the generator within the Maven process and therefore it can be necessary to define JVM parameters for large projects via the environment variable `MAVEN_OPTS`:
-
-* Windows: `set MAVEN_OPTS="-Xms256m -Xmx1g -XX:MaxPermSize=256m"`
-* Unix: `export MAVEN_OPTS=-Xms256m -Xmx1g -XX:MaxPermSize=256m`
-
-
 ## Generator Properties
 
 There are a many things that can be easily customized with properties. The default properties are defined in `default-sculptor-generator.properties` in [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core). You can override these properties by defining them in `sculptor-generator.properties` and `sculptor-gui-generator.properties`. You only have to define the ones that you need to change.
