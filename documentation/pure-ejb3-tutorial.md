@@ -286,7 +286,7 @@ Before we can deploy our EAR we have to prepare some resources within JBoss firs
    {"outcome" => "success"}
    ~~~
 
-4. Our `PlanetConsumer` MDB inherits from Sculptors framework class `AbstractMessageBean`. This class needs for [invalid message handling handling](http://www.enterpriseintegrationpatterns.com/InvalidMessageChannel.html) a reference to JBoss internal ConnectionFactory named `jms/QueueFactory` and a separate message queue called `jms/invalidMessageQueue`. Here we're using JBoss CLI as well:
+4. Our `PlanetConsumer` MDB inherits from Sculptors framework class `AbstractMessageBean`. This class needs (for [invalid message handling](http://www.enterpriseintegrationpatterns.com/InvalidMessageChannel.html)) a reference to JBoss internal ConnectionFactory named `jms/QueueFactory` and a separate message queue called `jms/invalidMessageQueue`. Here we're using JBoss CLI as well:
 
    ~~~
    [standalone@localhost:9999 /] /subsystem=messaging/hornetq-server=default/connection-factory=InVmQueueFactory/:add(entries=["java:/jms/QueueFactory"],connector={"in-vm" => undefined})
