@@ -24,35 +24,40 @@ Some changes are staightforward and some requires more in depth understanding of
 
 1. The developer is using the DSL Editor plugin to edit the application specific `model.btdesign`, i.e. the source for the concrete model that is the input to the code generation process. Constraints of the DSL is validated while editing.
 
-2. When generating code the application specific `Workflow.mwe2` is executed. It doesn't contain much.
+1. When generating code the application specific `Workflow.mwe2` is executed. It doesn't contain much.
 
-3. It invokes the `Sculptorworkflow.mwe2` which defines the flow of the code generation process.
+1. It invokes the `Sculptorworkflow.mwe2` which defines the flow of the code generation process.
 
-4. It starts with parsing the `model.btdesign` file using the XText parser. Constraints of the DSL are checked.
+1. It starts with parsing the `model.btdesign` file using the XText parser. Constraints of the DSL are checked.
 
-5. The DSL model is transformed into a model of the type defined by the `sculptormetamodel.ecore` meta model.
+1. The DSL model is transformed into a model of the type defined by the `sculptormetamodel.ecore` meta model.
 
-6. Constraint validation is performed.
+1. Constraint validation is performed.
 
-7. The model is transformed again. Now it is actually modified to add some default values.
+1. The model is transformed again. Now it is actually modified to add some default values.
 
-8. Constraint validation again.
+1. Constraint validation again.
 
-9. Now the actual generation of Java code and configuration files begin. It is done with code generation templates written in [Xtends template expressions](http://www.eclipse.org/xtend/documentation.html#templates). The templates extract values from the model and uses [Xtend extension methods](http://www.eclipse.org/xtend/documentation.html#extensionMethods) and Java helper classes.
+1. Now the actual generation of Java code and configuration files begin. It is done with code generation templates written in [Xtends template expressions](http://www.eclipse.org/xtend/documentation.html#templates). The templates extract values from the model and uses [Xtend extension methods](http://www.eclipse.org/xtend/documentation.html#extensionMethods) and Java helper classes.
 
-10. Properties of technical nature, which don't belong in the DSL or meta model, are used by the templates and the helpers.
+1. Properties of technical nature, which don't belong in the DSL or meta model, are used by the templates and the helpers.
 
 
 ## Generator Properties
 
-There are a many things that can be easily customized with properties. The default properties are defined in `default-sculptor-generator.properties` in [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core). You can override these properties by defining them in `sculptor-generator.properties` and `sculptor-gui-generator.properties`. You only have to define the ones that you need to change.
+There are a many things that can be easily customized with properties. The default properties are defined in `default-sculptor-generator.properties` in [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core). You can override these properties by defining them in `sculptor-generator.properties` and `sculptor-gui-generator.properties`.
+
+Properties used in multiple `sculptor-generator.properties` within the same project can be defined in a single place - in `common-sculptor-generator.properties`. This properties file is similar to `default-sculptor-generator.properties` (which is shipped with Sculptor) but it's defined once within your project.
+
+You only have to define the ones that you need to change.
 
 Sculptor will look for properties in the following order:
 
-  1. `System.properties` (only intended for temporary tests)
-  2. `sculptor-gui-generator.properties`
-  3. `sculptor-generator.properties`
-  4. `default-sculptor-generator.properties`
+1. `System.properties` (only intended for temporary tests)
+1. `sculptor-gui-generator.properties`
+1. `sculptor-generator.properties`
+1. `common-sculptor-generator.properties`
+1. `default-sculptor-generator.properties`
 
 
 ### Project Nature
