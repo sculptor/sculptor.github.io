@@ -13,6 +13,17 @@ Released versions of Sculptor:
 
 ## Version 3.0.x
 
+### Version 3.0.3
+
+Version 3.0.3 was released March xx, 2014.
+
+This release contains:
+
+* Support for [generator properties](developers-guide#generator-properties) which are common within a [multi-module Maven project](http://maven.apache.org/guides/mini/guide-multiple-modules.html)
+* Refactoring of [Maven plugins](maven-plugin) status file handling to improve file deletion on Windows
+* Removal of obsolete code related to partial generation and CRUD UI generation 
+
+
 ### Version 3.0.2
 
 [Version 3.0.2 was released March 2, 2014](/2014/03/02/sculptor-302-released).
