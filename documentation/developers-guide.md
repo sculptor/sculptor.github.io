@@ -45,19 +45,16 @@ Some changes are staightforward and some requires more in depth understanding of
 
 ## Generator Properties
 
-There are a many things that can be easily customized with properties. The default properties are defined in `default-sculptor-generator.properties` in [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core). You can override these properties by defining them in `sculptor-generator.properties` and `sculptor-gui-generator.properties`.
+There are a many things that can be easily customized with properties. The default properties are defined in `default-sculptor-generator.properties` in [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core). You can override these properties by defining them in `sculptor-generator.properties`.
 
-Properties used in multiple `sculptor-generator.properties` within the same project can be defined in a single place - in `common-sculptor-generator.properties`. This properties file is similar to `default-sculptor-generator.properties` (which is shipped with Sculptor) but it's defined once within your project.
-
-You only have to define the ones that you need to change.
+Properties used in multiple `sculptor-generator.properties` within [multiple Maven modules (sub-projects)](http://maven.apache.org/guides/mini/guide-multiple-modules.html) of the same project can be defined in a single place - in `common-sculptor-generator.properties`. This properties file is similar to `default-sculptor-generator.properties` (which is shipped with Sculptor) but it's provided within your project.
 
 Sculptor will look for properties in the following order:
 
-1. `System.properties` (only intended for temporary tests)
-1. `sculptor-gui-generator.properties`
-1. `sculptor-generator.properties`
-1. `common-sculptor-generator.properties`
-1. `default-sculptor-generator.properties`
+1. System properties (only intended for temporary tests)
+1. `generator/sculptor-generator.properties` (provided in the Maven modules within you project)
+1. `common-sculptor-generator.properties` (optionally provided once within you project)
+1. `default-sculptor-generator.properties` (shipped with Sculptor generator library)
 
 
 ### Project Nature

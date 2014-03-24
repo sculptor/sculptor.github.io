@@ -35,7 +35,7 @@ E.g. Quentin Tarantino is both actor and director in the movie 'Reservoir Dogs'.
 
 ## Setup Project
 
-In this part we will setup the project structure for maven and eclipse.
+In this part we will setup the project structure for Maven and Eclipse.
 
 ![Tryit](../images/tryit.gif)
 
@@ -2197,7 +2197,7 @@ In previous section it was described how the model could be separated into sever
 
 In that case the imported module must define a `basePackage` and use `ApplicationPart`.
 
-This is `model-sharedtypes.btdesign` in separate file, in another project:
+This is `model-sharedtypes.btdesign` in a separate file within another project:
 
 ~~~
 ApplicationPart CommonPart {
@@ -2213,13 +2213,16 @@ ApplicationPart CommonPart {
 }
 ~~~
 
-You don't want to generate code for the imported module in your project, which is going to use the sharedtypes from the common project. To skip generation of a module you define the module (sharedtypes in this example) in `sculptor-generator.properties`:
+<div markdown="1">
+You don't want to generate code for the imported module in your project, which is going to use the sharedtypes from the common project. To skip generation of a module you define the module (`sharedtypes` in this example) in `sculptor-generator.properties`:
 
 ~~~
 generate.module.sharedtypes=false
 ~~~
+</div>
+{: .alert .alert-error}
 
-You import and use it as normal, i.e.
+You import and use the model as normal, i.e.
 
 ~~~
 import "classpath:/model-sharedtypes.btdesign"
@@ -2236,9 +2239,9 @@ Application Bank {
 }
 ~~~
 
-The dependency to the classes must be added in `pom.xml`:
+The dependency to the project must be added in `pom.xml`:
 
-~~~
+~~~ xml
 <dependency>
     <groupId>org.foo.common</groupId>
     <artifactId>foo-common</artifactId>
@@ -2247,9 +2250,12 @@ The dependency to the classes must be added in `pom.xml`:
 </dependency>            
 ~~~
 
+<div markdown="1">
 Note that if you use classifier `client` it will be dependency to the `-client` jar file, which was created by `maven-jar-plugin` with corresponding `client` classifier.
 
 If the referenced project is an EJB project (built by the Maven EJB plugin via POM packaging type `ejb`) then you will use `<type>ejb-client</type>` instead of `<classifier/>`.
+</div>
+{: .alert}
 
 
 ## Overrides and extension mechanism
