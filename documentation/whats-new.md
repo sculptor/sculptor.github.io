@@ -15,7 +15,7 @@ Released versions of Sculptor:
 
 ### Version 3.0.3
 
-Version 3.0.3 was released March xx, 2014.
+[Version 3.0.3 was released March 29, 2014](/2014/03/29/sculptor-303-released).
 
 This release contains:
 
