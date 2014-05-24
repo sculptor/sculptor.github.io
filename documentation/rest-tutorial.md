@@ -24,7 +24,7 @@ At first we will setup the project structure for Maven and Eclipse.
 1. Use [Sculptors Maven archetype][12] with the following command (**one line** - indicated by the trailing `\`) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
 
    ~~~
-   mvn archetype:generate -DarchetypeGroupId=org.sculptor \
+   mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator \
       -DarchetypeArtifactId=sculptor-maven-archetype \
       -DarchetypeVersion={{site.sculptor_version}} \
       -Dstandalone=true -Drest=true
@@ -512,7 +512,7 @@ By default the web configuration and JSP pages are generated in `src/main/webapp
 <build>
   <plugins>
     <plugin>
-      <groupId>org.sculptor</groupId>
+      <groupId>org.sculptorgenerator</groupId>
       <artifactId>sculptor-maven-plugin</artifactId>
       <version>${sculptor-version}</version>
       <configuration>
