@@ -13,6 +13,18 @@ Released versions of Sculptor:
 
 ## Version 3.0.x
 
+### Version 3.0.4
+
+Version 3.0.4 was released May xx, 2014.
+
+This release contains:
+
+* Refactoring of [generator properties](developers-guide#generator-properties) support into separate project
+* Refactoring of Builder and mongoDB support into their own [generator cartridges](advanced-tutorial#cartridges)
+* Added support for adding new generator properties in generator cartridges
+* Added support for [Sculptors extension mechnism](advanced-tutorial#overrides-and-extension-mechanism) in template test support
+
+
 ### Version 3.0.3
 
 [Version 3.0.3 was released March 29, 2014](/2014/03/29/sculptor-303-released).
