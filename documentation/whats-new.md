@@ -19,6 +19,7 @@ Version 3.0.4 was released May xx, 2014.
 
 This release contains:
 
+* Upgrade to [Xtext/Xtend 2.6.0](http://www.eclipse.org/Xtext/releasenotes.html)
 * Refactoring of [generator properties](developers-guide#generator-properties) support into separate project
 * Refactoring of Builder and mongoDB support into their own [generator cartridges](advanced-tutorial#cartridges)
 * Added support for adding new generator properties in generator cartridges
