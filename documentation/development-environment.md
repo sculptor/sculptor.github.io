@@ -326,7 +326,7 @@ So Sculptors release process is as follows:
 * runs a Maven build (deploy or install), merges the release branch, updates pom(s) with the development version via `mvn jgitflow:release-finish -DdevelopmentVersion=<DEVLOPMENT_VERSION>`
 * update the Eclipse config files with the development version via `mvn tycho-versions:set-version -P!all -DnewVersion=<DEVLOPMENT_VERSION>` and commit the modified files
 
-To automate this process the script file [`release.sh`](https://github.com/sculptor/sculptor/blob/develop/release.sh) is available. This script requires as arguments the release version and the next development version (without the suffix "-SNAPSHOT"), e.g. `./release 3.0.0 3.0.1`.
+To automate this process the script file [`release.sh`](https://github.com/sculptor/sculptor/blob/develop/release.sh) is available. This script requires as arguments the release version and the next development version (without the suffix "-SNAPSHOT"), e.g. `./release.sh 3.0.0 3.0.1`.
 {: .alert .alert-success}
 
 The following chapters are describing the deployment of the Eclipse plugin and the Maven plugin during the release build (executed via `mvn jgitflow:release-finish`).
