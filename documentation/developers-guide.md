@@ -193,7 +193,7 @@ The generated DDL script contains drop statements. In case you don't wan't to ge
 generate.ddl.drop=false
 ~~~
 
-Individual classes may be omitted from the generated DDL. This can be useful to keep parts of the model that are works in progress from the DDL. To omit a class from the generated DDL, mark it with a 'skipddl' hint:
+Individual classes may be omitted from the generated DDL. This can be useful to keep parts of the model that are works in progress from the DDL. To omit a class from the generated DDL, mark it with a "skipddl" hint:
 
 ~~~
 Entity Roles {
@@ -204,7 +204,7 @@ Entity Roles {
 }
 ~~~
 
-By default, some of the system-generated attributes, such as `version`, `createdBy`, `createdDate`, are ordered at the end of each generated table in the DDL. This can be controlled via the 'systemAttributesToPutLast' property:
+By default, some of the system-generated attributes, such as `version`, `createdBy`, `createdDate`, are ordered at the end of each generated table in the DDL. This can be controlled via the `systemAttributesToPutLast` property:
 
 ~~~
 # Attributes defined by system that should appear last in attribute listings, such as in DDL
