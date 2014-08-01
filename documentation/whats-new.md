@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "What's new in Sculptor"
-description: "Release notes"
+description: "Release Notes, Version History"
 navbar_name: docs
 ---
 {% include JB/setup %}
