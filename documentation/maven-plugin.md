@@ -12,6 +12,7 @@ navbar_name: docs
       <li class="active"><a href="#overview">Overview</a></li>
       <li><a href="#usage">Usage</a></li>
       <li><a href="#configuration">Configuration</a></li>
+      <li><a href="#logging">Logging</a></li>
     </ul>
   </div>
   <div class="span9">
@@ -171,7 +172,7 @@ The Sculptor Maven plugin goals provide the following [configuration properties]
 | `skip`                 | `false`                              | `generate`                             | Skip the execution of the code generator (can be set from command line using `-Dsculptor.generator.skip=true`)
 | `skip`                 | `false`                              | `generate-images`                      | Skip the execution of the image generator (can be set from command line using `-Dsculptor.graphviz.skip=true`)
 | `statusFile`           | `.sculptor-status`                   | `clean`, `generate`, `generate-images` | File holding the status of the last code generator execution.
-| `verbose`              | `false`                              | `clean`, `generate`, `generate-images` | Activates verbose logging (can be set from command line using `-Dverbose=true`)
+| `verbose`              | `false`                              | `clean`, `generate`, `generate-images` | Activates verbose logging of the plugin (can be set from command line using `-Dverbose=true`). Activating debug logging of Sculptors generator library is decribed in the section [Logging](#logging).
 
 These properties are used within the `<configuration>` tag in the Sculptor Maven plugin definition, e.g. 
 
@@ -215,6 +216,35 @@ Some of these properties can be added to the commandline as system properties, e
 mvn clean test -Dverbose=true -Dsculptor.graphviz.skip=true
 ~~~
 
+
+## Logging
+
+Sculptor uses the [SLF4J](http://slf4j.org/) logging abstraction which supports various logging frameworks (e.g. java.util.logging, logback, log4j).
+
+Starting with version 3.1 [Maven ships with the SLF4J Simple Logger](http://maven.apache.org/maven-logging.html). So adding the Java system property `-Dorg.slf4j.simpleLogger.log.org.sculptor=debug` to the Maven command line activates the debug logging of Sculptors generator library:
+
+~~~
+mvn clean generate-sources -Dorg.slf4j.simpleLogger.log.org.sculptor=debug
+~~~
+
+With Maven 3.0 Sculptor uses the [Logback](http://logback.qos.ch/) logging framework. So adding the Java system property `-Dlogback.configurationFile=</path/to/logback.xml>` to the Maven command line activates debug logging of Sculptors generator library. The corresponding `logback.xml` defines a logger with the name "org.sculptor":
+
+~~~ xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration> 
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender"> 
+    <encoder> 
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern> 
+    </encoder> 
+  </appender>  
+
+  <logger name="org.sculptor" level="DEBUG"/>
+
+  <root level="WARN">
+    <appender-ref ref="STDOUT"/> 
+  </root> 
+</configuration>
+~~~
 
   </div>
 </div>
