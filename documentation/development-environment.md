@@ -352,15 +352,15 @@ Make sure that your Maven "settings.xml" contains the correct [Sonatype user cre
 
 If the release script aborts with an error during execution of the Maven plugin `maven-jgitflow-plugin:release-finish` (as described in the corresponding [ticket MJF-129](https://ecosystem.atlassian.net/browse/MJF-129)) then the release process has to be finished manually:
 
-1. Use Git Flow to finish the release via `git flow release finish <release name>`.
-1. Push the release tag created by Git Flow to the GitHub repository via `git push --tags`.
-1. Change the version number in the `develop` branch to the next development version via
+1.  Use Git Flow to finish the release via `git flow release finish <release name>`.
+1.  Push the release tag created by Git Flow to the GitHub repository via `git push --tags`.
+1.  Change the version number in the `develop` branch to the next development version via
 
-   ~~~
-   mvn tycho-versions:set-version -P!all -DnewVersion=<release version>
-   mvn tycho-versions:set-version -P!all -DnewVersion=<next development version>-SNAPSHOT
-   git commit -a -m "updates POMs and MANIFST.MFs for development of version <next development version>-SNAPSHOT"
-   ~~~
+    ~~~
+    mvn tycho-versions:set-version -P!all -DnewVersion=<release version>
+    mvn tycho-versions:set-version -P!all -DnewVersion=<next development version>-SNAPSHOT
+    git commit -a -m "updates POMs and MANIFST.MFs for development of version <next development version>-SNAPSHOT"
+    ~~~
 
 
 ### Publishing the staged release on Maven Central

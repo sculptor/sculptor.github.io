@@ -21,31 +21,31 @@ HTML, JSON and XML representations are generated.
 
 At first we will setup the project structure for Maven and Eclipse.
 
-1. Use [Sculptors Maven archetype][12] with the following command (**one line** - indicated by the trailing `\`) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
+1.  Use [Sculptors Maven archetype][12] with the following command (**one line** - indicated by the trailing `\`) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
 
-   ~~~
-   mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator \
-      -DarchetypeArtifactId=sculptor-maven-archetype \
-      -DarchetypeVersion={{site.sculptor_version}} \
-      -Dstandalone=true -Drest=true
-   ~~~
+    ~~~
+    mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator \
+       -DarchetypeArtifactId=sculptor-maven-archetype \
+       -DarchetypeVersion={{site.sculptor_version}} \
+       -Dstandalone=true -Drest=true
+    ~~~
 
-   The property `-Dstandalone=true` indicates that the project is **not** part of a [Maven multi-module project](http://maven.apache.org/guides/mini/guide-multiple-modules.html) and is **not** refering to a common parent project `helloworld-parent`.
-   {: .alert} 
+    The property `-Dstandalone=true` indicates that the project is **not** part of a [Maven multi-module project](http://maven.apache.org/guides/mini/guide-multiple-modules.html) and is **not** refering to a common parent project `helloworld-parent`.
+    {: .alert} 
 
-   The property `-rest=true` indicates that the project creates a WAR which is using Sculptors REST support and Jetty as web container.
-   {: .alert} 
+    The property `-rest=true` indicates that the project creates a WAR which is using Sculptors REST support and Jetty as web container.
+    {: .alert} 
 
-   Fill in groupId and artifactId:
+    Fill in groupId and artifactId:
 
-   ~~~
-   Define value for groupId: : org.helloworld
-   Define value for artifactId: : helloworld
-   Define value for version:  1.0-SNAPSHOT: :
-   Define value for package:  org.helloworld: :
-   ~~~
+    ~~~
+    Define value for groupId: : org.helloworld
+    Define value for artifactId: : helloworld
+    Define value for version:  1.0-SNAPSHOT: :
+    Define value for package:  org.helloworld: :
+    ~~~
 
-2. Open Eclipse and import the project via (via [Eclipse M2E](http://wiki.eclipse.org/M2E)) with "File > Import... > Existing Maven Projects".
+2.  Open Eclipse and import the project via (via [Eclipse M2E](http://wiki.eclipse.org/M2E)) with "File > Import... > Existing Maven Projects".
 
 
 ## Initial Model

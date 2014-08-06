@@ -31,37 +31,37 @@ Before you start you need to run a mongoDB server locally. Therefore [download a
 
 In this first part we will setup the project structure for Maven and Eclipse.
 
-1. Use [Sculptors Maven archetype][16] with the following command (**one line** - indicated by the trailing `\`) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
+1.  Use [Sculptors Maven archetype][16] with the following command (**one line** - indicated by the trailing `\`) to create a new project with [Maven POM](http://maven.apache.org/guides/introduction/introduction-to-the-pom.html) and file structure. You can change the groupId and artifactId if you like.
 
-   ~~~
-   mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator \
-      -DarchetypeArtifactId=sculptor-maven-archetype \
-      -DarchetypeVersion={{site.sculptor_version}} \
-      -Dstandalone=true \
-      -Dmongodb=true
-   ~~~
+    ~~~
+    mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator \
+       -DarchetypeArtifactId=sculptor-maven-archetype \
+       -DarchetypeVersion={{site.sculptor_version}} \
+       -Dstandalone=true \
+       -Dmongodb=true
+    ~~~
 
-   The property `-Dstandalone=true` indicates that the project is **not** part of a [Maven multi-module project](http://maven.apache.org/guides/mini/guide-multiple-modules.html) and is **not** refering to a common parent project.
-   {: .alert} 
+    The property `-Dstandalone=true` indicates that the project is **not** part of a [Maven multi-module project](http://maven.apache.org/guides/mini/guide-multiple-modules.html) and is **not** refering to a common parent project.
+    {: .alert} 
 
-   The property `-Dmongodb=true` indicates that this Sculptor Maven project needs some tweaks for supporting mongoDB, e.g. different dependendencies in `pom.xml` or aditional settings in the `sculptor-generator.properties` file.
-   {: .alert} 
+    The property `-Dmongodb=true` indicates that this Sculptor Maven project needs some tweaks for supporting mongoDB, e.g. different dependendencies in `pom.xml` or aditional settings in the `sculptor-generator.properties` file.
+    {: .alert} 
 
-   Fill in groupId and artifactId:
+    Fill in groupId and artifactId:
 
-   ~~~
-   Define value for groupId: : org.blogger
-   Define value for artifactId: : blog
-   Define value for version:  1.0-SNAPSHOT: :
-   Define value for package:  org.blogger: :
-   ~~~
+    ~~~
+    Define value for groupId: : org.blogger
+    Define value for artifactId: : blog
+    Define value for version:  1.0-SNAPSHOT: :
+    Define value for package:  org.blogger: :
+    ~~~
 
-2. Open Eclipse and import the project via (via [m2e Eclipse plugin](http://www.eclipse.org/m2e/)) with "File > Import... > Existing Maven Projects".
+2.  Open Eclipse and import the project via (via [m2e Eclipse plugin](http://www.eclipse.org/m2e/)) with "File > Import... > Existing Maven Projects".
 
-3. Create an Eclipse m2e launch configuration for executing Maven (e.g. with the goal `generate-sources`) from within Eclipse (right-clicking the project or Maven POM and selecting "Run as > Maven build..." from the context menu).
+3.  Create an Eclipse m2e launch configuration for executing Maven (e.g. with the goal `generate-sources`) from within Eclipse (right-clicking the project or Maven POM and selecting "Run as > Maven build..." from the context menu).
 
-   To refresh the Eclipse workspace after Sculptors code generator created new code enable the option "Refresh > Refresh resources upon completion > The project containing the selected resource" in the launch configuration.
-   {: .alert}
+    To refresh the Eclipse workspace after Sculptors code generator created new code enable the option "Refresh > Refresh resources upon completion > The project containing the selected resource" in the launch configuration.
+    {: .alert}
 
 Before you start serious development you should follow the instructions in the [Installation Guide][2].
 {: .alert .alert-success}
@@ -71,91 +71,91 @@ Before you start serious development you should follow the instructions in the [
 
 In this part we will write a Sculptor DSL file and generate code from it.
 
-1. Modify the file named `model.btdesign` in the folder `src/main/resources/`
+1.  Modify the file named `model.btdesign` in the folder `src/main/resources/`
 
-1. Open the `model.btdesign` file with Sculptor DSL editor, double-click on it.
-   Add the following to the design file.
+1.  Open the `model.btdesign` file with Sculptor DSL editor, double-click on it.
+    Add the following to the design file.
 
-   ~~~
-   Application Blog {
-       basePackage = org.blog
-   
-       Module core {
-   
-            Entity BlogPost {
-               scaffold
-               - Blog inBlog
-               String slug key
-               String title
-               String body length="2000"
-               Date published nullable
-               - Author writtenBy
-               - Set<Comment> comments
-               def List<Comment> getSortedComments;
-   
-               Repository BlogPostRepository { 
-                   List<@BlogPost> findPostsInBlog(@Blog inBlog);
-                   List<@BlogPost> findPostsWithComments => AccessObject;
-                   List<@BlogPost> findPostsWithGreatComments;
-                   protected findByCondition;
-               }
-           }
-   
-           ValueObject Comment {
-               not aggregateRoot
-               String title
-               String body
-               Timestamp timestamp
-           }
-   
-           Entity Blog {
-               scaffold
-               String ^url key
-               String title
-               String intro length="300"
-               - Set<Author> writers
-           }
-   
-           Entity Author {
-               scaffold
-               String name required
-               String emailAddress
-           }
-       }
-   }
-   ~~~
+    ~~~
+    Application Blog {
+        basePackage = org.blog
+    
+        Module core {
+    
+             Entity BlogPost {
+                scaffold
+                - Blog inBlog
+                String slug key
+                String title
+                String body length="2000"
+                Date published nullable
+                - Author writtenBy
+                - Set<Comment> comments
+                def List<Comment> getSortedComments;
+    
+                Repository BlogPostRepository { 
+                    List<@BlogPost> findPostsInBlog(@Blog inBlog);
+                    List<@BlogPost> findPostsWithComments => AccessObject;
+                    List<@BlogPost> findPostsWithGreatComments;
+                    protected findByCondition;
+                }
+            }
+    
+            ValueObject Comment {
+                not aggregateRoot
+                String title
+                String body
+                Timestamp timestamp
+            }
+    
+            Entity Blog {
+                scaffold
+                String ^url key
+                String title
+                String intro length="300"
+                - Set<Author> writers
+            }
+    
+            Entity Author {
+                scaffold
+                String name required
+                String emailAddress
+            }
+        }
+    }
+    ~~~
 
-   Visualization of this model looks like this (generated by Sculptor):
-   ![][3]
+    Visualization of this model looks like this (generated by Sculptor):
+    ![][3]
 
-1. Run `mvn clean install` to generate code and build. The JUnit test will fail.
+1.  Run `mvn clean install` to generate code and build. The JUnit test will fail.
 
-   If you run Maven from the command prompt you have to refresh the Eclipse workspace. If you from within Eclipse with the aforementioned m2e launch configuration then the workspace is refreshed automatically.
-   {: .alert }
+    If you run Maven from the command prompt you have to refresh the Eclipse workspace. If you from within Eclipse with the aforementioned m2e launch configuration then the workspace is refreshed automatically.
+    {: .alert }
 
-1. Now it is your task to complete the failing tests. A start for implementing `AuthorServiceTest` may look like this:
+1.  Now it is your task to complete the failing tests. A start for implementing `AuthorServiceTest` may look like this:
 
-   ~~~ java
-   private String authorId1;
-   
-   @Before
-   public void initTestData() {
-       Author author1 = new Author("Patrik");
-       Author saved = authorService.save(SimpleJUnitServiceContextFactory.getServiceContext(), author1);
-       authorId1 = saved.getId();
-   }
-   
-   @Test
-   public void testFindById() throws Exception {
-       Author found = authorService.findById(SimpleJUnitServiceContextFactory.getServiceContext(), authorId1);
-       assertEquals("Patrik", found.getName());
-   }
-   ~~~
+    ~~~ java
+    private String authorId1;
+    
+    @Before
+    public void initTestData() {
+        Author author1 = new Author("Patrik");
+        Author saved = authorService.save(SimpleJUnitServiceContextFactory.getServiceContext(), author1);
+        authorId1 = saved.getId();
+    }
+    
+    @Test
+    public void testFindById() throws Exception {
+        Author found = authorService.findById(SimpleJUnitServiceContextFactory.getServiceContext(), authorId1);
+        assertEquals("Patrik", found.getName());
+    }
+    ~~~
 
-   You need to run a mongoDB server locally. Therefore [download and install mongoDB][4]. Start mongoDB with `bin/mongod` command.
-   {: .alert .alert-error}
+    You need to run a mongoDB server locally. Therefore [download and install mongoDB][4]. Start mongoDB with `bin/mongod` command.
+    {: .alert .alert-error}
 
-   When running the tests it will connect to a mongoDB instance running at localhost (default port 27017). The database will be created automatically and dropped after each test method (done by the `@After dropDatabase` method in the test case).
+    When running the tests it will connect to a mongoDB instance running at localhost (default port 27017). The database will be created automatically and dropped after each test method (done by the `@After dropDatabase` method in the test case).
 
 
 ## Part 3 - Business Tier Explained

@@ -174,16 +174,16 @@ db.mysql.onDeleteCascade=false
 
 There are two ways to generate database creation SQL script (DDL). Select between:
 
-1. Enable the `hibernate3-maven-plugin hbm2ddl` in `pom.xml`. The archetype generates settings for it, but it is commented out.
+1.  Enable the `hibernate3-maven-plugin hbm2ddl` in `pom.xml`. The archetype generates settings for it, but it is commented out.
 The default settings is to generate the ddl script every time in the build phase `process-classes`. You can change that by
 removing the `<phase>process-classes</phase>` in the `execution` section of the plugin definition in `pom.xml`. In that case
 you need to run the generation when needed with `mvn hibernate3::hbm2ddl`.
 
-2. Sculptor will generate DDL script if you add the following property in `sculptor-generator.properties`:
+2.  Sculptor will generate DDL script if you add the following property in `sculptor-generator.properties`:
 
-   ~~~
-   generate.ddl=true
-   ~~~
+    ~~~
+    generate.ddl=true
+    ~~~
 
 The generated DDL script contains drop statements. In case you don't wan't to generate those you can define:
 
@@ -896,19 +896,19 @@ It is also possible to define color for individual elements using hint in model 
 By default [Jetty](http://www.mortbay.org/jetty/) is used to run the application. Instead of Jetty you can use [Tomcat](http://tomcat.apache.org/).
 Deployment in Tomcat requires that you do the following.
 
-1. Define the following property in `sculptor-generator.properties` in the business tier project:
+1.  Define the following property in `sculptor-generator.properties` in the business tier project:
 
-   ~~~
+    ~~~
 deployment.applicationServer=Tomcat
-   ~~~
+    ~~~
 
-2. The Tomcat definition of the datasource is located in `META-INF/context.xml` in the WAR. This file is generated once, but you might need to adjust the settings.
+2.  The Tomcat definition of the datasource is located in `META-INF/context.xml` in the WAR. This file is generated once, but you might need to adjust the settings.
 
-3. Copy the jdbc driver jar to tomcat lib directory.
+3.  Copy the jdbc driver jar to tomcat lib directory.
 
-4. Rebuild with `mvn clean install` in the parent directory.
+4.  Rebuild with `mvn clean install` in the parent directory.
 
-5. The WAR located in the target directory of the web project can be deployed in Tomcat.
+5.  The WAR located in the target directory of the web project can be deployed in Tomcat.
 
 
 ### Deployment as EAR or WAR
@@ -1309,9 +1309,9 @@ You can change the names of the subpackages to the module by defining properties
 
 Generation of database schema (DDL) is specific for different database vendors. To add support for your database you can do like this.
 
-1. In the application specific `sculptor-generator.properties` you define the database properties for your database. Note that the `db.product` value must be `custom`.
+1.  In the application specific `sculptor-generator.properties` you define the database properties for your database. Note that the `db.product` value must be `custom`.
 
-   ~~~
+    ~~~
 db.product=custom
 db.custom.maxNameLength=27
 db.custom.hibernate.dialect=org.hibernate.dialect.OracleDialect
@@ -1649,87 +1649,88 @@ When working with the DSL you generate the parser and editor by running the `Gen
 
 We need to be able to define an additional feature for the attributes of the Domain Objects. It should be possible to define that an attribute is included in the constructor, but still have setter method. A complement to the changeable feature. Let us call this new feature `required`.
 
-1. Open the `sculptormetamodel.ecore_diagram` with the graphical editor.
-   Add a new EAttribute to the `Attribute` "class". Set the name to `required` in the Properties view. Select `EBoolean` in the `EAttribute Type`.
+1.  Open the `sculptormetamodel.ecore_diagram` with the graphical editor.
+    Add a new EAttribute to the `Attribute` "class". Set the name to `required` in the Properties view. Select `EBoolean` in the `EAttribute Type`.
 
    ![Required Attribute](/images/documentation/developers-guide/required_attribute.png) \\
    <small>_Figure 4. Screenshot of metamodel for required attribute_</small>
 
-2. Open the `sculptormetamodel.genmodel` and right click on the top node. Select Generate Model.
+2.  Open the `sculptormetamodel.genmodel` and right click on the top node. Select Generate Model.
 
-3. Open `sculptordsl.xtext` and add `required` in the same way as `nullable` in the `DslAttribute` section. Note that `required` should by default be treated as false when not specified.
+3.  Open `sculptordsl.xtext` and add `required` in the same way as `nullable` in the `DslAttribute` section. Note that `required` should by default be treated as false when not specified.
 
-4. Run `GenerateSculptordsl.mwe` in `org.sculptor.dsl` project. This can be done by right clicking `GenerateSculptordsl.mwe` and selecting "Run as MWE Workflow".
+4.  Run `GenerateSculptordsl.mwe` in `org.sculptor.dsl` project. This can be done by right clicking `GenerateSculptordsl.mwe` and selecting "Run as MWE Workflow".
 
-5. Open `DslTransformation.ext` and add the "copy" of the `required` property in the same way as the `nullable` property in the create Attribute method.
+5.  Open `DslTransformation.ext` and add the "copy" of the `required` property in the same way as the `nullable` property in the create Attribute method.
 
-   ~~~
+    ~~~
 setRequired(attribute.required) ->
-   ~~~
+    ~~~
 
-6. Modify the code generation templates. In this case it was only needed to adjust the logic for the `constructorAttributes` method, which is located in `helper.ext`.
+6.  Modify the code generation templates. In this case it was only needed to adjust the logic for the `constructorAttributes` method, which is located in `helper.ext`.
 
-7. Build with `mvn clean install`.
+7.  Build with `mvn clean install`.
 
-8. Install the DSL editor plugins and test the new feature with the reference application.
+8.  Install the DSL editor plugins and test the new feature with the reference application.
 
 
 ### How to Add a New Core Concept
 
 This section describes all steps of how to add a completely new concept, Consumer in this case. Consumer is implemented in Sculptor and since this description is very brief you have to look at the details in the source code to make any sense out of this.
 
-1. Start with the Ecore meta model. Open the `sculptormetamodel.ecore_diagram` with the graphical editor.
+1.  Start with the Ecore meta model. Open the `sculptormetamodel.ecore_diagram` with the graphical editor.
 
-   * Add `Consumer` class.
-   * Add generalization link from `Consumer` to `NamedElement`, a Consumer has a name.
-   * Add bi-directional aggregate association between `Module` and `Consumer`, one Module can contain many Consumers, a Consumer belongs to one Module.
-   * Add association from `Consumer` to `Service`, `serviceDependencies`, used for dependency injection of Services into the Consumer.
-   * Add association from `Consumer` to `Repository`, `repositoryDependencies`, used for dependency injection of Repositories into the Consumer.
+    * Add `Consumer` class.
+    * Add generalization link from `Consumer` to `NamedElement`, a Consumer has a name.
+    * Add bi-directional aggregate association between `Module` and `Consumer`, one Module can contain many Consumers, a Consumer belongs to one Module.
+    * Add association from `Consumer` to `Service`, `serviceDependencies`, used for dependency injection of Services into the Consumer.
+    * Add association from `Consumer` to `Repository`, `repositoryDependencies`, used for dependency injection of Repositories into the Consumer.
 
-   ![Consumer Meta Model](/images/documentation/developers-guide/consumer_meta_model.png)\\
-   <small>_Figure 5. Screenshot of metamodel for consumer_</small>
+    ![Consumer Meta Model](/images/documentation/developers-guide/consumer_meta_model.png)\\
+    <small>_Figure 5. Screenshot of metamodel for consumer_</small>
 
-2. DSL grammar, located in `sculptordsl.xtext`
+2.  DSL grammar, located in `sculptordsl.xtext`
 
-   * Define `DslConsumer`
+    *   Define `DslConsumer`
 
-     ~~~
-DslConsumer :
-      (doc=STRING)?
-      "Consumer" name=ID "{"
-        (dependencies+=DslDependency)*
-        ("unmarshall" "to" (("@")?messageRoot=ID))?
-        ("queueName" "=" queue=DslQueueIdentifier )?
-      "}";
-     ~~~
+        ~~~
+        DslConsumer :
+              (doc=STRING)?
+              "Consumer" name=ID "{"
+                (dependencies+=DslDependency)*
+                ("unmarshall" "to" (("@")?messageRoot=ID))?
+                ("queueName" "=" queue=DslQueueIdentifier )?
+              "}";
+        ~~~
 
-   * Add `(consumers+=DslConsumer)*` to `DslModule`
-   * Add `DslDependency` in the same way as the existing `DslRepositoryDependency`
-   * Run `GenerateSculptordsl.mwe2` in `org.sculptor.dsl` to generate DSL meta model and DSL editor
+    *   Add `(consumers+=DslConsumer)*` to `DslModule`
+    *   Add `DslDependency` in the same way as the existing `DslRepositoryDependency`
+    *   Run `GenerateSculptordsl.mwe2` in `org.sculptor.dsl` to generate DSL meta model and DSL editor
 
-3. DSL constraints checks, located in `SculptordslJavaValidator.java` and `SculptordslChecks.chk`.
+3.  DSL constraints checks, located in `SculptordslJavaValidator.java` and `SculptordslChecks.chk`.
 
-   * Add `DslServiceDependency` in the same way as the existing `DslRepositoryDependency`, `findService` is already implemented in `sculptordsl.ext`
+    * Add `DslServiceDependency` in the same way as the existing `DslRepositoryDependency`, `findService` is already implemented in `sculptordsl.ext`
 
-4. Transformation of DSL model to Ecore meta model, located in `DslTransformation.ext` in `sculptor-generator-core`.
+4.  Transformation of DSL model to Ecore meta model, located in `DslTransformation.ext` in `sculptor-generator-core`.
 
-   * Add `consumers.addAll(module.consumers.transform()) ->` to the `Module` transformation.
-   * Add `create sculptormetamodel::Consumer this transform(DslConsumer consumer)...`
-   * Add `module.consumers.transformDependencies() ->` to the `Module` transformation.
-   * Add `transformDependencies(DslConsumer consumer)...`
-   * Add `sculptormetamodel::Service transformServiceDependency(DslDependency dependency)...`
+    * Add `consumers.addAll(module.consumers.transform()) ->` to the `Module` transformation.
+    * Add `create sculptormetamodel::Consumer this transform(DslConsumer consumer)...`
+    * Add `module.consumers.transformDependencies() ->` to the `Module` transformation.
+    * Add `transformDependencies(DslConsumer consumer)...`
+    * Add `sculptormetamodel::Service transformServiceDependency(DslDependency dependency)...`
 
-5. Meta model constraints, located in `constraints.chk` in `sculptor-generator-core`.
+5.  Meta model constraints, located in `constraints.chk` in `sculptor-generator-core`.
 
-   * Add `context Consumer ERROR "Not allowed to delegate to repository...`
-   * Add check of cyclic dependencies in `DependencyConstraints` class
+    * Add `context Consumer ERROR "Not allowed to delegate to repository...`
+    * Add check of cyclic dependencies in `DependencyConstraints` class
 
-6. Code generation template
+6.  Code generation template
 
-   * Add `Consumer.xpt` and everything to generate for the Consumers.
-   * Add properties for package and framework classes. This is done in `default-sculptor-generator.properties`, `properties.ext` and `helper.ext`.
-   * Add `EXPAND Consumer` in `Root.xpt`, you need `allConsumers()` in `helper.ext`, which can be implemented in the same way as `allServices`.
-   * Add Spring stuff for the Consumers in `Spring.xpt`.
+    * Add `Consumer.xpt` and everything to generate for the Consumers.
+    * Add properties for package and framework classes. This is done in `default-sculptor-generator.properties`, `properties.ext` and `helper.ext`.
+    * Add `EXPAND Consumer` in `Root.xpt`, you need `allConsumers()` in `helper.ext`, which can be implemented in the same way as `allServices`.
+    * Add Spring stuff for the Consumers in `Spring.xpt`.
+
 
 ### How to define a Sculptor cartridge
 

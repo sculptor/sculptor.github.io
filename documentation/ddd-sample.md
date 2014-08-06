@@ -55,17 +55,17 @@ If you are only interested in a sneak preview of the source code you can downloa
 
 Another choice is to try the real thing:
 
- 1. Install Sculptor and its requisites as described in the [Installation Guide][10].
- 2. Get the source code from GitHub: 
+1.  Install Sculptor and its requisites as described in the [Installation Guide][10].
+2.  Get the source code from GitHub: 
 
     ~~~
     $ git clone git://github.com/sculptor/sculptor.git
     $ cd sculptor/sculptor-examples/DDDSample
     ~~~
 
- 3. Build with `mvn clean install`. This will also run all JUnit tests located in `src/test/java`. Take a look at some of them and run them from Eclipse also.
- 4. Study the `.btdesign` files located in `src/main/resources`.
- 5. Study the hand written code in `src/main/java` and the generated code in `src/generated/java`.
+3.  Build with `mvn clean install`. This will also run all JUnit tests located in `src/test/java`. Take a look at some of them and run them from Eclipse also.
+4.  Study the `.btdesign` files located in `src/main/resources`.
+5.  Study the hand written code in `src/main/java` and the generated code in `src/generated/java`.
 
 Learn more about the capabilities of Sculptor by reading the [Hello World][11] and [Advanced Tutorial][12]
 

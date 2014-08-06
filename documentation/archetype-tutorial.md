@@ -35,74 +35,74 @@ We start with creating a script that calls the [Sculptor Maven archetypes][1] to
 
 Copy one of the following scripts into the root of your Eclipse workspace.
 
- * Windows script `sculptor-archetypes.cmd`:
+ *  Windows script `sculptor-archetypes.cmd`:
 
-   ~~~
-   set JAVA_HOME=c:\Program Files\Java\jdk1.7.0_25\
-   set M2_HOME=C:\devtools\apache-maven-3.0.5\
-   set MAVEN_OPTS=-Xms128m -Xmx1024m -XX:MaxPermSize=128m
+    ~~~
+    set JAVA_HOME=c:\Program Files\Java\jdk1.7.0_25\
+    set M2_HOME=C:\devtools\apache-maven-3.0.5\
+    set MAVEN_OPTS=-Xms128m -Xmx1024m -XX:MaxPermSize=128m
+    
+    set path=%JAVA_HOME%\bin;%M2_HOME%\bin
+    
+    set PACKAGE=%1
+    set SYS_NAME=%2
+    
+    set VERSION={{site.sculptor_version}}
+    
+    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-parent -DarchetypeVersion=%VERSION% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME%-parent -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Dweb=true
+    
+    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype -DarchetypeVersion=%VERSION% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME% -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Djboss=false
+    
+    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-web -DarchetypeVersion=%VERSION% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME%-web -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Drest=true -Djboss=false
+    
+    pause
+    
+    call mvn install -f %SYS_NAME%-parent\pom.xml
+    ~~~
 
-   set path=%JAVA_HOME%\bin;%M2_HOME%\bin
-   
-   set PACKAGE=%1
-   set SYS_NAME=%2
+ *  Unix bash script `sculptor-archetypes.sh`:
 
-   set VERSION={{site.sculptor_version}}
-   
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-parent -DarchetypeVersion=%VERSION% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME%-parent -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Dweb=true
-   
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype -DarchetypeVersion=%VERSION% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME% -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Djboss=false
-   
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-web -DarchetypeVersion=%VERSION% -DgroupId=%PACKAGE% -DartifactId=%SYS_NAME%-web -Dpackage=%PACKAGE% -Dversion=1.0-SNAPSHOT -Drest=true -Djboss=false
-   
-   pause
-   
-   call mvn install -f %SYS_NAME%-parent\pom.xml
-   ~~~
+    ~~~
+    #!/bin/bash
+    
+    if [ -z $1 ] || [ -z $2 ]; then
+       echo -e "Usage: $0 PACKAGEID ARTIFACTID\n\tPACKAGEID - name of Java package, for example org.helloworld"
+       echo -e "\tARTIFACTID - project base name, for example helloworld"
+       exit 1
+    fi
+    
+    JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/
+    M2_HOME=/opt/apache-maven-3.0.5
+    MAVEN_OPTS="-Xms128m -Xmx1024m -XX:MaxPermSize=128m"
+    
+    path=$path:$JAVA_HOME/bin:$M2_HOME/bin
+    
+    export JAVA_HOME M2_HOME MAVEN_OPTS path 
+    
+    PACKAGE=$1
+    SYS_NAME=$2
+    
+    VERSION={{site.sculptor_version}}
+    
+    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-parent \
+       -DarchetypeVersion=$VERSION -DgroupId=$PACKAGE -DartifactId=$SYS_NAME-parent \
+       -Dpackage=$PACKAGE -Dversion=1.0-SNAPSHOT -Dweb=true
+    
+    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype \
+       -DarchetypeVersion=$VERSION -DgroupId=$PACKAGE -DartifactId=$SYS_NAME \
+       -Dpackage=$PACKAGE -Dversion=1.0-SNAPSHOT -Djboss=false
+    
+    mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-web \
+       -DarchetypeVersion=$VERSION -DgroupId=$PACKAGE -DartifactId=$SYS_NAME-web \
+       -Dpackage=$PACKAGE -Dversion=1.0-SNAPSHOT -Drest=true -Djboss=false
+    
+    sleep 1
+    
+    mvn install -f $SYS_NAME-parent/pom.xml
+    ~~~
 
- * Unix bash script `sculptor-archetypes.sh`:
-
-   ~~~
-   #!/bin/bash
-   
-   if [ -z $1 ] || [ -z $2 ]; then
-      echo -e "Usage: $0 PACKAGEID ARTIFACTID\n\tPACKAGEID - name of Java package, for example org.helloworld"
-      echo -e "\tARTIFACTID - project base name, for example helloworld"
-      exit 1
-   fi
-
-   JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/
-   M2_HOME=/opt/apache-maven-3.0.5
-   MAVEN_OPTS="-Xms128m -Xmx1024m -XX:MaxPermSize=128m"
-
-   path=$path:$JAVA_HOME/bin:$M2_HOME/bin
-
-   export JAVA_HOME M2_HOME MAVEN_OPTS path 
-   
-   PACKAGE=$1
-   SYS_NAME=$2
-   
-   VERSION={{site.sculptor_version}}
-
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-parent \
-      -DarchetypeVersion=$VERSION -DgroupId=$PACKAGE -DartifactId=$SYS_NAME-parent \
-      -Dpackage=$PACKAGE -Dversion=1.0-SNAPSHOT -Dweb=true
-
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype \
-      -DarchetypeVersion=$VERSION -DgroupId=$PACKAGE -DartifactId=$SYS_NAME \
-      -Dpackage=$PACKAGE -Dversion=1.0-SNAPSHOT -Djboss=false
-
-   mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype-web \
-      -DarchetypeVersion=$VERSION -DgroupId=$PACKAGE -DartifactId=$SYS_NAME-web \
-      -Dpackage=$PACKAGE -Dversion=1.0-SNAPSHOT -Drest=true -Djboss=false
-   
-   sleep 1
-   
-   mvn install -f $SYS_NAME-parent/pom.xml
-   ~~~
-
-   To make the script executable use run the command `chmod +x sculptor-archetypes.sh`.
-   {: .alert}
+    To make the script executable use run the command `chmod +x sculptor-archetypes.sh`.
+    {: .alert}
 
 
 You have to adjust the paths used in the variables of this scripts to your environment.
@@ -263,50 +263,50 @@ In this final part we're going to deploy our WAR in JBoss.
 
 Before we can deploy our WAR we have to prepare some resources within JBoss first:
 
-1. JBoss AS 7 doesn't come with [HSQLDB](http://hsqldb.org/) anymore (instead JBoss uses [H2](http://www.h2database.com/) as in-memory database). So we have to install the HSQLDB JDBC driver first. For this we're using the [JBoss Command Line Client (CLI)](https://docs.jboss.org/author/display/AS72/Management+Clients) as described [here](http://www.mastertheboss.com/jboss-script/installing-a-jboss-as-7-module-using-the-cli). Locate the latest version of the HSQLDB JDBC driver JAR in you local Maven repository and fire up JBoss CLI:
+1.  JBoss AS 7 doesn't come with [HSQLDB](http://hsqldb.org/) anymore (instead JBoss uses [H2](http://www.h2database.com/) as in-memory database). So we have to install the HSQLDB JDBC driver first. For this we're using the [JBoss Command Line Client (CLI)](https://docs.jboss.org/author/display/AS72/Management+Clients) as described [here](http://www.mastertheboss.com/jboss-script/installing-a-jboss-as-7-module-using-the-cli). Locate the latest version of the HSQLDB JDBC driver JAR in you local Maven repository and fire up JBoss CLI:
 
-   ~~~
-   ./bin/jboss-cli.sh
-   [disconnected /] connect
-   [standalone@localhost:9999 /] module add --name=org.hsqldb --resources=/Users/torsten/Develop/maven-repos/org/hsqldb/hsqldb/2.2.9/hsqldb-2.2.9.jar --dependencies=javax.api,javax.transaction.api
-   [standalone@localhost:9999 /] /subsystem=datasources/jdbc-driver=hsqldb:add(driver-module-name=org.hsqldb, driver-name=hsqldb, driver-class-name=org.hsqldb.jdbc.JDBCDriver)
-   {"outcome" => "success"}
-   ~~~
+    ~~~
+    ./bin/jboss-cli.sh
+    [disconnected /] connect
+    [standalone@localhost:9999 /] module add --name=org.hsqldb --resources=/Users/torsten/Develop/maven-repos/org/hsqldb/hsqldb/2.2.9/hsqldb-2.2.9.jar --dependencies=javax.api,javax.transaction.api
+    [standalone@localhost:9999 /] /subsystem=datasources/jdbc-driver=hsqldb:add(driver-module-name=org.hsqldb, driver-name=hsqldb, driver-class-name=org.hsqldb.jdbc.JDBCDriver)
+    {"outcome" => "success"}
+    ~~~
+    
+    In the above `module add` command you have to update the `resources` parameter with the full path to your local Maven repository!
+    {: .alert .alert-info}
 
-   In the above `module add` command you have to update the `resources` parameter with the full path to your local Maven repository!
-   {: .alert .alert-info}
+2.  Next we need the datasource `UniversedDS` which is using HSQLDB. A deployable datasource configuration can be found in `src/generated/resources/dbschema/hellowrld-ds.xml`. But we're using JBoss CLI for this as well:
 
-2. Next we need the datasource `UniversedDS` which is using HSQLDB. A deployable datasource configuration can be found in `src/generated/resources/dbschema/hellowrld-ds.xml`. But we're using JBoss CLI for this as well:
-
-   ~~~
-   [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS:add(driver-name="hsqldb", connection-url="jdbc:hsqldb:mem:universe", jndi-name="java:/jdbc/UniverseDS", use-java-context=true, user-name="sa", password="sa")
-   {"outcome" => "success"}
-   [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS:enable(persistent=true)
-   {"outcome" => "success"}
-   ~~~
+    ~~~
+    [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS:add(driver-name="hsqldb", connection-url="jdbc:hsqldb:mem:universe", jndi-name="java:/jdbc/UniverseDS", use-java-context=true, user-name="sa", password="sa")
+    {"outcome" => "success"}
+    [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS:enable(persistent=true)
+    {"outcome" => "success"}
+    ~~~
 
 
 ### Adjust for JBoss
 
 To deploy the WAR in JBoss the following adjustments have to be made:
 
- 1. Since JBoss has some libraries in its default classpath you need to adjust several dependencies in `pom.xml` files (both business tier and presentation tier). Hibernate, slf4j and some more should not be bundled in WAR or EAR when deployed to JBoss.
+1.  Since JBoss has some libraries in its default classpath you need to adjust several dependencies in `pom.xml` files (both business tier and presentation tier). Hibernate, slf4j and some more should not be bundled in WAR or EAR when deployed to JBoss.
 To generate different POMs with the [Sculptor Maven archetypes][1] you have to set the property `-Djboss=` to `true` in the script `sculptor-archetypes` created in chapter "Part 1 - Setup Maven projects". Then delete **both** POM files and re-run the script `sculptor-archetypes`.
 
- 2. To create code for JBoss instead of Jetty you have to adjust the following property in `sculptor-generator.properties` in `helloworld` **and** `helloworld-web` project.
+2.  To create code for JBoss instead of Jetty you have to adjust the following property in `sculptor-generator.properties` in `helloworld` **and** `helloworld-web` project.
 
     ~~~
     deployment.applicationServer=JBoss
     ~~~
 
- 3. To get a proper context root for the deployed web app (the default one is the name of the WAR file) you have to create the JBoss deployment descriptor `jboss-web.xml` in the folder `src/main/webapp/WEB-INF/` of the `hellowworld-web` project with the following content:
+3.  To get a proper context root for the deployed web app (the default one is the name of the WAR file) you have to create the JBoss deployment descriptor `jboss-web.xml` in the folder `src/main/webapp/WEB-INF/` of the `hellowworld-web` project with the following content:
 
     ~~~
     <?xml version="1.0" encoding="UTF-8"?>
-	<jboss-web>
-	    <context-root>/helloworld</context-root>
-	</jboss-web>
-	~~~
+    <jboss-web>
+        <context-root>/helloworld</context-root>
+    </jboss-web>
+    ~~~
 
 Rebuild with `mvn clean install` from the `helloworld-parent` project.
 
@@ -322,49 +322,49 @@ Open [http://localhost:8080/helloworld](http://localhost:8080/helloworld) in you
 
 To use JBoss with [MySQL](http://www.mysql.com/) instead of HSQLDB the following adjustments are neccessary:
 
-1. Adjust the following properties in `sculptor-generator.properties` in the project `helloworld` to let Sculptor generate a database creation sql script (DDL) for MySQL in `src/generated/resources/dbschema/`:
+1.  Adjust the following properties in `sculptor-generator.properties` in the project `helloworld` to let Sculptor generate a database creation sql script (DDL) for MySQL in `src/generated/resources/dbschema/`:
 
-   ~~~
-   db.product=mysql
-   generate.ddl=true
-   ~~~
+    ~~~
+    db.product=mysql
+    generate.ddl=true
+    ~~~
 
-2. Rebuild with `mvn clean install` from project `helloworld-parent`.
+2.  Rebuild with `mvn clean install` from project `helloworld-parent`.
 
-3. Create the database schema named `universe` in your [MySQL](http://www.mysql.com/) database and run the DDL SQL script in `helloworld/src/generated/resources/dbschema/` to create the database tables. You can use [MySQLWorkbench](http://dev.mysql.com/downloads/tools/workbench/) to do that or use the MySQL command line client:
+3.  Create the database schema named `universe` in your [MySQL](http://www.mysql.com/) database and run the DDL SQL script in `helloworld/src/generated/resources/dbschema/` to create the database tables. You can use [MySQLWorkbench](http://dev.mysql.com/downloads/tools/workbench/) to do that or use the MySQL command line client:
 
-   ~~~
-   mysql -u root
-   mysql> create database universe;
-   mysql> connect universe;
-   mysql> source helloworld/src/generated/resources/dbschema/Universe_ddl.sql
-   ~~~
+    ~~~
+    mysql -u root
+    mysql> create database universe;
+    mysql> connect universe;
+    mysql> source helloworld/src/generated/resources/dbschema/Universe_ddl.sql
+    ~~~
 
-4. JBoss AS 7 doesn't come with the MySQL JDBC driver. So we have to download the MySQL JDBC driver from [http://dev.mysql.com/downloads/connector/j/](http://dev.mysql.com/downloads/connector/j/) and install it first. For this we're using the [JBoss Command Line Client (CLI)](https://docs.jboss.org/author/display/AS72/Management+Clients) as described [here](http://www.mastertheboss.com/jboss-script/installing-a-jboss-as-7-module-using-the-cli):
+4.  JBoss AS 7 doesn't come with the MySQL JDBC driver. So we have to download the MySQL JDBC driver from [http://dev.mysql.com/downloads/connector/j/](http://dev.mysql.com/downloads/connector/j/) and install it first. For this we're using the [JBoss Command Line Client (CLI)](https://docs.jboss.org/author/display/AS72/Management+Clients) as described [here](http://www.mastertheboss.com/jboss-script/installing-a-jboss-as-7-module-using-the-cli):
 
-   ~~~
-   ./bin/jboss-cli.sh
-   [disconnected /] connect
-   [standalone@localhost:9999 /] module add --name=com.mysql --resources=/Users/torsten/Develop/maven-repos/mysql/mysql-connector-java/5.1.26/mysql-connector-java-5.1.26.jar --dependencies=javax.api,javax.transaction.api
-   [standalone@localhost:9999 /] /subsystem=datasources/jdbc-driver=mysql:add(driver-module-name=com.mysql, driver-name=mysql, driver-class-name=com.mysql.jdbc.Driver)
-   {"outcome" => "success"}
-   ~~~
+    ~~~
+    ./bin/jboss-cli.sh
+    [disconnected /] connect
+    [standalone@localhost:9999 /] module add --name=com.mysql --resources=/Users/torsten/Develop/maven-repos/mysql/mysql-connector-java/5.1.26/mysql-connector-java-5.1.26.jar --dependencies=javax.api,javax.transaction.api
+    [standalone@localhost:9999 /] /subsystem=datasources/jdbc-driver=mysql:add(driver-module-name=com.mysql, driver-name=mysql, driver-class-name=com.mysql.jdbc.Driver)
+    {"outcome" => "success"}
+    ~~~
 
-   In the above `module add` command you have to update the `resources` parameter with the full path to your MySQL JDBC driver!
-   {: .alert .alert-info}
+    In the above `module add` command you have to update the `resources` parameter with the full path to your MySQL JDBC driver!
+    {: .alert .alert-info}
 
-5. Next we have to replace the previously created datasource `UniversedDS` (which is using HSQLDB) by one using MySQL instead. A deployable datasource configuration can be found in `src/generated/resources/dbschema/hellowrld-ds.xml`. But we're using JBoss CLI for this as well:
+5.  Next we have to replace the previously created datasource `UniversedDS` (which is using HSQLDB) by one using MySQL instead. A deployable datasource configuration can be found in `src/generated/resources/dbschema/hellowrld-ds.xml`. But we're using JBoss CLI for this as well:
 
-   ~~~
-   [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS:remove
-   {"outcome" => "success"}
-   [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS:add(driver-name="mysql", connection-url="jdbc:mysql://localhost/universe", jndi-name="java:/jdbc/UniverseDS", use-java-context=true, user-name="root")
-   {"outcome" => "success"}
-   [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS:enable(persistent=true)
-   {"outcome" => "success"}
-   ~~~
+    ~~~
+    [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS:remove
+    {"outcome" => "success"}
+    [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS:add(driver-name="mysql", connection-url="jdbc:mysql://localhost/universe", jndi-name="java:/jdbc/UniverseDS", use-java-context=true, user-name="root")
+    {"outcome" => "success"}
+    [standalone@localhost:9999 /] /subsystem=datasources/data-source=UniverseDS:enable(persistent=true)
+    {"outcome" => "success"}
+    ~~~
 
-6. Redeploy and test again.
+6.  Redeploy and test again.
 
 
 

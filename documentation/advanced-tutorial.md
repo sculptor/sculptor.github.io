@@ -39,24 +39,24 @@ In this part we will setup the project structure for Maven and Eclipse.
 
 ![Tryit](../images/tryit.gif)
 
-1. Use [Sculptors Maven archetype][5] with the following command (one line) to create a Maven POM and file structure.
+1.  Use [Sculptors Maven archetype][5] with the following command (one line) to create a Maven POM and file structure.
 
-   ~~~
+    ~~~
 mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-archetype-standalone -DarchetypeVersion={{site.sculptor_version}}
-   ~~~
+    ~~~
 
-   Fill in groupId and archetypeId:
+    Fill in groupId and archetypeId:
 
-   ~~~
+    ~~~
 Define value for groupId: : org.library
 Define value for artifactId: : library
 Define value for version:  1.0-SNAPSHOT: :
 Define value for package:  org.library: :
-   ~~~
+    ~~~
 
-2. In the new directory, run `mvn eclipse:eclipse` to create an Eclipse project with the same dependencies as in the pom.
+2.  In the new directory, run `mvn eclipse:eclipse` to create an Eclipse project with the same dependencies as in the pom.
 
-3. Open Eclipse and import the project.
+3.  Open Eclipse and import the project.
 
 
 ## Generate Code
@@ -65,165 +65,165 @@ In this part we will write a Sculptor DSL file and generate code from it.
 
 ![Tryit](../images/tryit.gif)
 
-1. Modify the file named `model.btdesign` in the folder `src/main/resources/model`
+1.  Modify the file named `model.btdesign` in the folder `src/main/resources/model`
 
-2. Open the design file with Sculptor DSL editor, double-click on it.
-   Add the following code to the design file.
+2.  Open the design file with Sculptor DSL editor, double-click on it.
+    Add the following code to the design file.
 
-   {: #library}
-   ~~~
-   Application Library {
-     basePackage = org.library
-
-     Module media {
-
-       Service LibraryService {
-         findLibraryByName => LibraryRepository.findLibraryByName;
-         findMediaByName => MediaRepository.findMediaByName;
-         findMediaByCharacter => MediaRepository.findMediaByCharacter;
-         findPersonByName => PersonService.findPersonByName;
-       }
-
-       Entity Library {
-         scaffold
-         String name key
-         - Set<@PhysicalMedia> media <-> library
-
-         Repository LibraryRepository {
-           findByQuery;
-           @Library findLibraryByName(String name) throws LibraryNotFoundException;
-         }
-       }
-
-       Entity PhysicalMedia {
-         scaffold
-         String status length="3"
-         String location
-         - @Library library nullable <-> media
-         - Set<@Media> media <-> physicalMedia
-       }
-
-       Service MediaService {
-         findAll => MediaRepository.findAll;
-       }
-
-       abstract Entity Media {
-         gap
-         String title !changeable
-         - Set<@PhysicalMedia> physicalMedia inverse <-> media
-         - Set<@Engagement> engagements cascade="all-delete-orphan" <-> media
-         - Set<@MediaCharacter> mediaCharacters <-> existsInMedia
-
-         Repository MediaRepository {
-           > @MediaCharacterRepository
-           int getNumberOfMovies(Long libraryId) => AccessObject;
-           List<@Media> findMediaByCharacter(Long libraryId, String characterName);
-           findById;
-           save;
-           findAll;
-           findByQuery;
-           protected findByKeys(Set<String> keys, String keyPropertyName, Class persistentClass);
-           List<@Media> findMediaByName(Long libraryId, String name);
-           Map<String, @Movie> findMovieByUrlIMDB(Set<String> keys);
-         }
-       }
-
-       Entity Book extends @Media {
-         !auditable
-         String isbn key length="20"
-       }
-
-       Entity Movie extends @Media {
-         !auditable
-         String urlIMDB key
-         Integer playLength
-         - @Genre category nullable
-       }
-
-       enum Genre {
-         ACTION,
-         COMEDY,
-         DRAMA,
-         SCI_FI
-       }
-
-       ValueObject Engagement {
-         String role
-         - @Person person
-         - @Media media <-> engagements
-       }
-
-       Service MediaCharacterService {
-         findAll => MediaCharacterRepository.findAll;
-       }
-
-       ValueObject MediaCharacter {
-         String name !changeable
-         - Set<@Person> playedBy
-         - Set<@Media> existsInMedia <-> mediaCharacters
-
-         Repository MediaCharacterRepository {
-           findByQuery;
-           findAll;
-         }
-       }
-     }
-
-     Module person {
-       Service PersonService {
-         findPersonByName => PersonRepository.findPersonByName;
-       }
-
-       Entity Person {
-         gap
-         scaffold
-         Date birthDate past
-         - @Gender sex !changeable
-         - @Ssn ssn key
-         - @PersonName name
-
-         Repository PersonRepository {
-           List<@Person> findPersonByName(String name) => AccessObject;
-           save;
-           save(Collection<@Person> entities);
-           findByQuery;
-           findByExample;
-           findByKeys;
-         }
-       }
-
-       BasicType Ssn {
-         String number key length="20"
-         - @Country country key
-       }
-
-       BasicType PersonName {
-         String first
-         String last
-       }
-
-       enum Gender {
-         FEMALE("F"),
-         MALE("M")
-       }
-
-       enum Country {
-         String alpha2 key
-         String alpha3
-         int numeric
-         SWEDEN("SE", "SWE", "752"),
-         NORWAY("NO", "NOR", "578"),
-         DENMARK("DK", "DNK", "208"),
-         US("US", "USA", "840")
-       }
-     }
-   }
-   ~~~
-   You can see that it defines two Modules, containing one Service each.
-   The operations in the Services delegates directly to the Repositories. It defines the same Domain Objects, including attributes and references,
+    {: #library}
+    ~~~
+    Application Library {
+      basePackage = org.library
+    
+      Module media {
+    
+        Service LibraryService {
+          findLibraryByName => LibraryRepository.findLibraryByName;
+          findMediaByName => MediaRepository.findMediaByName;
+          findMediaByCharacter => MediaRepository.findMediaByCharacter;
+          findPersonByName => PersonService.findPersonByName;
+        }
+    
+        Entity Library {
+          scaffold
+          String name key
+          - Set<@PhysicalMedia> media <-> library
+    
+          Repository LibraryRepository {
+            findByQuery;
+            @Library findLibraryByName(String name) throws LibraryNotFoundException;
+          }
+        }
+    
+        Entity PhysicalMedia {
+          scaffold
+          String status length="3"
+          String location
+          - @Library library nullable <-> media
+          - Set<@Media> media <-> physicalMedia
+        }
+    
+        Service MediaService {
+          findAll => MediaRepository.findAll;
+        }
+    
+        abstract Entity Media {
+          gap
+          String title !changeable
+          - Set<@PhysicalMedia> physicalMedia inverse <-> media
+          - Set<@Engagement> engagements cascade="all-delete-orphan" <-> media
+          - Set<@MediaCharacter> mediaCharacters <-> existsInMedia
+    
+          Repository MediaRepository {
+            > @MediaCharacterRepository
+            int getNumberOfMovies(Long libraryId) => AccessObject;
+            List<@Media> findMediaByCharacter(Long libraryId, String characterName);
+            findById;
+            save;
+            findAll;
+            findByQuery;
+            protected findByKeys(Set<String> keys, String keyPropertyName, Class persistentClass);
+            List<@Media> findMediaByName(Long libraryId, String name);
+            Map<String, @Movie> findMovieByUrlIMDB(Set<String> keys);
+          }
+        }
+    
+        Entity Book extends @Media {
+          !auditable
+          String isbn key length="20"
+        }
+    
+        Entity Movie extends @Media {
+          !auditable
+          String urlIMDB key
+          Integer playLength
+          - @Genre category nullable
+        }
+    
+        enum Genre {
+          ACTION,
+          COMEDY,
+          DRAMA,
+          SCI_FI
+        }
+    
+        ValueObject Engagement {
+          String role
+          - @Person person
+          - @Media media <-> engagements
+        }
+    
+        Service MediaCharacterService {
+          findAll => MediaCharacterRepository.findAll;
+        }
+    
+        ValueObject MediaCharacter {
+          String name !changeable
+          - Set<@Person> playedBy
+          - Set<@Media> existsInMedia <-> mediaCharacters
+    
+          Repository MediaCharacterRepository {
+            findByQuery;
+            findAll;
+          }
+        }
+      }
+    
+      Module person {
+        Service PersonService {
+          findPersonByName => PersonRepository.findPersonByName;
+        }
+    
+        Entity Person {
+          gap
+          scaffold
+          Date birthDate past
+          - @Gender sex !changeable
+          - @Ssn ssn key
+          - @PersonName name
+    
+          Repository PersonRepository {
+            List<@Person> findPersonByName(String name) => AccessObject;
+            save;
+            save(Collection<@Person> entities);
+            findByQuery;
+            findByExample;
+            findByKeys;
+          }
+        }
+    
+        BasicType Ssn {
+          String number key length="20"
+          - @Country country key
+        }
+    
+        BasicType PersonName {
+          String first
+          String last
+        }
+    
+        enum Gender {
+          FEMALE("F"),
+          MALE("M")
+        }
+    
+        enum Country {
+          String alpha2 key
+          String alpha3
+          int numeric
+          SWEDEN("SE", "SWE", "752"),
+          NORWAY("NO", "NOR", "578"),
+          DENMARK("DK", "DNK", "208"),
+          US("US", "USA", "840")
+        }
+      }
+    }
+    ~~~
+    You can see that it defines two Modules, containing one Service each.
+    The operations in the Services delegates directly to the Repositories. It defines the same Domain Objects, including attributes and references,
 as in [Figure 1](#domain-model). The details will be explained further on.
 
-3. Run `mvn clean install` to generate code and build. The JUnit test will fail.
+3.  Run `mvn clean install` to generate code and build. The JUnit test will fail.
 
 
 ## Domain-Driven Design
