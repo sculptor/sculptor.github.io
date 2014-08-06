@@ -43,7 +43,7 @@ Some changes are staightforward and some requires more in depth understanding of
 
 ## Generator Properties
 
-There are a many things that can be easily customized with properties. The default properties are defined in `default-sculptor-generator.properties` in [`sculptor-generator-core`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core). You can override these properties by defining them in `sculptor-generator.properties`.
+There are a many things that can be easily customized with properties. The default properties are defined in `default-sculptor-generator.properties` in [`sculptor-generator-configuration`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-configuration/src/main/resources/default-sculptor-generator.properties). You can override these properties by defining them in `sculptor-generator.properties`.
 
 Properties used in multiple `sculptor-generator.properties` within [multiple Maven modules (sub-projects)](http://maven.apache.org/guides/mini/guide-multiple-modules.html) of the same project can be defined in a single place - in `common-sculptor-generator.properties`. This properties file is similar to `default-sculptor-generator.properties` (which is shipped with Sculptor) but it's provided within your project.
 
