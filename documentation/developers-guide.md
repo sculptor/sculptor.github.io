@@ -24,11 +24,9 @@ Some changes are staightforward and some requires more in depth understanding of
 
 1. The developer is using the DSL Editor plugin to edit the application specific `model.btdesign`, i.e. the source for the concrete model that is the input to the code generation process. Constraints of the DSL is validated while editing.
 
-1. When generating code the application specific `Workflow.mwe2` is executed. It doesn't contain much.
+1. When generating code `SculptorGeneratorWorkflow.run()` is executed. It defines the flow of the code generation process.
 
-1. It invokes the `Sculptorworkflow.mwe2` which defines the flow of the code generation process.
-
-1. It starts with parsing the `model.btdesign` file using the XText parser. Constraints of the DSL are checked.
+1. It starts with parsing the `model.btdesign` file using the Xtext DSL parser. Constraints of the DSL are validated.
 
 1. The DSL model is transformed into a model of the type defined by the `sculptormetamodel.ecore` meta model.
 
@@ -38,9 +36,9 @@ Some changes are staightforward and some requires more in depth understanding of
 
 1. Constraint validation again.
 
-1. Now the actual generation of Java code and configuration files begin. It is done with code generation templates written in [Xtends template expressions](http://www.eclipse.org/xtend/documentation.html#templates). The templates extract values from the model and uses [Xtend extension methods](http://www.eclipse.org/xtend/documentation.html#extensionMethods) and Java helper classes.
+1. Now the actual generation of Java code and configuration files begin. It is done with code generation templates written in [Xtends template expressions](http://www.eclipse.org/xtend/documentation.html#templates). The templates extract values from the model and use [Xtend extension methods](http://www.eclipse.org/xtend/documentation.html#extensionMethods) and Java helper classes.
 
-1. Properties of technical nature, which don't belong in the DSL or meta model, are used by the templates and the helpers.
+1. [Properties](#generator-properties) of technical nature, which don't belong in the DSL or meta model, are used by the templates and the helpers.
 
 
 ## Generator Properties
