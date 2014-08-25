@@ -13,6 +13,23 @@ Released versions of Sculptor:
 
 ## Version 3.0.x
 
+### Version 3.0.5
+
+Version 3.0.5 was released xxx yy, 2014
+
+This release contains:
+
+* Upgrade to [Xtext/Xtend 2.6.2](http://www.eclipse.org/Xtext/releasenotes.html)
+* Upgrade to [Eclipse Tycho 0.21](http://wiki.eclipse.org/Tycho/Release_Notes/0.21)
+* Migrated generators internal workflow from MWE2 script to Xtend program
+* Refactoring of Builder and mongoDB [cartridges](advanced-tutorial#cartridges) into separate Maven projects within the new Maven module "sculptor-cartridges"
+* Refactoring of generator library and generator test library Maven projects into the Maven module "sculptor-maven"
+* Added support for returning a list of generator issues (in addition to the list of generated files) to SculptorGeneratorRunner
+* Added [parallel build support](https://cwiki.apache.org/confluence/display/MAVEN/Parallel+builds+in+Maven+3) to Maven plugin (by removing usage of Java system properties in SculptorGeneratorRunner)
+* Added support for handling multiple DbUnit XML files in DbUnit test base class
+* Updated runtime dependencies to latest version of Jackson2 and XStream
+
+
 ### Version 3.0.4
 
 [Version 3.0.4 was released June 02, 2014](/2014/06/02/sculptor-304-released).
