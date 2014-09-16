@@ -13,6 +13,13 @@ Released versions of Sculptor:
 
 ## Version 3.0.x
 
+### Version 3.0.6
+
+Version 3.0.6 was released September 09, 2014.
+
+This release is a minor bug fix release which fixes a critical regression [#148](https://github.com/sculptor/sculptor/issues/148).
+
+
 ### Version 3.0.5
 
 [Version 3.0.5 was released September 02, 2014](/2014/09/02/sculptor-305-released).
