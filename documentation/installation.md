@@ -121,7 +121,7 @@ Sculptor can be used with any text editor or IDE. But if you are an [Eclipse](ht
    To prevent OutOfMemoryError when using the Sculptor editor you can add `-XX:MaxPermSize=128m` in `eclipse.ini`, which is located in the Eclipse installation directory.
    {: .alert }
 
-2. Directly in Eclipse (Help -> Install New Software) install from the Eclipse releases (e.g. Kepler) update site the following plugins:
+2. Directly in Eclipse (Help -> Install New Software) install from the Eclipse releases update site the following plugins:
    * General Purpose Tools > [m2e - Maven Integration for Eclipse](http://www.eclipse.org/m2e/) 1.4.0 (or newer)
    * Modeling > Xtext SDK 2.5.0 (or newer)
 
@@ -141,7 +141,8 @@ Install "Sculptor DSL Editor".
 In Eclipse the following configuration settings are required:
 
 1. To support [Xtend template expressions](http://www.eclipse.org/xtend/documentation.html#templates) (which are using the "guillemets" characters `«` and `»` for tag brackets) the default file encoding in Eclipse should be set to `UTF-8` or `ISO-8859-1` via "Preferences > General > Workspace"
-2. Refresh in Eclipse is often time consuming. In the [m2e Eclipse plugin](http://www.eclipse.org/m2e/) Maven launch configurations (created via context menu "Run As > Maven build..." on the corresponding Maven project or Maven POM) you should enable the option "Refresh > Refresh resources upon completion > The project containing the selected resource". Don't use "The entire workspace".
+2. To use [Sculptors Maven archetypes](maven-archetypes) from within [m2e Eclipse plugins](http://www.eclipse.org/m2e/) New Maven Project wizard the Archetype catalog from Maven Central `http://repo1.maven.org/maven2/archetype-catalog.xml` has to be added to the list of archetype catalogs in m2e with Eclipse preferences (Maven > Archetypes > Add Remote Catalog)
+3. Refresh in Eclipse is often time consuming. In the [m2e Eclipse plugin](http://www.eclipse.org/m2e/) Maven launch configurations (created via context menu "Run As > Maven build..." on the corresponding Maven project or Maven POM) you should enable the option "Refresh > Refresh resources upon completion > The project containing the selected resource". Don't use "The entire workspace".
 
 
 ### Eclipse projects and Maven build started from command line
