@@ -339,6 +339,9 @@ Circular references between Modules are not allowed. Interaction between a Servi
 
 In the context of Sculptor, Domain Object is a common term for Entity, ValueObject and BasicType.
 
+Within a Sculptor application every Domain Object needs a unique name. This is due to Sculptor internal model which does not support name spaces.
+{ .alert}
+
 
 ### Gap Class
 
@@ -1297,6 +1300,9 @@ Service LibraryService {
 }
 ~~~
 
+Within a Sculptor application every Service needs a unique name. This is due to Sculptor internal model which does not support name spaces.
+{ .alert}
+
 When referring to a Domain Object (Entity or ValueObject) you use an @ in front of the declaration. Primitive types or any fully qualified Java class can also be used as parameters and return types. The same [built in types](#builtInTypes) as can be used for the Domain Objects can be used in the service operations.
 
 It is also possible to use [Data Transfer Objects](http://www.martinfowler.com/eaaCatalog/dataTransferObject.html) as parameters and return types.
@@ -1370,6 +1376,9 @@ Tip: use `ctrl+1` in Eclipse.
 ## How to Generate Repositories
 
 The default implementation of a Repository consists of an implementation class and [Access Objects](http://books.google.de/books?id=w5xFzY3sJLsC&lpg=PP1&pg=PA188#v=onepage&q&f=false). The intention is a separation of concerns between the domain and the data layer. Repository is close to the business domain and Access Objects are close to the data layer. The JPA/Hibernate specific code is located in the Access Object, and not in the Repository.
+
+Within a Sculptor application every Repository needs a unique name. This is due to Sculptor internal model which does not support name spaces.
+{ .alert}
 
 __Guidelines:__
 
