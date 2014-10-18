@@ -1227,68 +1227,6 @@ Regenerate with `mvn generate-sources -Dsculptor.generator.force=true` and look 
 {: .alert}
 
 
-### Documentation of domain model
-
-Sculptor generates summary documentation of domain model in clickable HTML format. The output is placed in `src/generated/resources/DomainModelDoc*.html`.
-
-The descriptions are defined in `model.btdesign`. Almost all elements in the model can have documentation. It is a simple quoted string before the element.
-
-~~~
-"Book is one of the products that..."
-Entity Book extends @Media {
-    "International Standard Book Number"
-    String isbn key length="20"
-}
-~~~
-
-The documentation is also included as JavaDoc of generated Java code.
-
-
-### Diagram of domain model
-
-Sculptor generates several UML diagrams for the domain model. The [above diagram](#domain-model) for the Library domain is generated.
-We are using [Graphviz](http://www.graphviz.org/).
-Sculptor generates textual Graphviz `.dot` files, which is then used to generate images.
-
-[Sculptors Maven plugin `sculptor-maven-plugin`][3] (goal `generate-images`) generates images (.png) from the .dot files. This plugin is included in the `pom.xml` created by the [Maven archetypes][5], but you need to install Graphviz and have executable `dot` in path.
-
-It is possible to mark some domain objects with `hint="umlgraph=core"` to generate a special diagram with those domain objects in focus.
-
-~~~
-Entity Book extends @Media {
-    hint="umlgraph=core"
-    String isbn key
-}
-
-Entity Movie extends @Media {
-    hint="umlgraph=core"
-    String urlIMDB key
-    Integer playLength
-    - @Genre category nullable
-}
-~~~
-
-The colors are customizable as described in [Developer's Guide](developers-guide#diagram).
-
-
-#### Subject area class diagrams
-
-It is also possible to create additional class diagrams to portray specific subject areas. One diagram is created per subject area you define, and the classes that belong to each subject area are defined via the `umlgraph.subject` hint:
-
-~~~
-ValueObject Itinerary {
-	hint="umlgraph.subject=routingsvc"
-	belongsTo Cargo
-    not optimisticLocking
-    not immutable
-    - @Cargo cargo nullable opposite itinerary
-    - List<@Leg> legs inverse orderColumn
-}
-~~~
-
-To include a class in more than one subject area, list each subject area in the hint, separated by a `|`. e.g. `hint="umlgraph.subject=routingsvc|cargoext"`.
-
-
 ## How to Generate Services
 {: #services}
 
@@ -1991,6 +1929,201 @@ Entity Person {
 ~~~
 
 
+## How to Generate Documentation of Domain Model
+
+Sculptor generates summary documentation of domain model in clickable HTML format. The output is placed in `src/generated/resources/DomainModelDoc*.html`.
+
+The descriptions are defined in `model.btdesign`. Almost all elements in the model can have documentation. It is a simple quoted string before the element.
+
+~~~
+"Book is one of the products that..."
+Entity Book extends @Media {
+    "International Standard Book Number"
+    String isbn key length="20"
+}
+~~~
+
+The documentation is also included as JavaDoc of generated Java code.
+
+To skip generation of model documentation define the following property in `sculptor-generator.properties`:
+
+~~~
+generate.modelDoc=false
+~~~
+
+
+### Diagram of domain model
+
+Sculptor generates several UML diagrams for the domain model. The [above diagram](#domain-model) for the Library domain is generated.
+We are using [Graphviz](http://www.graphviz.org/).
+Sculptor generates textual Graphviz `.dot` files, which is then used to generate images.
+
+[Sculptors Maven plugin `sculptor-maven-plugin`][3] (goal `generate-images`) generates images (.png) from the .dot files. This plugin is included in the `pom.xml` created by the [Maven archetypes][5], but you need to install Graphviz and have executable `dot` in path.
+
+It is possible to mark some domain objects with `hint="umlgraph=core"` to generate a special diagram with those domain objects in focus.
+
+~~~
+Entity Book extends @Media {
+    hint="umlgraph=core"
+    String isbn key
+}
+
+Entity Movie extends @Media {
+    hint="umlgraph=core"
+    String urlIMDB key
+    Integer playLength
+    - @Genre category nullable
+}
+~~~
+
+The colors are customizable as described in [Developer's Guide](developers-guide#diagram).
+
+To skip generation of UML diagrams define the following property in `sculptor-generator.properties`:
+
+~~~
+generate.umlgraph=false
+~~~
+
+
+#### Subject area class diagrams
+
+It is also possible to create additional class diagrams to portray specific subject areas. One diagram is created per subject area you define, and the classes that belong to each subject area are defined via the `umlgraph.subject` hint:
+
+~~~
+ValueObject Itinerary {
+	hint="umlgraph.subject=routingsvc"
+	belongsTo Cargo
+    not optimisticLocking
+    not immutable
+    - @Cargo cargo nullable opposite itinerary
+    - List<@Leg> legs inverse orderColumn
+}
+~~~
+
+To include a class in more than one subject area, list each subject area in the hint, separated by a `|`. e.g. `hint="umlgraph.subject=routingsvc|cargoext"`.
+
+
+## How to Organize Domain Models
+
+Sculptor has support for maintaining larger domain models with numerous domain objects scattered accross multiple modules.
+
+Within a Sculptor application every Module needs a unique name. This is due to Sculptor internal model which does not support name spaces.
+{ .alert}
+
+
+### Divide model into several files
+
+It is possible to split `model.btdesign` and define one or more modules in each file. Referenced files are imported with a URI syntax starting with `classpath:/` followed by classpath path to the `.btdesign` file to be imported.
+
+This is the `model.btdesign` main file:
+
+~~~
+import "classpath:/model-person.btdesign"
+
+Application Library {
+    basePackage = org.library
+
+    Module media {
+
+        // as usual ...
+    }
+}
+~~~
+
+This is the `model-person.btdesign` containing person module in separate file:
+
+~~~
+ApplicationPart PersonPart {
+
+    Module person {
+
+        // as usual ...
+    }
+}
+~~~
+
+The main file doesn't have to define a Module.
+
+~~~
+import "classpath:/model-media.btdesign"
+import "classpath:/model-person.btdesign"
+
+Application Library {
+    basePackage = org.library
+}
+~~~
+
+[Sculptors Maven plugin][3] will detect if a model file (specified in the plugin property `checkFileSets` \[default: `src/main/resources/*.btdesign`\]) has changed since previous generator run.
+{: .alert}
+
+
+### Cross project references
+
+In previous section it was described how the model could be separated into several files. It is also possible to define modules in a separate project to be used from other projects.
+
+In that case the imported module must define a `basePackage` and use `ApplicationPart`.
+
+This is `model-sharedtypes.btdesign` in a separate file within another project:
+
+~~~
+ApplicationPart CommonPart {
+
+    Module sharedtypes {
+        basePackage=org.foo.common.sharedtypes
+
+        BasicType Money {
+            String currency;
+            BigDecimal amount;
+        }
+    }
+}
+~~~
+
+<div markdown="1">
+You don't want to generate code for the imported module in your project, which is going to use the sharedtypes from the common project. To skip generation of a module you define the module (`sharedtypes` in this example) in `sculptor-generator.properties`:
+
+~~~
+generate.module.sharedtypes=false
+~~~
+</div>
+{: .alert .alert-error}
+
+You import and use the model as normal, i.e.
+
+~~~
+import "classpath:/model-sharedtypes.btdesign"
+
+Application Bank {
+    basePackage = org.bank
+
+    Module accounting {
+        Entity Account {
+            String accountNumber key;
+            - @Money balance;
+        }
+    }
+}
+~~~
+
+The dependency to the project must be added in `pom.xml`:
+
+~~~ xml
+<dependency>
+    <groupId>org.foo.common</groupId>
+    <artifactId>foo-common</artifactId>
+    <version>1.0</version>
+    <classifier>client</classifier>
+</dependency>            
+~~~
+
+<div markdown="1">
+Note that if you use classifier `client` it will be dependency to the `-client` jar file, which was created by `maven-jar-plugin` with corresponding `client` classifier.
+
+If the referenced project is an EJB project (built by the Maven EJB plugin via POM packaging type `ejb`) then you will use `<type>ejb-client</type>` instead of `<classifier/>`.
+</div>
+{: .alert}
+
+
 ## JUnit
 
 For each Service there is a generated JUnit test class that you have to implement. It extends IsolatedDatabaseTestCase which means that [DBUnit](http://www.dbunit.org/) it used to load the in memory [HSQLDB](http://hsqldb.org/) database with test data from the XML file specified in the `getDataSetFile` method. The database is refreshed for each test method.
@@ -2162,119 +2295,6 @@ Entity ^Entity {
     String ^url
 }
 ~~~
-
-
-## Divide model into several files
-
-It is possible to split `model.btdesign` and define one or more modules in each file. Referenced files are imported with a URI syntax starting with `classpath:/` followed by classpath path to the `.btdesign` file to be imported.
-
-This is the `model.btdesign` main file:
-
-~~~
-import "classpath:/model-person.btdesign"
-
-Application Library {
-    basePackage = org.library
-
-    Module media {
-
-        // as usual ...
-    }
-}
-~~~
-
-This is the `model-person.btdesign` containing person module in separate file:
-
-~~~
-ApplicationPart PersonPart {
-
-    Module person {
-
-        // as usual ...
-    }
-}
-~~~
-
-The main file doesn't have to define a Module.
-
-~~~
-import "classpath:/model-media.btdesign"
-import "classpath:/model-person.btdesign"
-
-Application Library {
-    basePackage = org.library
-}
-~~~
-
-[Sculptors Maven plugin][3] will detect if a model file (specified in the plugin property `checkFileSets` \[default: `src/main/resources/*.btdesign`\]) has changed since previous generator run.
-{: .alert}
-
-
-## Cross project references
-
-In previous section it was described how the model could be separated into several files. It is also possible to define modules in a separate project to be used from other projects.
-
-In that case the imported module must define a `basePackage` and use `ApplicationPart`.
-
-This is `model-sharedtypes.btdesign` in a separate file within another project:
-
-~~~
-ApplicationPart CommonPart {
-
-    Module sharedtypes {
-        basePackage=org.foo.common.sharedtypes
-
-        BasicType Money {
-            String currency;
-            BigDecimal amount;
-        }
-    }
-}
-~~~
-
-<div markdown="1">
-You don't want to generate code for the imported module in your project, which is going to use the sharedtypes from the common project. To skip generation of a module you define the module (`sharedtypes` in this example) in `sculptor-generator.properties`:
-
-~~~
-generate.module.sharedtypes=false
-~~~
-</div>
-{: .alert .alert-error}
-
-You import and use the model as normal, i.e.
-
-~~~
-import "classpath:/model-sharedtypes.btdesign"
-
-Application Bank {
-    basePackage = org.bank
-
-    Module accounting {
-        Entity Account {
-            String accountNumber key;
-            - @Money balance;
-        }
-    }
-}
-~~~
-
-The dependency to the project must be added in `pom.xml`:
-
-~~~ xml
-<dependency>
-    <groupId>org.foo.common</groupId>
-    <artifactId>foo-common</artifactId>
-    <version>1.0</version>
-    <classifier>client</classifier>
-</dependency>            
-~~~
-
-<div markdown="1">
-Note that if you use classifier `client` it will be dependency to the `-client` jar file, which was created by `maven-jar-plugin` with corresponding `client` classifier.
-
-If the referenced project is an EJB project (built by the Maven EJB plugin via POM packaging type `ejb`) then you will use `<type>ejb-client</type>` instead of `<classifier/>`.
-</div>
-{: .alert}
 
 
 ## Overrides and extension mechanism
