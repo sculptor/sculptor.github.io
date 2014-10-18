@@ -1929,7 +1929,7 @@ Entity Person {
 ~~~
 
 
-## How to Generate Documentation of Domain Model
+## How to Generate Documentation
 
 Sculptor generates summary documentation of domain model in clickable HTML format. The output is placed in `src/generated/resources/DomainModelDoc*.html`.
 
