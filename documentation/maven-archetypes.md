@@ -21,7 +21,7 @@ navbar_name: docs
     </div>
     <div markdown="1">
 
-Sculptor comes with a set of [Maven archetypes][1] which you be used to create skeleton projects. This is an easy way to get started using Sculptor as the archetypes generate a Maven `pom.xml` with the necessary Maven plugins (including [Sculptors Maven plugin][2]) and dependencies.
+Sculptor comes with a set of [Maven archetypes][1] which can be used to create skeleton projects. This is an easy way to get started using Sculptor as the archetypes generate a Maven `pom.xml` with the necessary Maven plugins (including [Sculptors Maven plugin][2]) and dependencies.
 
 Check the [Archetype Tutorial][3] for an example on how to use Sculptors Maven archetypes.
 {: .alert}
