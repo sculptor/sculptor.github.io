@@ -42,8 +42,11 @@ In this part we will setup the project structure for Maven and Eclipse.
 1.  Use [Sculptors Maven archetype][5] with the following command (one line) to create a Maven POM and file structure.
 
     ~~~
-mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-archetype-standalone -DarchetypeVersion={{site.sculptor_version}}
+mvn archetype:generate -DarchetypeGroupId=org.sculptorgenerator -DarchetypeArtifactId=sculptor-maven-archetype -DarchetypeVersion={{site.sculptor_version}} -Dstandalone=true
     ~~~
+
+    The property `-Dstandalone=true` indicates that the project is **not** part of a [Maven multi-module project](http://maven.apache.org/guides/mini/guide-multiple-modules.html) and is **not** refering to a common parent project `helloworld-parent`.
+    {: .alert} 
 
     Fill in groupId and archetypeId:
 
@@ -54,9 +57,9 @@ Define value for version:  1.0-SNAPSHOT: :
 Define value for package:  org.library: :
     ~~~
 
-2.  In the new directory, run `mvn eclipse:eclipse` to create an Eclipse project with the same dependencies as in the pom.
+2.  Open Eclipse and import the project via (via [m2e Eclipse plugin](http://www.eclipse.org/m2e/)) with "File > Import... > Existing Maven Projects".
 
-3.  Open Eclipse and import the project.
+3.  Create an Eclipse m2e launch configuration for executing Maven (e.g. with the goal `generate-sources`) from within Eclipse (right-clicking the project or Maven POM and selecting "Run as > Maven build..." from the context menu).
 
 
 ## Generate Code
