@@ -31,9 +31,11 @@ These projects are created with [Sculptors Maven archetypes][1] as follows:
     mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
        -DarchetypeArtifactId=sculptor-maven-archetype-parent -DarchetypeVersion={{site.sculptor_version}} \
        -DgroupId=org.helloworld -DartifactId=helloworld-parent -Dpackage=org.helloworld \
-       -Dversion=1.0-SNAPSHOT -Dear=true
+       -Dversion=1.0-SNAPSHOT -Dejb=true -Dear=true
     ~~~
 
+    The property `-Dejb=true` indicates that an EJB3 target implementation ([project nature](developers-guide#project-nature) `pure-ejb3`) should be generated.
+    If this property is omitted or set to `true` then a Spring target implementation is generated instead.
     The property `-Dear=true` indicates that the EAR module `helloworld-ear` should be imported in the Maven POM.
     {: .alert} 
 
