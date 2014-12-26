@@ -16,7 +16,7 @@ When constructing systems it is a very nice match to accomplish loosely coupled 
 We strive for simplicity, but at the same time not restricting us.
 
 So, how can you use with Sculptor?
-In the [1.9.0 release][8], we have focused on support for [Publish/Subscribe][3], [Comman-Query Responisbility Segregation (CQRS)][4] and [Event Sourcing][5].
+In the [1.9.0 release][8], we have focused on support for [Publish/Subscribe][3], [Command-Query Responsibility Segregation (CQRS)][4] and [Event Sourcing][5].
 
 The most useful part is of course the pub/sub support. Event sourcing is an architectural style that has its niche. CQRS is also an architectural style that there has been some publicity around lately. CQRS uses pub/sub and can with advantage be constructed to use Event Sourcing.
 
