@@ -270,6 +270,7 @@ public void consume(Object any) {
 }
 ~~~
 
+{: #consumer}
 Not only `Service` and `Repository` can be subscribers. It is also possible to define a dedicated `Consumer`, which can only receive events. You can inject Services and Repositories to the `Consumer`, as usual.
 
 ~~~

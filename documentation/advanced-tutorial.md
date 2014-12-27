@@ -226,7 +226,7 @@ In this part we will write a Sculptor DSL file and generate code from it.
     The operations in the Services delegates directly to the Repositories. It defines the same Domain Objects, including attributes and references,
 as in [Figure 1](#domain-model). The details will be explained further on.
 
-3.  Run `mvn clean install` to generate code and build. The JUnit test will fail.
+3.  Run `mvn clean install` to generate code and build. The [unit tests](#unit-tests) will fail.
 
 
 ## Domain-Driven Design
@@ -318,9 +318,10 @@ I can recommend that you read [Inject Repositories, not DAOs in Domain Entities]
 
 ### Service
 
-The Services act as a [Service Layer](http://martinfowler.com/eaaCatalog/serviceLayer.html) around the domain model. It provides a well defined interface with a set of available operations to the clients.
+The Services act as a [Service Layer](http://martinfowler.com/eaaCatalog/serviceLayer.html) around the domain model. It provides a well defined interface with a set of available operations to the clients. These operations are using Repositories and other Services.
 
-The transaction boundary is at the service layer.
+This service layer is the boundary for [transaction management](#transaction-management) and [error handling](#error-handling).
+{: .alert .alert-error}
 
 
 ### Module
@@ -336,6 +337,7 @@ cohesion and a low level of coupling."
 With Sculptor the Modules are realized as Java packages. By default they are subpackages of the application package, but it is possible to define another package by specifying the `basePackage` attribute of the Module.
 
 Circular references between Modules are not allowed. Interaction between a Service in one Module and a Repository in another Module is not allowed, it must go via a Service. Sculptor will validate these constraints.
+{: .alert .alert-error}
 
 
 ## How to Generate Domain Objects
@@ -2127,9 +2129,10 @@ If the referenced project is an EJB project (built by the Maven EJB plugin via P
 {: .alert}
 
 
-## JUnit
+## Unit Tests
+{: #unit-tests}
 
-For each Service there is a generated JUnit test class that you have to implement. It extends IsolatedDatabaseTestCase which means that [DBUnit](http://www.dbunit.org/) it used to load the in memory [HSQLDB](http://hsqldb.org/) database with test data from the XML file specified in the `getDataSetFile` method. The database is refreshed for each test method.
+For each Service there is a generated JUnit test class that you have to implement. It extends `IsolatedDatabaseTestCase` which means that [DBUnit](http://www.dbunit.org/) is used to load the in memory [HSQLDB](http://hsqldb.org/) database with test data from the XML file specified in the `getDataSetFile` method. The database is refreshed for each test method.
 
 Spring beans are injected in the test with ordinary `@Autowired` annotations.
 
@@ -2158,7 +2161,7 @@ As example we have a MessageSender, which is implemented using JMS. The MessageS
 </bean>
 ~~~
 
-In the junit test:
+In the [unit test](#unit-tests):
 
 ~~~ java
 public class MyFacadeTest extends AbstractDbUnitJpaTests
@@ -2214,6 +2217,38 @@ You might find the following DBUnit test data useful:
 ~~~
 
 
+## Transaction Management
+{: #transaction-management}
+
+The service layer marks the applications transactional boundary. Depending on the [deployment type](developers-guide.html#deployment) transaction management is implemented with different technologies:
+
+* In EAR deployment the services are exposed as EJBs and the application servers JTA support is used.
+
+* In WAR deployment the services are exposed as POJOs and Springs [declarative transaction management](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/transaction.html#transaction-declarative) is used.
+
+Sculptor uses Springs XML-based configuration via the corresponding XML namespace:
+
+~~~ xml
+<tx:advice id="txAdvice" transaction-manager="txManager">
+	<tx:attributes>
+		<!-- all methods starting with 'get' or 'find' are read-only -->
+		<tx:method name="get*" read-only="true"/>
+		<tx:method name="find*" read-only="true"/>
+		<!-- all other methods are transactional and ApplicationException will cause rollback -->
+		<tx:method name="*" read-only="false" rollback-for="org.sculptor.framework.errorhandling.ApplicationException"/>
+	</tx:attributes>
+</tx:advice>
+~~~
+
+By convention all service methods with a name starting with "get" or "find" are [configured with read-only transaction semantics](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/transaction.html#transaction-declarative-diff-tx). All other methods are configured with default transaction semantics and rollback triggered if an  [ApplicationException](#error-handling) is thrown.
+
+For switching to [annotation-based configuration](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/transaction.html#transaction-declarative-annotations) (with Springs `@Transactional` annotation) define the following property in your project `sculptor-generator.properties` file:
+
+~~~
+generate.spring.annotation.tx=true
+~~~
+
+
 ## Error Handling
 {: #error-handling}
 
@@ -2223,7 +2258,8 @@ Two types of exceptions are used, a checked exception called `ApplicationExcepti
 
 `SystemException` is used to indicate unrecoverable, unexpected errors that are outside the control of the application, e.g. database failures. The current processing can't continue and the transaction is rolled back when they occur.
 
-[Effective Java Exceptions](http://www.oracle.com/technetwork/articles/entarch/effective-exceptions-092345.html) is a good article describing similar error handling strategy.
+[Effective Java Exceptions](http://www.oracle.com/technetwork/articles/entarch/effective-exceptions-092345.html) is a good article describing a similar error handling strategy.
+{: .alert}
 
 Both `ApplicationException` and `SystemException` contain an error code, which is used by the client to translate to appropriate error message. Subclasses to these exceptions defines specific error situations and it is in these subclasses the error codes are defined, i.e. an exception class can define several error codes to indicate different flavours of the fault.
 
@@ -2236,16 +2272,22 @@ Repository LibraryRepository {
 }
 ~~~
 
-A Spring advice will catch all exceptions that are thrown from the Services. This advice will log all SystemExceptions to the error log. ApplicationExceptions are logged at debug level. [slf4j][4] is used for the logging.
+<div markdown="1">
+Error handling is implemented as an AOP advice (with Spring) or a JEE interceptor (with pure EJB3). This advice / interceptor catches all exceptions that are thrown from the Service operations and logs them via [slf4j][4].
+
+**SystemExceptions are logged at error level and ApplicationExceptions at debug level.**
+</div>
+{: .alert}
 
 
-### ServiceContext
+## Service Context
+{: #servicecontext}
 
 The `ServiceContext` class is needed to support logging and audit trail functionality through the tiers of an application. A `ServiceContext` object will typically be sent through all tiers, and represents the context in which a business service is called. It contains information about the user and ids for the session and request.
 
 The first parameter of each method in the Services is a `ServiceContext` parameter. This is generated automatically. In front of the Services there is an advice, which stores this `ServiceContext` object in a thread local variable, `ServiceContextStore`, to make sure that it is available everywhere within that request in the tier. When calling remote methods it must be passed as a method parameter.
 
-It is possible to skip the generation of `ServiceContext`, see [Developer's Guide](developers-guide#serviceContext).
+It is possible to disable the generation of `ServiceContext` support, see [Developer's Guide](developers-guide#servicecontext).
 
 
 ## Alternative Notation

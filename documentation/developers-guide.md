@@ -42,6 +42,7 @@ Some changes are staightforward and some requires more in depth understanding of
 
 
 ## Generator Properties
+{: #generator-properties}
 
 There are a many things that can be easily customized with properties. The default properties are defined in `default-sculptor-generator.properties` in [`sculptor-generator-configuration`](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-configuration/src/main/resources/default-sculptor-generator.properties). You can override these properties by defining them in `sculptor-generator.properties`.
 
@@ -174,8 +175,8 @@ db.mysql.onDeleteCascade=false
 
 There are two ways to generate database creation SQL script (DDL). Select between:
 
-1.  Enable the `hibernate3-maven-plugin hbm2ddl` in `pom.xml`. The archetype generates settings for it, but it is commented out.
-The default settings is to generate the ddl script every time in the build phase `process-classes`. You can change that by
+1.  Enable the `hibernate3-maven-plugin hbm2ddl` in `pom.xml`. The [Maven archetype][5] generates settings for it, but it is commented out.
+The default settings is to generate the DDL script every time in the build phase `process-classes`. You can change that by
 removing the `<phase>process-classes</phase>` in the `execution` section of the plugin definition in `pom.xml`. In that case
 you need to run the generation when needed with `mvn hibernate3::hbm2ddl`.
 
@@ -435,8 +436,8 @@ One drawback with not using key class is that `findByKeys` is not supported for 
 {: .alert}
 
 
-### Removing the generation of the ServiceContext
-{: #serviceContext}
+### Disable the generation of the ServiceContext
+{: #servicecontext}
 
 For some reason it might be required to switch off the generation of the `ServiceContext` - for example if you want to create a client without the created/updated functionality.
 In this case it can be done easily with setting a property value in the `sculptor-generator.properties` file:
@@ -446,18 +447,21 @@ In this case it can be done easily with setting a property value in the `sculpto
 generate.serviceContext=false
 ~~~
 
-This turns off the generation of the `ServiceContext`. Please note that in this case the [auditable feature][4] does not work or must be implemented manually.
+This turns off the generation of the `ServiceContext`.
 
-You can skip generation of auditable with:
+<div markdown="1">
+Please note that in this case the [auditable feature][4] does not work or must be implemented manually. You can disable the generation of auditable with:
 
 ~~~
 generate.auditable=false
 ~~~
+</div>
+{: .alert .alert-error}
 
 
 ### Null instead of NotFoundException
 
-By default, some repository operations such as `findById` and `findByKey` throws `NotFoundException` if the query doesn't find any matching result. You can use the following generator property to return `null` instead of throwing exception:
+By default, some repository operations such as `findById` and `findByKey` throws `NotFoundException` if the query doesn't find any matching result. You can use the following [generator property](#generator-properties) to return `null` instead of throwing exception:
 
 ~~~
 generate.NotFoundException=false
@@ -812,7 +816,7 @@ add the plugin to enhance the domain classes and the repository to resolve the d
 
 ### Business Component without Persistence
 
-You can create a business component that is not using JPA or MongoDB by defining generator property:
+You can create a business component that is not using JPA or MongoDB by defining [generator property](#generator-properties):
 
 ~~~
 jpa.provider=none
@@ -891,7 +895,21 @@ umlgraph.labelangle=-30
 It is also possible to define color for individual elements using hint in model `hint="umlgraph.bgcolor=D0D0D0"`. Hide elements using `hint="umlgraph=hide"`.
 
 
-### Deployment in Tomcat
+### Deployment
+{: #deployment}
+
+Sculptor supports deployment as EAR or WAR (default). This is configured with the [generator property](#generator-properties) `deployment.type`.
+
+The design differences for each deployment type are as follows:
+
+* Services are exposed as EJBs when deployed as EAR, POJOs when deployed as WAR.
+* [Transaction management](advanced-tutorial.html#transaction-management) is done with JTA by the application server when deployed as EAR, by Spring when deployed as WAR.
+* [Consumers](event-driven-tutorial.html#consumer) are not supported when deployed as WAR.
+
+The [Archetype Tutorial](archetype-tutorial) describes the steps how to convert WAR to EAR deployment (e.g. by setting `deployment.type=ear`). It also describes how to deploy in JBoss (e.g. by setting `deployment.applicationServer=JBoss`).
+
+
+#### Deployment in Tomcat
 
 By default [Jetty](http://www.mortbay.org/jetty/) is used to run the application. Instead of Jetty you can use [Tomcat](http://tomcat.apache.org/).
 Deployment in Tomcat requires that you do the following.
@@ -904,22 +922,11 @@ deployment.applicationServer=Tomcat
 
 2.  The Tomcat definition of the datasource is located in `META-INF/context.xml` in the WAR. This file is generated once, but you might need to adjust the settings.
 
-3.  Copy the jdbc driver jar to tomcat lib directory.
+3.  Copy the JDBC driver jar to Tomcat lib directory.
 
 4.  Rebuild with `mvn clean install` in the parent directory.
 
 5.  The WAR located in the target directory of the web project can be deployed in Tomcat.
-
-
-### Deployment as EAR or WAR
-
-Sculptor supports deployment as EAR or WAR. WAR is default when creating new projects with the archetypes. The design differences are:
-
-* Services are exposed as EJBs when deployed as EAR, POJOs when deployed as WAR.
-* Transaction management is done with JTA by the application server when deployed as EAR, by Spring when deployed as WAR.
-* Consumers are not supported when deployed as WAR.
-
-The [Archetype Tutorial](archetype-tutorial) describes the steps how to convert WAR to EAR deployment (e.g. by setting `deployment.type=ear`). It also describes how to deploy in JBoss (e.g. by setting `deployment.applicationServer=JBoss`).
 
 
 ### JAXB
@@ -1750,3 +1757,4 @@ To define a cartridge:
 [2]: advanced-tutorial#scaffold
 [3]: maven-plugin
 [4]: advanced-tutorial#auditable
+[5]: maven-archetypes
