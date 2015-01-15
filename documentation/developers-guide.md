@@ -1741,12 +1741,12 @@ This section describes all steps of how to add a completely new concept, Consume
 
 ### How to define a Sculptor cartridge
 
-Cartridges in Sculptor provide a means to package extensions to Sculptor that projects may enable or disable via the 'cartridges' property.  Some features within Sculptor itself are packaged as cartridges, for example the builders feature and MongoDB support.
+[Cartridges in Sculptor](advanced-tutorial.html#cartridges) provide a means to package extensions to Sculptor that projects may enable or disable via the 'cartridges' property.  Some features within Sculptor itself are packaged as cartridges, for example the builders feature and MongoDB support.
 
 To define a cartridge:
 
-* Review [overriding templates or transformations for a project](advanced-tutorial.html#overriding-templates-or-transformations-for-a-project) and [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges-reusable-extensions-to-sculptor)
-* Follow the steps in [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges-reusable-extensions-to-sculptor) to define a cartridge.
+* Review [overriding templates or transformations for a project](advanced-tutorial.html#overriding-templates-or-transformations-for-a-project) and [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges)
+* Follow the steps in [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges) to define a cartridge.
 * The cartridge may either be packaged in the sculptor-generator-core project itself, or in a separate project.
 
   If a separate project, it can be set up in the same manner as [Creating separate generator project](advanced-tutorial.html#creating-separate-generator-project)
