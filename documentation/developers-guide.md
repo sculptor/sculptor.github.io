@@ -1144,7 +1144,7 @@ class TransformationOverride extends Transformation {
 
 ## Meta Model
 
-Input to the code generation is the model, which is structured according to the meta models `sculptormetamodel.ecore` and `sculptorguimetamodel.ecore`. The meta models are defined with [Ecore](http://www.eclipse.org/modeling/emf/).
+Input to the code generation is the model, which is structured according to the meta model `sculptormetamodel.xcore`. The meta model is defined with [Xcore](https://wiki.eclipse.org/Xcore) (an Xtext-based DSL for [EMF](http://www.eclipse.org/modeling/emf/) models).
 
 
 ### Business Tier Model (domain model)
