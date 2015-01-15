@@ -1118,7 +1118,7 @@ A separate model is used for generation of the CRUD GUI. A transformation takes 
 
 ### Customize the Transformations
 
-The [Sculptor extension mechanism](advanced-tutorial.html#overrides-and-extension-mechanism) can be used to customize the transformations.  Follow either the steps in the [overriding templates or transformations for a project](advanced-tutorial.html#overriding-templates-or-transformations-for-a-project) or [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges-reusable-extensions-to-sculptor), depending on how you want to package the extension.
+The [Sculptor extension mechanism](advanced-tutorial.html#overrides-and-extension-mechanism) can be used to customize the transformations.  Follow either the steps in the [overriding templates or transformations for a project](advanced-tutorial.html#overriding-templates-or-transformations-for-a-project) or [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges), depending on how you want to package the extension.
 
 For example, to skip automatic addition of uuid property in your project:
 
