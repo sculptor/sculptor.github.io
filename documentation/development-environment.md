@@ -17,9 +17,9 @@ To develop Sculptor you need local installations of the following tools:
 
 * [git](http://git-scm.com/downloads) (1.8 or newer)
   * git workflow extension [git-flow](https://github.com/nvie/gitflow)
-* [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/) (1.6 or newer)
-* [Maven](http://maven.apache.org/download.html) (3.0.5 or newer)
-* [Eclipse](http://eclipse.org/downloads/) (4.2 or newer) with [Xtext](http://www.eclipse.org/Xtext/download.html) (2.4.2 or newer)
+* [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/) (1.7 or newer)
+* [Maven](http://maven.apache.org/download.html) (3.2.1 or newer)
+* [Eclipse](http://eclipse.org/downloads/) (4.3 or newer) with [Xtext](http://www.eclipse.org/Xtext/download.html) (2.7.2 or newer)
 * (optional) [GraphViz](http://www.graphviz.org/) (2.2.8 or newer)
 
 The installation and configuration of these tools is described in [Sculptors installation guide](http://sculptorgenerator.org/documentation/installation).
@@ -221,6 +221,8 @@ The following is a brief overview of the main Maven modules of Sculptors source 
 * `sculptor-eclipse` The aggregator project holding the Eclipse projects with the Eclipse p2 mirror, the meta model, the DSL model with its UI and unit tests, the feature and the p2 mirror.
 
 * `sculptor-generator` The aggregator project holding the implementation of the code generator.
+
+* `sculptor-cartridges` The aggregator project holding the implementation of the [code generator cartridges](advanced-tutorial.html#cartridges-reusable-extensions-to-sculptor).
 
 * `sculptor-framework` The aggregator project holding the implementation of the Sculptor runtime library.
 
