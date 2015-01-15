@@ -222,7 +222,7 @@ The following is a brief overview of the main Maven modules of Sculptors source 
 
 * `sculptor-generator` The aggregator project holding the implementation of the code generator.
 
-* `sculptor-cartridges` The aggregator project holding the implementation of the [code generator cartridges](advanced-tutorial.html#cartridges-reusable-extensions-to-sculptor).
+* `sculptor-cartridges` The aggregator project holding the implementation of the [code generator cartridges](advanced-tutorial.html#cartridges).
 
 * `sculptor-framework` The aggregator project holding the implementation of the Sculptor runtime library.
 
