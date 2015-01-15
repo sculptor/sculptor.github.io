@@ -729,7 +729,7 @@ if( isSpecialCase(bookBuilder) ) {
 Book book = bookBuilder.build();
 ~~~
 
-Generation of domain object builder classes is an optional feature (disabled by default) which is implemented as a [template extension cartridge](#cartridges) named "builder". To [activate this cartridge](#cartridge-activation) add it to the list of cartridges in `sculptor-generator.properties`, e.g.
+Generation of domain object builder classes is an optional feature (disabled by default) which is implemented as a [template extension cartridge](#cartridges) named "builder". To [activate this cartridge](#enabling-cartridges) add it to the list of cartridges in `sculptor-generator.properties`, e.g.
 
 ~~~
 cartridges=mongodb,builder
