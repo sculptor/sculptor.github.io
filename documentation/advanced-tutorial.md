@@ -471,7 +471,7 @@ Built in types:
   * Blob
 
 It is easy to add your own DSL types and mapping to database and Java types. See [Developer's Guide](developers-guide#types). Sculptor supports [Joda Time](http://joda-time.sourceforge.net/) instead of the Java date and time classes. It is also described in the [Developer's Guide](developers-guide#joda) how to activate Joda Time.
-{: .alert .alert-info}
+{: .alert}
 
 To distinguish references from simple attributes, declarations of references starts with a `-`. In the same way as in other places you must also use an `@` in front of the declaration when referring to a Domain Object. When the relation is one-to-many or many-to-many you define a collection as the type of the reference. Bidirectional associations are defined with the opposite `<->` syntax.
 
