@@ -489,7 +489,7 @@ There is an [alternative notation](#alternative-notation) for references and bid
 
 ### Collections
 
-Supported collection types:
+Collections use the ordinary Java generics syntax. Supported collection types:
 
   * Set - unordered collection
   * List - ordered collection using order column (additional options available for JPA2, see below)
@@ -553,9 +553,9 @@ You can use `orderby` or `orderColumn`, but not both. It is possible not to spec
 
 ### Element Collections
 
-This feature correspondents to the JPA @ElementCollection.
+This feature correspondents to the JPA `@ElementCollection`.
 
-In addition to define collections (Set, List) as relationships to other entities, it is possible to specify collections of BasicTypes and simple types (String, ...). This elements will be stored in a separate collection table. This collection table is a kind of one-to-many relation (aggregation) with a join column that refers to the containing entity table.
+In addition to define [collections (Set, List)](#collections) as relationships to other entities, it is possible to specify collections of BasicTypes and simple types (String, ...). This elements will be stored in a separate collection table. This collection table is a kind of one-to-many relation (aggregation) with a join column that refers to the containing entity table.
 
 Example using a collection of Strings.
 
@@ -906,7 +906,7 @@ ValueObject Transaction {
 }
 ~~~
 
-BasicTypes can contain nested BasicTypes, relationships to Entities and collections of simple types, BasicTypes and Entities.
+BasicTypes can contain nested BasicTypes, relationships to Entities and [collections](#collections) of simple types, BasicTypes and Entities.
 
 ~~~
 Entity Person {
@@ -1263,7 +1263,7 @@ DataTransferObject BookDto {
 }
 ~~~
 
-Collections use the ordinary Java generics syntax. Built in collection types:
+[Collections](#collections) use the ordinary Java generics syntax. Built in collection types:
 
 * Set
 * List
@@ -1734,7 +1734,7 @@ PersonRepository {
 }
 ~~~
 
-Next to the aggregate root any appropriate return type is allowed. This can be simple types, referenced domain objects (BasicType/Entity) and collections (List/Set) of simple types and domain objects. Returning multiple columns is just as possible as using aggregate functions and ordering.
+Next to the aggregate root any appropriate return type is allowed. This can be simple types, referenced domain objects (BasicType/Entity) and [collections (List/Set)](#collections) of simple types and domain objects. Returning multiple columns is just as possible as using aggregate functions and ordering.
 
 ~~~
 PersonRepository {
@@ -1804,7 +1804,7 @@ PersonRepository {
 }
 ~~~
 
-Any appropriate return type is allowed. This can be simple types, referenced domain object (BasicType/Entity) and collections (List/Set) of simple types and domain objects. Returning multiple columns is just as possible as using aggregate functions and ordering.
+Any appropriate return type is allowed. This can be simple types, referenced domain object (BasicType/Entity) and [collections (List/Set)](#collections) of simple types and domain objects. Returning multiple columns is just as possible as using aggregate functions and ordering.
 
 You can add a complete JPQL statement or only the needed parts.
 (not all JPQL features are supported, e.g you can not use subselects or explicit joins)
