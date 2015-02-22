@@ -11,6 +11,31 @@ Released versions of Sculptor:
 * toc
 {:toc}
 
+## Version 3.1.x
+
+### Version 3.1.0
+
+Version 3.1.0 was released xx, 2015.
+
+Some highlights of the release:
+
+* Upgrade to [Xtext/Xtend 2.7.3](http://www.eclipse.org/Xtext/releasenotes.html) and Eclipse Luna
+* Upgrade to [Eclipse Tycho 0.22](http://wiki.eclipse.org/Tycho/Release_Notes/0.22)
+* Upgrade to Spring 4.1
+* Upgrade to Jave EE 6 (deployment descriptors and dependencies)
+* Upgrade to JPA 2.0 by using Hibernate 4.2 (the last version of Hibernate which does not require JPA 2.1)
+* [Sculptor meta model](http://sculptorgenerator.org/documentation/developers-guide#meta-model) based on [Xcore](https://wiki.eclipse.org/Xcore) now (instead of plain Ecore)
+* Additional integration tests for [Maven archetypes](maven-archetypes#sculptor-maven-archetype)
+* New examples ([Spring Boot](http://projects.spring.io/spring-boot/) and [Pure EJB3](http://sculptorgenerator.org/documentation/pure-ejb3-tutorial))
+* First version of [Spring Data JPA](http://projects.spring.io/spring-data-jpa/) cartridge
+
+API Breaking changes:
+
+* Drop support for Java 6, Hibernate 3 and JPA 1
+* Refactoring of `ServiceContext` into package `org.sculptor.framework.context`
+* Refactoring of `JpaFlushEager` into package `org.sculptor.framework.persistence`
+
+
 ## Version 3.0.x
 
 ### Version 3.0.6
