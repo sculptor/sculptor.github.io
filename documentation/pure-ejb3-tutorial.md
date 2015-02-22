@@ -45,7 +45,7 @@ These projects are created with [Sculptors Maven archetypes][1] as follows:
     mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
        -DarchetypeArtifactId=sculptor-maven-archetype -DarchetypeVersion={{site.sculptor_version}} \
        -DgroupId=org.helloworld -DartifactId=helloworld -Dpackage=org.helloworld \
-       -Dversion=1.0-SNAPSHOT -Dejb=true
+       -Dversion=1.0-SNAPSHOT -Dejb=true -Dear=true
     ~~~
 
     The property `-Dejb=true` indicates that an EJB3 target implementation ([project nature](developers-guide#project-nature) `pure-ejb3`) should be generated.
@@ -58,7 +58,7 @@ These projects are created with [Sculptors Maven archetypes][1] as follows:
     mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.sculptorgenerator \
        -DarchetypeArtifactId=sculptor-maven-archetype-ear -DarchetypeVersion={{site.sculptor_version}} \
        -DgroupId=org.helloworld -DartifactId=helloworld-ear -Dpackage=org.helloworld \
-       -Dversion=1.0-SNAPSHOT
+       -Dversion=1.0-SNAPSHOT -Dejb=true
     ~~~
 
 4.  Change directory to `helloworld-parent`. Run `mvn install`.
