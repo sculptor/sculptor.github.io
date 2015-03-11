@@ -2458,7 +2458,7 @@ The steps for defining a cartridge are very similar to the steps for [overriding
 
   - Be marked with the `@ChainOverride` annotation
 
-For an example of a cartridge, see the [org.sculptor.generator.cartridge.mongodb](https://github.com/sculptor/sculptor/tree/develop/sculptor-generator/sculptor-generator-core/src/main/java/org/sculptor/generator/cartridge/mongodb) cartridge within the [sculptor-generator-core](https://github.com/sculptor/sculptor/tree/develop/sculptor-generator/sculptor-generator-core) project.
+For examples of cartridges (e.g. the [builder cartridge](#builder)), see the projects within the [sculptor-cartridges](https://github.com/sculptor/sculptor/tree/develop/sculptor-cartridges) aggregator project.
 
 
 ### Enabling a cartridge in a project
