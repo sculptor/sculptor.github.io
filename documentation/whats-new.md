@@ -19,7 +19,8 @@ Version 3.1.0 was released xx, 2015.
 
 Some highlights of the release:
 
-* Upgrade to [Xtext/Xtend 2.7.3](http://www.eclipse.org/Xtext/releasenotes.html) and Eclipse Luna
+* Upgrade to [Eclipse Luna](https://projects.eclipse.org/releases/luna)
+* Upgrade to [Xtext/Xtend 2.8.0](http://www.eclipse.org/Xtext/releasenotes.html)
 * Upgrade to [Eclipse Tycho 0.22](http://wiki.eclipse.org/Tycho/Release_Notes/0.22)
 * Upgrade to Spring 4.1
 * Upgrade to Jave EE 6 (deployment descriptors and dependencies)
