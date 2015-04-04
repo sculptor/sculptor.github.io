@@ -238,10 +238,10 @@ To add additional dependencies to the the plugins classpath (e.g. for [cross-pro
 		</execution>
 		<dependencies>
 			<dependency>
-		    	<groupId>org.foo.common</groupId>
-		    	<artifactId>foo-common</artifactId>
-		    	<version>1.0</version>
-		    	<classifier>client</classifier>
+				<groupId>org.foo.common</groupId>
+				<artifactId>foo-common</artifactId>
+				<version>1.0</version>
+				<classifier>client</classifier>
 			</dependency>
 		</dependencies>
 	</executions>
