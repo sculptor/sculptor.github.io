@@ -451,4 +451,10 @@ Open SoapUI again an execute the `getAllPlanets` request. Voilà! The planet is 
 ![Soapui Screenshot](/images/documentation/pure-ejb3-tutorial/soapui-screenshot.png)
 
 
+## Source
+
+The complete source code for this tutorial is available in GitHub:
+[https://github.com/sculptor/sculptor/tree/master/sculptor-examples/ejb-example](https://github.com/sculptor/sculptor/tree/master/sculptor-examples/ejb-example)
+
+
   [1]: maven-archetypes
