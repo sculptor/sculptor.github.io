@@ -2111,15 +2111,29 @@ Application Bank {
 }
 ~~~
 
-The dependency to the project must be added in `pom.xml`:
+The dependency with the imported module must be added to the [dependencies of Sculptors Maven plugin](maven-plugin#classpath) in `pom.xml`:
 
 ~~~ xml
-<dependency>
-    <groupId>org.foo.common</groupId>
-    <artifactId>foo-common</artifactId>
-    <version>1.0</version>
-    <classifier>client</classifier>
-</dependency>            
+<plugin>
+	<groupId>org.sculptorgenerator</groupId>
+	<artifactId>sculptor-maven-plugin</artifactId>
+	<executions>
+		<execution>
+			<id>code-generation</id>
+			<goals>
+				<goal>generate</goal>
+			</goals>
+		</execution>
+		<dependencies>
+			<dependency>
+		    	<groupId>org.foo.common</groupId>
+		    	<artifactId>foo-common</artifactId>
+		    	<version>1.0</version>
+		    	<classifier>client</classifier>
+			</dependency>            
+		</dependencies>
+	</executions>
+</plugin>
 ~~~
 
 <div markdown="1">

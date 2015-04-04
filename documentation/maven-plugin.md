@@ -12,6 +12,7 @@ navbar_name: docs
       <li class="active"><a href="#overview">Overview</a></li>
       <li><a href="#usage">Usage</a></li>
       <li><a href="#configuration">Configuration</a></li>
+      <li><a href="#classpath">Classpath</a></li>
       <li><a href="#logging">Logging</a></li>
     </ul>
   </div>
@@ -36,6 +37,7 @@ The plugin provides the following features:
 * The plugin registers itself with the [Eclipse m2e plugin](http://www.eclipse.org/m2e/) (Eclipse Maven support) to provide the following information:
   * metadata for the Sculptor Mven plugins [Maven lifecycle mapping](http://wiki.eclipse.org/M2E_plugin_execution_not_covered#lifecycle_mapping_metadata_provided_by_maven_plugin)
   * directories of the Maven project which should be used as classpath entries within an Eclipse project
+* The plugin maintains its [own classpath](#classpath) which is independent from the projects classpath.
 
 
 ## Usage
@@ -214,6 +216,36 @@ Some of these properties can be added to the commandline as system properties, e
 
 ~~~
 mvn clean test -Dverbose=true -Dsculptor.graphviz.skip=true
+~~~
+
+
+## Classpath
+
+The plugin uses [its own classloader](http://maven.apache.org/guides/mini/guide-maven-classloading.html#Plugin_Classloaders) which is separated from the current Maven projects one.
+
+To add additional dependencies to the the plugins classpath (e.g. for [cross-project references](advanced-tutorial#cross-project-references)) add these dependencies in the `plugins/plugin` section of the project `pom.xml`:
+
+~~~ xml
+<plugin>
+	<groupId>org.sculptorgenerator</groupId>
+	<artifactId>sculptor-maven-plugin</artifactId>
+	<executions>
+		<execution>
+			<id>code-generation</id>
+			<goals>
+				<goal>generate</goal>
+			</goals>
+		</execution>
+		<dependencies>
+			<dependency>
+		    	<groupId>org.foo.common</groupId>
+		    	<artifactId>foo-common</artifactId>
+		    	<version>1.0</version>
+		    	<classifier>client</classifier>
+			</dependency>
+		</dependencies>
+	</executions>
+</plugin>
 ~~~
 
 
