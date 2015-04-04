@@ -253,11 +253,17 @@ To add additional dependencies to the the plugins classpath (e.g. for [cross-pro
 
 Sculptor uses the [SLF4J](http://slf4j.org/) logging abstraction which supports various logging frameworks (e.g. java.util.logging, logback, log4j).
 
+
+### Maven 3.1 and newer
+
 Starting with version 3.1 [Maven ships with the SLF4J Simple Logger](http://maven.apache.org/maven-logging.html). So adding the Java system property `-Dorg.slf4j.simpleLogger.log.org.sculptor=debug` to the Maven command line activates the debug logging of Sculptors generator library:
 
 ~~~
 mvn clean generate-sources -Dorg.slf4j.simpleLogger.log.org.sculptor=debug
 ~~~
+
+
+### Maven 3.0
 
 With Maven 3.0 Sculptor uses the [Logback](http://logback.qos.ch/) logging framework. So adding the Java system property `-Dlogback.configurationFile=</path/to/logback.xml>` to the Maven command line activates debug logging of Sculptors generator library. The corresponding `logback.xml` defines a logger with the name "org.sculptor":
 
