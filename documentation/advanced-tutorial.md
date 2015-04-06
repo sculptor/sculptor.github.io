@@ -364,7 +364,8 @@ Entity Person {
 }
 ~~~
 
-Note that in the gap class some annotations are specified, e.g. @Entity and @Table. Those are only generated once, and must be maintained manually. E.g. when changing the natural key attributes the @UniqueConstraint must be modified. In the JavaDoc of the generated base class the correct annotations are defined, for convenient copy to the hand written subclass.
+Note that in the gap class some annotations are specified, e.g. `@Entity` and `@Table`. Those are only generated once, and must be maintained manually. E.g. when changing the natural key attributes the `@UniqueConstraint` must be modified. In the JavaDoc of the generated base class the correct annotations are defined, for convenient copy to the hand-written subclass.
+{: .alert}
 
 It is possible to configure that gap classes are always to be generated, except when specified otherwise. Then you add the following property in `sculptor-generator.properties`:
 
@@ -403,9 +404,9 @@ Entity Person {
 
 ### Traits
 
-Traits provide a mixin composition mechanism that is missing in Java. Similar to interfaces in Java, traits are used to define object types by specifying the signature of the supported methods. Unlike interfaces, traits can be partially implemented; i.e. it is possible to define implementations for some methods. Sculptor has support for traits, inspired by Scala traits, but with some limitations compared to Scala traits.
+Traits provide a mixin composition mechanism that is missing in Java. Similar to interfaces in Java, traits are used to define object types by specifying the signature of the supported methods. Unlike interfaces, traits can be partially implemented; i.e. it is possible to define implementations for some methods. Sculptor has support for traits, inspired by [Scala traits](http://docs.scala-lang.org/tutorials/tour/traits.html), but with some limitations compared to Scala traits.
 
-Let us say that the Library system also should be used to sell products.
+Let us say that the Library system also should be used to sell products:
 
 ~~~
 Entity Book extends Media with Product {
@@ -540,7 +541,7 @@ Entity Library {
 }
 ~~~
 
-To define a persistently ordered List you can specify `orderColumn="columnName"`. `columnName` is contains the name of the database column that is added, to store the order. `columnName` is optional. If not given, a default name is used (reference name + "_INDEX").
+To define a persistently ordered List you can specify `orderColumn="columnName"`. `columnName` contains the name of the database column that is added, to store the order. `columnName` is optional. If not given, a default name is used (reference name + "_INDEX").
 
 ~~~
 Entity Library {
@@ -599,7 +600,7 @@ singular2plural.species=species
 
 ### Key
 
-`equals` and `hashCode` requires some thought when used with JPA/Hibernate, see the [discussion](http://www.hibernate.org/109.html) at the Hibernate site. Sculptor takes care of the details. You only have to mark the attributes that is the natural key of the Domain Object.
+`equals` and `hashCode` requires some thought when used with JPA/Hibernate, see the [discussion](http://www.hibernate.org/109.html) at the Hibernate site. Sculptor takes care of the details. You only have to mark the attribute that is the natural key of the Domain Object.
 
 If the key is a composite key, consisting of several attributes, a separate internal key class will be generated.
 
@@ -1680,7 +1681,7 @@ conditions.add(conditionalCriteria);
 
 ### Generation of Finder Operations
 
-Widely used repository operations are operations to find domainobjects. Often this operations use static queries to get the results. In this cases it is now possible to specify the related query in the model file and let Sculptor generate the code for the repository operations.
+Widely used repository operations are operations to find domain objects. Often this operations use static queries to get the results. In this cases it is now possible to specify the related query in the model file and let Sculptor generate the code for the repository operations.
 
 This feature is not activated by default. To allow Sculptor to generate finder operations add the following line into your `sculptor-generator.properties` file:
 
