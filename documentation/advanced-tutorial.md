@@ -493,7 +493,7 @@ There is an [alternative notation](#alternative-notation) for references and bid
 Collections use the ordinary Java generics syntax. Supported collection types:
 
   * Set - unordered collection
-  * List - ordered collection using order column (additional options available for JPA2, see below)
+  * List - ordered collection using orderby or orderColumn sorting
   * Bag - ordered collection using orderby sorting
 
 For Bag collections you can specify `orderby`
@@ -532,8 +532,7 @@ Entity Library {
 }
 ~~~
 
-In a JPA2 environment there are a few new possibilities sorting a List collection.
-For List collections you can now specify `orderby="properties"`. `properties` is a string that contains one or more comma-separated attributes of the object to be ordered or in a referenced BasicType or Entity.
+For sorted List collections you can specify `orderby="properties"`. `properties` is a string that contains one or more comma-separated attributes of the object to be ordered or in a referenced BasicType or Entity.
 
 ~~~
 Entity Library {
@@ -1339,7 +1338,7 @@ It is possible to use another design approach and implement everything directly 
 
 ### Generic Access Objects
 
-Sculptor runtime framework provides generic access objects for the following operations:
+Sculptors runtime framework provides generic access objects for the following operations:
 
   * `findById`
   * `findAll`
@@ -1353,9 +1352,6 @@ Sculptor runtime framework provides generic access objects for the following ope
   * `delete`
   * `countAll`
   * `populateAssociations`
-
-**JPA2:** All generic access objects, including `findByExample`, `findByCondition` and `findByCriteria`, are implemented for all supported JPA2 providers.
-{: .alert }
 
 To use a generic Access Object you simply have to specify the name of it in the Repository in the DSL.
 
@@ -1376,14 +1372,12 @@ Repository PersonRepository {
 }
 ~~~
 
-See the [source](https://github.com/sculptor/sculptor/tree/master/sculptor-framework/sculptor-framework-main/src/main/java/org/sculptor/framework/accessimpl/jpa2) of the corresponding classes for more information of the functionality of these Access Objects.
+See the [source](https://github.com/sculptor/sculptor/tree/master/sculptor-framework/sculptor-framework-main/src/main/java/org/sculptor/framework/accessimpl/jpa) of the corresponding classes for more information of the functionality of these Access Objects.
 
 Note that setter methods in the [interface](https://github.com/sculptor/sculptor/tree/master/sculptor-framework/sculptor-framework-main/src/main/java/org/sculptor/framework/accessapi) corresponds to method parameters in the repository operation. For example the `findAll` operation can be used with parameters for sorting and caching.
 
 ~~~
 Repository LibraryRepository {
-    //  deprecated using jpa2
-    //  findAll(String orderBy, boolean orderByAsc, boolean cache);
     findAll(String orderBy, boolean cache);
 }
 ~~~
@@ -1392,8 +1386,6 @@ You would often like to define sorting and caching without exposing it as parame
 
 ~~~
 Repository PersonRepository {
-    //  deprecated using jpa2
-    //  findAll hint="orderBy=name.last, orderByAsc=false";
     findAll hint="orderBy=name.last asc, name.first desc" or findAll orderBy="name.last asc, name.first desc"
     findByKey hint="cache";
 }
@@ -1845,7 +1837,7 @@ Entity Person {
 
 Multiple column results are supported (and only this columns will be selected).
 Similar to operations using `findByQuery` you can use an object array to store the values of the result set.
-In addition to an object array a Tuple (`javax.persistence.Tuple`, JPA2) can be used, which provides some useful methods to extract the elements of the query result.
+In addition to an object array a Tuple (`javax.persistence.Tuple`) can be used, which provides some useful methods to extract the elements of the query result.
 
 ~~~
 PersonRepository {
