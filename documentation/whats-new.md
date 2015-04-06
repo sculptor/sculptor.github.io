@@ -15,20 +15,20 @@ Released versions of Sculptor:
 
 ### Version 3.1.0
 
-Version 3.1.0 was released xx, 2015.
+[Version 3.1.0 was released April 05, 2015](/2015/04/05/sculptor-310-released).
 
 Some highlights of the release:
 
 * Upgrade to [Eclipse Luna](https://projects.eclipse.org/releases/luna)
-* Upgrade to [Xtext/Xtend 2.8.0](http://www.eclipse.org/Xtext/releasenotes.html)
+* Upgrade to [Xtext/Xtend 2.8](http://www.eclipse.org/Xtext/releasenotes.html)
 * Upgrade to [Eclipse Tycho 0.22](http://wiki.eclipse.org/Tycho/Release_Notes/0.22)
 * Upgrade to Spring 4.1
 * Upgrade to Jave EE 6 (deployment descriptors and dependencies)
 * Upgrade to JPA 2.0 by using Hibernate 4.2 (the last version of Hibernate which does not require JPA 2.1)
 * [Sculptor meta model](http://sculptorgenerator.org/documentation/developers-guide#meta-model) based on [Xcore](https://wiki.eclipse.org/Xcore) now (instead of plain Ecore)
 * Additional integration tests for [Maven archetypes](maven-archetypes#sculptor-maven-archetype)
-* New examples ([Spring Boot](http://projects.spring.io/spring-boot/) and [Pure EJB3](http://sculptorgenerator.org/documentation/pure-ejb3-tutorial))
 * First version of [Spring Data JPA](http://projects.spring.io/spring-data-jpa/) cartridge
+* New examples for [Spring Boot](http://projects.spring.io/spring-boot/), [Pure EJB3](http://sculptorgenerator.org/documentation/pure-ejb3-tutorial) and Sculptor Cartridge for Spring Data JPA
 
 API Breaking changes:
 
@@ -271,6 +271,13 @@ The most important features of this release:
 
 ## Version 1.3.x
 
+### Version 1.3.1
+
+Version 1.3.1 was released April 11, 2008.
+
+This release is a minor bug fix release.
+
+
 ### Version 1.3.0
 
 Version 1.3.0 was released March 17, 2008.
@@ -278,13 +285,6 @@ Version 1.3.0 was released March 17, 2008.
 The most important feature of 1.3 is a totally new metamodel for the CRUD GUI. In version 1.1 we implemented the CRUD GUI without a separate gui metamodel. The gui generation was using the business tier model. This was a good start, but the experience was that the templates and helper extensions became rather complicated. A special purpose gui metamodel simplified the templates and moved some of the logic to a transformation instead. This is important as we see the need for different dialects of the GUI. In the initial version we are using Spring WebFlow and JSP. We have also started a JSF dialect.
 
 More is likely to come, such as rich client (RCP). Another motivation for the gui metamodel is the possibility to customize the GUI by using a separate DSL (in next release).
-
-
-### Version 1.3.1
-
-Version 1.3.1 was released April 11, 2008.
-
-This release is a minor bug fix release.
 
 
 ## Version 1.2.x
@@ -298,6 +298,13 @@ It is a technical upgrade of several core products such as Eclipse and openArchi
 
 ## Version 1.1.x
 
+### Version 1.1.1
+
+Version 1.1.1 was released November 26, 2007.
+
+This release is a minor bug fix release.
+
+
 ### Version 1.1.0
 
 Version 1.1.0 was released November 5, 2007.
@@ -310,27 +317,20 @@ This release includes a lot of useful features:
 * Possibility to deploy without EJBs, i.e. to run in Tomcat.
 
 
-### Version 1.1.1
-
-Version 1.1.1 was released November 26, 2007.
-
-This release is a minor bug fix release.
-
-
 ## Version 1.0.x
-
-### Version 1.0.0
-
-Version 1.0.0 was released May 24, 2007.
-
-The first final version of Sculptor has been released. The textual Domain Specific Language (DSL) and the design of theg enerated code are inspired by Domain-Driven Design. When using Sculptor you can focus on the business domain, instead of technical details. Sculptor uses openArchitectureWare to parse the DSL and generate high quality Java code and configuration. The generated code is based on well-known frameworks, such as Spring, Hibernate and Java EE.
-
 
 ### Version 1.0.1
 
 Version 1.0.1 was released June 28, 2007.
 
 This release is a minor bug fix release.
+
+
+### Version 1.0.0
+
+Version 1.0.0 was released May 24, 2007.
+
+The first final version of Sculptor has been released. The textual Domain Specific Language (DSL) and the design of theg enerated code are inspired by Domain-Driven Design. When using Sculptor you can focus on the business domain, instead of technical details. Sculptor uses openArchitectureWare to parse the DSL and generate high quality Java code and configuration. The generated code is based on well-known frameworks, such as Spring, Hibernate and Java EE.
 
 
 [1]: advanced-tutorial
