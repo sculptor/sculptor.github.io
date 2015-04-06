@@ -764,7 +764,7 @@ Replace the hibernate properties and dependencies from `pom.xml` with
 
 ~~~ xml
 <properties>
-	<openjpa.version>2.2.0-SNAPSHOT</openjpa.version>
+	<openjpa.version>2.2.2</openjpa.version>
 </properties>
 
 <dependency>
@@ -774,13 +774,13 @@ Replace the hibernate properties and dependencies from `pom.xml` with
 </dependency>
 ~~~
 
-add the plugin to enhance the domain classes and the repository to resolve the dependencies
+Add the Maven plugin to enhance the domain classes
 
 ~~~ xml
 <plugin>
-	<groupId>org.codehaus.mojo</groupId>
+	<groupId>org.apache.openjpa</groupId>
 	<artifactId>openjpa-maven-plugin</artifactId>
-	<version>1.2</version>
+	<version>${openjpa-version}</version>
 	<configuration>
              <includes>**/domain/*.class</includes>
              <excludes>**/domain/*Propert*.class,**/domain/*Repository.class</excludes>
@@ -802,15 +802,6 @@ add the plugin to enhance the domain classes and the repository to resolve the d
 		</dependency>
 	</dependencies>
 </plugin>
-
-<repository>
-    <id>apache.snapshots</id>
-    <name>Apache Snapshot Repository</name>
-    <url>http://repository.apache.org/snapshots</url>
-    <releases>
-        <enabled>false</enabled>
-    </releases>
-</repository>
 ~~~
 
 
