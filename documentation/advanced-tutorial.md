@@ -459,17 +459,19 @@ Another example of traits is illustrated in this [article](/2011/02/03/mixin-com
 Domain Objects can have simple attributes and references to other Domain Objects and enums.
 
 Primitive types or any fully qualified Java class can be used as type of the attributes.
-Built in types:
+Default built-in types (defined in ):
 {: #builtInTypes}
 
   * String
   * Integer (int), Long (long), Float (float), Double (double)
-  * BigDecimal
+  * BigDecimal, BigInteger
   * Boolean (boolean)
   * Date
   * DateTime, Timestamp
   * Clob
   * Blob
+  * IDTYPE (internally used for the [id attribute](#id) which holds the database primary key)
+  * UUID (internally used for the default [key attribute](#key) if no attribute was marked as key)
 
 It is easy to add your own DSL types and mapping to database and Java types. See [Developer's Guide](developers-guide#types). Sculptor supports [Joda Time](http://joda-time.sourceforge.net/) instead of the Java date and time classes. It is also described in the [Developer's Guide](developers-guide#joda) how to activate Joda Time.
 {: .alert}
@@ -1032,7 +1034,7 @@ enum Genre {
 }
 ~~~
 
-JPA has a built in support for enums. It is recommend to use this default handling to avoid provider specific generation of code and configuration files. Therefore try not to use enums that have an identifier (key) attribute.
+JPA has a built-in support for enums. It is recommend to use this default handling to avoid provider specific generation of code and configuration files. Therefore try not to use enums that have an identifier (key) attribute.
 {: .alert .alert-info}
 
 
@@ -1233,6 +1235,47 @@ Regenerate with `mvn generate-sources -Dsculptor.generator.force=true` and look 
 {: .alert}
 
 
+### Scaffold
+
+It is possible to mark a Domain Object with `scaffold` to automatically generate some predefined CRUD operations in the `Repository` and corresponding `Service`.
+
+~~~
+Entity Person {
+    scaffold
+    String ssn key
+    String name
+}
+~~~
+
+The above DSL definition would result in the same as the following:
+
+~~~
+Service PersonService {
+    findById => PersonRepository.findById;
+    findAll => PersonRepository.findAll;
+    save => PersonRepository.save;
+    delete => PersonRepository.delete;
+}
+
+Entity Person {
+    String ssn key
+    String name
+
+    Repository PersonRepository {
+        findById;
+        findAll;
+        save;
+        delete;
+    }
+}
+~~~
+
+The `Repository` and `Service` are also added automatically if they are not defined.
+{: .alert .alert-success}
+
+Which scaffolding operations to use can be defined in `sculptor-generator.properties`, see [Developer's Guide](developers-guide#scaffold).
+
+
 ## How to Generate Services
 {: #services}
 
@@ -1247,7 +1290,7 @@ Service LibraryService {
 Within a Sculptor application every Service needs a unique name. This is due to Sculptors internal model which does not support name spaces.
 {: .alert}
 
-When referring to a Domain Object (Entity or ValueObject) you use an @ in front of the declaration. Primitive types or any fully qualified Java class can also be used as parameters and return types. The same [built in types](#builtInTypes) as can be used for the Domain Objects can be used in the service operations.
+When referring to a Domain Object (Entity or ValueObject) you use an @ in front of the declaration. Primitive types or any fully qualified Java class can also be used as parameters and return types. The same [built-in types](#builtInTypes) as can be used for the Domain Objects can be used in the service operations.
 
 It is also possible to use [Data Transfer Objects](http://www.martinfowler.com/eaaCatalog/dataTransferObject.html) as parameters and return types.
 
@@ -1263,7 +1306,7 @@ DataTransferObject BookDto {
 }
 ~~~
 
-[Collections](#collections) use the ordinary Java generics syntax. Built in collection types:
+[Collections](#collections) use the ordinary Java generics syntax. Built-in collection types:
 
 * Set
 * List
@@ -1503,47 +1546,6 @@ public Library findLibraryByName(String name) {
 ~~~
 
 
-### Scaffold
-
-It is possible to mark a Domain Object with `scaffold` to automatically generate some predefined CRUD operations in the `Repository` and corresponding `Service`.
-
-~~~
-Entity Person {
-    scaffold
-    String ssn key
-    String name
-}
-~~~
-
-The above DSL definition would result in the same as the following:
-
-~~~
-Service PersonService {
-    findById => PersonRepository.findById;
-    findAll => PersonRepository.findAll;
-    save => PersonRepository.save;
-    delete => PersonRepository.delete;
-}
-
-Entity Person {
-    String ssn key
-    String name
-
-    Repository PersonRepository {
-        findById;
-        findAll;
-        save;
-        delete;
-    }
-}
-~~~
-
-The `Repository` and `Service` is also added automatically if they are not defined.
-{: .alert .alert-success}
-
-Which scaffolding operations to use can be defined in `sculptor-generator.properties`, see [Developer's Guide](developers-guide#scaffold).
-
-
 ### Pagination
 
 Paging of large result sets is supported for `findAll`, `findByQuery`, `findByCriteria` and custom access objects.
@@ -1574,7 +1576,7 @@ PagedResult<Person> pagedResult = personRepository.findAll(pagingParameter);
 List<Person> values = pagedResult.getValues();
 ~~~
 
-In the initial request you typically ask for number of available pages. To answer this the system must count total number of rows. For `findAll` there is a built in countAll access object. For `findByQuery`, `findByCriteria` custom access objects you must provide a count operation, which can be done in several ways.
+In the initial request you typically ask for number of available pages. To answer this the system must count total number of rows. For `findAll` there is a built-in countAll access object. For `findByQuery`, `findByCriteria` custom access objects you must provide a count operation, which can be done in several ways.
 
 For `findByQuery` the default is to use a naming convention of the named query for the counting query. `find` is replaced with `count`.
 `findByQuery` on named query `"Person.findByCountry"` will use `"Person.countByCountry"`.
@@ -1607,7 +1609,7 @@ findByCondition.paging=true
 
 ### findByCondition
 
-`findByCondition` is one of the built in repository operations. It is used like this.
+`findByCondition` is one of the built-in repository operations. It is used like this.
 
 It takes a list of `ConditionalCriteria` objects as parameter. Use the fluent api of `ConditionalCriteriaBuilder` to define the criteria:
 
@@ -1681,7 +1683,7 @@ This feature is not activated by default. To allow Sculptor to generate finder o
 generate.repository.finders=true
 ~~~
 
-After activation all repository operations starting with 'find', except built in operations, are potential candidates for finder generation. To prevent a generation and to use handwritten code for a special operation, add the keyword 'gap'.
+After activation all repository operations starting with 'find', except built-in operations, are potential candidates for finder generation. To prevent a generation and to use handwritten code for a special operation, add the keyword `gap`.
 
 ~~~
 PersonRepository {
@@ -1690,16 +1692,17 @@ PersonRepository {
 ~~~
 
 There two variants of generated finder operations.
-One is based on the the built in repository operation `findByQuery` the other uses `findByCondition`.
+One is based on the the built-in repository operation `findByQuery` the other uses `findByCondition`.
 
 Both variants actually do not support pagination.
+{: .alert .alert-error}
 
 
 #### Based on findByQuery
 
-This kind of finder operation is using a JPQL query or named query and delegates the query to the built in findByQuery access object. It is not necassary to add a findByQuery operation to the model. It will be added to the repository automatically in case it is not defined.
+This kind of finder operation is using a JPQL query or named query and delegates the query to the built-in `findByQuery` access object. It is not necassary to add a `findByQuery` operation to the model. It will be added to the repository automatically in case it is not defined.
 
-Here are typical examples.
+Here are typical examples:
 
 ~~~
 PersonRepository {
@@ -1710,15 +1713,16 @@ PersonRepository {
 ~~~
 
 All these examples will produce the same results:
-`findByNamedQuery` is using a named query defined in the Person entity class.
-`findBy` will execute the given JPQL statement to get the result list.
 
-The second `findBy` operation is a short form of the first. The generated code is indetical. This means specifing the result type of an operation is optional. The default is List (in the example List). For simple queries you can omit some parts of the JPQL query and only add the restrictions.
+* `findByNamedQuery` is using a named query defined in the Person entity class.
+* `findBy` will execute the given JPQL statement to get the result list.
+* The second `findBy` operation is a short form of the first.
+
+The generated code is identical. This means specifing the result type of an operation is optional. The default is List (in the example List). For simple queries you can omit some parts of the JPQL query and only add the restrictions.
 
 The parameters of the operation will be used to set the query parameters with matching names.
 
-You are free to choose a name for your finder operations
-(it is good style to have a consistent naming, but names must not start with 'find')
+You are free to choose a name for your finder operations (it is good style to have a consistent naming, but names must not start with 'find').
 
 ~~~
 PersonRepository {
@@ -1745,7 +1749,7 @@ PersonRepository {
 
 #### Based on findByCondition
 
-This kind of generated finder operation builds a `ConditionalCriteria` from a JQPL like syntax and delegate the execution of the query to the built in `findByCondition` operation. Also here it is not necessary to add a `findByCondition` operation to the model.
+This kind of generated finder operation builds a `ConditionalCriteria` from a JQPL like syntax and delegate the execution of the query to the built-in `findByCondition` operation. Also here it is not necessary to add a `findByCondition` operation to the model.
 
 Here is a typical example.
 
