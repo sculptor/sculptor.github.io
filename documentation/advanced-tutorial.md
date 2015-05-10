@@ -287,7 +287,7 @@ references to each other, but an outside object can hold
 references only to the root object."
 <small>Quote from [DDD Quickly](http://www.infoq.com/news/2006/12/domain-driven-design)</small>
 
-With Sculptor each Entity is by default an aggregate root, but you can use `!aggregateRoot` or `belongsTo @<aggregate root>` to define that it is not. Sculptor will validate the reference constraints described in the quote above.
+With Sculptor each Entity is by default an aggregate root, but you can use `!aggregateRoot` or `belongsTo` to define that it is not. Sculptor will validate the reference constraints described in the quote above.
 
 
 ### Repository
@@ -878,7 +878,7 @@ Entity Part {
 Read more about the example above in the Domain-Driven Design book, page 134.
 {: .alert}
 
-An alternate notation for `!aggregateRoot` is `belongsTo @<aggregate root>`, e.g.
+An alternate notation for `!aggregateRoot` is `belongsTo`, e.g.
 
 ~~~
 Entity PurchaseOrder {
@@ -887,7 +887,7 @@ Entity PurchaseOrder {
 }
 
 Entity PurchaseOrderLineItem {
-    belongsTo @PurchaseOrder
+    belongsTo PurchaseOrder
     Integer quantity
     - @Money price
     - @Part part
@@ -2011,8 +2011,8 @@ It is also possible to create additional class diagrams to portray specific subj
 
 ~~~
 ValueObject Itinerary {
-	hint="umlgraph.subject=routingsvc"
-	belongsTo Cargo
+    hint="umlgraph.subject=routingsvc"
+    belongsTo Cargo
     not optimisticLocking
     not immutable
     - @Cargo cargo nullable opposite itinerary

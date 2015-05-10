@@ -23,7 +23,7 @@ Let us repeat what DDD says about aggregates:
 > An Aggregate is a group of associated objects which are considered as one unit with regard to data changes. The Aggregate is demarcated by a boundary which separates the objects inside from those outside. Each Aggregate has one root. The root is an Entity, and it is the only object accessible from outside. The root can hold references to any of the aggregate objects, and the other objects can hold references to each other, but an outside object can hold references only to the root object.
 <small>_from [DDD Quickly][3]_</small>
 
-Sculptor will validate the reference constraints described in the quote above. Repositories are only available for aggregate roots. Aggregates are defined with belongsTo or not aggregateRoot in the owned DomainObjects.
+Sculptor will validate the reference constraints described in the quote above. Repositories are only available for aggregate roots. Aggregates are defined with `belongsTo` or `not aggregateRoot` in the owned DomainObjects.
 
 A typical aggregate in the [blog sample][4] is that `Comment` belongs to `BlogPost`
 
@@ -37,7 +37,7 @@ Entity BlogPost {
 }
 
 ValueObject Comment {
-    not aggregateRoot
+    belongsTo @BlogPost
     - BlogPost forPost opposite comments
     String title
     String body
