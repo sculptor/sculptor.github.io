@@ -626,9 +626,9 @@ If there is no natural key Sculptor will generate a UUID (via `java.util.UUID.ra
 
 ### Id
 
-All Entities and persistent Value Objects will also have a surrogate `id` attribute, which is the primary key in the database.
+All Entities and persistent Value Objects will also have a surrogate `id` attribute, which is the primary key in the database und used in foreign key relations. This attribute is automatically added during [model enrichment](developers-guide#model-enrichment).
 
-The Java type of the automatically generated id attribute is `Long`. This can be change as described in the [Developer's Guide](developers-guide#types).
+The default Java type of the id attribute is `Long`. This can be change as described in the [Developer's Guide](developers-guide#types).
 
 
 ### Changeable

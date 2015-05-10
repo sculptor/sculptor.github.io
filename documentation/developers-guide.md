@@ -285,7 +285,7 @@ db.mysql.length.ShortString=10
 javaType.ShortString=String
 ~~~
 
-The type of the automatically generated id attribute is defined as
+The type of the automatically generated [id attribute][6] is defined as
 
 ~~~
 id.type=Long
@@ -1097,7 +1097,7 @@ When you change the DSL, except for simple syntactic sugar, you often have to ch
 
 ### Model Enrichment
 
-There is one transformation that enrich the model with some useful default values. It is implemented in `Transformation.ext`. For example the id attribute of each DomainObject is added by this transformation.
+There is one transformation that enrich the model with some useful default values. It is implemented in `Transformation.ext`. For example the [id attribute][6] of each persistent DomainObject is added by this transformation.
 
 You can add more features to this transformation when needed. If it is not specific to the concrete syntax of the DSL, it is better to add features to this transformation than to the `DslTransformation`, since they will be available even if the concrete syntax is replaced by some other DSL.
 
@@ -1749,3 +1749,4 @@ To define a cartridge:
 [3]: maven-plugin
 [4]: advanced-tutorial#auditable
 [5]: maven-archetypes
+[6]: advanced-tutorial#id
