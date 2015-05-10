@@ -287,7 +287,7 @@ references to each other, but an outside object can hold
 references only to the root object."
 <small>Quote from [DDD Quickly](http://www.infoq.com/news/2006/12/domain-driven-design)</small>
 
-With Sculptor each Entity is by default an aggregate root, but you can use `!aggregateRoot` to define that it is not. Sculptor will validate the reference constraints described in the quote above.
+With Sculptor each Entity is by default an aggregate root, but you can use `!aggregateRoot` or `belongsTo @<aggregate root>` to define that it is not. Sculptor will validate the reference constraints described in the quote above.
 
 
 ### Repository
@@ -877,6 +877,22 @@ Entity Part {
 
 Read more about the example above in the Domain-Driven Design book, page 134.
 {: .alert}
+
+An alternate notation for `!aggregateRoot` is `belongsTo @<aggregate root>`, e.g.
+
+~~~
+Entity PurchaseOrder {
+    - @Money approvedLimit
+    - List<@PurchaseOrderLineItem> items
+}
+
+Entity PurchaseOrderLineItem {
+    belongsTo @PurchaseOrder
+    Integer quantity
+    - @Money price
+    - @Part part
+}
+~~~
 
 
 ### Basic Type
