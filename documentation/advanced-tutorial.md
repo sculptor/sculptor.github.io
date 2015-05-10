@@ -1219,7 +1219,7 @@ Possible values for `cascade`:
 | replicate         | `org.hibernate.annotations.CascadeType.REPLICATE`
 | lock              | `org.hibernate.annotations.CascadeType.LOCK`
 
-Several cascade types can be defined by separating them with comma, e.g. `cascade=persist,merge`.
+Several cascade types can be defined by separating them with comma, e.g. `cascade="persist,merge"`.
 {: .alert .alert-info}
 
 The default value for `cascade` takes the aggregate and module into account. When cascade is not explicitly defined in the DSL the convention is:
