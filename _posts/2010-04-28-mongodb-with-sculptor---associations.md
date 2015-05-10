@@ -37,7 +37,7 @@ Entity BlogPost {
 }
 
 ValueObject Comment {
-    belongsTo @BlogPost
+    belongsTo BlogPost
     - BlogPost forPost opposite comments
     String title
     String body
