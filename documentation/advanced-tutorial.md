@@ -1219,14 +1219,15 @@ Possible values for `cascade`:
 | replicate         | `org.hibernate.annotations.CascadeType.REPLICATE`
 | lock              | `org.hibernate.annotations.CascadeType.LOCK`
 
-Several cascade types can be defined by separating them with comma, e.g. `cascade="persist,merge"`.
+Several cascade types can be defined by separating them with comma, e.g. `cascade=persist,merge`.
+{: .alert .alert-info}
 
 The default value for `cascade` takes the aggregate and module into account. When cascade is not explicitly defined in the DSL the convention is:
 
   * `all-delete-orphan` is used if both Entities are in the same Aggregate.
   * `all` is used if both Entities are in the same Module.
 
-Default values for `cascade` can be defined in `sculptor-generator.properties`, see [Developer's Guide][1].
+Default values for `cascade` can be defined in `sculptor-generator.properties`, see [Developer's Guide](developers-guide#cascade).
 
 ![Tryit](../images/tryit.gif)
 Try the different features of the Domain Objects. Add a few more Entities and Value Objects to `model.btdesign`. Add different types of Attributes and References. For example you can add a new Module named customer, with a `Customer` entity, which has a Reference to rented `Media`. Maybe with a rental contract Value Object in between, containing time period and price.\\
