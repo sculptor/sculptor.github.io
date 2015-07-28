@@ -2372,6 +2372,7 @@ Entity ^Entity {
 
 
 ## Overrides and extension mechanism
+{: #extension}
 
 Sculptor includes a mechanism for overriding individual Sculptor template or transformation functions.  This can be used to specialize the code that is generated for a project.
 
@@ -2394,7 +2395,7 @@ To override a template or transformation:
 
   If one doesn't already exist, create a separate generator project to contain the override classes and any other Sculptor generator-specific classes your project may need.
 
-  See the [Creating separate generator project](#creating-separate-generator-project) section below for details on how to do this.
+  See the [Creating separate generator project](#separate-generator-project) section below for details on how to do this.
 
 * **Create an override class in the separate generator project**.  The override class must:
 

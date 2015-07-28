@@ -1005,9 +1005,9 @@ This approach is not recommended, since it might be confusing to have multiple b
 
 ## Change Generation Templates
 
-You can customize the code generation templates using the [Sculptor extension mechanism](advanced-tutorial.html#overrides-and-extension-mechanism).
+You can customize the code generation templates using the [Sculptor extension mechanism][7].
 
-See [Sculptor extension mechanism](advanced-tutorial.html#overrides-and-extension-mechanism) for details and steps on how to override Templates (or transformations) in your project, or to extend Sculptor via cartridges.
+See [Sculptor extension mechanism][7] for details and steps on how to override templates (or transformations) in your project, or to [extend Sculptor via cartridges][9].
 
 You find the default templates in [https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core/src/main/java/org/sculptor/generator/template](https://github.com/sculptor/sculptor/tree/master/sculptor-generator/sculptor-generator-core/src/main/java/org/sculptor/generator/template).
 Everything starts in [RootTmpl](https://github.com/sculptor/sculptor/blob/master/sculptor-generator/sculptor-generator-core/src/main/java/org/sculptor/generator/template/RootTmpl.xtend), which you also can intercept to add more templates or exclude some of the existing templates.
@@ -1017,7 +1017,7 @@ Another alternative is to setup the [development environment][1] and change the 
 ### hint
 {: #hint}
 
-A very useful extension mechanism is available via the `hint` keyword in the model. It is possible to use a hint on almost any element in the model. It may contain any key/values, which can be used in [Sculptor template extensions](advanced-tutorial.html#overrides-and-extension-mechanism) to customize the code generation.
+A very useful extension mechanism is available via the `hint` keyword in the model. It is possible to use a hint on almost any element in the model. It may contain any key/values, which can be used in [Sculptor template extensions][7] to customize the code generation.
 
 For example, if you need to use a special database sequence for the ids of some entities. In the model you can use the hint:
 
@@ -1121,12 +1121,12 @@ A separate model is used for generation of the CRUD GUI. A transformation takes 
 
 ### Customize the Transformations
 
-The [Sculptor extension mechanism](advanced-tutorial.html#overrides-and-extension-mechanism) can be used to customize the transformations.  Follow either the steps in the [overriding templates or transformations for a project](advanced-tutorial.html#overriding-templates-or-transformations-for-a-project) or [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges), depending on how you want to package the extension.
+The [Sculptor extension mechanism][7] can be used to customize the transformations.  Follow either the steps in the [overriding templates or transformations for a project][8] or [cartridges: reusable extensions to Sculptor][9], depending on how you want to package the extension.
 
 For example, to skip automatic addition of uuid property in your project:
 
 * Locate the class to be overridden or extended, in this case it's the org.sculptor.generator.transform.Transformation class
-* Create a TransformationOverride.xtend class in the generator package in a separate generator project for your main project
+* Create a `TransformationOverride.xtend` class in the generator package in a [separate generator project][10] for your main project
 * Override the modifyUuid method:
 
 ~~~
@@ -1744,16 +1744,13 @@ This section describes all steps of how to add a completely new concept, Consume
 
 ### How to define a Sculptor cartridge
 
-[Cartridges in Sculptor](advanced-tutorial.html#cartridges) provide a means to package extensions to Sculptor that projects may enable or disable via the 'cartridges' property.  Some features within Sculptor itself are packaged as cartridges, for example the builders feature and MongoDB support.
+[Cartridges in Sculptor][9] provide a means to package extensions to Sculptor that projects may enable or disable via the `cartridges` property. Some features within Sculptor itself are packaged as cartridges, for example the builders feature and MongoDB support.
 
 To define a cartridge:
 
-* Review [overriding templates or transformations for a project](advanced-tutorial.html#overriding-templates-or-transformations-for-a-project) and [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges)
-* Follow the steps in [cartridges: reusable extensions to Sculptor](advanced-tutorial.html#cartridges) to define a cartridge.
-* The cartridge may either be packaged in the sculptor-generator-core project itself, or in a separate project.
-
-  If a separate project, it can be set up in the same manner as [Creating separate generator project](advanced-tutorial.html#creating-separate-generator-project)
-
+* Review [overriding templates or transformations for a project][8] and [cartridges: reusable extensions to Sculptor][9]
+* Follow the steps in [cartridges: reusable extensions to Sculptor][9] to define a cartridge.
+* The cartridge may either be packaged in the `sculptor-generator-core` project itself or in a [separate project][10].
 
 
 [1]: development-environment
@@ -1762,3 +1759,7 @@ To define a cartridge:
 [4]: advanced-tutorial#auditable
 [5]: maven-archetypes
 [6]: advanced-tutorial#id
+[7]: advanced-tutorial#extension
+[8]: advanced-tutorial#overriding
+[9]: advanced-tutorial#cartridges
+[10]: advanced-tutorial#separate-generator-project
