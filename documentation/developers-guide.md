@@ -1017,26 +1017,38 @@ Another alternative is to setup the [development environment][1] and change the 
 ### hint
 {: #hint}
 
-A very useful extension mechanism is available via the `hint` keyword in the model. It is possible to use a hint on almost any element in the model. It may contain any key/values, which can be used in `SpecialCases` to customize the code generation. For example, if you need to use a special database sequence for the ids of some entities. In the model you can use the hint:
+A very useful extension mechanism is available via the `hint` keyword in the model. It is possible to use a hint on almost any element in the model. It may contain any key/values, which can be used in [Sculptor template extensions](advanced-tutorial.html#overrides-and-extension-mechanism) to customize the code generation.
+
+For example, if you need to use a special database sequence for the ids of some entities. In the model you can use the hint:
 
 ~~~
 Entity Person {
-    hint="idSequence=SEQ2"
+  hint="idSequence=SEQ2"
 ~~~
 
-In `SpecialCases.xpt`:
+The corresponding template extension `DomainObjectAttributeAnnotationTmplOverride.xtend`:
 
 ~~~
-«AROUND templates::domain::DomainObjectAttributeAnnotation::idAnnotations FOR Attribute»
-    «IF getDomainObject().hasHint("idSequence")»
+@ChainOverride
+class DomainObjectAttributeAnnotationTmplOverride
+      extends DomainObjectAttributeAnnotationTmpl {
+
+  @Inject extension DbHelper dbHelper
+  @Inject extension Helper helper
+
+  override String idAnnotations(Attribute it) {
+    '''
+      «IF domainObject.hasHint("idSequence")»
         @javax.persistence.Id
         @javax.persistence.GeneratedValue(strategy=javax.persistence.GenerationType.SEQUENCE,
-            generator="«getDomainObject().getHint('idSequence')»")
-        @javax.persistence.Column(name="«getDatabaseName()»")
-    «ELSE»
-    	«targetDef.proceed()»
-    «ENDIF»
-«ENDAROUND»
+            generator="«domainObject.getHint('idSequence')»")
+        @javax.persistence.Column(name="«databaseName»")
+      «ELSE»
+        «next.idAnnotations(it)»
+      «ENDIF»
+    '''
+  }
+}
 ~~~
 
 Several hints can be defined, separated with comma, and the hint may have a value or not.
