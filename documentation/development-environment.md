@@ -103,41 +103,6 @@ Usage of the local repository manager can be (temporarily) turned-off by disabli
 {: .alert .alert-info }
 
 
-#### Eclipse p2 repository mirror
-{: #p2-mirror-profile}
-
-To use the [local Eclipse p2 repository mirror](#p2-mirror) (created by the Sculptor build via Eclipse Tycho) for requests to the external Eclipse p2 repositories an additional Maven profile with corresponding [`<mirror/>` settings](http://maven.apache.org/guides/mini/guide-mirror-settings.html) are necessary, e.g.
-
-~~~ xml
-<profiles>
-  <profile>
-    <id>p2-mirror</id>
-    <mirrors>
-      <mirror>
-        <!-- This sends requests to p2 repositories to local mirror -->
-        <id>mirror</id>
-        <mirrorOf>p2.eclipse,p2.eclipse.xtext,p2.xtext-utils</mirrorOf>
-        <url>"location of your Sculptor repository clone"/devtools/eclipse-mirror/.p2-mirror/</url>
-        <layout>p2</layout>
-        <mirrorOfLayouts>p2</mirrorOfLayouts>
-      </mirror>
-    </mirrors>
-  </profile>
-</profiles>
-
-<activeProfiles>
-  <!--make the profile active all the time -->
-  <activeProfile>p2-mirror</activeProfile>
-</activeProfiles>
-~~~
-
-The repository IDs listed in the <mirrorOf> tag have to match the repository IDs used in the Maven POM of the Maven (aggregator) project  `sculptor-eclipse`.
-{: .alert .alert-error }
-
-Usage of the local p2 repository mirror can be (temporarily) turned-off by disabling the coresponding Maven profile via the commandline option `-P!p2-mirror`.
-{: .alert .alert-info }
-
-
 #### Deployment to GitHub
 {: #github-credentials}
 
@@ -216,9 +181,7 @@ $ cd sculptor
 
 The following is a brief overview of the main Maven modules of Sculptors source code: 
 
-* `devtools` Folder with projects used for local development, e.g. `eclipse-mirror` with the local Eclipse p2 repository mirror.
-
-* `sculptor-eclipse` The aggregator project holding the Eclipse projects with the Eclipse p2 mirror, the meta model, the DSL model with its UI and unit tests, the feature and the p2 mirror.
+* `sculptor-eclipse` The aggregator project holding the Eclipse projects with the Eclipse target platform, the meta model, the DSL model with its UI and unit tests, the feature and the p2 repository.
 
 * `sculptor-generator` The aggregator project holding the implementation of the code generator.
 
@@ -244,37 +207,9 @@ After executing a Maven build from the commandline the corresponding projects in
 The following chapters are describing the different aspects of Sculptors Maven-based build process.
 
 
-### Creation of local Eclipse p2 repository mirror
-{: #p2-mirror}
-
-To improve the development experience the needed external Eclipse p2 repositories are "mirrored" via Eclipse Tycho. The mirroring process is activated by using the Maven profile `mirror`:
-
-~~~
-mvn initialize -Pmirror
-~~~
-
-The *initial* mirroring process takes hours!!! After the build is finished then the mirror can be found in the folder "devtools/eclipse-mirror/.p2-mirror/". 
-{: .alert}
-
-Make sure that the [Maven profile used for the local Eclipse p2 repository mirror](#p2-mirror-profile) is added to the Maven "settings.xml".
-{: .alert .alert-error}
-
-
-### Installation of custom Eclipse IDE
-
-By using Eclipse Tycho it's possible to create a customized Eclipse installation. The installation process is activated by using the Maven profile `ide`:
-
-~~~
-mvn verify -Pide
-~~~
-
-After the build is finished then the Eclipse installation can be found in the folder "devtools/eclipse-ide/target/products/org.sculptor.ide/<platform>".
-{: .alert}
-
-
 ### Build the whole project
 
-Without specifying any Maven profile the whole project is built:
+Without specifying any Maven profile the whole project (without examples) is built:
 
 ~~~
 mvn clean install
@@ -287,13 +222,13 @@ By specifying one or more from the following Maven profiles certain parts of the
 
 * `eclipse` Sculptor Eclipse plugin
 * `maven` Sculptor Maven plugin and archetypes
-* `example` Sculptor examples
-* `all` The whole Sculptor project (same as specifying no profile)
+* `examples` Sculptor examples
+* `all` The whole Sculptor project without examples (same as specifying no profile)
 
 E.g. to built the Maven stuff and the examples only then the following commands are used:
 
 ~~~
-mvn clean install -Pmaven,example
+mvn clean install -Pmaven,examples
 ~~~
 
 
