@@ -745,6 +745,30 @@ package.builder=builder
 ~~~
 
 
+### Domain Object Properties
+{: #properties-class}
+
+Sculptor generates a properties class for each domain object. It contains definitions of all attributes and references of the the Domain Object. This class is used with the
+`ConditionalCriteriaBuilder` to define the criterias for the [`findByCondition` repository method](#findByCondition):
+
+~~~ java
+List<ConditionalCriteria> conditions = ConditionalCriteriaBuilder.criteriaFor(Person.class)
+    .withProperty(PersonProperties.primaryAddress().city()).eq("Stockholm")
+    .build();
+~~~
+
+The properties class approach has the following advantages:
+
+* It is refactoring safe, since you will get compilation errors when something is changed.
+* It provides convenient code completion (`ctrl+space`) support in your IDE.
+
+To deactivate the generation of these Properties classes add the following line into your `sculptor-generator.properties` file:
+
+~~~
+generate.domainObject.conditionalCriteriaProperties=false
+~~~
+
+
 ### Validation
 
 Sculptor supports bean validation by adding [Hibernate Validator](https://www.hibernate.org/412.html) annotations to the Domain Objects.
@@ -1625,6 +1649,7 @@ findByCondition.paging=true
 
 
 ### findByCondition
+{: #findByCondition}
 
 `findByCondition` is one of the built-in repository operations. It is used like this.
 
@@ -1636,16 +1661,10 @@ List<ConditionalCriteria> conditions = ConditionalCriteriaBuilder.criteriaFor(Pe
     .build();
 ~~~
 
-Note that for each Domain Object a corresponding Properties class is generated. It contains definitions of all attributes and references of the the Domain Object. It serves two purposes:
-
-* It is refactoring safe, since you will get compilation errors when something is changed.
-* It provides convenient code completion (`ctrl+space`) support in your IDE.
-
-To deactivate the generation of these Properties classes add the following line into your `sculptor-generator.properties` file:
-
-~~~
-generate.domainObject.conditionalCriteriaProperties=false
-~~~
+<div markdown="1">
+Note that for each Domain Object a corresponding [properties class](#properties-class) is generated. It contains definitions of all attributes and references of the the Domain Object.
+</div>
+{: .alert}
 
 You would typically use static imports to make the expression more compact and readable:
 
