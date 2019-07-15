@@ -22,7 +22,7 @@ sculptor_version: "3.1.0"
 # Use kramdown for markdown files -> http://kramdown.rubyforge.org/
 markdown: kramdown
 kramdown:
-  input:          GFM
+  input: GFM
   # https://github.com/jekyll/jekyll/pull/4090
   syntax_highlighter: rouge
 
@@ -35,7 +35,7 @@ kramdown:
     span:
       line_numbers: false
     block:
-      line_numbers: true
+      line_numbers: false
       start_line: 1
 
 # The production_url is only used when full-domain names are needed
