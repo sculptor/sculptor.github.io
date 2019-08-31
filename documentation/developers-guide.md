@@ -645,7 +645,7 @@ If you want to use DataNucleus add
 jpa.provider=datanucleus
 ~~~
 
-Replace the related hibernate properties and dependencies from `pom.xml with
+Replace the related hibernate properties and dependencies from `pom.xml` with
 
 ~~~ xml
 <datanucleus.version>3.0.2</datanucleus.version>
@@ -987,11 +987,10 @@ Now the mapping will be `/foobarbaz/*`.
 # The type of remoting can be selected with
 spring.remoting.type=rmi
 #spring.remoting.type=hessian
-#spring.remoting.type=burlap
 #spring.remoting.type=httpInvoker
 ~~~
 
-Hessian, Burlap and HttpInvoker requires some additional configuration in `web.xml`, as described in [Spring remoting documentation](http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/remoting.html).
+Hessian and HttpInvoker requires some additional configuration in `web.xml`, as described in [Spring remoting documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#remoting).
 
 
 ## Spring Configuration
