@@ -2272,7 +2272,7 @@ The service layer marks the applications transactional boundary. Depending on th
 
 * In EAR deployment the services are exposed as EJBs and the application servers JTA support is used.
 
-* In WAR deployment the services are exposed as POJOs and Springs [declarative transaction management](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/transaction.html#transaction-declarative) is used.
+* In WAR deployment the services are exposed as POJOs and Springs [declarative transaction management](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/transaction.html#transaction-declarative) is used.
 
 Sculptor uses Springs XML-based configuration via the corresponding XML namespace:
 
@@ -2288,9 +2288,9 @@ Sculptor uses Springs XML-based configuration via the corresponding XML namespac
 </tx:advice>
 ~~~
 
-By convention all service methods with a name starting with "get" or "find" are [configured with read-only transaction semantics](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/transaction.html#transaction-declarative-diff-tx). All other methods are configured with default transaction semantics and rollback triggered if an  [ApplicationException](#error-handling) is thrown.
+By convention all service methods with a name starting with "get" or "find" are [configured with read-only transaction semantics](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/transaction.html#transaction-declarative-diff-tx). All other methods are configured with default transaction semantics and rollback triggered if an  [ApplicationException](#error-handling) is thrown.
 
-For switching to [annotation-based configuration](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/transaction.html#transaction-declarative-annotations) (with Springs `@Transactional` annotation) define the following property in your project `sculptor-generator.properties` file:
+For switching to [annotation-based configuration](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/transaction.html#transaction-declarative-annotations) (with Springs `@Transactional` annotation) define the following property in your project `sculptor-generator.properties` file:
 
 ~~~
 generate.spring.annotation.tx=true

@@ -981,7 +981,7 @@ Now the mapping will be `/foobarbaz/*`.
 
 ### Spring Remoting Type
 
-[Spring remoting](http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/remoting.html) with RMI is used by default. The type of Spring remoting can be selected with properties in `sculptor-generator.properties`:
+[Spring remoting](https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#remoting) with RMI is used by default. The type of Spring remoting can be selected with properties in `sculptor-generator.properties`:
 
 ~~~
 # The type of remoting can be selected with
