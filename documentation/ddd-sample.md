@@ -51,11 +51,9 @@ JUnit tests are not included, since they are very similar. Web application is no
 
 ## Try It
 
-If you are only interested in a sneak preview of the source code you can download it here: [Sculptor-DDDSample-src.zip][9]
+If you interested in the source code you can find it as part of Sculptor's examples:
 
-Another choice is to try the real thing:
-
-1.  Install Sculptor and its requisites as described in the [Installation Guide][10].
+1.  Install Sculptor and its requisites as described in the [Installation Guide][9].
 2.  Get the source code from GitHub: 
 
     ~~~
@@ -67,7 +65,7 @@ Another choice is to try the real thing:
 4.  Study the `.btdesign` files located in `src/main/resources`.
 5.  Study the hand written code in `src/main/java` and the generated code in `src/generated/java`.
 
-Learn more about the capabilities of Sculptor by reading the [Hello World][11] and [Advanced Tutorial][12]
+Learn more about the capabilities of Sculptor by reading the [Hello World][10] and [Advanced Tutorial][11]
 
 
 ## Source Code
@@ -83,8 +81,7 @@ The complete source code for this sample is available in GitHub [https://github.
    [6]: /images/documentation/ddd-sample/ddd-sample-loc-bar.png
    [7]: /images/documentation/ddd-sample/ddd-sample-loc-package.png
    [8]: /images/documentation/ddd-sample/ddd-sample-loc-summary.png
-   [9]: /images/documentation/ddd-sample/Sculptor-DDDSample-src.zip
-   [10]: installation
-   [11]: hello-world-tutorial
-   [12]: advanced-tutorial
+   [9]: installation
+   [10]: hello-world-tutorial
+   [11]: advanced-tutorial
   
