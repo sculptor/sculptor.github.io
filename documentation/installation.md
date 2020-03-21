@@ -36,7 +36,10 @@ This instruction describes what you need to install and configure to be able to 
 
 Sculptor is implemented in Java. So we need a Java development environment:
 
-1. Install a recent [JDK](http://www.oracle.com/technetwork/java/javase/downloads/) (Java 6 or newer)
+1. Install a [JDK](http://www.oracle.com/technetwork/java/javase/downloads/) (from Java 6 up to Java 8)
+
+   Currently only Java up to version 8 is supported!
+   {: .alert .alert-error}
 2. Define environment variable `JAVA_HOME` with path to JDK installation folder
 
 **Windows:**
