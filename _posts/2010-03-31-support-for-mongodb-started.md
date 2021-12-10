@@ -18,6 +18,6 @@ We have started prototyping and it looks promising. The idea is that that Sculpt
   * Automatic mapping between domain objects and mongoDB documents (DBObject) will be generated.
   * Different types of association will be supported. Aggregates are typically embedded documents and other associations are stored as id references. Maybe we will provide a mechanism to lazy load associated documents.
 
-   [1]: http://www.mongodb.org/
-   [2]: http://www.infoq.com/news/2010/03/mongodb
+   [1]: https://www.mongodb.org/
+   [2]: https://www.infoq.com/news/2010/03/mongodb
    [3]: /documentation/advanced-tutorial#findbycondition

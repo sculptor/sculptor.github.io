@@ -132,7 +132,7 @@ In the above code, note a couple things:
 [sculptor-shipping-generator]: https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator
 [DomainObjectReferenceTmplOverride]: https://github.com/sculptor/sculptor/blob/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator/src/main/java/generator/DomainObjectReferenceTmplOverride.xtend
 [DomainObjectReferenceTmpl]: https://github.com/sculptor/sculptor/blob/develop/sculptor-generator/sculptor-generator-templates/src/main/java/org/sculptor/generator/template/domain/DomainObjectReferenceTmpl.xtend
-[Overrides and extension mechanism]: http://sculptorgenerator.org/documentation/advanced-tutorial.html#overrides-and-extension-mechanism
+[Overrides and extension mechanism]: https://sculptorgenerator.org/documentation/advanced-tutorial.html#overrides-and-extension-mechanism
 [DomainObjectReferenceTmplOverrideTest]: https://github.com/sculptor/sculptor/blob/develop/sculptor-examples/mongodb-samples/sculptor-shipping-generator/src/test/java/generator/DomainObjectReferenceTmplOverrideTest.xtend
 [GeneratorTestBase]: https://github.com/sculptor/sculptor/blob/develop/sculptor-generator/sculptor-generator-test/src/main/java/org/sculptor/generator/test/GeneratorTestBase.xtend
 [GeneratorTestExtensions]: https://github.com/sculptor/sculptor/blob/develop/sculptor-generator/sculptor-generator-test/src/main/java/org/sculptor/generator/test/GeneratorTestExtensions.xtend

@@ -99,4 +99,4 @@ Entity BlogPost {
 You have probably selected MongoDB for its low latency. Then you want the data mapper to be fast also. The mappers provided by Sculptor are generated code that runs at full speed. Alternative solutions using reflection or intermediate String JSON format is probably not as fast.
 
    [1]: /2010/04/27/mongodb-with-sculptor---introduction
-   [2]: http://api.mongodb.org/java/2.11.3/com/mongodb/DBObject.html
+   [2]: https://api.mongodb.org/java/2.11.3/com/mongodb/DBObject.html

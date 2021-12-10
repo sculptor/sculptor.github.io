@@ -105,7 +105,7 @@ Since we are using publish/subscribe via a message bus, it might take a while un
 
 The full source code for the example is available here: [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-betting][4]
 
-The slides of the presentation are available here: [http://www.slideshare.net/patriknw/sculptor][5]
+The slides of the presentation are available here: [https://www.slideshare.net/patriknw/sculptor][5]
 
 
 ## Summary
@@ -114,8 +114,8 @@ In the example we have chosen MongoDB as persistence store, Camel together with 
 
 I was pretty impressed myself when I counted the number of lines of code that was required to implement this example. 70 lines! 40 in the model and 30 lines of hand written java code. User interface not counted.
 
-   [1]: http://jwsdsl09sep.eventbrite.com/
-   [2]: http://cqrs.wordpress.com/
+   [1]: https://jwsdsl09sep.eventbrite.com/
+   [2]: https://cqrs.wordpress.com/
    [3]: /images/2010-09-09-eda-cqrs-betting-sample/betting_demo.png
    [4]: https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-betting
-   [5]: http://www.slideshare.net/patriknw/sculptor
+   [5]: https://www.slideshare.net/patriknw/sculptor

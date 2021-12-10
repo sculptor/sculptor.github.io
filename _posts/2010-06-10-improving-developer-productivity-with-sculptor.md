@@ -17,7 +17,7 @@ author: Patrik Nordwall
 
 ## Overview
 
-Sculptor is a simple and powerful code generation platform, which provides a quick start to [Model Driven Software Development](http://www.voelter.de/mdsd-book/) (MDSD). When using Sculptor you can focus on the business domain, instead of technical details. You can use the concepts from [Domain-Driven Design](http://domaindrivendesign.org/books/) (DDD) in the textual Domain Specific Language (DSL). Sculptor uses [Xtext](http://www.eclipse.org/Xtext/) to parse the DSL and generate high quality Java code and configuration. The generated code is based on well-known frameworks, such as Spring, Hibernate and Java EE.
+Sculptor is a simple and powerful code generation platform, which provides a quick start to [Model Driven Software Development](https://www.voelter.de/mdsd-book/) (MDSD). When using Sculptor you can focus on the business domain, instead of technical details. You can use the concepts from [Domain-Driven Design](https://domaindrivendesign.org/books/) (DDD) in the textual Domain Specific Language (DSL). Sculptor uses [Xtext](https://www.eclipse.org/Xtext/) to parse the DSL and generate high quality Java code and configuration. The generated code is based on well-known frameworks, such as Spring, Hibernate and Java EE.
 
 ![Overview](/images/2010-06-10-improving-developer-productivity-with-sculptor/sculptor_overview5.png) \\
 <small>_Figure 1. Overview of Sculptor_</small>
@@ -92,9 +92,9 @@ Application Library {
 
 The full DSL model for the Library example looks like [this][3]. There you can see that the DSL defines two Modules, containing a few Services. It defines the same Domain Objects, including attributes and references, as in Figure 2, “Domain model”.
 
-The core concepts of the DSL have been taken from [Domain-Driven Design](http://domaindrivendesign.org/books/). If you don't have the book you can download and read more in [DDD Quickly](http://www.infoq.com/news/2006/12/domain-driven-design).
+The core concepts of the DSL have been taken from [Domain-Driven Design](https://domaindrivendesign.org/books/). If you don't have the book you can download and read more in [DDD Quickly](https://www.infoq.com/news/2006/12/domain-driven-design).
 
-Sculptor code generation is executed as part of the [Maven build cycle](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html), i.e. you run `mvn install` as usual. When developing it is also convenient to use `mvn generate-sources`, which will only generate, without performing compile, test and package.
+Sculptor code generation is executed as part of the [Maven build cycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html), i.e. you run `mvn install` as usual. When developing it is also convenient to use `mvn generate-sources`, which will only generate, without performing compile, test and package.
 
 The artifacts that are intended to be completed with hand written code are generated only once, while other artifacts are regenerated and overwritten each time. Separation is typically implemented with extension as illustrated in Figure 3, "Separation of generated and hand written".
 
@@ -136,7 +136,7 @@ important, but not as easy to measure.
 
 In the context of Sculptor, Domain Object is a common term for Entity, ValueObject and BasicType.
 
-Entities have an identity and the state of the object may change during the lifecycle. For Value Objects the values of the attribues are interesting, and not which object it is. Value Objects are typically immutable. BasicType is used for fundamental [types](http://www.martinfowler.com/ieeeSoftware/whenType.pdf), such as [Money](http://martinfowler.com/eaaCatalog/money.html). BasicType is a ValueObject which is stored in the same table as the Domain Object referencing it. It corresponds to JPA embedded (Hibernate Component).
+Entities have an identity and the state of the object may change during the lifecycle. For Value Objects the values of the attribues are interesting, and not which object it is. Value Objects are typically immutable. BasicType is used for fundamental [types](https://www.martinfowler.com/ieeeSoftware/whenType.pdf), such as [Money](https://martinfowler.com/eaaCatalog/money.html). BasicType is a ValueObject which is stored in the same table as the Domain Object referencing it. It corresponds to JPA embedded (Hibernate Component).
 
 Domain Objects are implemented as ordinary POJOs or EJB3 entities. They can have simple attributes and references to other Domain Objects. They can of course also contain behavior; otherwise it wouldn't be a rich domain model. However, the behavior logic is always written manually and not defined in the DSL.
 
@@ -180,14 +180,14 @@ For Domain Objects Sculptor generates:
 
 Separation of generated and manually written code is done by a generated base class and manually written subclass. See Figure 3, "Separation of generated and hand written". It is in the subclass you add methods to implement the behavior of the Domain Object. The subclass is also generated, but only once, it will never be overwritten by the generator. You can of course remove it to regenerate it.
 
-`equals` and `hashCode` requires some thought when used with Hibernate, see the [discussion](http://www.hibernate.org/109.html) at the Hibernate site. Sculptor takes care of the details and this is a typical example of how Sculptor raises the level of abstraction by distilling best practice. You only have to mark the attributes that is the natural key of the Domain Object, or if there is no natural key Sculptor will generate a UUID automatically.
+`equals` and `hashCode` requires some thought when used with Hibernate, see the [discussion](https://www.hibernate.org/109.html) at the Hibernate site. Sculptor takes care of the details and this is a typical example of how Sculptor raises the level of abstraction by distilling best practice. You only have to mark the attributes that is the natural key of the Domain Object, or if there is no natural key Sculptor will generate a UUID automatically.
 
 The Sculptor DSL is based on the principle "convention over configuration". An example of this is that Entities are by default auditable, which means that when the objects are saved an interceptor will automatically update information about by whom and when the object was created or changed These attributes are automatically added for auditable Domain Objects. You can turn off auditing for an Entity with `not auditable`. Value Objects are by default not auditable.
 
 
 ### Services
 
-The Services act as a [Service Layer](http://martinfowler.com/eaaCatalog/serviceLayer.html) around the domain model. It provides a well defined interface with a set of available operations to the clients.
+The Services act as a [Service Layer](https://martinfowler.com/eaaCatalog/serviceLayer.html) around the domain model. It provides a well defined interface with a set of available operations to the clients.
 
 Services are implemented as Spring @Service with interface and implementation class. EJB 3 stateless session bean is also supported.
 
@@ -271,10 +271,10 @@ Unit tests of Sculptor artifacts can be done for Domain Objects, Repositories, S
 
 Domain Objects can be tested as ordinary POJOs with JUnit, exactly as usual. It is probably the behavior that needs to be tested and methods for that are added manually anyway.
 
-When testing Repositories, Services and Consumers it is convenient to use [DBUnit](http://www.dbunit.org/) to load the in memory HSQLDB database with test data from an XML file.
+When testing Repositories, Services and Consumers it is convenient to use [DBUnit](https://www.dbunit.org/) to load the in memory HSQLDB database with test data from an XML file.
 The database is recreated for each test method.
 
-Sometimes it is better to test the Services and Consumers by [stubbing](http://www.martinfowler.com/eaaCatalog/serviceStub.html) dependencies to Repositories and other Services.
+Sometimes it is better to test the Services and Consumers by [stubbing](https://www.martinfowler.com/eaaCatalog/serviceStub.html) dependencies to Repositories and other Services.
 
 To explain the TDD approach we will look at an example. It is the same example application as described in this article.
 Assume we need to add a service to lookup a library with a specific name.
@@ -416,7 +416,7 @@ For each of these areas there are alternative implementations that are supported
 
 ### Internal Design
 
-Sculptor is implemented with [Xtext](http://www.eclipse.org/Xtext/) and [Xpand](http://wiki.eclipse.org/Xpand). Sculptor is Open Source and available under Apache 2 License.
+Sculptor is implemented with [Xtext](https://www.eclipse.org/Xtext/) and [Xpand](https://wiki.eclipse.org/Xpand). Sculptor is Open Source and available under Apache 2 License.
 
 ![Sculptor Internal Design](/images/2010-06-10-improving-developer-productivity-with-sculptor/sculptor-internal-design.png) \\
 <small>_Figure 8. Internal Design of Sculptor_</small>
@@ -458,7 +458,7 @@ You can customize rather much with simple configuration properties. Examples:
 
 ### Change Generation Templates
 
-The actual code generation is done with [XPand](http://wiki.eclipse.org/Xpand), which is a powerful and simple to use template language. The templates can be structured very much like methods, with small definitions, which expand other definitions.
+The actual code generation is done with [XPand](https://wiki.eclipse.org/Xpand), which is a powerful and simple to use template language. The templates can be structured very much like methods, with small definitions, which expand other definitions.
 
 You can change the code generation templates using the Aspect-Oriented Programming (AOP) feautures in XPand. You can "override" the definitions in the original templates. For example if you need to replace the UUID generation:
 
@@ -504,7 +504,7 @@ Sculptor is an Open Source tool with the purpose to improve developer productivi
 It raises the level of abstraction and automates a lot of otherwise repetitive manual coding.
 
 You can focus on the business domain, instead of technical details. Sculptor distills best practice into easy to use notation.
-The design of the generated application is heavily inspired by the patterns and concepts from [Domain-Driven Design](http://domaindrivendesign.org/books/).
+The design of the generated application is heavily inspired by the patterns and concepts from [Domain-Driven Design](https://domaindrivendesign.org/books/).
 
 You are in control and can easily adopt the tool to fit the requirements and frameworks you are working with.
 

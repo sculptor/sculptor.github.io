@@ -88,4 +88,4 @@ How can I be notified when things happens?
 
 
    [1]: /documentation/hello-world-tutorial
-   [2]: http://docs.spring.io/spring/docs/3.0.x/reference/aop.html
+   [2]: https://docs.spring.io/spring/docs/3.0.x/reference/aop.html

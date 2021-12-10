@@ -127,5 +127,5 @@ Entity Movie extends @Media {
 
    [1]: /2010/04/27/mongodb-with-sculptor---introduction
    [2]: /2009/08/20/introducing-type
-   [3]: http://www.infoq.com/minibooks/domain-driven-design-quickly
+   [3]: https://www.infoq.com/minibooks/domain-driven-design-quickly
    [4]: https://github.com/sculptor/sculptor/tree/develop/sculptor-examples/mongodb-samples/blog-mongodb

@@ -99,8 +99,8 @@ It doesn't run over the network, but Akka has some nice modules for that as well
 
 
    [1]: /2010/08/11/eda-events-over-system-boundaries---with-camel
-   [2]: http://jonasboner.com/
-   [3]: http://akka.io/
-   [4]: http://www.scala-lang.org/
-   [5]: http://en.wikipedia.org/wiki/Actor_model
-   [6]: http://en.wikipedia.org/wiki/Software_transactional_memory
+   [2]: https://jonasboner.com/
+   [3]: https://akka.io/
+   [4]: https://www.scala-lang.org/
+   [5]: https://en.wikipedia.org/wiki/Actor_model
+   [6]: https://en.wikipedia.org/wiki/Software_transactional_memory

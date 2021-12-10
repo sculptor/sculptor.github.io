@@ -103,5 +103,5 @@ Also, note that snapshots and event are immutable and therefore we have great op
 The complete source code for this example is available here: [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-simplecqrs-snapshots][3]
 
    [1]: /2010/10/28/event-sourcing-with-sculptor
-   [2]: http://github.com/gregoryyoung/m-r
+   [2]: https://github.com/gregoryyoung/m-r
    [3]: https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-simplecqrs-snapshots

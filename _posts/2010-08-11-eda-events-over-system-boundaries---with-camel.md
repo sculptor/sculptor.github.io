@@ -113,6 +113,6 @@ All for today, next time...we'll see what the subject is...
 
 
    [1]: /2010/08/02/eda-events-over-system-boundaries
-   [2]: http://en.wikipedia.org/wiki/Java_Message_Service
-   [3]: http://springsource.org/spring-integration
-   [4]: http://camel.apache.org/
+   [2]: https://en.wikipedia.org/wiki/Java_Message_Service
+   [3]: https://springsource.org/spring-integration
+   [4]: https://camel.apache.org/

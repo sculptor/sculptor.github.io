@@ -17,4 +17,4 @@ This maintainance release provides [a few bug fixes][2] and adds support for [ge
    [1]: /documentation/whats-new#version-303
    [2]: https://github.com/sculptor/sculptor/issues?milestone=4&state=closed
    [3]: /documentation/developers-guide#generator-properties
-   [4]: http://maven.apache.org/guides/mini/guide-multiple-modules.html
+   [4]: https://maven.apache.org/guides/mini/guide-multiple-modules.html

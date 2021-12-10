@@ -28,10 +28,10 @@ The logging API has been changed from Commons Logging with Log4j to [SLF4J][6] w
 [Read more about the release][8].
 
    [1]: /documentation/rest-tutorial
-   [2]: http://static.springsource.org/spring/docs/3.0.x/reference/mvc.html
+   [2]: https://static.springsource.org/spring/docs/3.0.x/reference/mvc.html
    [3]: /2011/02/03/mixin-composition
-   [4]: http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/remoting.html
-   [5]: http://fornax.itemis.de/confluence/x/zQk
-   [6]: http://www.slf4j.org/
-   [7]: http://logback.qos.ch/
+   [4]: https://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/remoting.html
+   [5]: https://fornax.itemis.de/confluence/x/zQk
+   [6]: https://www.slf4j.org/
+   [7]: https://logback.qos.ch/
    [8]: /documentation/whats-new#version-200

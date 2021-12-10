@@ -82,10 +82,10 @@ That was all for today, next time will it be more concrete with examples of how 
 
 
    [1]: /2010/07/15/eda-overview
-   [2]: http://en.wikipedia.org/wiki/Event-driven_architecture
-   [3]: http://en.wikipedia.org/wiki/Publish/subscribe
-   [4]: http://www.udidahan.com/2009/12/09/clarified-cqrs/
-   [5]: http://martinfowler.com/eaaDev/EventSourcing.html
-   [6]: http://www.springsource.org/spring-integration
-   [7]: http://camel.apache.org/
+   [2]: https://en.wikipedia.org/wiki/Event-driven_architecture
+   [3]: https://en.wikipedia.org/wiki/Publish/subscribe
+   [4]: https://www.udidahan.com/2009/12/09/clarified-cqrs/
+   [5]: https://martinfowler.com/eaaDev/EventSourcing.html
+   [6]: https://www.springsource.org/spring-integration
+   [7]: https://camel.apache.org/
    [8]: /documentation/whats-new#version-190

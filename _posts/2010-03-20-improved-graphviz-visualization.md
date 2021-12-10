@@ -65,7 +65,7 @@ You also need to install the excellent [Graphviz][6] tool.
    [3]: /images/2010-03-20-improved-graphviz-visualization/umlgraph-person.dot.png
    [4]: /images/2010-03-20-improved-graphviz-visualization/umlgraph-core-domain.dot.png
    [5]: /images/2010-03-20-improved-graphviz-visualization/umlgraph.dot.png
-   [6]: http://www.graphviz.org/
+   [6]: https://www.graphviz.org/
    [7]: /documentation/maven-plugin
    [8]: /documentation/developers-guide#diagram
 

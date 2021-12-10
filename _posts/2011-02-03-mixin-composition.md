@@ -96,6 +96,6 @@ Note that compareTo is no longer implemented in Product, only in PriceTag.
 
 Try this new feature in [Sculptor 2.0.0][3].
 
-   [1]: http://www.scala-lang.org
-   [2]: http://www.scala-lang.org/node/126
+   [1]: https://www.scala-lang.org
+   [2]: https://www.scala-lang.org/node/126
    [3]: /2011/03/13/sculptor-20-is-out

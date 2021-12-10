@@ -198,7 +198,7 @@ In this example we have used a naive approach when loading the `InventoryItem` b
 
 The complete source code for this example can be found here: [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-simplecqrs][4]
 
-   [1]: http://github.com/gregoryyoung/m-r
-   [2]: http://cqrs.wordpress.com/documents/
+   [1]: https://github.com/gregoryyoung/m-r
+   [2]: https://cqrs.wordpress.com/documents/
    [3]: /2010/10/29/event-sourcing-with-sculptor---snapshots
    [4]: https://github.com/sculptor/sculptor/tree/master/sculptor-examples/eda-samples/sculptor-simplecqrs

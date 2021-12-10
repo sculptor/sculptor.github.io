@@ -68,12 +68,12 @@ Ok, that was probably a very short and incomplete list of EDA related topics, bu
 Next up, how we support EDA in Sculptor.
 
    [1]: /2010/07/12/eda-intro
-   [2]: http://en.wikipedia.org/wiki/Observer_pattern
-   [3]: http://martinfowler.com/eaaDev/DomainEvent.html
-   [4]: http://docs.oracle.com/cd/E13213_01/wlevs/docs20/
-   [5]: http://martinfowler.com/
-   [6]: http://martinfowler.com/eaaDev/EventSourcing.html
+   [2]: https://en.wikipedia.org/wiki/Observer_pattern
+   [3]: https://martinfowler.com/eaaDev/DomainEvent.html
+   [4]: https://docs.oracle.com/cd/E13213_01/wlevs/docs20/
+   [5]: https://martinfowler.com/
+   [6]: https://martinfowler.com/eaaDev/EventSourcing.html
    [7]: /2010/05/31/prototyping-event-sourcing
    [8]: /2010/06/01/event-sourcing-snapshots
-   [9]: http://www.udidahan.com/2009/12/09/clarified-cqrs/
-   [10]: http://en.wikipedia.org/wiki/Event-driven_architecture
+   [9]: https://www.udidahan.com/2009/12/09/clarified-cqrs/
+   [10]: https://en.wikipedia.org/wiki/Event-driven_architecture

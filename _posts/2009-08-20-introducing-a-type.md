@@ -83,9 +83,9 @@ There are a lot of cases when it is a good idea to introduce types.
 I can recommend reading [When to Make a Type][6], Martin Fowler.
 
    [1]: /documentation/hello-world-tutorial
-   [2]: http://martinfowler.com/eaaDev/quantity.html
+   [2]: https://martinfowler.com/eaaDev/quantity.html
    [3]: /documentation/advanced-tutorial#basictype
-   [4]: http://martinfowler.com/eaaCatalog/money.html
-   [5]: http://martinfowler.com/eaaDev/Range.html
-   [6]: http://www.martinfowler.com/ieeeSoftware/whenType.pdf
+   [4]: https://martinfowler.com/eaaCatalog/money.html
+   [5]: https://martinfowler.com/eaaDev/Range.html
+   [6]: https://www.martinfowler.com/ieeeSoftware/whenType.pdf
    [7]: /documentation/advanced-tutorial#domain-objects

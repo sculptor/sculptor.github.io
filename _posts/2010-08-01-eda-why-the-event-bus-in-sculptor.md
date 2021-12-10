@@ -28,8 +28,8 @@ Beside the default, we currently have two implementations based on [Spring Integ
 And that brings us to the next topic of this series. Some examples of how to bring your events to life over system boundaries, i.e. integration stuff.
 
 
-   [1]: http://en.wikipedia.org/wiki/Event-driven_architecture
-   [2]: http://www.springsource.org/spring-integration
-   [3]: http://camel.apache.org/
-   [4]: http://en.wikipedia.org/wiki/Observer_pattern
-   [5]: http://sculptorgenerator.org/2010/07/19/eda-sculptor-support/
+   [1]: https://en.wikipedia.org/wiki/Event-driven_architecture
+   [2]: https://www.springsource.org/spring-integration
+   [3]: https://camel.apache.org/
+   [4]: https://en.wikipedia.org/wiki/Observer_pattern
+   [5]: https://sculptorgenerator.org/2010/07/19/eda-sculptor-support/

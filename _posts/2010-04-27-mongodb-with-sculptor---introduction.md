@@ -53,10 +53,10 @@ Read the other posts that describes the features in more detail:
 The source code of examples on using MongoDB (like the aforementioned blog sample or a modified version of the library sample) on using MongoDB can be found here: [https://github.com/sculptor/sculptor/tree/master/sculptor-examples/mongodb-samples][10]
 
 
-   [1]: http://www.mongodb.org/
+   [1]: https://www.mongodb.org/
    [2]: /2010/01/16/pick-n-choose-target-implementation
    [3]: /2009/06/27/what-is-sculptor
-   [4]: http://api.mongodb.org/java/2.11.3/com/mongodb/DBObject.html
+   [4]: https://api.mongodb.org/java/2.11.3/com/mongodb/DBObject.html
    [5]: /images/2010-04-27-mongodb-with-sculptor---introduction/blog_model.png
    [6]: /images/2010-04-27-mongodb-with-sculptor---introduction/blog_umlgraph.png
    [7]: /2010/04/28/mongodb-with-sculptor---data-mapper

@@ -19,5 +19,5 @@ We see great improvements in the area of truly asynchronous web solutions, which
 
 Of course it is also important to use HTTP as designed, since HTTP caching is a key ingredient in highly scalable web sites.
 
-   [1]: http://twitter.com/h3nk3
-   [2]: http://r-c-r.tumblr.com/post/2947120096/concurrency-parallelism-and-actors
+   [1]: https://twitter.com/h3nk3
+   [2]: https://r-c-r.tumblr.com/post/2947120096/concurrency-parallelism-and-actors

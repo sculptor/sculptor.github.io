@@ -25,8 +25,8 @@ How do I copy database? For [MongoDB][5] there is a simple `copydb` command, whi
 
 These operations will of course not be super fast and temporary databases for historical queries must probably be prepared in advanced to have decent response times. If you need to do a lot of historical queries you need something more, such as a separate system responsible for answering such queries. It may be a data warehouse, a denormalized database, or whatever tailored for the purpose. This separate system is fed from the same original event stream. The design is called [CQRS][4].
 
-   [1]: http://sourceforge.net/mailarchive/message.php?msg_id=25406308
+   [1]: https://sourceforge.net/mailarchive/message.php?msg_id=25406308
    [2]: /2010/05/31/prototyping-event-sourcing
    [3]: /images/2010-06-01-event-sourcing-snapshots/snapshots.png
-   [4]: http://codebetter.com/blogs/gregyoung/archive/2010/02/13/cqrs-and-event-sourcing.aspx
-   [5]: http://mongodb.org/
+   [4]: https://codebetter.com/blogs/gregyoung/archive/2010/02/13/cqrs-and-event-sourcing.aspx
+   [5]: https://mongodb.org/

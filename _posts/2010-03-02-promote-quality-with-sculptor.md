@@ -128,4 +128,4 @@ The result of using Sculptor is better quality and also development productivity
 
 **Resources**
 
-This article was originally published in [JayView](http://www.jayway.se/jayview.html) paper magazine
+This article was originally published in [JayView](https://www.jayway.se/jayview.html) paper magazine
